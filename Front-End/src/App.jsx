@@ -7,7 +7,7 @@ function App() {
       <Header></Header>
       <Food></Food>
       <Footer></Footer>
-    dgfg
+   
       </>
     );
 }
