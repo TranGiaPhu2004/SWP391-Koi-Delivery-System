@@ -9,7 +9,7 @@ function Home(){
         <Header></Header>
         <hr></hr>
       <MainContent></MainContent>
-      <hr></hr>
+      
       <Footer></Footer>
         </>
         
