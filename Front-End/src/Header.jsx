@@ -1,18 +1,36 @@
 
-function Header(){
-    return(
-        <header>
-        <h1>My website</h1>
+import React from 'react';
+import './Header.css'; // Bạn có thể thêm CSS vào file riêng
+import logo from '../src/assets/image/vietnam.png'
+import logo1 from '../src/assets/image/japan.png'
+import logo3 from '../src/assets/image/Logo.png'
+
+function Header() {
+  return (
+    <header>
+      
+      
+
+      <div className="header-content">
+      
+        <img src={logo} alt="Vietnam Flag" className="flag" />
+        <img src={logo1} alt="Japan Flag" className="flag" />
+        <img src={logo3} alt="Logo" className="logo" />
+        
         <nav>
-            <ul>
-                <li><a href='#'>Home</a></li>
-                <li><a href='#'>About</a></li>
-                <li><a href='#'>Service</a></li>
-                <li><a href='#'>Contact</a></li>
-            </ul>
+          <a href="/">Home</a>
+          <a href="/services">Services</a>
+          <a href="/about">About Us</a>
+          <a href="/contact">Contact</a>
+          <a href="/news">News</a>
         </nav>
+        <div className="auth-buttons">
+          <button>Sign In</button>
+          <button>Register</button>
+        </div>
+      </div>
     </header>
-    );
-    
+  );
 }
-export default Header
+
+export default Header;

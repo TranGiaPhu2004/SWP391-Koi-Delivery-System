@@ -1,12 +1,11 @@
-import Header from './Header.jsx'
-import Footer from './Footer.jsx';
-import Food from './Food.jsx';
+import Home from '../src/Page/Home';
+import './App.css';
+
+
 function App() {
     return(
       <>
-      <Header></Header>
-      <Food></Food>
-      <Footer></Footer>
+      <Home></Home>
       
       </>
     );
