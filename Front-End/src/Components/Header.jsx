@@ -1,9 +1,9 @@
 
 import React from 'react';
 import './Header.css'; // Bạn có thể thêm CSS vào file riêng
-import logo from '../src/assets/image/vietnam.png'
-import logo1 from '../src/assets/image/japan.png'
-import logo3 from '../src/assets/image/Logo.png'
+import logo from '../assets/image/vietnam.png'
+import logo1 from '../assets/image/japan.png'
+import logo3 from '../assets/image/Logo.png'
 
 function Header() {
   return (

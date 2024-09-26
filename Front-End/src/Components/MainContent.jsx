@@ -1,8 +1,8 @@
 import React from 'react';
 import './MainContent.css';
-import Service1 from '../src/assets/image/Service1.png'
-import Service2 from '../src/assets/image/Service2.png'
-import Service3 from '../src/assets/image/Service3.png'
+import Service1 from '../assets/image/Service1.png'
+import Service2 from '../assets/image/Service2.png'
+import Service3 from '../assets/image/Service3.png'
 
 function MainContent() {
   return (
