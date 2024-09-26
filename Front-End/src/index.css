@@ -4,7 +4,7 @@ body {
     max-width: 100vw;
     overflow-x: hidden;
     /*  overflow-x: hidden: không bị tràn viền theo phương ngang */
-
+}
   :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
