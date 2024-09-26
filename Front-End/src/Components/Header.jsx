@@ -4,8 +4,14 @@ import './Header.css'; // Bạn có thể thêm CSS vào file riêng
 import logo from '../assets/image/vietnam.png'
 import logo1 from '../assets/image/japan.png'
 import logo3 from '../assets/image/Logo.png'
+import Login from '../Page/Login';
 
 function Header() {
+  function goLogin(){
+      return(
+        <Login></Login>
+      )
+  }
   return (
     <header>
       
@@ -25,7 +31,7 @@ function Header() {
           <a href="/news">News</a>
         </nav>
         <div className="auth-buttons">
-          <button>Sign In</button>
+          <button onClick={goLogin}>Sign In</button>
           <button>Register</button>
         </div>
       </div>
