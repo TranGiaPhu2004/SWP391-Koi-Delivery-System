@@ -4,7 +4,7 @@ body {
     max-width: 100vw;
     overflow-x: hidden;
     /*  overflow-x: hidden: không bị tràn viền theo phương ngang */
-  }
+
   :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
@@ -14,10 +14,12 @@ body {
     color: rgba(255, 255, 255, 0.87);
     background-color: #242424;
   
+
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
   }
   
   a {
@@ -30,11 +32,13 @@ body {
   }
   
   body {
+
     margin: 0;
     display: flex;
     place-items: center;
     min-width: 320px;
     min-height: 100vh;
+
   }
   
   h1 {
@@ -43,6 +47,7 @@ body {
   }
   
   button {
+
     border-radius: 8px;
     border: 1px solid transparent;
     padding: 0.6em 1.2em;
@@ -52,6 +57,7 @@ body {
     background-color: #1a1a1a;
     cursor: pointer;
     transition: border-color 0.25s;
+
   }
   button:hover {
     border-color: #646cff;
@@ -73,3 +79,4 @@ body {
       background-color: #f9f9f9;
     }
   }
+
