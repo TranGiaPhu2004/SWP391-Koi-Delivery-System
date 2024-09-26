@@ -1,0 +1,34 @@
+header {
+    background-color: white;
+    display: contents;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+  }
+  .header1{
+    display: inline-block;
+  }
+
+  .flag {
+    width: 60px;
+    
+
+  }
+  
+  nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: black;
+  }
+  
+  .auth-buttons button {
+    margin: 0 5px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: none;
+    cursor: pointer;
+  }
+  .header-content {
+    display: contents;
+  }
+  
