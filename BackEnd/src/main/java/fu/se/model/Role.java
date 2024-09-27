@@ -1,5 +1,6 @@
 package fu.se.model;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -12,7 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Role {
+public class Role implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "roleID", nullable = false)
