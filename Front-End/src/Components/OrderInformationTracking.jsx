@@ -11,6 +11,10 @@ import './OrderInformationTracking.css'
 function OrderInformationTracking() {
     return (
         <div className="main-tracking">
+            <div className="header-tracking">
+                <p>Order Tracking</p> 
+            </div>
+           
             <div className='tracking-order'>
                 <div className='tracking'>
                     <img className='pic' src={track1} alt="" />
