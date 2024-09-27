@@ -1,4 +1,4 @@
-package fu.se.dto.request;
+package com.example.demo.dto.request;
 
 import java.io.Serializable;
 
