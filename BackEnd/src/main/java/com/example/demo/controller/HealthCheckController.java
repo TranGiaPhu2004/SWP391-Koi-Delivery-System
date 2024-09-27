@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HealthCheckController {
 
-    // API này sẽ trả về 200 OK nếu server đang hoạt động
+    
+    // API test hoạt động trên postman
     @GetMapping("/test")
     public ResponseEntity<String> healthCheck() {
         return ResponseEntity.ok("Server is running!");
     }
+
 }

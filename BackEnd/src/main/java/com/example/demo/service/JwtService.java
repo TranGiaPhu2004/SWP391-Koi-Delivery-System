@@ -2,7 +2,6 @@ package com.example.demo.service;
 
 import java.util.Optional;
 
-import com.example.demo.controller.AuthController;
 import com.example.demo.dto.request.LoginRequestDTO;
 import com.example.demo.model.User;
 import com.example.demo.repository.IUserRepository;
