@@ -4,7 +4,6 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-
     border-bottom: 1px solid #ccc;
     font-family: cursive;
   }
@@ -33,9 +32,12 @@ header {
   .auth-buttons button {
     margin: 0 5px;
     padding: 10px;
-    background-color: #f0f0f0;
+    background-color: #3D3D74;
+    color: #fff;
     border: none;
     cursor: pointer;
+    border-radius: 15px;
+    font-family: 'Kay Pho Du';
   }
   .header-content {
     display: contents;

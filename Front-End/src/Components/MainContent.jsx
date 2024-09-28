@@ -49,7 +49,7 @@ function MainContent() {
         <div className="service-box">
           <img src={Service4} alt="Service 4" />
           <p>We will never be paid attention to someone else ‘s voice
-            Cuz of belivering, we staring at me with a smile proud
+            Cuz of belivering, we staring at me with a smile proud <br/>
             You are deserved with somethings that you made it.</p>
         </div>
       </section>

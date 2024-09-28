@@ -20,6 +20,10 @@
     color: #3D3D74;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bolder;
+    margin-top: 40px;
+    font-weight: 800;
+
+    border-bottom: 3px solid black;
 }
 
 
