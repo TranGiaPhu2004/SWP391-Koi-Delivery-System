@@ -4,18 +4,15 @@ import './Header.css'; // Bạn có thể thêm CSS vào file riêng
 import logo from '../assets/image/vietnam.png'
 import logo1 from '../assets/image/japan.png'
 import logo3 from '../assets/image/Logo.png'
-import Login from '../Page/Login';
-import { Link } from "react-router-dom";
+
 
 function Header() {
-  function goLogin(){
-      return(
-        <Login></Login>
-      )
-  }
+  
   return (
     <header>
       
+      
+
       <div className="header-content">
       
         <img src={logo} alt="Vietnam Flag" className="flag" />
@@ -30,9 +27,7 @@ function Header() {
           <a href="/news">News</a>
         </nav>
         <div className="auth-buttons">
-        <Link to="/login">
-        <button>Login</button>
-      </Link>
+          <button >Sign In</button>
           <button>Register</button>
         </div>
       </div>

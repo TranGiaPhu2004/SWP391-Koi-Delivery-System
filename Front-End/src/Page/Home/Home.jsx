@@ -4,13 +4,15 @@ import MainContent from '../../Components/MainContent.jsx'
 
 
 
-
 function Home(){
     return(
         <>
         <Header></Header>
-
+       
       <MainContent></MainContent>
+
+      
+      
 
       <Footer></Footer>
     </>
