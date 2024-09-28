@@ -4,10 +4,11 @@ import MainContent from '../../Components/MainContent.jsx'
 
 
 
-function Home() {
-  return (
-    <>
-      <Header></Header>
+
+function Home(){
+    return(
+        <>
+        <Header></Header>
 
       <MainContent></MainContent>
 
