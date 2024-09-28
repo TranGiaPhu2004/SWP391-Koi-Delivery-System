@@ -12,9 +12,9 @@ function OrderInformationTracking() {
     return (
         <div className="main-tracking">
             <div className="header-tracking">
-                <p>Order Tracking</p> 
+                <p>ORDER TRACKING</p>
             </div>
-           
+
             <div className='tracking-order'>
                 <div className='tracking'>
                     <img className='pic' src={track1} alt="" />
