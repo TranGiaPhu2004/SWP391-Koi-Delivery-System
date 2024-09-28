@@ -6,8 +6,7 @@ header {
     padding: 20px;
 
     border-bottom: 1px solid #ccc;
-    font-family: 'Kay Pho Du';
-  
+    font-family: cursive;
   }
   .header-container{
     display: flex;
@@ -21,9 +20,8 @@ header {
   }
 
   .flag {
-    width: 60px;
-    
-
+    width: 100px;
+    height: auto;
   }
   
   nav a {
