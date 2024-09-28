@@ -9,7 +9,7 @@ function Home(){
         <>
         <Header></Header>
        
-      <MainContent></MainContent>
+      
 
       
       <MainContent></MainContent>
