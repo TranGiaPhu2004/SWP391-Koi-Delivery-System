@@ -10,7 +10,7 @@ const Footer = () => {
           <p>🌸 <strong>Address</strong></p>
           <p>E2a-7 lot, Saigon High-tech Park, <br /> Long Thanh My Ward, Thu Duc City, HCMC</p>
           <p>📧 <strong>Email</strong></p>
-          <p>Harry@gmail.com</p>
+          <p>KoiDeliveryOrderSystem@gmail.com</p>
           <p>📱 <strong>Connect with us</strong></p>
           <p>Connect with us on social media</p>
         </div>

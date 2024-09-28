@@ -15,8 +15,6 @@ function Header() {
   return (
     <header>
       
-      
-
       <div className="header-content">
       
         <img src={logo} alt="Vietnam Flag" className="flag" />
