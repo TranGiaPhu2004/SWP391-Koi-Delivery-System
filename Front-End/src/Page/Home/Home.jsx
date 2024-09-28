@@ -12,7 +12,7 @@ function Home(){
       <MainContent></MainContent>
 
       
-      <MainContent></MainContent>
+      
 
       <Footer></Footer>
     </>
