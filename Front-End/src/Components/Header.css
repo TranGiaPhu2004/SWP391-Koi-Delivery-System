@@ -29,6 +29,11 @@ header {
     color: black;
   }
   
+  .auth-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
   .auth-buttons button {
     margin: 0 5px;
     padding: 10px;
