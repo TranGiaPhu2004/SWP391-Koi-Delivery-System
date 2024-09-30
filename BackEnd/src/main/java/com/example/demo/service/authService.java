@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class JwtService {
+public class authService {
 
     @Autowired
     private IUserRepository userRepository;
@@ -21,7 +21,7 @@ public class JwtService {
     @Autowired
     private JwtUtil jwtUtil;
 
-    private static final Logger logger = LoggerFactory.getLogger(JwtService.class);
+    private static final Logger logger = LoggerFactory.getLogger(authService.class);
 
     public String login(LoginRequestDTO request) {
         String usernameOrEmail = request.getUsernameOrEmail();
@@ -53,5 +53,21 @@ public class JwtService {
         // Nếu đăng nhập thành công
         logger.info("dang nhap thanh cong");
         return jwtUtil.generateToken(user);
+    }
+
+    public String loginByUsername(String username, String password) {
+        User user = userRepository.findByUsername(username).orElse(null);
+        if (user != null && user.getPassword().equals(password)) { // So sánh trực tiếp
+            return jwtUtil.generateToken(user);
+        }
+        return null; // Invalid credentials
+    }
+
+    public String loginByEmail(String email, String password) {
+        User user = userRepository.findByEmail(email).orElse(null);
+        if (user != null && user.getPassword().equals(password)) { // So sánh trực tiếp
+            return jwtUtil.generateToken(user);
+        }
+        return null; // Invalid credentials
     }
 }

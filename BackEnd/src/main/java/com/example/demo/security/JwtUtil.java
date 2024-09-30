@@ -28,21 +28,21 @@ public class JwtUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtUtil.class);
 
+
     private Key getSigningKey() {
-        // Decode key theo base64
+        // Decode the base64-encoded secret key to get a byte array
         byte[] keyBytes = Base64.getDecoder().decode(secret);
 
-        // Kiểm tra kích thước Key
+        // Kiểm tra kích thước khóa
         if (keyBytes.length < 32) { // 32 bytes = 256 bits
             throw new IllegalArgumentException("Secret key must be at least 256 bits (32 bytes) long.");
         }
 
-        // return key đã decode
+        // Return the Key object for signing the JWT
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
     public String generateToken(User user) {
-        // tạo token
         logger.info("begin create token");
         Map<String, Object> claims = new HashMap<>();
         claims.put("username", user.getUsername());
@@ -61,33 +61,25 @@ public class JwtUtil {
                 .compact();
     }
 
-    public String refreshToken(String token) {
-        if (isTokenExpired(token)) {
-            throw new RuntimeException("Token đã hết hạn"); // Hoặc bạn có thể tạo một ngoại lệ tùy chỉnh
-        }
+   public boolean validateToken(String token, User user) {
+       final String username = extractUsername(token);
+       return (username.equals(user.getUsername()) && !isTokenExpired(token));
+   }
 
-        Claims claims = extractAllClaims(token);
-        return createToken(claims, claims.getSubject());
-    }
+   public String extractUsername(String token) {
+       return extractAllClaims(token).get("username", String.class);
+   }
 
-    public boolean validateToken(String token, User user) {
-        final String username = extractUsername(token);
-        return (username.equals(user.getUsername()) && !isTokenExpired(token));
-    }
+   private Claims extractAllClaims(String token) {
+       return Jwts.parserBuilder()
+               .setSigningKey(getSigningKey())
+               .build()
+               .parseClaimsJws(token)
+               .getBody();
+   }
 
-    public String extractUsername(String token) {
-        return extractAllClaims(token).get("username", String.class);
-    }
+   private boolean isTokenExpired(String token) {
+       return extractAllClaims(token).getExpiration().before(new Date());
+   }
 
-    public Claims extractAllClaims(String token) {
-        return Jwts.parserBuilder()
-                .setSigningKey(getSigningKey())
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
-    }
-
-    public boolean isTokenExpired(String token) {
-        return extractAllClaims(token).getExpiration().before(new Date());
-    }
 }
