@@ -1,4 +1,4 @@
-
+import React from 'react';
 import './Header.css'; // Bạn có thể thêm CSS vào file riêng
 import logo from '../assets/image/vietnam.png'
 import logo1 from '../assets/image/japan.png'
