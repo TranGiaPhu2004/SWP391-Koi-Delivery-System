@@ -1,0 +1,182 @@
+/* Container for the whole layout */
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    
+  }
+  
+  /* Header section at the top */
+  .header {
+    display: flex;
+    justify-content: center; /* Căn giữa tất cả các phần tử theo chiều ngang */
+    align-items: center;
+
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative; /* Để sử dụng vị trí cho các phần tử khác */
+  }
+  
+  .logo img {
+    width: 250px;
+    
+  }
+
+  .search-bar {
+    position: absolute;
+    right: 110px; /* Đẩy thanh tìm kiếm sang bên phải */
+    display: flex;
+    align-items: center;
+    
+  }
+  
+  .search-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 5px;
+  }
+  
+  .search-container input {
+    padding: 5px 10px;
+    width: 200px;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    background-color: white;
+  }
+  
+  .search-icon {
+    width: 30px;
+    height: 30px;
+    margin-left: 5px; /* Đặt icon bên cạnh thanh tìm kiếm */
+    cursor: pointer;
+  }
+
+  /* Đặt profile icon bên phải */
+.profile-icon {
+    position: absolute;
+    right: 40px; /* Đẩy icon sát bên phải */
+  }
+  
+  .profile-icon img {
+    width: 50px;
+    border-radius: 50%;
+  }
+  
+  /* Sidebar for the menu */
+  .sidebar {
+    width: 200px;
+    height: 230px;
+    background-color: rgb(161, 122, 101);
+    color: black;
+    font-weight: bold;
+    font-size: larger;
+    padding: 20px;
+    position: absolute;
+    top: 87px;
+    left: 0;
+    box-sizing: border-box; 
+    overflow-y: auto;
+  }
+  
+  .sidebar-item {
+    display: flex; /* Sử dụng flexbox để căn giữa nội dung */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    height: 40px; /* Đặt chiều cao cho mỗi mục */
+    margin: 10px 0; /* Tạo khoảng cách giữa các mục */
+    font-size: 16px; /* Kích thước chữ */
+    font-weight: bold; /* In đậm chữ */
+    cursor: pointer; /* Thêm hiệu ứng con trỏ */
+    background-color: rgba(255, 255, 255, 0.1); /* Màu nền nhẹ */
+    border-radius: 5px; /* Bo tròn góc của các mục */
+    color: white; /* Màu chữ */
+    transition: background-color 0.3s ease; /* Thêm hiệu ứng khi hover */
+}
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;  
+  }
+  
+  .sidebar li {
+    margin: 15px 0;
+    cursor: pointer;
+    font-size: 18px;
+  }
+   
+  
+
+.sidebar-image {
+  background-color: #f3eafc;
+  display: flex;
+  
+}
+
+.sidebar-image img {
+  width: 100%; /* Đảm bảo ảnh giãn đầy chiều ngang */
+  height: 230px; /* Kéo dài ảnh để chiếm toàn bộ chiều cao của sidebar-image */
+  object-fit: cover; /* Đảm bảo ảnh không bị méo mà giữ tỷ lệ khi kéo dài */
+}
+  
+  /* Main content area */
+  .main-content {
+    
+    padding: 20px;
+    flex: 1;
+    background-color: white;
+  }
+  
+  .list {
+    background-color:rgb(187, 164, 148);
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .list-item {
+    font-size: larger;
+    font-weight: 900;
+    color: black;
+    background-color: rgb(214, 197, 190);
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    
+    text-align: center;
+    align-items: center; 
+    border: 1px dashed #d3c0f9; /* Đường viền giống như hình */
+  }
+  
+  .circle {
+    display: inline-flex;
+    justify-content: center;
+    width: 40px; /* Chiều rộng và chiều cao của vòng tròn */
+    height: 40px;
+    background-color: rgb(163, 142, 139); /* Màu nền tím nhạt cho vòng tròn */
+    color: black; /* Màu chữ A */
+    font-weight: bold; /* In đậm chữ A */
+    font-size: 18px; /* Kích thước chữ A */
+    border-radius: 50%; /* Tạo hình tròn */
+    margin-right: 15px; /* Khoảng cách giữa chữ A và nội dung */
+    line-height: 2;
+
+  }
+
+  .list-item span {
+    display: inline-block;
+    text-align: center;
+  }
+ 
+/* Định dạng checkbox */
+.checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-left: auto;
+}
