@@ -31,41 +31,33 @@
         <java.version>17</java.version>
     </properties>
     <dependencies>
-        <!-- hỗ trợ check api nào cần valid token -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-test</artifactId>
-            <scope>test</scope>
-        </dependency>
 
-        <!-- kết nối ms sql server -->
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>
             <version>9.2.0.jre11</version>
         </dependency>
-        <!-- spring web -->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!-- dùng để test -->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- dùng để ánh xạ table trong db -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!-- jwt token để xác thực -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-impl</artifactId>
@@ -81,13 +73,36 @@
             <artifactId>jjwt-jackson</artifactId>
             <version>0.11.5</version>
         </dependency>
+        <!-- đỡ phải getter setter -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.28</version>
+            <scope>provided</scope>
+        </dependency>
 
 
-      
-        <!-- <dependency>
+        <!-- Optional: For Base64 encoding -->
+        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.12.0</version>
+            <version>3.12.0</version>            <!-- You can check for the latest version -->
+        </dependency>
+
+        <!-- Gatling Core -->
+        <!-- <dependency>
+            <groupId>io.gatling.highcharts</groupId>
+            <artifactId>gatling-charts-highcharts</artifactId>
+            <version>3.7.6</version>
+            <scope>test</scope>
+        </dependency> -->
+
+        <!-- Gatling HTTP -->
+        <!-- <dependency>
+            <groupId>io.gatling</groupId>
+            <artifactId>gatling-http</artifactId>
+            <version>3.7.6</version>
+            <scope>test</scope>
         </dependency> -->
     </dependencies>
 

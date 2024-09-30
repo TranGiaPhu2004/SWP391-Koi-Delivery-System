@@ -4,8 +4,15 @@ import java.io.Serializable;
 import java.util.Set;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "Role")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Role implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,32 +22,7 @@ public class Role implements Serializable{
     @Column(name = "title", length = 100, nullable = false)
     private String title;
 
-    @OneToMany(mappedBy = "role")
+    @OneToMany(mappedBy = "role",fetch = FetchType.LAZY)
     private Set<User> users;  // Quan hệ 1-nhiều với Users
-
-    public Integer getRoleID() {
-        return roleID;
-    }
-
-    public void setRoleID(Integer roleID) {
-        this.roleID = roleID;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
     
 }
