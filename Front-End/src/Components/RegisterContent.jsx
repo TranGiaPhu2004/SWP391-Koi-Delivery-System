@@ -1,17 +1,18 @@
-import "./LoginHeader.css";
+import "./RegisterContent.css";
 import Logo from "../assets/image/Logo.png";
 import LogoLogin from "../assets/image/LogoLogin.png";
-function LoginHeaderMethod() {
+function RegisterMethod() {
   return (
     <div className="main">
-      <div className="LogoLogin">
-        <img src={LogoLogin} alt="LogoLogin" className="LogoLoginImg" />
+      <div className="LogoRegister">
+        <img src={LogoLogin} alt="LogoRegister" className="LogoRegisterImg" />
       </div>
-      <div className="login-form">
+      <div className="Register-form">
         <div className="logo">
           <img src={Logo} alt="Logo" />
         </div>
-        <h1>LOGIN PAGE</h1>
+
+        <h1>REGISTER PAGE</h1>
         <form>
           <div className="input-group">
             <label className="label">USERNAME</label>
@@ -19,18 +20,18 @@ function LoginHeaderMethod() {
           </div>
           <div className="input-group">
             <label className="label">PASSWORD</label>
-            <input type="password" placeholder="Enter your password" />
+            <input type="text" placeholder="Enter your password" />
           </div>
-          <div className="links">
-            <a href="/forgot-password">Forgot password?</a>
-            <a href="/register">Register here.</a>
+          <div className="input-group">
+            <label className="label">CONFIRM YOUR PASSWORD</label>
+            <input type="text" placeholder="Comfirm Password" />
           </div>
           <button className="button" type="submit">
-            LOGIN
+            REGISTER
           </button>
         </form>
       </div>
     </div>
   );
 }
-export default LoginHeaderMethod;
+export default RegisterMethod;
