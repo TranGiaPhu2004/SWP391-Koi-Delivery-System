@@ -1,10 +1,10 @@
 
 
-import './HeaderOrderDelete.css'; // CSS file for header styling
+import './HeaderPaymentMethods.css'; // CSS file for header styling
 
 import pic from '../assets/image/KoiExpress.png'
 import user from '../assets/image/user.png'
-import koi2 from '../assets/image/pickoi2.png'
+import koi1 from '../assets/image/pickoi1.png'
 import cart from '../assets/image/shoppingcart.png'
 function HeaderPaymentMethods() {
 
@@ -12,7 +12,7 @@ function HeaderPaymentMethods() {
         <div className='main'>
 
             <div className="header">
-                <img className="koi-logo" src={koi2} alt="koi pic" />
+                <img className="koi-logo" src={koi1} alt="koi pic" />
                 <div className="express-logo">
                     <img src={pic} alt="koi express" />
                     <span>KOIEXPRESS</span>
