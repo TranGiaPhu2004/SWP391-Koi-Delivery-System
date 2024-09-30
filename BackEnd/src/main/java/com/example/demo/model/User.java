@@ -1,10 +1,12 @@
-package fu.se.model;
+package com.example.demo.model;
+
+import java.io.Serializable;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Users")
-public class User {
+public class User implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)  // tự động tăng
     @Column(name = "userID", nullable = false)
@@ -16,8 +18,8 @@ public class User {
     @Column(name = "password", length = 100, nullable = false)
     private String password;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "roleID", referencedColumnName = "roleID", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "roleID")
     private Role role;  // Nên sử dụng Role thay vì int để giữ mối quan hệ @ManyToOne
 
     @Column(name = "email", length = 100, nullable = false)

@@ -1,10 +1,10 @@
-package fu.se.swp391_3;
+package com.example.demo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest(classes = Swp3913Application.class)
-class Swp3913ApplicationTests {
+@SpringBootTest
+class DemoApplicationTests {
 
     @Test
     void contextLoads() {
