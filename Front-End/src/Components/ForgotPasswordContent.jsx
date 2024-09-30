@@ -3,35 +3,51 @@ import Logo from "../assets/image/Logo.png";
 import LogoLogin from "../assets/image/LogoLogin.png";
 function ForgotPasswordContent() {
   return (
-    <div className="main">
-      <div className="LogoForgotPassword">
+    <div className="ForgotPassword-main">
+      <div className="ForgotPassword-LogoForgotPassword">
         <img
           src={LogoLogin}
           alt="LogoForgotPassword"
-          className="LogoForgotPassword"
+          className="ForgotPassword-LogoForgotPassword"
         />
       </div>
 
       <div className="ForgotPassword-form">
-        <div className="logo">
+        <div className="ForgotPassword-logo">
           <img src={Logo} alt="Logo" />
         </div>
 
-        <h1>FORGOT PASSWORD PAGE</h1>
+        <h2>FORGOT PASSWORD PAGE</h2>
         <form>
-          <div className="input-group">
-            <label className="label">USERNAME</label>
-            <input type="text" placeholder="Enter your username" />
+          <div className="ForgotPassword-input-group">
+            <label className="ForgotPassword-label">USERNAME</label>
+            <input
+              className="ForgotPassword-username-input"
+              type="text"
+              placeholder="Enter your username"
+            />
           </div>
-          <div className="input-group">
-            <label className="label">ENTER YOUR NEW PASSWORD</label>
-            <input type="text" placeholder="Enter your new password" />
+          <div className="ForgotPassword-input-group">
+            <label className="ForgotPassword-label">
+              ENTER YOUR NEW PASSWORD
+            </label>
+            <input
+              className="ForgotPassword-password-input"
+              type="text"
+              placeholder="Enter your new password"
+            />
           </div>
-          <div className="input-group">
-            <label className="label">CONFIRM YOUR NEW PASSWORD</label>
-            <input type="text" placeholder="Comfirm your new Password" />
+          <div className="ForgotPassword-input-group">
+            <label className="ForgotPassword-label">
+              CONFIRM YOUR NEW PASSWORD
+            </label>
+            <input
+              className="ForgotPassword-cfnpassword-input"
+              type="text"
+              placeholder="Comfirm your new Password"
+            />
           </div>
-          <button className="button" type="submit">
+          <button className="ForgotPassword-button" type="submit">
             CHANGE PASSWORD
           </button>
         </form>

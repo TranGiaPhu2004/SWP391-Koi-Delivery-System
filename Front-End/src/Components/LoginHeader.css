@@ -1,4 +1,4 @@
-.main {
+/* .main {
   display: flex;
   height: 50vw;
   width: 100vw;
@@ -82,4 +82,52 @@ input {
   display: block;
   margin: auto;
   width: 60%;
+} */
+.Login-main{
+  background-color: white;
+  display: flex;
+  width: 100vw;
+  height: 50vw;
+}
+.Login-logo{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ margin-left: 20px;
+}
+.Login-input-group{
+ width: 40vw;
+}
+.Login-label{
+  font-family: 'Kay Pho Du';
+  color: black;
+  padding-right:  10px; 
+}
+ .Login-username-input{
+  font-family: 'Kay Pho Du';
+  width: 40vw;
+  height: 30px;
+ }
+ .Login-password-input{
+  font-family: 'Kay Pho Du';
+  width: 40vw;
+  height: 30px;
+ }
+.Login-form{
+  background-color: white;
+  padding: 70px;
+  width: 40vw;
+
+}
+.Login-links{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  font-family: 'Kay Pho Du';
+  
+}
+.Login-button{
+  display: block;
+  justify-content: center;
+  margin-left: 260px;
 }

@@ -3,30 +3,46 @@ import Logo from "../assets/image/Logo.png";
 import LogoLogin from "../assets/image/LogoLogin.png";
 function RegisterMethod() {
   return (
-    <div className="main">
-      <div className="LogoRegister">
-        <img src={LogoLogin} alt="LogoRegister" className="LogoRegisterImg" />
+    <div className="Register-main">
+      <div className="Register-LogoRegister">
+        <img
+          src={LogoLogin}
+          alt="LogoRegister"
+          className="Register-LogoRegisterImg"
+        />
       </div>
       <div className="Register-form">
-        <div className="logo">
+        <div className="Register-logo">
           <img src={Logo} alt="Logo" />
         </div>
 
         <h1>REGISTER PAGE</h1>
         <form>
-          <div className="input-group">
-            <label className="label">USERNAME</label>
-            <input type="text" placeholder="Enter your username" />
+          <div className="Register-input-group">
+            <label className="Register-label">USERNAME</label>
+            <input
+              className="Register-username-input"
+              type="text"
+              placeholder="Enter your username"
+            />
           </div>
-          <div className="input-group">
-            <label className="label">PASSWORD</label>
-            <input type="text" placeholder="Enter your password" />
+          <div className="Register-input-group">
+            <label className="Register-label">PASSWORD</label>
+            <input
+              className="Register-password-input"
+              type="text"
+              placeholder="Enter your password"
+            />
           </div>
-          <div className="input-group">
-            <label className="label">CONFIRM YOUR PASSWORD</label>
-            <input type="text" placeholder="Comfirm Password" />
+          <div className="Register-input-group">
+            <label className="Register-label">CONFIRM YOUR PASSWORD</label>
+            <input
+              className="Register-cfpassword-input"
+              type="text"
+              placeholder="Comfirm Password"
+            />
           </div>
-          <button className="button" type="submit">
+          <button className="Register-button" type="submit">
             REGISTER
           </button>
         </form>
