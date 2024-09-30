@@ -1,5 +1,5 @@
 
-import HeaderPaymentMethods from "../../Components/HeaderPaymentMethods";
+import HeaderPaymentMethods from "../../Components/HeaderPaymentMethods.jsx";
 import OrderPaymentMethods from "../../Components/OrderPaymentMethods";
 import FooterOrderMethods from "../../Components/FooterOrderMethods";
 function PaymentMethod() {
