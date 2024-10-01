@@ -1,6 +1,6 @@
 
 
-import './HeaderPaymentMethods.css'; // CSS file for header styling
+import './HeaderPaymentMethods.css'; 
 
 import pic from '../assets/image/KoiExpress.png'
 import user from '../assets/image/user.png'
@@ -9,22 +9,22 @@ import cart from '../assets/image/shoppingcart.png'
 function HeaderPaymentMethods() {
 
     return (
-        <div className='main'>
+        <div className='HeaderPaymentMethods-main'>
 
-            <div className="header">
-                <img className="koi-logo" src={koi1} alt="koi pic" />
-                <div className="express-logo">
+            <div className="HeaderPaymentMethods-header">
+                <img className="HeaderPaymentMethods-koi-logo" src={koi1} alt="koi pic" />
+                <div className="HeaderPaymentMethods-express-logo">
                     <img src={pic} alt="koi express" />
                     <span>KOIEXPRESS</span>
                 </div>
-                <div className="user-actions">
-                    <a href='#'><img className="user-icon" src={user} alt="user" /></a>
-                    <a href='#'><img className="cart-icon" src={cart} alt="cart" /></a>
+                <div className="HeaderPaymentMethods-user-actions">
+                    <a href='#'><img className="HeaderPaymentMethods-user-icon" src={user} alt="user" /></a>
+                    <a href='#'><img className="HeaderPaymentMethods-cart-icon" src={cart} alt="cart" /></a>
                 </div>
             </div>
 
-            <div className="choice">
-                <ul className='list'>
+            <div className="HeaderPaymentMethods-choice">
+                <ul className='HeaderPaymentMethods-list'>
                     <li><a href="/about">About us</a></li>
                     <li><a href="/">Home</a></li>
                     <li><a href="/services">Services</a></li>
@@ -34,7 +34,7 @@ function HeaderPaymentMethods() {
                 </ul>
             </div>
 
-            <div className='line'></div>
+            <div className='HeaderPaymentMethods-line'></div>
         </div>
 
 

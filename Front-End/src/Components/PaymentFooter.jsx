@@ -2,16 +2,16 @@
 import './PaymentFooter.css'
 function PaymentFooter() {
     return (
-        <footer>
-            <div className="footer-main">
-                <div className="copyright">
+        <div className='PaymentFooter-mainfooter'>
+            <div className="PaymentFooter-footer-main">
+                <div className="PaymentFooter-copyright">
                     Copyright © 2024 Koi Delivery Ordering System
                 </div>
-                <div className="copyright1">
+                <div className="PaymentFooter-copyright1">
                     Copyright has been registered.
                 </div>
             </div>
-        </footer>
+        </div>
 
     );
 }

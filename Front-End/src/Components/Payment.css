@@ -1,10 +1,10 @@
-.main {
+.Payment-main {
     max-width: 100vw;
 }
 
-.header {
+.Payment-header {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     text-align: center;
     padding: 15px 20px;
@@ -17,54 +17,54 @@
 }
 
 
-.logo-container {
+.Payment-logo-container {
     display: flex;
     align-items: center;
 }
 
 
-.koi-logo {
+.Payment-koi-logo {
     height: 80px;
     margin-right: 20px;
 }
 
 
-.express-logo {
+.Payment-express-logo {
     display: flex;
     align-items: center;
     
 }
 
-.express-logo img {
+.Payment-express-logo img {
     height: 60px;
 }
 
-.express-logo span {
+.Payment-express-logo span {
     font-weight: bold;
     font-size: 1.2rem;
     margin-left: 10px;
 }
 
 
-.user-actions {
+.Payment-user-actions {
     display: flex;
     box-sizing: border-box;
    
 }
 
-.user-icon,
-.cart-icon {
+.Payment-user-icon,
+.Payment-cart-icon {
     height: 30px;
     margin-right: 5%;
 }
 
-.user-icon,
-.cart-icon:hover {
+.Payment-user-icon,
+.Payment-cart-icon:hover {
     cursor: grab;
 }
 
 
-.line {
+.Payment-line {
    
     height: 1px;
     background-color: rgb(187, 184, 184);
@@ -94,7 +94,7 @@ li {
     text-align: center;
 }
 
-.list a {
+.Payment-list a {
     color: #333;
     font-size: 14px;
     font-weight: 500;
@@ -102,7 +102,7 @@ li {
    
 }
 
-.list a:hover {
+.Payment-list a:hover {
     color: #007bff;
     cursor: grab;
 }

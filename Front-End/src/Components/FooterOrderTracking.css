@@ -1,26 +1,26 @@
-footer {
+.FooterOrderTracking-ordertrackingfooter {
     margin-top: 100px;
     max-width: 100vw;
     
 }
 
-.footer-main {
+.FooterOrderTracking-footer-main {
     background-color: #3D3D74;
-    padding: 20px 20px;
+    padding: 10px 10px;
    
     margin-bottom: -280px;
 }
 
-.copyrightt {
+.FooterOrderTracking-copyrightt {
     color: white;
     text-align: center;
     font-family: 'Kay Pho Du';
     font-size: 45px;
 }
 
-.copyrightt,
-.copyright,
-.copyright1 {
+.FooterOrderTracking-copyrightt,
+.FooterOrderTracking-copyright,
+.FooterOrderTracking-copyright1 {
     margin: 5px;
     color: white;
     text-align: center;
