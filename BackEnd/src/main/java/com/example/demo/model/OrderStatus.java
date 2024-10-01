@@ -12,7 +12,7 @@ public class OrderStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Order_StatusID")
-    private Integer orderStatusID;
+    private Long orderStatusID;
 
     @Column(name = "StatusName", length = 100)
     private String statusName;

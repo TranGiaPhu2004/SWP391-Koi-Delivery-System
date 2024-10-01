@@ -28,7 +28,6 @@ public class JwtUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtUtil.class);
 
-
     private Key getSigningKey() {
         // Decode the base64-encoded secret key to get a byte array
         byte[] keyBytes = Base64.getDecoder().decode(secret);

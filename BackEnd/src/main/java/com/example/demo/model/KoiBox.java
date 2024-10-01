@@ -12,7 +12,7 @@ public class KoiBox {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "BoxID")
-    private Integer boxID;
+    private Long boxID;
 
     @Column(name = "Price")
     private Float price;

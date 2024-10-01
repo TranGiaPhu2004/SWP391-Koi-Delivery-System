@@ -35,7 +35,8 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable()) // Disable CSRF for simplicity in token-based auth
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/test").permitAll() // Allow public access to "/test"
-                .requestMatchers("/auth/login/**").permitAll() // Allow public access to login
+                .requestMatchers("/api/**").permitAll() // Allow public access to "/"
+                .requestMatchers("/auth/**").permitAll() // Allow public access to login
                 .requestMatchers("/admin/**").hasRole("Admin") // Protect "/admin" route
                 .anyRequest().authenticated()) // All other routes require authentication
             .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class); // Add JWT filter

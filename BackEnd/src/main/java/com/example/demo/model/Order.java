@@ -7,6 +7,27 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+// CREATE TABLE Orders (
+//   OrderID INT PRIMARY KEY IDENTITY(1, 1),
+//   StartPlace VARCHAR(100),
+//   EndPlace VARCHAR(100),
+//   OrderDate DATE,
+//   TotalPrice FLOAT,
+//   userID INT,
+//   Order_StatusID INT,
+//   CustomsImageLink VARCHAR(255),
+//   BoxID INT,
+//   PaymentID INT,
+//   DeliveryID INT,
+//   ServiceID INT,
+//   FOREIGN KEY (userID) REFERENCES Users(userID),  -- Cập nhật tham chiếu
+//   FOREIGN KEY (Order_StatusID) REFERENCES Order_Status(Order_StatusID),
+//   FOREIGN KEY (BoxID) REFERENCES Koi_Box(BoxID),
+//   FOREIGN KEY (PaymentID) REFERENCES Payment(PaymentID),
+//   FOREIGN KEY (DeliveryID) REFERENCES Delivery(DeliveryID),
+//   FOREIGN KEY (ServiceID) REFERENCES Service(ServiceID)
+// );
+
 @Entity
 @Table(name = "Orders")
 @Data
@@ -15,18 +36,18 @@ import lombok.NoArgsConstructor;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orderID;
+    private Integer orderID;
 
-    @Column(name = "StartPlace", nullable = false)
+    @Column(name = "StartPlace")
     private String startPlace;
 
-    @Column(name = "EndPlace", nullable = false)
+    @Column(name = "EndPlace")
     private String endPlace;
 
-    @Column(name = "OrderDate", nullable = false)
+    @Column(name = "OrderDate")
     private LocalDate orderDate;
 
-    @Column(name = "TotalPrice", nullable = false)
+    @Column(name = "TotalPrice")
     private Float totalPrice;
 
     @Column(name = "CustomsImageLink")

@@ -36,8 +36,25 @@ class AuthSimulation extends Simulation {
     )
 
   // Cấu hình mô phỏng
+  // setUp(
+  //   scnLoginUsername.inject(
+  //     nothingFor(0.seconds), // Không làm gì trước
+  //     atOnceUsers(10),       // Gửi 10 yêu cầu đăng nhập bằng username ngay lập tức
+  //     rampUsers(10).during(1.second) // Gửi 10 yêu cầu trong 1 giây, cách nhau 0.1 giây
+  //   ),
+  //   scnLoginEmail.inject(
+  //     nothingFor(0.seconds), // Không làm gì trước
+  //     atOnceUsers(10),       // Gửi 10 yêu cầu đăng nhập bằng email ngay lập tức
+  //     rampUsers(10).during(1.second) // Gửi 10 yêu cầu trong 1 giây, cách nhau 0.1 giây
+  //   )
+  // ).protocols(httpProtocol)
+
   setUp(
-    scnLoginUsername.inject(atOnceUsers(10)), // 10 người dùng đăng nhập bằng username
-    scnLoginEmail.inject(atOnceUsers(10))     // 10 người dùng đăng nhập bằng email
+    scnLoginUsername.inject(
+      constantUsersPerSec(500).during(10.seconds) // Gửi 5000 yêu cầu trong 10 giây
+    ),
+    scnLoginEmail.inject(
+      constantUsersPerSec(500).during(10.seconds) // Gửi 5000 yêu cầu trong 10 giây
+    )
   ).protocols(httpProtocol)
 }
