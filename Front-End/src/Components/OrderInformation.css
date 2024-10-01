@@ -41,11 +41,75 @@
 
 }
 
-.OrderInformation-amount {
+.OrderInformation-amount1 {
+    margin-left: 16px;
     display: flex;
     flex-direction: row;
     gap: 5px;
 }
+
+.OrderInformation-amount1 .decrement-button1 {
+    transition: filter 0.3s ease;
+    /* Thêm hiệu ứng chuyển đổi mượt */
+}
+
+.OrderInformation-amount1 .decrement-button1.blurred {
+    filter: blur(1px);
+    cursor: not-allowed;
+}
+
+.OrderInformation-amount1 .decrement-button1.active {
+    filter: none;
+    cursor: pointer;
+}
+
+
+.OrderInformation-amount2 {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+
+.OrderInformation-amount2 .decrement-button2 {
+    transition: filter 0.3s ease;
+    /* Thêm hiệu ứng chuyển đổi mượt */
+}
+
+.OrderInformation-amount2 .decrement-button2.blurred {
+    filter: blur(1px);
+    cursor: not-allowed;
+}
+
+.OrderInformation-amount2 .decrement-button2.active {
+    filter: none;
+    cursor: pointer;
+}
+
+
+.OrderInformation-amount3 {
+    margin-left: 16px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.OrderInformation-amount3 .decrement-button3 {
+    transition: filter 0.3s ease;
+    /* Thêm hiệu ứng chuyển đổi mượt */
+}
+
+.OrderInformation-amount3 .decrement-button3.blurred {
+    filter: blur(1px);
+    cursor: not-allowed;
+}
+
+.OrderInformation-amount3 .decrement-button3.active {
+    filter: none;
+    cursor: pointer;
+}
+
+
 
 .OrderInformation-button {
     color: red;
@@ -54,8 +118,8 @@
 }
 
 .OrderInformation-order-information {
-    margin-top: 18%;
-    margin-left: 50%;
+    margin-top: 15%;
+    margin-left: 45%;
 
 }
 
@@ -133,7 +197,7 @@
 
 .OrderInformation-cancel {
     text-align: center;
-    color:  #3D3D74;
+    color: #3D3D74;
     font-weight: 700;
 }
 
