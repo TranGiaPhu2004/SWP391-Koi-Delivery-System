@@ -8,22 +8,22 @@ import koi from '../assets/image/koi.png'
 import cart from '../assets/image/shoppingcart.png'
 function Payment() {
   return (
-    <div className='main'>
+    <div className='Payment-main'>
 
-      <div className="header">
-        <img className="koi-logo" src={koi} alt="koi pic" />
-        <div className="express-logo">
+      <div className="Payment-header">
+        <img className="Payment-koi-logo" src={koi} alt="koi pic" />
+        <div className="Payment-express-logo">
           <img src={pic} alt="koi express" />
           <span>KOIEXPRESS</span>
         </div>
-        <div className="user-actions">
-          <a href='#'><img className="user-icon" src={user} alt="user" /></a>
-          <a href='#'><img className="cart-icon" src={cart} alt="cart" /></a>
+        <div className="Payment-user-actions">
+          <a href='#'><img className="Payment-user-icon" src={user} alt="user" /></a>
+          <a href='#'><img className="Payment-cart-icon" src={cart} alt="cart" /></a>
         </div>
       </div>
 
-      <div className="choice">
-        <ul className='list'>
+      <div className="Payment-choice">
+        <ul className='Payment-list'>
           <li><a href="/about">About us</a></li>
           <li><a href="/">Home</a></li>
           <li><a href="/services">Services</a></li>
@@ -33,7 +33,7 @@ function Payment() {
         </ul>
       </div>
 
-      <div className='line'></div>
+      <div className='Payment-line'></div>
     </div>
 
 

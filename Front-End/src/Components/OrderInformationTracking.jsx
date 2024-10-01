@@ -10,41 +10,41 @@ import track5 from '../assets/image/track5.png'
 import './OrderInformationTracking.css'
 function OrderInformationTracking() {
     return (
-        <div className="main-tracking">
-            <div className="header-tracking">
+        <div className="OrderInformationTracking-main-tracking">
+            <div className="OrderInformationTracking-header-tracking">
                 <p>ORDER TRACKING</p>
             </div>
 
-            <div className='tracking-order'>
-                <div className='tracking'>
-                    <img className='pic' src={track1} alt="" />
+            <div className='OrderInformationTracking-tracking-order'>
+                <div className='OrderInformationTracking-tracking'>
+                    <img className='OrderInformationTracking-pic' src={track1} alt="" />
                     <p>Order Received</p>
                     <label htmlFor="">Your order has been received
                         by your courier partner</label>
                 </div>
-                <div className='tracking'>
-                    <img className='pic' src={track2} alt="" />
+                <div className='OrderInformationTracking-tracking'>
+                    <img className='OrderInformationTracking-pic' src={track2} alt="" />
                     <p>Order Picked</p>
                     <label htmlFor="">Your order has been picked
                         up by your courier partner</label>
                 </div>
-                <div className='tracking'>
-                    <img className='pic' src={track3} alt="" />
+                <div className='OrderInformationTracking-tracking'>
+                    <img className='OrderInformationTracking-pic' src={track3} alt="" />
                     <p>Order In Transit</p>
                     <label htmlFor="">Your order is on it’s way
                         to your customer’s address</label>
                 </div>
-                <div className='tracking'>
-                    <img className='pic' src={track4} alt="" />
+                <div className='OrderInformationTracking-tracking'>
+                    <img className='OrderInformationTracking-pic' src={track4} alt="" />
                     <p>Out For Delivery</p>
                     <label htmlFor="">The courier executive is on its way
                         to deliver the order at your
                         customer’s doorstep</label>
                 </div>
-                <div className='tracking'>
-                    <img className='pic' src={track5} alt="" />
+                <div className='OrderInformationTracking-tracking'>
+                    <img className='OrderInformationTracking-pic' src={track5} alt="" />
                     <p>Reached Destination</p>
-                    <label className='info' htmlFor="">Your order has reached
+                    <label className='OrderInformationTracking-info' htmlFor="">Your order has reached
                         your customer’s city</label>
                 </div>
             </div>

@@ -9,22 +9,22 @@ import cart from '../assets/image/shoppingcart.png'
 function HeaderOrderDelete() {
 
     return (
-        <div className='main'>
+        <div className='HeaderOrderDelete-main'>
 
-            <div className="header">
-                <img className="koi-logo" src={koi1} alt="koi pic" />
-                <div className="express-logo">
+            <div className="HeaderOrderDelete-header">
+                <img className="HeaderOrderDelete-koi-logo" src={koi1} alt="koi pic" />
+                <div className="HeaderOrderDelete-express-logo">
                     <img src={pic} alt="koi express" />
                     <span>KOIEXPRESS</span>
                 </div>
-                <div className="user-actions">
-                    <a href='#'><img className="user-icon" src={user} alt="user" /></a>
-                    <a href='#'><img className="cart-icon" src={cart} alt="cart" /></a>
+                <div className="HeaderOrderDelete-user-actions">
+                    <a href='#'><img className="HeaderOrderDelete-user-icon" src={user} alt="user" /></a>
+                    <a href='#'><img className="HeaderOrderDelete-cart-icon" src={cart} alt="cart" /></a>
                 </div>
             </div>
 
-            <div className="choice">
-                <ul className='list'>
+            <div className="HeaderOrderDelete-choice">
+                <ul className='HeaderOrderDelete-list'>
                     <li><a href="/about">About us</a></li>
                     <li><a href="/">Home</a></li>
                     <li><a href="/services">Services</a></li>
@@ -34,7 +34,7 @@ function HeaderOrderDelete() {
                 </ul>
             </div>
 
-            <div className='line'></div>
+            <div className='HeaderOrderDelete-line'></div>
         </div>
 
 

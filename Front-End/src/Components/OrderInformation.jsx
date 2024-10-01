@@ -8,15 +8,15 @@ import pickoi3 from '../assets/image/pickoi3.png'
 const OrderInformation = ({ totalOrder, deliveryCost, totalAmount, deliveryTo }) => {
 
     return (
-        <div className="main-order">
-            <div className="main-pic">
-                <div className="pic-koi1">
+        <div className="OrderInformation-main-order">
+            <div className="OrderInformation-main-pic">
+                <div className="OrderInformation-pic-koi1">
                     <img src={pickoi1} alt="PIC KOI 1" />
-                    <div className="pic1">
+                    <div className="OrderInformation-pic1">
                         <p>Small Box</p>
-                        <button className='button'>Delete</button>
+                        <button className='OrderInformation-button'>Delete</button>
                     </div>
-                    <div className="amount">
+                    <div className="OrderInformation-amount">
                         <button>
                             -
                         </button>
@@ -32,13 +32,13 @@ const OrderInformation = ({ totalOrder, deliveryCost, totalAmount, deliveryTo })
                 </div>
 
 
-                <div className="pic-koi2">
+                <div className="OrderInformation-pic-koi2">
                     <img src={pickoi2} alt="PIC KOI 2" />
-                    <div className="pic1">
+                    <div className="OrderInformation-pic1">
                         <p>Small Box</p>
-                        <button className='button'>Delete</button>
+                        <button className='OrderInformation-button'>Delete</button>
                     </div>
-                    <div className="amount">
+                    <div className="OrderInformation-amount">
                         <button>
                             -
                         </button>
@@ -50,13 +50,13 @@ const OrderInformation = ({ totalOrder, deliveryCost, totalAmount, deliveryTo })
                         </button>
                     </div>
                 </div>
-                <div className="pic-koi3">
+                <div className="OrderInformation-pic-koi3">
                     <img src={pickoi3} alt="PIC KOI 3" />
-                    <div className="pic1">
+                    <div className="OrderInformation-pic1">
                         <p>Small Box</p>
-                        <button className='button'>Delete</button>
+                        <button className='OrderInformation-button'>Delete</button>
                     </div>
-                    <div className="amount">
+                    <div className="OrderInformation-amount">
                         <button>
                             -
                         </button>
@@ -71,18 +71,18 @@ const OrderInformation = ({ totalOrder, deliveryCost, totalAmount, deliveryTo })
             </div>
 
 
-            <div className="order-information">
-                <div className='order-details'>
+            <div className="OrderInformation-order-information">
+                <div className='OrderInformation-order-details'>
                     <h2>Order Information</h2>
-                    <div className='line'></div>
+                    <div className='OrderInformation-line'></div>
                     <p>Total order: {totalOrder} vnđ</p>
                     <p>Delivery Cost: {deliveryCost} vnđ</p>
                     <span>Total Amount: {totalAmount} vnđ</span>
                     <p>Delivery to: {deliveryTo}</p>
                     <p>By pressing the button, I agree to the <a href="#">Terms and Conditions.</a></p>
-                    <button className="payment-button">{totalAmount} vnđ Payment <a href="#"><span>→</span></a></button>
+                    <button className="OrderInformation-payment-button">{totalAmount} vnđ Payment <a href="#"><span>→</span></a></button>
                     
-                <div className="cancel">
+                <div className="OrderInformation-cancel">
                     <a href='#'>Delete</a>
                 </div>
                 </div>

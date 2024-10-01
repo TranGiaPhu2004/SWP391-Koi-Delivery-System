@@ -1,9 +1,9 @@
-.main {
+.HeaderOrderDelete-main {
     width: 100%;
     max-width: 100vw;
 }
 
-.header {
+.HeaderOrderDelete-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -17,54 +17,54 @@
 }
 
 
-.logo-container {
+.HeaderOrderDelete-logo-container {
     display: flex;
     align-items: center;
 }
 
 
-.koi-logo {
+.HeaderOrderDelete-koi-logo {
     height: 80px;
     margin-right: 20px;
     border-radius: 30px;
 }
 
 
-.express-logo {
+.HeaderOrderDelete-express-logo {
     display: flex;
     align-items: center;
     margin-left: 64%;
 }
 
-.express-logo img {
+.HeaderOrderDelete-express-logo img {
     height: 60px;
 }
 
-.express-logo span {
+.HeaderOrderDelete-express-logo span {
     font-weight: bold;
     font-size: 1.2rem;
     margin-left: 10px;
 }
 
 
-.user-actions {
+.HeaderOrderDelete-user-actions {
     display: flex;
     box-sizing: border-box;
     margin-left: 65%;
 }
 
-.user-icon,
-.cart-icon {
+.HeaderOrderDelete-user-icon,
+.HeaderOrderDelete-cart-icon {
     height: 30px;
 }
 
-.user-icon,
-.cart-icon:hover {
+.HeaderOrderDelete-user-icon,
+.HeaderOrderDelete-cart-icon:hover {
     cursor: grab;
 }
 
 
-.line {
+.HeaderOrderDelete-line {
    
     height: 1px;
     background-color: rgb(187, 184, 184);
@@ -94,7 +94,7 @@ li {
     text-align: center;
 }
 
-.list a {
+.HeaderOrderDelete-list a {
     color: #333;
     font-size: 14px;
     font-weight: 500;
@@ -102,7 +102,7 @@ li {
    
 }
 
-.list a:hover {
+.HeaderOrderDelete-list a:hover {
     color: #007bff;
     cursor: grab;
 }

@@ -33,13 +33,13 @@ function OrderDeliveryStatus() {
         setIsObvious4(!isObvious4);
     }
     return (
-        <div className="main-tracking">
-            <div className="header-tracking">
+        <div className="OrderDeliveryStatus-main-tracking">
+            <div className="OrderDeliveryStatus-header-tracking">
                 <p>DELIVERY STATUS</p>
             </div>
 
-            <div className='tracking-order'>
-                <div className='tracking'>
+            <div className='OrderDeliveryStatus-tracking-order'>
+                <div className='OrderDeliveryStatus-tracking'>
                     <img className={`pic ${isObvious ? 'active' : 'blurred'}`} src={track1} alt="" />
                     <p>Order Received</p>
                     <label htmlFor="">Your order has been received
@@ -49,7 +49,7 @@ function OrderDeliveryStatus() {
                         onChange={handleRadioChange}
                     />
                 </div>
-                <div className='tracking1'>
+                <div className='OrderDeliveryStatus-tracking1'>
                     <img className={`pic ${isObvious1 ? 'active' : 'blurred'}`} src={track2} alt="" />
                     <p>Order Picked</p>
                     <label htmlFor="">Your order has been picked
@@ -59,7 +59,7 @@ function OrderDeliveryStatus() {
                         onChange={handleRadioChange1}
                     />
                 </div>
-                <div className='tracking2'>
+                <div className='OrderDeliveryStatus-tracking2'>
                     <img className={`pic ${isObvious2 ? 'active' : 'blurred'}`} src={track3} alt="" />
 
                     <p>Order In Transit</p>
@@ -70,9 +70,8 @@ function OrderDeliveryStatus() {
                         onChange={handleRadioChange2}
                     />
                 </div>
-                <div className='tracking3'>
+                <div className='OrderDeliveryStatus-tracking3'>
                     <img className={`pic ${isObvious3 ? 'active' : 'blurred'}`} src={track4} alt="" />
-
                     <p>Out For Delivery</p>
                     <label htmlFor="">The courier executive is on its way
                         to deliver the order at your
@@ -84,7 +83,7 @@ function OrderDeliveryStatus() {
 
 
                 </div>
-                <div className='tracking4'>
+                <div className='OrderDeliveryStatus-tracking4'>
                     <img className={`pic ${isObvious4 ? 'active' : 'blurred'}`} src={track5} alt="" />
 
                     <p>Reached Destination</p>
@@ -97,7 +96,7 @@ function OrderDeliveryStatus() {
                 </div>
             </div>
 
-            <div className="submit">
+            <div className="OrderDeliveryStatus-submit">
                 <button>Submit</button>
             </div>
         </div>

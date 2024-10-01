@@ -7,19 +7,19 @@ const OrderInformationDelete = ({ totalOrder, deliveryCost, totalAmount, deliver
     return (
         <div>
 
-            <div className="order-information">
-                <div className='order-details'>
+            <div className="OrderInformationDelete-order-information">
+                <div className='OrderInformationDelete-order-details'>
                     <h2>Order Information</h2>
-                    <div className='line'></div>
+                    <div className='OrderInformationDelete-line'></div>
                     <p>Total order: {totalOrder} vnđ</p>
                     <p>Delivery Cost: {deliveryCost} vnđ</p>
                     <span>Total Amount: {totalAmount} vnđ</span>
                     <p>Delivery to: {deliveryTo}</p>
                     <p>By pressing the button, I agree to the <a href="#">Terms and Conditions.</a></p>
-                    <div className="text">
+                    <div className="OrderInformationDelete-text">
                         Do you really wanna delete order ?
                     </div>
-                    <button className='delete_button'>Delete</button>
+                    <button className='OrderInformationDelete-delete_button'>Delete</button>
                 </div>
 
             </div>

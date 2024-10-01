@@ -3,19 +3,19 @@ import './FooterDeliveryStatus.css'
 
 function FooterDeliveryStatus() {
     return (
-        <footer>
-            <div className="footer-main">
-                <div className="copyrightt">
+        <div className='FooterDeliveryStatus-footer'>
+            <div className="FooterDeliveryStatus-footer-main">
+                <div className=" FooterDeliveryStatus-copyrightt">
                     Your Satisfaction is our pride
                 </div>
-                <div className="copyright">
+                <div className="FooterDeliveryStatus-copyright">
                     Copyright © 2024 Koi Delivery Ordering System
                 </div>
-                <div className="copyright1">
+                <div className="FooterDeliveryStatus-copyright1">
                     Copyright has been registered.
                 </div>
             </div>
-        </footer>
+        </div>
 
     );
 }
