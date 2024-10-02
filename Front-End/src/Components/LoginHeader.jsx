@@ -1,7 +1,52 @@
 import "./LoginHeader.css";
 import Logo from "../assets/image/Logo.png";
 import LogoLogin from "../assets/image/LogoLogin.png";
+import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 function LoginHeaderMethod() {
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const navigate = useNavigate();  // Hook để điều hướng
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    // Tạo đối tượng dữ liệu để gửi lên API
+    const loginData = {
+      usernameOrEmail: username,
+      password: password
+    };
+
+    try {
+      // Gửi yêu cầu POST đến API
+      const response = await fetch('http://localhost:8080/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(loginData),
+      });
+
+      // Kiểm tra phản hồi từ API
+      if (response.ok) {
+        const data = await response.json();
+        // Lưu token vào localStorage hoặc sessionStorage
+        localStorage.setItem('token', data.token);
+        navigate('/Payment');
+      } else {
+        setErrorMessage('Invalid username or password');
+      }
+    } catch (error) {
+      setErrorMessage('Error logging in');
+    }
+  };
+  //------
+
   return (
     <div className="Login-main">
       <div className="Login-LogoLogin">
@@ -12,13 +57,16 @@ function LoginHeaderMethod() {
           <img src={Logo} alt="Logo" />
         </div>
         <h1>LOGIN PAGE</h1>
-        <form>
+        <form onSubmit={handleLogin}>
+        {errorMessage && <p style={{color: 'red'}}>{errorMessage}</p>}
           <div className="Login-input-group">
             <label className="Login-label">USERNAME</label>
             <input
               className="Login-username-input"
               type="text"
               placeholder="Enter your username"
+              value={username}
+            onChange={(e) =>setUsername(e.target.value)}
             />
           </div>
           <div className="Login-input-group">
@@ -27,11 +75,17 @@ function LoginHeaderMethod() {
               className="Login-password-input"
               type="password"
               placeholder="Enter your password"
+              value={password}
+            onChange={(e) =>setPassword(e.target.value)}
             />
           </div>
           <div className="Login-links">
-            <a href="/forgot-password">Forgot password?</a>
-            <a href="/register">Register here.</a>
+          <Link to="/ForgotPass">
+            Forgot password?
+            </Link>
+            <Link to="/Register">
+            Register here.
+            </Link>
           </div>
           <button className="Login-button" type="submit">
             LOGIN
