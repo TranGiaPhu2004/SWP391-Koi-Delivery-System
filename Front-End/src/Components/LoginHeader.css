@@ -124,6 +124,7 @@ input {
   display: flex;
   text-align: center;
   margin-left: 30%;
+  color: black;
 }
 .Login-links{
   display: flex;
