@@ -13,9 +13,9 @@ import lombok.NoArgsConstructor;
 public class Feedback {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long feedbackID;
+    private Integer feedbackID;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "OrderID", referencedColumnName = "OrderID")
     private Order order;
 

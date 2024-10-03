@@ -25,7 +25,13 @@ function OrderPaymentMethods({ totalOrder, deliveryCost, totalAmount, deliveryTo
                 </div>
 
                 <div className="methods">
-                    
+                    <div className="payment-option">
+                        <label>
+                            <input type="radio" name="payment" value="cash" />
+                            <img src={cash} alt="Cash" className="icon" />
+                            <div className="Text">Cash</div>
+                        </label>
+                    </div>
                     <div className="payment-option">
                         <label>
                             <input type="radio" name="payment" value="momo" />

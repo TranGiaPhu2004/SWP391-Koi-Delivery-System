@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "Delivery")
 @Data
@@ -23,6 +25,9 @@ public class Delivery {
 
     @Column(name = "DeliveryStatus", nullable = false)
     private Boolean deliveryStatus;
+
+    @OneToMany(mappedBy = "delivery", fetch = FetchType.EAGER)
+    private Set<Order> orders;
 
 }
 

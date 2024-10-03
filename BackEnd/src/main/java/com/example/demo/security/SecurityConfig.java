@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -32,15 +33,16 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable()) // Disable CSRF for simplicity in token-based auth
-            .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/test").permitAll() // Allow public access to "/test"
-                .requestMatchers("/api/**").permitAll() // Allow public access to "/"
-                .requestMatchers("/auth/**").permitAll() // Allow public access to login
-                .requestMatchers("/admin/**").hasRole("Admin") // Protect "/admin" route
-                .anyRequest().authenticated()) // All other routes require authentication
-            .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class); // Add JWT filter
-        
+                .csrf(AbstractHttpConfigurer::disable) // Disable CSRF for simplicity in token-based auth
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/**").permitAll()
+//                        .requestMatchers("/test").permitAll()
+//                        .requestMatchers("/api/**").permitAll()
+//                        .requestMatchers("/auth/**").permitAll()
+//                        .requestMatchers("/admin/**").hasRole("Admin")
+                        .anyRequest().authenticated()) // All other routes require authentication
+                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class); // Add JWT filter
+
         return http.build();
     }
 
@@ -56,7 +58,7 @@ public class SecurityConfig {
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Allow HTTP methods
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type")); // Allow headers
         configuration.setAllowCredentials(true); // Allow credentials (cookies, etc.)
-        
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration); // Apply to all routes
         return source;

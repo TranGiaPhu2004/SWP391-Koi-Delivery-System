@@ -2,7 +2,10 @@ package com.example.demo.service;
 
 import java.util.Optional;
 
+import com.example.demo.dto.request.LoginByEmailRequestDTO;
+import com.example.demo.dto.request.LoginByUsernameRequestDTO;
 import com.example.demo.dto.request.LoginRequestDTO;
+import com.example.demo.dto.response.LoginResponseDTO;
 import com.example.demo.model.User;
 import com.example.demo.repository.IUserRepository;
 import com.example.demo.security.JwtUtil;
@@ -23,11 +26,11 @@ public class authService {
 
     private static final Logger logger = LoggerFactory.getLogger(authService.class);
 
-    public String login(LoginRequestDTO request) {
+    public LoginResponseDTO login(LoginRequestDTO request) {
         String usernameOrEmail = request.getUsernameOrEmail();
         Optional<User> userOpt;
         logger.info("get request body out");
-    
+
         if (usernameOrEmail.contains("@")) {
             logger.info("get email");
             userOpt = userRepository.findByEmail(usernameOrEmail);
@@ -35,13 +38,13 @@ public class authService {
             logger.info("get username");
             userOpt = userRepository.findByUsername(usernameOrEmail);
         }
-    
+
         // Nếu người dùng không tồn tại
         if (userOpt.isEmpty()) {
             logger.info("repo null");
             return null; // Trả về null
         }
-    
+
         User user = userOpt.get();
         logger.info("get user exist");
         // Kiểm tra mật khẩu
@@ -49,24 +52,28 @@ public class authService {
             logger.info("mk sai");
             return null; // Trả về null
         }
-    
+
         // Nếu đăng nhập thành công
         logger.info("dang nhap thanh cong");
-        return jwtUtil.generateToken(user);
+        return new LoginResponseDTO(jwtUtil.generateToken(user),user.getRole().getTitle());
     }
 
-    public String loginByUsername(String username, String password) {
+    public LoginResponseDTO loginByUsername(LoginByUsernameRequestDTO request) {
+        String username = request.getUsername();
+        String password = request.getPassword();
         User user = userRepository.findByUsername(username).orElse(null);
         if (user != null && user.getPassword().equals(password)) { // So sánh trực tiếp
-            return jwtUtil.generateToken(user);
+            return new LoginResponseDTO(jwtUtil.generateToken(user),user.getRole().getTitle()) ;
         }
         return null; // Invalid credentials
     }
 
-    public String loginByEmail(String email, String password) {
+    public LoginResponseDTO loginByEmail(LoginByEmailRequestDTO request) {
+        String email = request.getEmail();
+        String password = request.getPassword();
         User user = userRepository.findByEmail(email).orElse(null);
         if (user != null && user.getPassword().equals(password)) { // So sánh trực tiếp
-            return jwtUtil.generateToken(user);
+            return new LoginResponseDTO(jwtUtil.generateToken(user),user.getRole().getTitle());
         }
         return null; // Invalid credentials
     }
