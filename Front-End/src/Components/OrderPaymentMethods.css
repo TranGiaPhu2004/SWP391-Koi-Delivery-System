@@ -35,7 +35,7 @@
 
 .OrderPaymentMethods-order-details h2 {
     margin-top: -10px;
-    text-align: center;
+   margin-left: -4px;
     color: #3D3D74;
     font-weight: 800;
 }
