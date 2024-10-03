@@ -13,24 +13,24 @@ function Header() {
       )
   }
   return (
-    <header>
+    <header className='Home-header'>
       
       
 
-      <div className="header-content">
+      <div className="Home-header-content">
       
-        <img src={logo} alt="Vietnam Flag" className="flag" />
-        <img src={logo1} alt="Japan Flag" className="flag" />
-        <img src={logo3} alt="Logo" className="logo" />
+        <img src={logo} alt="Vietnam Flag" className="Home-flag" />
+        <img src={logo1} alt="Japan Flag" className="Home-flag" />
+        <img src={logo3} alt="Logo" className="Home-logo" />
         
-        <nav>
+        <nav className='Home-nav'>
           <a href="/">Home</a>
           <a href="/services">Services</a>
           <a href="/about">About Us</a>
           <a href="/contact">Contact</a>
           <a href="/news">News</a>
         </nav>
-        <div className="auth-buttons">
+        <div className="Home-auth-buttons">
         <Link to="/login">
         <button>Login</button>
       </Link>

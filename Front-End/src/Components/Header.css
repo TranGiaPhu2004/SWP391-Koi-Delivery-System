@@ -1,4 +1,4 @@
-header {
+.Home-header {
     background-color: white;
     display: flex;
     justify-content: space-between;
@@ -7,34 +7,34 @@ header {
     border-bottom: 1px solid #ccc;
     font-family: cursive;
   }
-  .header-container{
+  .Home-header-container{
     display: flex;
     justify-content: space-between;  /* Căn đều các phần */
     align-items: flex-start;
     padding: 0 50px;
 
   }
-  .header1{
+  .Home-header1{
     display: inline-block;
   }
 
-  .flag {
+  .Home-flag {
     width: 100px;
     height: auto;
   }
   
-  nav a {
+  .Home-nav a {
     margin: 0 10px;
     text-decoration: none;
     color: black;
   }
   
-  .auth-buttons {
+  .Home-auth-buttons {
     display: flex;
     flex-direction: row;
     gap: 10px;
   }
-  .auth-buttons button {
+  .Home-auth-buttons button {
     margin: 0 5px;
     padding: 10px;
     background-color: #3D3D74;
@@ -44,7 +44,7 @@ header {
     border-radius: 15px;
     font-family: 'Kay Pho Du';
   }
-  .header-content {
+  .Home-header-content {
     display: contents;
   }
   
