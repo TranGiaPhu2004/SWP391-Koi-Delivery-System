@@ -1,0 +1,86 @@
+/* .main{
+    background-color: white;
+    height: 50vw;
+      width: 100vw;
+  }
+  .LogoRegisterImg{
+    max-width: 100%;
+    height: auto;
+  }
+
+  .logo {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding-right: 8%;
+  }
+  h1 {
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 40px;
+  }
+  
+  .input-group {
+    width: 100px;
+  }
+  .label{
+    color: black;
+  }
+  .button{
+    display: flex;
+    margin: auto;
+
+    margin-top: 40px;
+  
+  } */
+   .Register-main{
+    background-color: white;
+    display: flex;
+    width: 100vw;
+    height: 50vw;
+   }
+   .Register-logo {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding-right: 8%;
+  }
+  h1{
+    color: black;
+    text-align: center;
+    margin: 5%;
+  }
+  .Register-form{
+    background-color: white;
+  padding: 70px;
+  width: 40vw;
+  }
+  .Register-input-group{
+    width: 40vw;
+  }
+  .Register-label{
+    color: black;
+    margin-right: 5%;
+  }
+  .Register-username-input{
+    width: 40vw;
+  height: 30px;
+  }
+  .Register-password-input{
+    width: 40vw;
+  height: 30px;
+  }
+  .Register-cfpassword-input{
+    width: 40vw;
+  height: 30px;
+  }
+  .Register-button{
+    margin-left: 40%;
+    margin-top: 10px;
+  } 
