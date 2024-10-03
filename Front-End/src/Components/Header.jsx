@@ -34,7 +34,9 @@ function Header() {
         <Link to="/login">
         <button>Login</button>
       </Link>
+      <Link to="/Register">
           <button>Register</button>
+          </Link>
         </div>
       </div>
     </header>
