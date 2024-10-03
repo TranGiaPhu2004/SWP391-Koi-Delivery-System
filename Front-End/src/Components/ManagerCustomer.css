@@ -4,13 +4,13 @@
   box-sizing: border-box;
   font-family: 'Arial', sans-serif;
 }
-  
+
 .ManagerCustomer-container {
   width: 100vw;
   display: flex;
 }
 
-.ManagerCustomer-logo{
+.ManagerCustomer-logo {
   margin-left: 10px;
 }
 
@@ -23,16 +23,19 @@
   display: flex;
   flex-direction: column;
   /* justify-content: space-between; */
-  position: fixed; /* Sidebar cố định vị trí */
-  top: 0; /* Đảm bảo nó dính trên cùng của trang */
-  left: 0; /* Đặt sidebar ở phía trái màn hình */
+  position: fixed;
+  /* Sidebar cố định vị trí */
+  top: 0;
+  /* Đảm bảo nó dính trên cùng của trang */
+  left: 0;
+  /* Đặt sidebar ở phía trái màn hình */
 }
 
 .ManagerCustomer-nav {
   list-style-type: none;
- 
-  
-  
+
+
+
 }
 
 .ManagerCustomer-nav-item:hover {
@@ -61,9 +64,12 @@
 
 .ManagerCustomer-main-content {
   /* padding: 20px; */
-  width: calc(100% - 250px); /* Đảm bảo rằng khung chính mở rộng */
-  margin-left: 300px; /* Đẩy nội dung chính sang phải bằng với chiều rộng của sidebar */
-  width: calc(100% - 300px); /* Đảm bảo chiều rộng đúng */
+  width: calc(100% - 250px);
+  /* Đảm bảo rằng khung chính mở rộng */
+  margin-left: 300px;
+  /* Đẩy nội dung chính sang phải bằng với chiều rộng của sidebar */
+  width: calc(100% - 300px);
+  /* Đảm bảo chiều rộng đúng */
   margin-left: 300px;
 }
 
@@ -99,9 +105,11 @@
   align-items: center;
   border: 1px solid #ccc;
   border-radius: 20px;
-  background-color: white; /* Nền trắng cho cả khối */
+  background-color: white;
+  /* Nền trắng cho cả khối */
   padding: 5px;
-  width: 400px; /* Điều chỉnh kích thước của khối */
+  width: 400px;
+  /* Điều chỉnh kích thước của khối */
 }
 
 .ManagerCustomer-search-container input {
@@ -110,18 +118,25 @@
   border: none;
   outline: none;
   border-radius: 20px;
-  background-color: white; /* Nền trắng cho ô input */
-  color: #333; /* Màu chữ cho thanh tìm kiếm */
+  background-color: white;
+  /* Nền trắng cho ô input */
+  color: #333;
+  /* Màu chữ cho thanh tìm kiếm */
 }
 
 .ManagerCustomer-search-icon {
-  width: 25px; /* Kích thước icon */
+  width: 25px;
+  /* Kích thước icon */
   height: 25px;
-  margin-left: -40px; /* Kéo icon vào gần cạnh phải của ô input */
+  margin-left: -40px;
+  /* Kéo icon vào gần cạnh phải của ô input */
   cursor: pointer;
-  background-color: white; /* Đảm bảo icon có nền trắng */
-  padding: 2px; /* Thêm một chút khoảng trống cho icon */
-  border-radius: 50%; /* Tạo hình tròn cho icon nếu cần */
+  background-color: white;
+  /* Đảm bảo icon có nền trắng */
+  padding: 2px;
+  /* Thêm một chút khoảng trống cho icon */
+  border-radius: 50%;
+  /* Tạo hình tròn cho icon nếu cần */
 }
 
 .ManagerCustomer-add-button {
@@ -135,7 +150,7 @@
 }
 
 .ManagerCustomer-product-management {
-  padding: 10px; 
+  padding: 10px;
   width: 99%;
   background-color: #2B3D55;
 }
@@ -143,11 +158,14 @@
 .ManagerCustomer-product-management h1 {
   margin-bottom: 20px;
   margin-top: 5px;
+  color: #FFF;
 }
 
 .ManagerCustomer-table-container {
-  max-height: 400px; /* Đặt chiều cao tối đa cho bảng */
-  overflow-y: auto; /* Cho phép cuộn dọc nếu nội dung tràn */
+  max-height: 400px;
+  /* Đặt chiều cao tối đa cho bảng */
+  overflow-y: auto;
+  /* Cho phép cuộn dọc nếu nội dung tràn */
   margin: 0;
   padding: 0;
   border: none;
@@ -156,40 +174,55 @@
 }
 
 .ManagerCustomer-customer-table {
-  max-width: 100%; /* Đảm bảo bảng không vượt quá khung nhìn */
-  padding: 0; /* Xóa bỏ mọi padding không cần thiết */
+  max-width: 100%;
+  /* Đảm bảo bảng không vượt quá khung nhìn */
+  padding: 0;
+  /* Xóa bỏ mọi padding không cần thiết */
   margin-left: 5px;
   width: 99%;
-  table-layout: fixed; /* Cố định chiều rộng các cột để bảng không bị tràn */
+  table-layout: fixed;
+  /* Cố định chiều rộng các cột để bảng không bị tràn */
   border-collapse: collapse;
   background-color: #F9F9F9;
   color: black;
-  overflow-x: auto; /* Cho phép cuộn ngang nếu nội dung quá dài */
+  overflow-x: auto;
+  /* Cho phép cuộn ngang nếu nội dung quá dài */
 
 }
 
-.ManagerCustomer-customer-table th, .ManagerCustomer-customer-table td {
+.ManagerCustomer-customer-table th,
+.ManagerCustomer-customer-table td {
   padding: 10px;
   border: 1px solid #ddd;
   text-align: left;
-  white-space: nowrap; /* Không cho phép xuống dòng */
-  overflow: hidden; /* Ẩn nội dung nếu quá dài */
-  text-overflow: ellipsis; /* Thêm dấu "..." nếu nội dung bị cắt ngắn */
+  white-space: nowrap;
+  /* Không cho phép xuống dòng */
+  overflow: hidden;
+  /* Ẩn nội dung nếu quá dài */
+  text-overflow: ellipsis;
+  /* Thêm dấu "..." nếu nội dung bị cắt ngắn */
 }
+
 /* Đặt chiều rộng cho cột ID nhỏ hơn các cột khác */
 .ManagerCustomer-customer-table th:nth-child(1),
 .ManagerCustomer-customer-table td:nth-child(1) {
-width: 50px; /* Bạn có thể điều chỉnh kích thước nhỏ hơn */
-text-align: center; /* Căn giữa nội dung cột ID */
+  width: 50px;
+  /* Bạn có thể điều chỉnh kích thước nhỏ hơn */
+  text-align: center;
+  /* Căn giữa nội dung cột ID */
 }
 
 .ManagerCustomer-customer-table th {
   background-color: #F9F9F9;
   font-weight: bold;
-  position: sticky; /* Làm cho tiêu đề dính */
-  top: 0; /* Dính ở phía trên cùng */
-  z-index: 1; /* Đảm bảo tiêu đề luôn ở trên cùng */
-  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4); /* Thêm hiệu ứng đổ bóng khi cuộn */
+  position: sticky;
+  /* Làm cho tiêu đề dính */
+  top: 0;
+  /* Dính ở phía trên cùng */
+  z-index: 1;
+  /* Đảm bảo tiêu đề luôn ở trên cùng */
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+  /* Thêm hiệu ứng đổ bóng khi cuộn */
 }
 
 .ManagerCustomer-customer-table tr:nth-child(even) {
@@ -202,12 +235,15 @@ text-align: center; /* Căn giữa nội dung cột ID */
 
 .ManagerCustomer-customer-table th:nth-child(7),
 .ManagerCustomer-customer-table td:nth-child(7) {
-width: 180px; /* Điều chỉnh kích thước vừa đủ cho hai nút */
-text-align: center; /* Căn giữa các nút trong cột */
+  width: 180px;
+  /* Điều chỉnh kích thước vừa đủ cho hai nút */
+  text-align: center;
+  /* Căn giữa các nút trong cột */
 }
 
 /* CSS cho các nút Update và Delete */
-.ManagerCustomer-btn-update, .ManagerCustomer-btn-delete {
+.ManagerCustomer-btn-update,
+.ManagerCustomer-btn-delete {
   padding: 5px 10px;
   margin-right: 5px;
   border: none;
@@ -217,19 +253,23 @@ text-align: center; /* Căn giữa các nút trong cột */
 
 .ManagerCustomer-btn-update {
   margin-left: 5px;
-  background-color: #4CAF50; /* Màu xanh cho nút Update */
+  background-color: #4CAF50;
+  /* Màu xanh cho nút Update */
   color: white;
 }
 
 .ManagerCustomer-btn-update:hover {
-  background-color: #45a049; /* Màu đậm hơn khi hover */
+  background-color: #45a049;
+  /* Màu đậm hơn khi hover */
 }
 
 .ManagerCustomer-btn-delete {
-  background-color: #f44336; /* Màu đỏ cho nút Delete */
+  background-color: #f44336;
+  /* Màu đỏ cho nút Delete */
   color: white;
 }
 
 .ManagerCustomer-btn-delete:hover {
-  background-color: #da190b; /* Màu đậm hơn khi hover */
+  background-color: #da190b;
+  /* Màu đậm hơn khi hover */
 }

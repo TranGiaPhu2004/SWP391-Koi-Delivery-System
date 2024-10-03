@@ -39,7 +39,7 @@ function RegisterMethod() {
             <input
               className="Register-cfpassword-input"
               type="text"
-              placeholder="Comfirm Password"
+              placeholder="Confirm Password"
             />
           </div>
           <button className="Register-button" type="submit">

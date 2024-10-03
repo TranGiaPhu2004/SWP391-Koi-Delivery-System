@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 import './OrderPaymentMethods.css'
 
-import cash from '../assets/image/cash.png'
+
 import momo from '../assets/image/momo.png'
 import vnpay from '../assets/image/vnpay.png'
 function OrderPaymentMethods({ totalOrder, deliveryCost, totalAmount, deliveryTo }) {

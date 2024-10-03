@@ -1,55 +1,79 @@
-.Login-main{
+.Login-main {
   background-color: white;
   display: flex;
   width: 100vw;
   height: 50vw;
 }
-.Login-logo{
- display: flex;
- justify-content: center;
- align-items: center;
- margin-left: 20px;
+
+.Login-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: -4%;
 }
-.Login-input-group{
- width: 40vw;
+
+.Login-input-group {
+  width: 40vw;
 }
-.Login-label{
-  font-family: 'Kay Pho Du';
-  color: black;
-  padding-right:  10px; 
+
+.Login-label {
+  color: #3D3D74;
+  margin-right: 5%;
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 20px;
 }
- .Login-username-input{
-  font-family: 'Kay Pho Du';
+
+.Login-username-input {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
   width: 40vw;
   height: 30px;
- }
- .Login-password-input{
-  font-family: 'Kay Pho Du';
+}
+
+.Login-password-input {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   width: 40vw;
   height: 30px;
- }
-.Login-form{
+
+}
+
+.Login-form {
   background-color: white;
   padding: 70px;
-  width: 40vw;
-
 }
 
 .Login-form h1 {
   display: flex;
   text-align: center;
-  margin-left: 30%;
+  margin-left: 24%;
   color: black;
 }
-.Login-links{
+
+.Login-links {
   display: flex;
   justify-content: space-between;
   margin-bottom: 1.5rem;
-  font-family: 'Kay Pho Du';
-  
+   font-family: monospace;
+
 }
-.Login-button{
+
+.Login-button {
   display: block;
   justify-content: center;
-  margin-left: 260px;
+  margin-left: 255px;
+  margin-top: -10px;
+  opacity: 0.7;
+  font-family: monospace;
+  font-size: 20px;
+}
+
+.Login-button:hover {
+  background-color: #3D3D74;
+  color: #fff;
+  font-weight: bolder;
+  font-family: cursive;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+  
 }
