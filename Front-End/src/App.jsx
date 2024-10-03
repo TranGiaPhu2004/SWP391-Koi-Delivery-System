@@ -4,6 +4,7 @@ import Login from './Page/Login/Login';
 import Register from './Page/Register/Register';
 import ForgotPassword from './Page/ForgotPassword/ForgotPassword'
 import PaymentMethods from './Page/Payment-Methods/PaymentMethod';
+import Manager from './Page/Manager/Manager'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/Register" element={<Register/>} />
         <Route path="/ForgotPass" element={<ForgotPassword />} />
         <Route path="/Payment" element={<PaymentMethods />} />
+        <Route path="/Manager" element={<Manager />} />
       </Routes>
     </Router>
 
