@@ -4,7 +4,7 @@
   box-sizing: border-box;
   font-family: 'Arial', sans-serif;
 }
-
+  
 .ManagerCustomer-container {
   width: 100vw;
   display: flex;
@@ -28,10 +28,18 @@
   left: 0; /* Đặt sidebar ở phía trái màn hình */
 }
 
-.ManagerCustomer-nav-list {
+.ManagerCustomer-nav {
   list-style-type: none;
+ 
+  
   
 }
+
+.ManagerCustomer-nav-item:hover {
+  color: #ff4b5c;
+  transition: color 0.3s ease;
+}
+
 
 .ManagerCustomer-nav-item {
   color: #2B3D55;
@@ -55,6 +63,8 @@
   /* padding: 20px; */
   width: calc(100% - 250px); /* Đảm bảo rằng khung chính mở rộng */
   margin-left: 300px; /* Đẩy nội dung chính sang phải bằng với chiều rộng của sidebar */
+  width: calc(100% - 300px); /* Đảm bảo chiều rộng đúng */
+  margin-left: 300px;
 }
 
 .ManagerCustomer-header {
@@ -141,6 +151,8 @@
   margin: 0;
   padding: 0;
   border: none;
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 .ManagerCustomer-customer-table {
