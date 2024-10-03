@@ -1,4 +1,4 @@
-.main-order {
+.OrderInformationTracking-main-order {
     display: flex;
     flex: 1;
     width: 100%;
@@ -6,7 +6,7 @@
 
 }
 
-.header-tracking {
+.OrderInformationTracking-header-tracking {
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -14,7 +14,7 @@
     margin-bottom: -25px;
 }
 
-.header-tracking p {
+.OrderInformationTracking-header-tracking p {
     text-align: center;
     font-size: 40px;
     color: #3D3D74;
@@ -28,7 +28,7 @@
 
 
 
-.tracking-order {
+.OrderInformationTracking-tracking-order {
     display: flex;
     flex-direction: row;
     column-gap: 15px;
@@ -40,7 +40,7 @@
     margin-top: 40px;
 }
 
-.tracking-order p {
+.OrderInformationTracking-tracking-order p {
     display: flex;
     flex-direction: row;
 
@@ -49,18 +49,18 @@
     font-family: cursive;
 }
 
-.tracking img {
+.OrderInformationTracking-tracking img {
     width: 20%;
     height: 20%;
     opacity: 0.5;
 }
 
-.tracking img:hover {
+.OrderInformationTracking-tracking img:hover {
     opacity: 1;
     transition: opacity 0.3s ease;
 }
 
-.tracking label {
+.OrderInformationTracking-tracking label {
     font-size: 15px;
     font-family: 'Kay Pho Du';
     word-wrap: break-word;

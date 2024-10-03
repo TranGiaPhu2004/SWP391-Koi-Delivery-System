@@ -1,23 +1,23 @@
-footer {
+.PaymentFooter-mainfooter {
     margin-top: 100px;
     max-width: 100vw;
     width: 100%;
 }
 
-.footer-main {
+.PaymentFooter-footer-main {
     background-color: #3D3D74;
     padding: 10px 20px;
     width: 165%;
 }
 
-.copyright {
+.PaymentFooter-copyright {
     color: white;
     text-align: center;
 }
 
 
-.copyright,
-.copyright1 {
+.PaymentFooter-copyright,
+.PaymentFooter-copyright1 {
     color: white;
     text-align: center;
     padding: 3px 3px;

@@ -1,19 +1,19 @@
-.main-order {
+.OrderInformation-main-order {
     display: flex;
     flex-direction: row;
 
 }
 
-.main-pic {
+.OrderInformation-main-pic {
     margin-left: 10%;
     display: flex;
     flex-direction: column;
     row-gap: 50px;
 }
 
-.pic-koi1,
-.pic-koi2,
-.pic-koi3 {
+.OrderInformation-pic-koi1,
+.OrderInformation-pic-koi2,
+.OrderInformation-pic-koi3 {
     width: 100%;
     /* Chiếm toàn bộ chiều rộng của phần tử cha */
     height: auto;
@@ -24,16 +24,16 @@
     margin-top: 40px;
 }
 
-.pic-koi1,
-.pic-koi2,
-.pic-koi3 {
+.OrderInformation-pic-koi1,
+.OrderInformation-pic-koi2,
+.OrderInformation-pic-koi3 {
     display: flex;
     flex-direction: row;
     gap: 20px;
     align-items: center;
 }
 
-.pic1 {
+.OrderInformation-pic1 {
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -41,25 +41,89 @@
 
 }
 
-.amount {
+.OrderInformation-amount1 {
+    margin-left: 16px;
     display: flex;
     flex-direction: row;
     gap: 5px;
 }
 
-.button {
+.OrderInformation-amount1 .decrement-button1 {
+    transition: filter 0.3s ease;
+    /* Thêm hiệu ứng chuyển đổi mượt */
+}
+
+.OrderInformation-amount1 .decrement-button1.blurred {
+    filter: blur(1px);
+    cursor: not-allowed;
+}
+
+.OrderInformation-amount1 .decrement-button1.active {
+    filter: none;
+    cursor: pointer;
+}
+
+
+.OrderInformation-amount2 {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+
+.OrderInformation-amount2 .decrement-button2 {
+    transition: filter 0.3s ease;
+    /* Thêm hiệu ứng chuyển đổi mượt */
+}
+
+.OrderInformation-amount2 .decrement-button2.blurred {
+    filter: blur(1px);
+    cursor: not-allowed;
+}
+
+.OrderInformation-amount2 .decrement-button2.active {
+    filter: none;
+    cursor: pointer;
+}
+
+
+.OrderInformation-amount3 {
+    margin-left: 16px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.OrderInformation-amount3 .decrement-button3 {
+    transition: filter 0.3s ease;
+    /* Thêm hiệu ứng chuyển đổi mượt */
+}
+
+.OrderInformation-amount3 .decrement-button3.blurred {
+    filter: blur(1px);
+    cursor: not-allowed;
+}
+
+.OrderInformation-amount3 .decrement-button3.active {
+    filter: none;
+    cursor: pointer;
+}
+
+
+
+.OrderInformation-button {
     color: red;
     background-color: antiquewhite;
     font-family: 'Kay Pho Du';
 }
 
-.order-information {
-    margin-top: 18%;
-    margin-left: 50%;
+.OrderInformation-order-information {
+    margin-top: 15%;
+    margin-left: 45%;
 
 }
 
-.order-details p:hover {
+.OrderInformation-order-details p:hover {
     cursor: grab;
     opacity: 0.8;
     transition: opacity 2s ease;
@@ -68,7 +132,7 @@
     font-family: 'Kay Pho Du';
 }
 
-.order-details {
+.OrderInformation-order-details {
     background: #D9D9D9;
     padding: 30px 20px;
     border-radius: 30px;
@@ -78,19 +142,19 @@
     height: 420px;
 }
 
-.order-details span {
+.OrderInformation-order-details span {
     color: #3D3D74;
     font-weight: 800;
 }
 
-.order-details h2 {
+.OrderInformation-order-details h2 {
     margin-top: -10px;
     text-align: center;
     color: #3D3D74;
     font-weight: 800;
 }
 
-.order-details .line {
+.OrderInformation-order-details .line {
     background: white;
     width: 100%;
     height: 5px;
@@ -98,12 +162,12 @@
 }
 
 
-.order-details button {
+.OrderInformation-order-details button {
     width: 100%;
 }
 
 
-.payment-button {
+.OrderInformation-payment-button {
     background-color: #3D3D74;
     color: #fff;
     padding: 15px 20px;
@@ -115,7 +179,7 @@
 
 }
 
-.payment-button span {
+.OrderInformation-payment-button span {
     background: #D9D9D9;
     color: black;
     font-size: 20px;
@@ -126,17 +190,17 @@
     margin-left: 10px;
 }
 
-.payment-button span:hover {
+.OrderInformation-payment-button span:hover {
     color: #007bff;
     cursor: grab;
 }
 
-.cancel {
+.OrderInformation-cancel {
     text-align: center;
-    color:  #3D3D74;
+    color: #3D3D74;
     font-weight: 700;
 }
 
-.order-details .cancel:hover {
+.OrderInformation-order-details .cancel:hover {
     cursor: grab;
 }

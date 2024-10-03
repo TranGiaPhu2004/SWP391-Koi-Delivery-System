@@ -1,12 +1,6 @@
-.main-order {
-    display: flex;
-    flex: 1;
-    width: 100%;
-    max-width: 100vw;
 
-}
 
-.header-tracking {
+.OrderDeliveryStatus-header-tracking {
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -14,7 +8,7 @@
     margin-bottom: -25px;
 }
 
-.header-tracking p {
+.OrderDeliveryStatus-header-tracking p {
     text-align: center;
     font-size: 40px;
     color: #3D3D74;
@@ -28,7 +22,7 @@
 
 
 
-.tracking-order {
+.OrderDeliveryStatus-tracking-order {
     display: flex;
     flex-direction: row;
     column-gap: 15px;
@@ -40,7 +34,7 @@
     margin-top: 40px;
 }
 
-.tracking-order p {
+.OrderDeliveryStatus-tracking-order p {
     display: flex;
     flex-direction: row;
 
@@ -49,35 +43,35 @@
     font-family: cursive;
 }
 
-.tracking img {
+.OrderDeliveryStatus-tracking img {
     width: 20%;
     height: 20%;
     opacity: 0.5;
     transition: opacity 0.5s ease, filter 0.5s ease;
 }
 
-.tracking1 img {
+.OrderDeliveryStatus-tracking1 img {
     width: 20%;
     height: 20%;
     opacity: 0.5;
     transition: opacity 0.5s ease, filter 0.5s ease;
 }
 
-.tracking2 img {
+.OrderDeliveryStatus-tracking2 img {
     width: 20%;
     height: 20%;
     opacity: 0.5;
     transition: opacity 0.5s ease, filter 0.5s ease;
 }
 
-.tracking3 img {
+.OrderDeliveryStatus-tracking3 img {
     width: 20%;
     height: 20%;
     opacity: 0.5;
     transition: opacity 0.5s ease, filter 0.5s ease;
 }
 
-.tracking4 img {
+.OrderDeliveryStatus-tracking4 img {
     width: 20%;
     height: 20%;
     opacity: 0.5;
@@ -85,78 +79,78 @@
 }
 
 /* trạng thái chưa xác nhận */
-.tracking img.blurred {
+.OrderDeliveryStatus-tracking img.blurred {
 
     filter: blur;
 }
 
 /* khi nhấn vào radio => đã xác nhận đơn hàng */
-.tracking img.active {
+.OrderDeliveryStatus-tracking img.active {
 
     opacity: 1;
     filter: blur(0);
 }
 
-.tracking1 img.blurred {
+.OrderDeliveryStatus-tracking1 img.blurred {
     filter: blur;
 }
 
 /* khi nhấn vào radio => đã xác nhận đơn hàng */
-.tracking1 img.active {
-
-    opacity: 1;
-    filter: blur(0);
-}
-
-
-.tracking2 img.blurred {
-    filter: blur;
-}
-
-/* khi nhấn vào radio => đã xác nhận đơn hàng */
-.tracking2 img.active {
+.OrderDeliveryStatus-tracking1 img.active {
 
     opacity: 1;
     filter: blur(0);
 }
 
 
-.tracking3 img.blurred {
+.OrderDeliveryStatus-tracking2 img.blurred {
     filter: blur;
 }
 
 /* khi nhấn vào radio => đã xác nhận đơn hàng */
-.tracking3 img.active {
+.OrderDeliveryStatus-tracking2 img.active {
 
     opacity: 1;
     filter: blur(0);
 }
 
 
-.tracking4 img.blurred {
+.OrderDeliveryStatus-tracking3 img.blurred {
     filter: blur;
 }
 
 /* khi nhấn vào radio => đã xác nhận đơn hàng */
-.tracking4 img.active {
+.OrderDeliveryStatus-tracking3 img.active {
 
     opacity: 1;
     filter: blur(0);
 }
 
 
-.tracking,
-.tracking1,
-.tracking2,
-.tracking3,
-.tracking4 label {
+.OrderDeliveryStatus-tracking4 img.blurred {
+    filter: blur;
+}
+
+/* khi nhấn vào radio => đã xác nhận đơn hàng */
+.OrderDeliveryStatus-tracking4 img.active {
+
+    opacity: 1;
+    filter: blur(0);
+}
+
+
+.OrderDeliveryStatus-tracking,
+.OrderDeliveryStatus-tracking1,
+.OrderDeliveryStatus-tracking2,
+.OrderDeliveryStatus-tracking3,
+.OrderDeliveryStatus-tracking4 label {
     font-size: 15px;
     font-family: 'Kay Pho Du';
     word-wrap: break-word;
     white-space: normal;
 }
 
-.submit button {
+.OrderDeliveryStatus-submit button {
     display: block;
     margin: auto;
     margin-top: 30px;
