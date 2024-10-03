@@ -18,7 +18,7 @@ function ForgotPasswordContent() {
         </div>
 
         <h2>FORGOT PASSWORD PAGE</h2>
-        <form>
+        <form className="ForgotPassword-Form">
           <div className="ForgotPassword-input-group">
             <label className="ForgotPassword-label">USERNAME</label>
             <input

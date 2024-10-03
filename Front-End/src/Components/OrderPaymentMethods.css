@@ -7,26 +7,30 @@
 
 }
 
-
-.OrderPaymentMethods-order-details p:hover {
-    cursor: grab;
-    opacity: 0.8;
-    transition: opacity 2s ease;
-    color: #3D3D74;
-    font-weight: bolder;
-    font-family: 'Kay Pho Du';
-}
-
 .OrderPaymentMethods-order-details {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
     background: #D9D9D9;
     padding: 30px 20px;
     border-radius: 30px;
     border: none;
     line-height: 2;
-    width: 350px;
+    width: 450px;
     height: 420px;
-    
+    font-family: 'Courier New', Courier, monospace;
+
 }
+
+.OrderPaymentMethods-order-details p{
+   
+    color: #3D3D74;
+    font-weight: bolder;
+    font-family: monospace;
+    font-size: 17px;
+}
+
+
 
 .OrderPaymentMethods-order-details span {
     color: #3D3D74;
@@ -35,9 +39,10 @@
 
 .OrderPaymentMethods-order-details h2 {
     margin-top: -10px;
-   margin-left: -4px;
+    margin-left: -4px;
     color: #3D3D74;
     font-weight: 800;
+    font-family: cursive;
 }
 
 .OrderPaymentMethods-order-details .line {
@@ -83,7 +88,7 @@
 
 .OrderPaymentMethods-cancel {
     text-align: center;
-    color:  #3D3D74;
+    color: #3D3D74;
     font-weight: 700;
 }
 
@@ -100,28 +105,28 @@
     margin-left: 70%;
 }
 
-.OrderPaymentMethods-payment-option label{
+.OrderPaymentMethods-payment-option label {
     display: flex;
     flex-direction: row;
- 
+
 }
 
 .OrderPaymentMethods-payment-option .Text {
-  
+
     text-align: center;
     margin-left: 30px;
     margin-top: 30px;
 }
 
 .OrderPaymentMethods-payment-option .Text2 {
-  
+
     text-align: center;
     margin-left: 30px;
     margin-top: 25px;
 }
 
 .OrderPaymentMethods-payment-option .Text3 {
-  
+
     text-align: center;
     margin-left: 30px;
     margin-top: 50px;

@@ -131,7 +131,8 @@ const OrderInformation = ({ totalOrder, deliveryCost, totalAmount, deliveryTo })
                     <span>Total Amount: {totalAmount} {(count1 + count2) * parseFloat(1000000)} vnđ</span>
                     <p>Delivery to: {deliveryTo}</p>
                     <p>By pressing the button, I agree to the <a href="#">Terms and Conditions.</a></p>
-                    <button className="OrderInformation-payment-button">{totalAmount} vnđ Payment <a href="#"><span>→</span></a></button>
+                    <button className="OrderInformation-payment-button">{(count1 + count2) * parseFloat(100000000)} vnđ Payment 
+                        <a href="#"><span>→</span></a></button>
 
                     <div className="OrderInformation-cancel">
                         <a href='#'>Delete</a>
