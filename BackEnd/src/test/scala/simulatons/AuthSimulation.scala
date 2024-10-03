@@ -51,10 +51,10 @@ class AuthSimulation extends Simulation {
 
   setUp(
     scnLoginUsername.inject(
-      constantUsersPerSec(500).during(10.seconds) // Gửi 5000 yêu cầu trong 10 giây
+      constantUsersPerSec(1000).during(10.seconds) // Gửi 1000 yêu cầu trong 10 giây
     ),
     scnLoginEmail.inject(
-      constantUsersPerSec(500).during(10.seconds) // Gửi 5000 yêu cầu trong 10 giây
+      constantUsersPerSec(1000).during(10.seconds) // Gửi 1000 yêu cầu trong 10 giây
     )
   ).protocols(httpProtocol)
 }

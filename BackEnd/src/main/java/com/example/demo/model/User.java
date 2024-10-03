@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -22,7 +23,7 @@ public class User implements Serializable{
     @Column(name = "password", length = 100, nullable = false)
     private String password;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "roleID")
     private Role role;  // Nên sử dụng Role thay vì int để giữ mối quan hệ @ManyToOne
 
@@ -32,4 +33,6 @@ public class User implements Serializable{
     @Column(name = "phonecontact", length = 20)
     private String phonecontact;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Order> orders;
 }

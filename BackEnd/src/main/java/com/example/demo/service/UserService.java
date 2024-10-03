@@ -27,5 +27,4 @@ public class UserService {
         return user != null ? new UserResponseDTO(user.getUserID(), user.getUsername(), user.getEmail()) : null;
     }
 
-    // Thêm các phương thức khác để tạo, cập nhật, xóa người dùng
 }

@@ -13,12 +13,12 @@ import lombok.NoArgsConstructor;
 public class KoiFish {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long fishID;
+    private Integer fishID;
 
     @Column(name = "Weight", nullable = false)
     private Float weight;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "OrderID", referencedColumnName = "OrderID")
     private Order order;
 
@@ -28,7 +28,7 @@ public class KoiFish {
     @Column(name = "FishStatus", nullable = false)
     private String fishStatus;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "BoxID", referencedColumnName = "BoxID")
     private KoiBox box;
 
