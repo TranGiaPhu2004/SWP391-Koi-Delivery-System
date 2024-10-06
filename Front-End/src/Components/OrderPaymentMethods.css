@@ -1,6 +1,29 @@
+
+.OrderPaymentMethods-paymentmethods {
+    text-align: center;
+    margin-left: 66%;
+    font-size: 38px;
+    font-family: monospace;
+    width: 40%;
+    padding: 15px 15px;
+    margin-top: 20px;
+    border-bottom: 2px solid black;
+    color: #3D3D74;
+    font-weight: 800;
+}
+
+.OrderPaymentMethods-message {
+    text-align: center;
+    margin-left: 66%;
+    font-size: 17px;
+    font-family: monospace;
+    width: 40%;
+    margin-top: 20px;
+}
+
 .OrderPaymentMethods-order-information {
     display: flex;
-    margin-top: 6%;
+    margin-top: 8%;
     margin-left: 20%;
     align-items: center;
     text-align: center;
@@ -22,8 +45,12 @@
 
 }
 
-.OrderPaymentMethods-order-details p{
-   
+.OrderPaymentMethods-order-details .OrderPaymentMethods-line {
+    border: 3px solid white;
+}
+
+.OrderPaymentMethods-order-details p {
+
     color: #3D3D74;
     font-weight: bolder;
     font-family: monospace;
@@ -43,6 +70,7 @@
     color: #3D3D74;
     font-weight: 800;
     font-family: cursive;
+    font-size: 28px;
 }
 
 .OrderPaymentMethods-order-details .line {
@@ -86,17 +114,15 @@
     cursor: grab;
 }
 
-.OrderPaymentMethods-cancel {
-    text-align: center;
-    color: #3D3D74;
-    font-weight: 700;
+.OrderPaymentMethods-order-details .OrderPaymentMethods-cancel {
+    margin-top: -4px;
 }
-
-.OrderPaymentMethods-order-details .cancel:hover {
+.OrderPaymentMethods-order-details .OrderPaymentMethods-cancel a{
     cursor: grab;
 }
 
 .OrderPaymentMethods-main-order {
+   
     display: flex;
     flex-direction: row;
 }
@@ -111,18 +137,27 @@
 
 }
 
-.OrderPaymentMethods-payment-option .Text {
+.OrderPaymentMethods-payment-option .OrderPaymentMethods-Text2 {
 
     text-align: center;
     margin-left: 30px;
-    margin-top: 30px;
+    margin-top: 35%;
+    font-family: monospace;
+    font-size: 17px;
+    width: 100%;
+    /*  white-space: nowrap: 0 cho chữ bị xuống dòng */
+    white-space: nowrap;  
 }
 
-.OrderPaymentMethods-payment-option .Text2 {
+.OrderPaymentMethods-payment-option .OrderPaymentMethods-Text3 {
 
     text-align: center;
     margin-left: 30px;
-    margin-top: 25px;
+    margin-top: 58px;
+    font-family: monospace;
+    font-size: 17px;
+    width: 100%;
+    white-space: nowrap;  
 }
 
 .OrderPaymentMethods-payment-option .Text3 {
@@ -140,16 +175,16 @@
 }
 
 .OrderPaymentMethods-methods button {
-    margin-left: 72%;
+    margin-left: 70%;
     color: #fff;
     background-color: #3D3D74;
-    font-family: 'Kay Pho Du';
-    padding: 7px 7px;
-    width: 150px;
+    font-family: monospace;
+    padding: 5px 5px;
+    width: 250px;
     height: 50px;
     border: none;
     border-radius: 15px;
-    opacity: 0.5;
+    font-size: 20px;
 }
 
 .OrderPaymentMethods-methods button:hover {
