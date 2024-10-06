@@ -63,17 +63,10 @@
   justify-content: center;
   margin-left: 255px;
   margin-top: -10px;
-  opacity: 0.7;
   font-family: monospace;
-  font-size: 20px;
-}
-
-.Login-button:hover {
+  font-size: 18px;
   background-color: #3D3D74;
   color: #fff;
   font-weight: bolder;
-  font-family: cursive;
-  opacity: 1;
-  transition: opacity 0.2s ease;
-  
 }
+

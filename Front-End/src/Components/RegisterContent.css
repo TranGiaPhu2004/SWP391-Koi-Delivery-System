@@ -90,13 +90,9 @@ h1 {
   margin-left: 40%;
   margin-top: 10px;
   font-family: 'Courier New', Courier, monospace;
-  opacity: 0.5;
-}
-
-.Register-button:hover {
   background-color: #3D3D74;
-  color: #fff;
+  
   font-weight: bolder;
-  opacity: 1;
-  transition: opacity 0.3s ease;
+  color: #fff;
+  
 }
