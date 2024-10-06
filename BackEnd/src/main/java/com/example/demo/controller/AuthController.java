@@ -3,7 +3,9 @@ package com.example.demo.controller;
 import com.example.demo.dto.request.LoginByEmailRequestDTO;
 import com.example.demo.dto.request.LoginByUsernameRequestDTO;
 import com.example.demo.dto.request.LoginRequestDTO;
+import com.example.demo.dto.request.RegisterRequestDTO;
 import com.example.demo.dto.response.LoginResponseDTO;
+import com.example.demo.dto.response.RegisterResponseDTO;
 import com.example.demo.service.*;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -67,5 +69,15 @@ public class AuthController {
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
+    }
+
+    @PostMapping("/register/username")
+    public ResponseEntity<RegisterResponseDTO> register(@RequestBody RegisterRequestDTO request) {
+        logger.info("Register controller called");
+        String msg = authService.registerUser(request);
+        RegisterResponseDTO response = new RegisterResponseDTO();
+        response.setMsg(msg);
+        logger.info("Register method completed");
+        return ResponseEntity.ok(response);
     }
 }
