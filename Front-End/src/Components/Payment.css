@@ -4,12 +4,13 @@
 
 .Payment-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     text-align: center;
     padding: 15px 20px;
     background-color: #fff;
     width: 165%;
+    margin-left: -12%;
     
     /*  max-width: 100vw : Đảm bảo header không vượt quá chiều rộng màn hình */
     box-sizing: border-box;
