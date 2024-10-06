@@ -73,7 +73,7 @@
     width: 167%;
 }
 
-ul {
+.HeaderPaymentMethods-list {
     display: flex;
     justify-content: center;
     flex-direction: row;

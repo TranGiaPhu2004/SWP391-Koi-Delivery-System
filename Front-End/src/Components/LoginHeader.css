@@ -1,94 +1,72 @@
-.main {
-    display: flex;
-    height: auto;
-    width: 100vw;
-    
-  }
-  .LogoLogin{
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f8f8f8;
-  }
-  
-  .LogoLoginImg {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .login-form {
-    flex: 1;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: white;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .Logo {
-    
-    margin-bottom: 2rem;
-    
-  }
-  
-  .logo {
-    justify-content: center;
-    align-items: center;
-    display: flex;
-  }
-  
-  h1 {
-    text-align: center;
-    font-family: 'Arial', sans-serif;
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    color: #333;
-  }
-  
-  .input-group {
-    margin-bottom: 1.5rem;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-    color: white;
-  }
-  
-  input {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-        
-  }
-  
-  .links {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1.5rem;
-  }
-  
-  .links a {
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  button {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #4682b4;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #3a6d92;
-  }
+.Login-main {
+  background-color: white;
+  display: flex;
+  width: 100vw;
+  height: 50vw;
+}
+
+.Login-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: -4%;
+}
+
+.Login-input-group {
+  width: 40vw;
+}
+
+.Login-label {
+  color: #3D3D74;
+  margin-right: 5%;
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.Login-username-input {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+  width: 40vw;
+  height: 30px;
+}
+
+.Login-password-input {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  width: 40vw;
+  height: 30px;
+
+}
+
+.Login-form {
+  background-color: white;
+  padding: 70px;
+}
+
+.Login-form h1 {
+  display: flex;
+  text-align: center;
+  margin-left: 24%;
+  color: black;
+}
+
+.Login-links {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+   font-family: monospace;
+
+}
+
+.Login-button {
+  display: block;
+  justify-content: center;
+  margin-left: 255px;
+  margin-top: -10px;
+  font-family: monospace;
+  font-size: 18px;
+  background-color: #3D3D74;
+  color: #fff;
+  font-weight: bolder;
+}
+

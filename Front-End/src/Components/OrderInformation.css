@@ -1,11 +1,40 @@
 .OrderInformation-main-order {
     display: flex;
     flex-direction: row;
+    width: 100%;
+    height: 100%;
 
 }
 
+.OrderInformation-paymentmethods {
+    text-align: center;
+    margin-left: 53%;
+    font-size: 40px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    width: 40%;
+    padding: 15px 15px;
+    margin-top: 20px;
+    border-bottom: 2px solid black;
+    color: #3D3D74;
+    font-weight: 800;
+    
+}
+
+.OrderInformation-message {
+    color: coral;
+    text-align: center;
+    margin-left: 48%;
+    font-size: 17px;
+    font-family: 'Courier New', Courier, monospace;
+    width: 50%;
+    margin-top: 20px;
+    font-weight: 800;
+   
+    
+}
+
 .OrderInformation-main-pic {
-    margin-left: 10%;
+    margin-left: 5%;
     display: flex;
     flex-direction: column;
     row-gap: 50px;
@@ -38,7 +67,71 @@
     flex-direction: column;
     text-align: center;
     align-items: center;
+    
+}
 
+.OrderInformation-pic1 p {
+    font-family: monospace;
+    font-size: 17px;
+    
+}
+
+.OrderInformation-pic1 .OrderInformation-info-box p{
+    padding: 10px 10px;
+    font-size: 12px;
+}
+
+.OrderInformation-pic1 .OrderInformation-info-box p span{
+    color: #3D3D74;
+    font-weight: 800;
+}
+
+.OrderInformation-pic2 {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    
+}
+
+.OrderInformation-pic2 p {
+    font-family: monospace;
+    font-size: 17px;
+    
+}
+
+.OrderInformation-pic2 .OrderInformation-info-box p{
+    padding: 10px 10px;
+    font-size: 12px;
+}
+
+.OrderInformation-pic2 .OrderInformation-info-box p span{
+    color: #3D3D74;
+    font-weight: 800;
+}
+
+.OrderInformation-pic3 {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    
+}
+
+.OrderInformation-pic3 p {
+    font-family: monospace;
+    font-size: 17px;
+   
+}
+
+.OrderInformation-pic3 .OrderInformation-info-box p{
+    padding: 10px 10px;
+    font-size: 12px;
+}
+
+.OrderInformation-pic3 .OrderInformation-info-box p span{
+    color: #3D3D74;
+    font-weight: 800;
 }
 
 .OrderInformation-amount1 {
@@ -50,11 +143,11 @@
 
 .OrderInformation-amount1 .decrement-button1 {
     transition: filter 0.3s ease;
-    /* Thêm hiệu ứng chuyển đổi mượt */
+    background-color: rgb(243, 146, 146);
 }
 
 .OrderInformation-amount1 .decrement-button1.blurred {
-    filter: blur(1px);
+    filter: blur(0);
     cursor: not-allowed;
 }
 
@@ -62,6 +155,34 @@
     filter: none;
     cursor: pointer;
 }
+
+.OrderInformation-amount1 .increment-button1 {
+    background-color: rgb(148, 227, 148);
+}
+.OrderInformation-amount2 .increment-button2 {
+    background-color: rgb(148, 227, 148);
+}
+.OrderInformation-amount3 .increment-button3 {
+    background-color: rgb(148, 227, 148);
+}
+
+.OrderInformation-amount1 .OrderInformation-count1 {
+    background: antiquewhite;
+    font-family: cursive;
+}
+
+.OrderInformation-amount2 .OrderInformation-count2 {
+    background: antiquewhite;
+    font-family: cursive;
+}
+
+
+.OrderInformation-amount3 .OrderInformation-count3 {
+    background: antiquewhite;
+    font-family: cursive;
+}
+
+
 
 
 .OrderInformation-amount2 {
@@ -73,11 +194,11 @@
 
 .OrderInformation-amount2 .decrement-button2 {
     transition: filter 0.3s ease;
-    /* Thêm hiệu ứng chuyển đổi mượt */
+    background-color: rgb(243, 146, 146);
 }
 
 .OrderInformation-amount2 .decrement-button2.blurred {
-    filter: blur(1px);
+    filter: blur(0);
     cursor: not-allowed;
 }
 
@@ -97,10 +218,11 @@
 .OrderInformation-amount3 .decrement-button3 {
     transition: filter 0.3s ease;
     /* Thêm hiệu ứng chuyển đổi mượt */
+    background-color: rgb(243, 146, 146);  
 }
 
 .OrderInformation-amount3 .decrement-button3.blurred {
-    filter: blur(1px);
+    filter: blur(0);
     cursor: not-allowed;
 }
 
@@ -114,32 +236,35 @@
 .OrderInformation-button {
     color: red;
     background-color: antiquewhite;
-    font-family: 'Kay Pho Du';
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .OrderInformation-order-information {
-    margin-top: 15%;
-    margin-left: 45%;
+    margin-top: 18%;
+    margin-left: 40%;
 
 }
 
-.OrderInformation-order-details p:hover {
+.OrderInformation-order-details p{
     cursor: grab;
-    opacity: 0.8;
-    transition: opacity 2s ease;
+   
     color: #3D3D74;
-    font-weight: bolder;
-    font-family: 'Kay Pho Du';
+    font-family: monospace;
+    font-size: 15px;
+    font-weight: 600;
 }
 
 .OrderInformation-order-details {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
     background: #D9D9D9;
     padding: 30px 20px;
     border-radius: 30px;
     border: none;
     line-height: 2;
-    width: 350px;
-    height: 420px;
+    width: 420px;
+    height: 430px;
 }
 
 .OrderInformation-order-details span {
@@ -149,9 +274,13 @@
 
 .OrderInformation-order-details h2 {
     margin-top: -10px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: center;
     color: #3D3D74;
     font-weight: 800;
+    font-size: 30px;
+    border-bottom: 3px solid white;
+    
 }
 
 .OrderInformation-order-details .line {
@@ -164,6 +293,7 @@
 
 .OrderInformation-order-details button {
     width: 100%;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 
@@ -203,4 +333,8 @@
 
 .OrderInformation-order-details .cancel:hover {
     cursor: grab;
+}
+
+.OrderInformation-button:active {
+    border: none;
 }
