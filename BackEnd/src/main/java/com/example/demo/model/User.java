@@ -27,7 +27,7 @@ public class User implements Serializable{
     @JoinColumn(name = "roleID")
     private Role role;  // Nên sử dụng Role thay vì int để giữ mối quan hệ @ManyToOne
 
-    @Column(name = "email", length = 100, nullable = false)
+    @Column(name = "email", length = 100)
     private String email;
 
     @Column(name = "phonecontact", length = 20)

@@ -2,11 +2,15 @@ package com.example.demo.service;
 
 import java.util.Optional;
 
+import com.example.demo.config.DefaultVariableConfig;
 import com.example.demo.dto.request.LoginByEmailRequestDTO;
 import com.example.demo.dto.request.LoginByUsernameRequestDTO;
 import com.example.demo.dto.request.LoginRequestDTO;
+import com.example.demo.dto.request.RegisterRequestDTO;
 import com.example.demo.dto.response.LoginResponseDTO;
+import com.example.demo.model.Role;
 import com.example.demo.model.User;
+import com.example.demo.repository.IRoleRepository;
 import com.example.demo.repository.IUserRepository;
 import com.example.demo.security.JwtUtil;
 import org.slf4j.Logger;
@@ -17,10 +21,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class authService {
+    @Autowired
+    private DefaultVariableConfig defaultVariableConfig;
 
     @Autowired
     private IUserRepository userRepository;
 
+    @Autowired
+    private IRoleRepository roleRepository;
     @Autowired
     private JwtUtil jwtUtil;
 
@@ -76,5 +84,25 @@ public class authService {
             return new LoginResponseDTO(jwtUtil.generateToken(user),user.getRole().getTitle());
         }
         return null; // Invalid credentials
+    }
+
+    public String registerUser(RegisterRequestDTO request) {
+        if (userRepository.existsByUsername(request.getUsername())) {
+            return "Register fail! Username already taken.";
+        }
+
+        // Get the default role (customer) if no roleID is provided
+        // Find the default "customer" role from the application properties
+        Role defaultRole = roleRepository.findByTitle(defaultVariableConfig.getDefaultRole())
+                .orElseThrow(() -> new IllegalArgumentException("Default role not found"));
+
+        // Create a new User with the default role
+        User user = new User();
+        user.setUsername(request.getUsername());
+        user.setPassword(request.getPassword()); // No encryption
+        user.setRole(defaultRole);
+
+        userRepository.save(user);
+        return "User registered successfully";
     }
 }
