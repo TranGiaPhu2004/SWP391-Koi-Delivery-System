@@ -1,6 +1,7 @@
 import logo from '../assets/image/Logo.png'
 import avatar from '../assets/image/avatar.png'
 import search from '../assets/image/search.png'
+import { Link } from "react-router-dom";
 import './ManagerCustomer.css';
 
 const ManagerCustomer = () => {
@@ -71,7 +72,9 @@ const ManagerCustomer = () => {
           <img src={search} alt='Search Icon' className="ManagerCustomer-search-icon" />
           </div>
           <div className="ManagerCustomer-add-account">
-            <button className="ManagerCustomer-add-button">+ Add New Account</button>
+          <Link to="/AddNewAccount">
+          <button className="ManagerCustomer-add-button">+ Add New Account</button>
+          </Link>
           </div>
         </header>
 

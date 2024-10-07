@@ -1,6 +1,6 @@
-import "./RegisterContent.css";
-import Logo from "../assets/image/Logo.png";
-import LogoLogin from "../assets/image/LogoLogin.png";
+import "../../Components/RegisterContent.css";
+import Logo from "../../assets/image/Logo.png";
+import LogoLogin from "../../assets/image/LogoLogin.png";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +10,7 @@ function RegisterMethod() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [role,setConfirmRole] = useState("")
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -33,6 +34,7 @@ function RegisterMethod() {
       email: email,
       username: username,
       password: password,
+      role: role
     };
 
     try {
@@ -73,7 +75,7 @@ function RegisterMethod() {
         <div className="Register-logo">
           <img src={Logo} alt="Logo" />
         </div>
-        <h1>REGISTER PAGE</h1>
+        <h1>CREATE ACCOUNT PAGE</h1>
         <form onSubmit={handleRegister}>
           {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
           {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
@@ -117,11 +119,23 @@ function RegisterMethod() {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
-          <div className="Register-links">
-            <Link to="/login">Already have an account? Login here.</Link>
+          <div className="Register-input-group">
+            <label className="Register-label">SET ROLE</label>
+            <select
+              className="Register-role-select"
+              value={role}
+              onChange={(e) => setConfirmRole(e.target.value)}
+            >
+              <option value="" disabled>Select a role</option>
+              <option value="Delivery Staff">Delivery Staff</option>
+              <option value="Sales Staff">Sales Staff</option>
+              <option value="Manager">Manager</option>
+            </select>
+          
           </div>
+          
           <button className="Register-button" type="submit">
-            REGISTER
+            CREATE
           </button>
         </form>
       </div>
