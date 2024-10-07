@@ -87,22 +87,33 @@ public class authService {
     }
 
     public String registerUser(RegisterRequestDTO request) {
+        logger.info("Service Start");
         if (userRepository.existsByUsername(request.getUsername())) {
+            logger.info("Username Exist");
             return "Register fail! Username already taken.";
+        }
+        if (userRepository.existsByEmail(request.getEmail())) {
+            logger.info("Email Exist");
+            return "Register fail! Email already taken.";
         }
 
         // Get the default role (customer) if no roleID is provided
         // Find the default "customer" role from the application properties
+        logger.info("Find Default Role");
         Role defaultRole = roleRepository.findByTitle(defaultVariableConfig.getDefaultRole())
                 .orElseThrow(() -> new IllegalArgumentException("Default role not found"));
 
         // Create a new User with the default role
+        logger.info("Add User");
         User user = new User();
         user.setUsername(request.getUsername());
         user.setPassword(request.getPassword()); // No encryption
+        user.setEmail(request.getEmail());
         user.setRole(defaultRole);
 
+        logger.info("Save to DB");
         userRepository.save(user);
+        logger.info("Save to DB success");
         return "User registered successfully";
     }
 }
