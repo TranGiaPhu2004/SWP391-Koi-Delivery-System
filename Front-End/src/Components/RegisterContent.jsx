@@ -19,6 +19,14 @@ function RegisterMethod() {
         <h1>REGISTER PAGE</h1>
         <form>
           <div className="Register-input-group">
+            <label className="Register-label">Email</label>
+            <input
+              className="Register-email-input"
+              type="text"
+              placeholder="Enter your email"
+            />
+          </div>
+          <div className="Register-input-group">
             <label className="Register-label">USERNAME</label>
             <input
               className="Register-username-input"

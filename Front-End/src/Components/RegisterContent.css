@@ -80,6 +80,7 @@ h1 {
 
 .Register-username-input,
 .Register-password-input,
+.Register-email-input,
 .Register-cfpassword-input {
   width: 40vw;
   height: 30px;
