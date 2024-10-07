@@ -78,6 +78,11 @@ public class AuthController {
         RegisterResponseDTO response = new RegisterResponseDTO();
         response.setMsg(msg);
         logger.info("Register method completed");
-        return ResponseEntity.ok(response);
+        if(msg.equals("User registered successfully")){
+            return ResponseEntity.ok(response); // Code là 200
+        }
+        else {
+            return ResponseEntity.badRequest().body(response); // Code là 400
+        }
     }
 }
