@@ -43,6 +43,9 @@ function LoginHeaderMethod() {
         } else if (data.role === "User") {
           navigate("/Payment");
         }
+        else if (data.role === "Customer") {
+          navigate("/Payment");
+        }
       } else {
         setErrorMessage("Invalid username or password");
       }

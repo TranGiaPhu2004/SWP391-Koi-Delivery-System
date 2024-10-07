@@ -81,7 +81,8 @@ h1 {
 .Register-username-input,
 .Register-password-input,
 .Register-email-input,
-.Register-cfpassword-input {
+.Register-confirm-password-input,
+.Role-confirm-password-input {
   width: 40vw;
   height: 30px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
