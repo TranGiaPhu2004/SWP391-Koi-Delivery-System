@@ -10,15 +10,12 @@ import com.example.demo.service.*;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,8 +27,11 @@ public class AuthController {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
-    @Autowired
-    private authService authService;
+    private final authService authService;
+
+    public AuthController(authService authService) {
+        this.authService = authService;
+    }
 
     @Operation(summary = "Login = usernameOrEmail")
     @PostMapping("/login")
@@ -71,7 +71,8 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/register/username")
+    @Operation(summary = "Register = username,password,email")
+    @PostMapping("/register")
     public ResponseEntity<RegisterResponseDTO> register(@RequestBody RegisterRequestDTO request) {
         logger.info("Register controller called");
         String msg = authService.registerUser(request);
