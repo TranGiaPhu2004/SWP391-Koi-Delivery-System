@@ -42,10 +42,6 @@ public class Order {
     private OrderStatus orderStatus;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "BoxID")
-    private KoiBox box;
-
-    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "PaymentID")
     private Payment payment;
 

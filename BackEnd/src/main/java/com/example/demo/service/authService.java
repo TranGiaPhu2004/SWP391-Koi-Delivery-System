@@ -29,6 +29,7 @@ public class authService {
 
     @Autowired
     private IRoleRepository roleRepository;
+
     @Autowired
     private JwtUtil jwtUtil;
 
