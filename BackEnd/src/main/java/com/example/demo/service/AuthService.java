@@ -3,11 +3,9 @@ package com.example.demo.service;
 import java.util.Optional;
 
 import com.example.demo.config.DefaultVariableConfig;
-import com.example.demo.dto.request.LoginByEmailRequestDTO;
-import com.example.demo.dto.request.LoginByUsernameRequestDTO;
-import com.example.demo.dto.request.LoginRequestDTO;
-import com.example.demo.dto.request.RegisterRequestDTO;
+import com.example.demo.dto.request.*;
 import com.example.demo.dto.response.LoginResponseDTO;
+import com.example.demo.dto.response.MsgResponseDTO;
 import com.example.demo.model.Role;
 import com.example.demo.model.User;
 import com.example.demo.repository.IRoleRepository;
@@ -116,5 +114,38 @@ public class AuthService {
         userRepository.save(user);
         logger.info("Save to DB success");
         return "User registered successfully";
+    }
+
+    public MsgResponseDTO createEmployee(CreateEmployeeRequestDTO request) {
+        logger.info("Service Start");
+        MsgResponseDTO msg = new MsgResponseDTO();
+        if (userRepository.existsByUsername(request.getUsername())) {
+            logger.info("Username Exist");
+            msg.setMsg("Username already taken.");
+            return msg;
+        }
+        if (userRepository.existsByEmail(request.getEmail())) {
+            logger.info("Email Exist");
+            msg.setMsg("Email already taken.");
+            return msg;
+        }
+
+        logger.info("Find Selected Role");
+        Role defaultRole = roleRepository.findByTitle(request.getRole())
+                .orElseThrow(() -> new IllegalArgumentException("Selected Role not found"));
+
+        // Create a new User with the default role
+        logger.info("Add User");
+        User user = new User();
+        user.setUsername(request.getUsername());
+        user.setPassword(request.getPassword()); // No encryption
+        user.setEmail(request.getEmail());
+        user.setRole(defaultRole);
+
+        logger.info("Save to DB");
+        userRepository.save(user);
+        logger.info("Save to DB success");
+        msg.setMsg("Create Employee successfully");
+        return msg;
     }
 }
