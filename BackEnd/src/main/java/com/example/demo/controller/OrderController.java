@@ -1,40 +1,28 @@
 package com.example.demo.controller;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.dto.request.OrderCreateRequestDTO;
+import com.example.demo.dto.response.MsgResponseDTO;
+import com.example.demo.service.OrderService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.example.demo.dto.response.UserResponseDTO;
-import com.example.demo.model.Order;
-import com.example.demo.repository.IOrderRepository;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/auth/orders")
+@RequestMapping("/orders")
+@Tag(name = "Order Controller")
 public class OrderController {
+    private final OrderService orderService;
 
-    @Autowired
-    private IOrderRepository orderRepository;
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
+    }
 
-    // API to get all orders
-    // @GetMapping
-    // public ResponseEntity<List<Order>> getAllOrders() {
-    //     List<Order> orders = orderRepository.findAll().stream()
-    //             .map(order -> new OrderResponseDTO(order.getOrderId(), order.getStartPlace(),order.getEndPlace(),order.getOrderDate(),order.getTotalPrice()))
-    //             .collect(Collectors.toList()); // This will work correctly now
-    //     return ResponseEntity.ok(orders);
-    // }
+    @GetMapping("Tạo Order")
+    @PostMapping("/create")
+    public ResponseEntity<MsgResponseDTO> createOrder(@RequestBody OrderCreateRequestDTO request) {
+        MsgResponseDTO response = orderService.createOrder(request);
+        return ResponseEntity.ok(response);
+    }
 
-    // API to view a specific order by ID using @RequestParam
-    // @GetMapping("/view")
-    // public ResponseEntity<Order> getOrderById(@RequestParam Integer id) {
-    //     return orderRepository.findById(id)
-    //             .map(order -> ResponseEntity.ok(order))
-    //             .orElse(ResponseEntity.notFound().build());
-    // }
 }
 

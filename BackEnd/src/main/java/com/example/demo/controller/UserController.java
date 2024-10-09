@@ -1,28 +1,21 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.response.UserResponseDTO;
-import com.example.demo.model.User;
 import com.example.demo.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/users")
+@Tag(name = "Order Controller")
 public class UserController {
 
     @Autowired
     private UserService userService;
-
-    // Lấy tất cả người dùng
-    @GetMapping
-    public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
-        List<UserResponseDTO> users = userService.getAllUsers();
-        return ResponseEntity.ok(users);
-    }
 
     // Lấy người dùng theo ID
     @GetMapping("/{id}")

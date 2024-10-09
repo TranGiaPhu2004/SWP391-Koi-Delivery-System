@@ -37,7 +37,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/**").permitAll()
 //                        .requestMatchers("/test").permitAll()
-//                        .requestMatchers("/api/**").permitAll()
 //                        .requestMatchers("/auth/**").permitAll()
 //                        .requestMatchers("/admin/**").hasRole("Admin")
                         .anyRequest().authenticated()) // All other routes require authentication

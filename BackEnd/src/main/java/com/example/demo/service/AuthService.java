@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class authService {
+public class AuthService {
     @Autowired
     private DefaultVariableConfig defaultVariableConfig;
 
@@ -33,7 +33,7 @@ public class authService {
     @Autowired
     private JwtUtil jwtUtil;
 
-    private static final Logger logger = LoggerFactory.getLogger(authService.class);
+    private static final Logger logger = LoggerFactory.getLogger(AuthService.class);
 
     public LoginResponseDTO login(LoginRequestDTO request) {
         String usernameOrEmail = request.getUsernameOrEmail();
