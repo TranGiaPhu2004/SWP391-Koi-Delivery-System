@@ -51,7 +51,7 @@ public class Order {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ServiceID")
-    private Service service;
+    private Services services;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<KoiFish> koiFishes;
