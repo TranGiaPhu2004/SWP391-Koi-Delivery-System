@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
-@Tag(name = "Order Controller")
+@Tag(name = "User Controller")
 public class UserController {
 
     @Autowired

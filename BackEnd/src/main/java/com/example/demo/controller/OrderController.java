@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.request.OrderCreateRequestDTO;
 import com.example.demo.dto.response.MsgResponseDTO;
 import com.example.demo.service.OrderService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @GetMapping("Tạo Order")
+    @Operation(summary = "Tạo Order")
     @PostMapping("/create")
     public ResponseEntity<MsgResponseDTO> createOrder(@RequestBody OrderCreateRequestDTO request) {
         MsgResponseDTO response = orderService.createOrder(request);
