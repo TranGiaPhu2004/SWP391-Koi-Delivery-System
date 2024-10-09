@@ -2,7 +2,7 @@ import "../../Components/RegisterContent.css";
 import Logo from "../../assets/image/Logo.png";
 import LogoLogin from "../../assets/image/LogoLogin.png";
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function RegisterMethod() {
@@ -10,17 +10,37 @@ function RegisterMethod() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [role,setConfirmRole] = useState("")
+  const [role, setConfirmRole] = useState("");
+  const [roles, setRoles] = useState([]); // Lưu danh sách các vai trò từ backend
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    // Lấy danh sách vai trò từ backend
+    const fetchRoles = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/role");
+        if (response.ok) {
+          const data = await response.json();
+          setRoles(data.allRole); // Cập nhật state với danh sách vai trò
+        } else {
+          console.error("Failed to fetch roles");
+        }
+      } catch (error) {
+        console.error("Error fetching roles:", error);
+      }
+    };
+
+    fetchRoles();
+  }, []);
+
   const handleRegister = async (e) => {
     e.preventDefault();
 
     // Basic validation for input fields
-    if (!email || !username || !password || !confirmPassword) {
+    if (!email || !username || !password || !confirmPassword || !role) {
       setErrorMessage("Please fill in all fields.");
       return;
     }
@@ -34,11 +54,11 @@ function RegisterMethod() {
       email: email,
       username: username,
       password: password,
-      role: role
+      role: role,
     };
 
     try {
-      const response = await fetch("http://localhost:8080/auth/register/username", {
+      const response = await fetch("http://localhost:8080/admin/employee", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -127,13 +147,13 @@ function RegisterMethod() {
               onChange={(e) => setConfirmRole(e.target.value)}
             >
               <option value="" disabled>Select a role</option>
-              <option value="Delivery Staff">Delivery Staff</option>
-              <option value="Sales Staff">Sales Staff</option>
-              <option value="Manager">Manager</option>
+              {roles.map((role) => (
+                <option key={role} value={role}>
+                  {role}
+                </option>
+              ))}
             </select>
-          
           </div>
-          
           <button className="Register-button" type="submit">
             CREATE
           </button>
