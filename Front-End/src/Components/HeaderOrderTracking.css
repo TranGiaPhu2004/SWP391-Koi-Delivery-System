@@ -76,7 +76,7 @@
     width: 167%;
 }
 
-ul {
+.HeaderOrderTracking-list {
     display: flex;
     justify-content: center;
     flex-direction: row;

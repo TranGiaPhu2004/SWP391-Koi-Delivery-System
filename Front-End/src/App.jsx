@@ -5,6 +5,8 @@ import Register from './Page/Register/Register';
 import ForgotPassword from './Page/ForgotPassword/ForgotPassword'
 import PaymentMethods from './Page/Payment-Methods/PaymentMethod';
 import Manager from './Page/Manager/Manager'
+import DeliveryTracking from './Page/View-Order-Tracking/ViewOrderTracking'
+import AddNewAccount from './Page/Add-new-account/Add-new-account'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
         <Route path="/ForgotPass" element={<ForgotPassword />} />
         <Route path="/Payment" element={<PaymentMethods />} />
         <Route path="/Manager" element={<Manager />} />
+        <Route path="/DeliveryTracking" element={<DeliveryTracking />} />
+        <Route path="/AddNewAccount" element={<AddNewAccount />} />
       </Routes>
     </Router>
 

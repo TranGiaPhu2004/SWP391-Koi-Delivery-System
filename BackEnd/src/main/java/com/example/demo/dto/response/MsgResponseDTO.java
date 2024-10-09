@@ -9,7 +9,6 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginResponseDTO implements Serializable {
-    private String token;
-    private String role;
+public class MsgResponseDTO implements Serializable {
+    private String msg;
 }

@@ -42,10 +42,6 @@ public class Order {
     private OrderStatus orderStatus;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "BoxID")
-    private KoiBox box;
-
-    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "PaymentID")
     private Payment payment;
 
@@ -55,7 +51,7 @@ public class Order {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ServiceID")
-    private Service service;
+    private Services services;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<KoiFish> koiFishes;
