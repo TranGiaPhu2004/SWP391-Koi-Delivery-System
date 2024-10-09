@@ -70,80 +70,79 @@ function PriceList() {
     // giữ nguyên giá trị các checkbox còn lại
     const handleOptionChange = () => {
         setIsNoneSelected(false);
-        
-
-        // Hàm để lấy dữ liệu box và dịch vụ từ server
-        const fetchBoxesAndServices = async () => {
-            try {
-                // Lấy danh sách box từ server
-                const boxResponse = await fetch('https://your-server-api-url.com/api/boxes');
-                if (!boxResponse.ok) {
-                    throw new Error('Failed to fetch boxes');
-                }
-                const boxes = await boxResponse.json(); // Chuyển đổi response thành JSON
-
-                // Lấy danh sách dịch vụ từ server
-                const serviceResponse = await fetch('https://your-server-api-url.com/api/services');
-                if (!serviceResponse.ok) {
-                    throw new Error('Failed to fetch services');
-                }
-                const services = await serviceResponse.json(); // Chuyển đổi response thành JSON
-
-                // Trả về dữ liệu box và dịch vụ
-                return { boxes, services };
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-
-        // Hàm để gửi order lên server
-        const sendOrder = async (orderId, selectedBoxes, selectedServices) => {
-            try {
-                // Tính tổng giá tiền của các box
-                const totalBoxPrice = selectedBoxes.reduce((total, box) => {
-                    return total + (box.price * box.quantity); // Tổng giá box = giá mỗi box * số lượng
-                }, 0);
-
-                // Tính tổng giá tiền của các dịch vụ
-                const totalServicePrice = selectedServices.reduce((total, service) => {
-                    return total + service.price; // Tổng giá dịch vụ = giá mỗi dịch vụ
-                }, 0);
-
-                // Tính tổng giá đơn hàng
-                const totalOrderPrice = totalBoxPrice + totalServicePrice;
-
-                // Tạo object Order chứa thông tin đơn hàng
-                const order = {
-                    orderId: orderId, // Mã đơn hàng
-                    boxes: selectedBoxes, // Danh sách box mà người dùng đã chọn
-                    services: selectedServices, // Danh sách dịch vụ mà người dùng đã chọn
-                    totalPrice: totalOrderPrice // Tổng giá đơn hàng
-                };
-
-                // Gửi request tạo order mới tới server
-                const response = await fetch('https://your-server-api-url.com/api/orders', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(order), // Chuyển đổi object order thành JSON
-                });
-
-                // Xử lý kết quả trả về từ server
-                if (!response.ok) {
-                    throw new Error('Failed to create order');
-                }
-
-                const data = await response.json(); // Chuyển đổi response thành JSON
-                console.log('Order created successfully:', data);
-            } catch (error) {
-                console.error('Error creating order:', error);
-            }
-        };
     };
 
+    
+
+    const [boxes, setBoxes] = useState([]); // Chuyển về mảng để có thể sử dụng reduce
+    const [boxid, setBoxid] = useState('');
+    const [quantity, setQuantity] = useState(0); // Thay đổi thành số để dễ tính toán
+    const [selectedServices, setSelectedServices] = useState([]); // Các dịch vụ đã chọn
+    const [deliveries, setDeliveries] = useState([]);
+    const [serviceID, setServiceID] = useState('');
+    const [deliveryID, setDeliveryID] = useState('');
+    const [errorMessage, setErrorMessage] = useState ('');
+    const [price, setPrice] = useState ('');
+
+    const handlePriceList = async (e) => {
+        e.preventDefault();
+
+        // Tính tổng giá của các hộp theo từng boxid
+        const totalBoxPrice = boxes.reduce((total, box) => {
+            return total + (box.price * box.quantity); // Tổng giá cho từng hộp
+        }, 0);
+
+        // Tính tổng giá của các dịch vụ đã chọn
+        const totalServicePrice = selectedServices.reduce((total, service) => {
+            return total + service.price; // Tổng giá dịch vụ = giá mỗi dịch vụ
+        }, 0);
+
+        // Lấy giá của phương thức giao hàng dựa trên deliveryID
+        const selectedDelivery = deliveries.find(delivery => delivery.id === deliveryID);
+
+        const totalDeliveryPrice = selectedDelivery ? selectedDelivery.price : 0; // Giá vận chuyển
+
+        // Tính tổng giá đơn hàng
+        const totalPrice = totalBoxPrice + totalServicePrice + totalDeliveryPrice; // Tổng giá
 
 
+        // Tạo đối tượng dữ liệu để gửi lên API
+        const priceListData = {
+            boxes: [
+                {
+                    boxid: boxid,
+                    price: price,
+                    quantity: quantity,
+                }
+
+            ],
+            serviceID: serviceID,
+            deliveryID: deliveryID,
+            totalPrice: totalPrice,
+        };
+        
+        try {
+            // Gửi yêu cầu POST đến API
+            const response = await fetch("http://localhost:8080/orders/create", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(priceListData),
+            });
+
+            // Kiểm tra phản hồi từ API
+            if (response.ok) {
+                const data = await response.json();
+                // Lưu token vào localStorage hoặc sessionStorage
+                localStorage.setItem("token", data.token);
+            }
+
+        } catch (error) {
+            setErrorMessage("Error logging in");
+        }
+
+    };
 
     return (
         <>
