@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 function LoginHeaderMethod() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -45,6 +46,9 @@ function LoginHeaderMethod() {
         }
         else if (data.role === "Customer") {
           navigate("/Payment");
+        }
+        else if (data.role === "Delivery Staff") {
+          navigate("/DeliveryTracking");
         }
       } else {
         setErrorMessage("Invalid username or password");
