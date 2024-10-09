@@ -1,0 +1,525 @@
+
+.PriceList-main-order {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+
+}
+.PriceList-main-priceList {
+    padding: 20px 20px;
+    border-bottom: 2px dashed  #a28089;
+    width: 70%;
+    margin-left: 14%;
+}
+.PriceList-main-priceList p{
+    text-align: center;
+    font-size: 50px;
+    font-family: monospace;
+    color: #3D3D74;
+    font-weight: 800;
+}
+
+.PriceList-BoxChoosing {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2%;
+}
+
+.PriceList-paymentmethods {
+    text-align: center;
+    margin-left: 37%;
+    font-size: 40px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    width: 30%;
+    padding: 15px 15px;
+    margin-top: 10px;
+    border-bottom: 1px solid black;
+    color: #ff1d58;
+    font-weight: 800;
+
+}
+
+.PriceList-message {
+    color: #f75990;
+    text-align: center;
+    margin-left: 27%;
+    font-size: 17px;
+    font-family: monospace;
+    width: 50%;
+    margin-top: 20px;
+    font-weight: bolder;
+
+
+}
+
+.PriceList-price {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    text-align: center;
+    align-items: center;
+}
+
+.PriceList-price p {
+    white-space: nowrap;
+    font-family: cursive;
+    font-size: 16px;
+    color: #3D3D74;
+    font-weight: 800;
+}
+
+.PriceList-main-pic {
+    display: flex;
+    flex-direction: row;
+    column-gap: 80px;
+}
+
+.PriceList-pic-koi1,
+.PriceList-pic-koi2,
+.PriceList-pic-koi3 {
+    width: 100%;
+    /* Chiếm toàn bộ chiều rộng của phần tử cha */
+    height: auto;
+    /* Tự động điều chỉnh chiều cao theo tỷ lệ */
+    object-fit: contain;
+    /* Giữ tỷ lệ gốc và phóng to tối đa */
+    padding: 10px 20px;
+    margin-top: 40px;
+}
+
+.PriceList-pic-koi1,
+.PriceList-pic-koi2,
+.PriceList-pic-koi3 {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+}
+
+.PriceList-pic-koi1 img,
+.PriceList-pic-koi2 img,
+.PriceList-pic-koi3 img {
+    width: 70%;
+    height: 70%;
+}
+
+.PriceList-pic1 {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+
+}
+
+.PriceList-pic1 p {
+    font-family: monospace;
+    font-size: 17px;
+    margin-left: 20px;
+}
+
+.PriceList-pic1 .PriceList-info-box p {
+    padding: 10px 10px;
+    font-size: 12px;
+}
+
+.PriceList-pic1 .PriceList-info-box p span {
+    color: #3D3D74;
+    font-weight: 800;
+}
+
+.PriceList-pic2 {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+
+}
+
+.PriceList-pic2 p {
+    font-family: monospace;
+    font-size: 17px;
+
+}
+
+.PriceList-pic2 .PriceList-info-box p {
+    padding: 10px 10px;
+    font-size: 12px;
+}
+
+.PriceList-pic2 .PriceList-info-box p span {
+    color: #3D3D74;
+    font-weight: 800;
+}
+
+.PriceList-pic3 {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+
+}
+
+.PriceList-pic3 p {
+    font-family: monospace;
+    font-size: 17px;
+
+}
+
+.PriceList-pic3 .PriceList-info-box p {
+    padding: 10px 10px;
+    font-size: 12px;
+}
+
+.PriceList-pic3 .PriceList-info-box p span {
+    color: #3D3D74;
+    font-weight: 800;
+}
+
+.PriceList-amount1 {
+    margin-left: 16px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.PriceList-amount1 .decrement-button1 {
+    transition: filter 0.3s ease;
+    background-color: rgb(243, 146, 146);
+}
+
+.PriceList-amount1 .decrement-button1.blurred {
+    filter: blur(0);
+    cursor: not-allowed;
+}
+
+.PriceList-amount1 .decrement-button1.active {
+    filter: none;
+    cursor: pointer;
+}
+
+.PriceList-amount1 .increment-button1 {
+    background-color: rgb(148, 227, 148);
+}
+
+.PriceList-amount2 .increment-button2 {
+    background-color: rgb(148, 227, 148);
+}
+
+.PriceList-amount3 .increment-button3 {
+    background-color: rgb(148, 227, 148);
+}
+
+.PriceList-amount1 .PriceList-count1 {
+    background: antiquewhite;
+    font-family: cursive;
+}
+
+.PriceList-amount2 .PriceList-count2 {
+    background: antiquewhite;
+    font-family: cursive;
+}
+
+
+.PriceList-amount3 .PriceList-count3 {
+    background: antiquewhite;
+    font-family: cursive;
+}
+
+
+
+.PriceList-amount2 {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+
+.PriceList-amount2 .decrement-button2 {
+    transition: filter 0.3s ease;
+    background-color: rgb(243, 146, 146);
+}
+
+.PriceList-amount2 .decrement-button2.blurred {
+    filter: blur(0);
+    cursor: not-allowed;
+}
+
+.PriceList-amount2 .decrement-button2.active {
+    filter: none;
+    cursor: pointer;
+}
+
+
+.PriceList-amount3 {
+    margin-left: 16px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.PriceList-amount3 .decrement-button3 {
+    transition: filter 0.3s ease;
+    /* Thêm hiệu ứng chuyển đổi mượt */
+    background-color: rgb(243, 146, 146);
+}
+
+.PriceList-amount3 .decrement-button3.blurred {
+    filter: blur(0);
+    cursor: not-allowed;
+}
+
+.PriceList-amount3 .decrement-button3.active {
+    filter: none;
+    cursor: pointer;
+}
+
+
+
+.PriceList-button {
+    color: red;
+    background-color: antiquewhite;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.PriceList-order-information {
+    margin-top: 18%;
+    margin-left: 40%;
+
+}
+
+.PriceList-order-details p {
+    cursor: grab;
+
+    color: #3D3D74;
+    font-family: monospace;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.PriceList-order-details {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    background: #D9D9D9;
+    padding: 30px 20px;
+    border-radius: 30px;
+    border: none;
+    line-height: 2;
+    width: 420px;
+    height: 430px;
+}
+
+.PriceList-order-details span {
+    color: #3D3D74;
+    font-weight: 800;
+}
+
+.PriceList-order-details h2 {
+    margin-top: -10px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+    color: #3D3D74;
+    font-weight: 800;
+    font-size: 30px;
+    border-bottom: 3px solid white;
+
+}
+
+.PriceList-order-details .line {
+    background: white;
+    width: 100%;
+    height: 5px;
+
+}
+
+
+.PriceList-order-details button {
+    width: 100%;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+
+.PriceList-payment-button {
+    background-color: #3D3D74;
+    color: #fff;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: bolder;
+
+}
+
+.PriceList-payment-button span {
+    background: #D9D9D9;
+    color: black;
+    font-size: 20px;
+    font-weight: bolder;
+    border-radius: 50px;
+    border: none;
+    padding: 8px 8px;
+    margin-left: 10px;
+}
+
+.PriceList-payment-button span:hover {
+    color: #007bff;
+    cursor: grab;
+}
+
+.PriceList-cancel {
+    text-align: center;
+    color: #3D3D74;
+    font-weight: 700;
+}
+
+.PriceList-order-details .cancel:hover {
+    cursor: grab;
+}
+
+.PriceList-button:active {
+    border: none;
+}
+
+.PriceList-Services {
+    display: flex;
+    flex-direction: row;
+    column-gap: 30px;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2%;
+    margin-left: -9%;
+    margin-top: 50px;
+}
+
+.PriceList-none,
+.PriceList-package,
+.PriceList-health,
+.PriceList-temperatureControl,
+.PriceList-insurance {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.5;
+}
+
+.PriceList-package,
+.PriceList-health,
+.PriceList-temperatureControl,
+.PriceList-insurance {
+    margin-left: 20px;
+}
+
+.PriceList-temperatureControl {
+    margin-left: -5%;
+}
+
+.PriceList-package {
+    margin-left: 8%;
+}
+
+.PriceList-none label,
+.PriceList-package label,
+.PriceList-temperatureControl label,
+.PriceList-health label,
+.PriceList-insurance label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    white-space: nowrap;
+
+}
+
+.PriceList-none img,
+.PriceList-package img,
+.PriceList-health img,
+.PriceList-insurance img {
+    width: 38%;
+    /* Small but sharp */
+    height: auto;
+    border-radius: 10px;
+    margin-top: 5px;
+}
+
+.PriceList-none p,
+.PriceList-package p,
+.PriceList-temperatureControl p,
+.PriceList-health p,
+.PriceList-insurance p {
+    font-family: cursive;
+    font-size: 18px;
+    color: #3D3D74;
+    font-weight: 800;
+}
+
+.PriceList-none h4,
+.PriceList-package h4,
+.PriceList-temperatureControl h4,
+.PriceList-health h4,
+.PriceList-insurance h4 {
+    font-family: monospace;
+    font-size: 17px;
+}
+
+.PriceList-temperatureControl img {
+    width: 38%;
+}
+
+
+.PriceList-Delivery {
+    display: flex;
+    margin-top: 20px;
+    column-gap: 10%;
+}
+
+.PriceList-standard-delivery,
+.PriceList-fast-delivery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+
+.PriceList-standard-delivery label,
+.PriceList-fast-delivery label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.PriceList-standard-delivery img,
+.PriceList-fast-delivery img {
+    width: 18%; /* Small image size */
+    height: auto;
+}
+
+.PriceList-fast-delivery {
+    margin-left: -30%;
+}
+.PriceList-standard-delivery p,
+.PriceList-fast-delivery p {
+    font-family: cursive;
+    font-size: 20px;
+    color: #3D3D74;
+    font-weight: 800;
+}
+
+
+.PriceList-buttonn {
+    background-color: #fff;
+    margin-top: 3%;
+    margin-left: 43%;
+}
+
+.PriceList-buttonn button {
+    background-color: #3D3D74;
+    color: #fff;
+    font-family: monospace;
+    font-size: 20px;
+}
+
+.PriceList-buttonn button:hover {
+    transform: scale(1.1);
+}
