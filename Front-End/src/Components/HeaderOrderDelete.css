@@ -73,7 +73,7 @@
     width: 167%;
 }
 
-ul {
+.HeaderOrderDelete-list ul {
     display: flex;
     justify-content: center;
     flex-direction: row;
@@ -90,7 +90,7 @@ ul {
     margin-top: -40px;
 }
 
-li {
+.HeaderOrderDelete-list li {
     text-align: center;
 }
 
