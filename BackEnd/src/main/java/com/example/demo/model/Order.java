@@ -18,38 +18,38 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer orderID;
 
-    @Column(name = "StartPlace")
+    @Column(name = "startplace")
     private String startPlace;
 
-    @Column(name = "EndPlace")
+    @Column(name = "endplace")
     private String endPlace;
 
-    @Column(name = "OrderDate")
+    @Column(name = "orderdate")
     private LocalDate orderDate;
 
-    @Column(name = "TotalPrice")
+    @Column(name = "totalprice")
     private Float totalPrice;
 
-    @Column(name = "CustomsImageLink")
+    @Column(name = "customsimagelink")
     private String customsImageLink;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "userID")
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "userID", referencedColumnName = "userID")
     private User user;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Order_StatusID")
     private OrderStatus orderStatus;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PaymentID")
     private Payment payment;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "DeliveryID")
     private Delivery delivery;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ServiceID")
     private Services services;
 

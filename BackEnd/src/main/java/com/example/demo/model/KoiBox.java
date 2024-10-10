@@ -16,10 +16,10 @@ public class KoiBox {
     @Column(name = "BoxID")
     private Integer boxID;
 
-    @Column(name = "Price")
+    @Column(name = "price")
     private Float price;
 
-    @Column(name = "BoxSize")
+    @Column(name = "boxsize")
     private Float boxSize;
 
     @OneToMany(mappedBy = "box", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

@@ -19,9 +19,9 @@ public class Feedback {
     @JoinColumn(name = "OrderID", referencedColumnName = "OrderID")
     private Order order;
 
-    @Column(name = "FeedbackDescription", columnDefinition = "NVARCHAR(MAX)")
+    @Column(name = "feedbackdescription", columnDefinition = "NVARCHAR(MAX)")
     private String feedbackDescription;
 
-    @Column(name = "Rating", nullable = false)
+    @Column(name = "rating", nullable = false)
     private Integer rating;
 }

@@ -48,7 +48,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         String username = null;
         String jwt = null;
-
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             jwt = authorizationHeader.substring(7);
             username = jwtUtil.extractUsername(jwt);
@@ -61,9 +60,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             if (optionalUser.isPresent()) {
                 User user = optionalUser.get();
 
-                if (user != null && jwtUtil.validateToken(jwt, user)) {
+                if (jwtUtil.validateToken(jwt, user)) {
                     // Chỉ cần một authority cho user
-                    GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + user.getRole().getTitle());
+                    GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + user.getRole().getTitle().toUpperCase());
                     UsernamePasswordAuthenticationToken authenticationToken = 
                         new UsernamePasswordAuthenticationToken(user, null, Collections.singletonList(authority));
         

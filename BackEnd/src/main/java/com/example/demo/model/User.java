@@ -33,6 +33,6 @@ public class User implements Serializable{
     @Column(name = "phonecontact", length = 20)
     private String phonecontact;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<Order> orders;
 }

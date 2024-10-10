@@ -17,10 +17,10 @@ public class Services {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer serviceID;
 
-    @Column(name = "ServiceName", nullable = false)
+    @Column(name = "servicename", nullable = false)
     private String serviceName;
 
-    @Column(name = "Price", nullable = false)
+    @Column(name = "price", nullable = false)
     private Float price;
 
     @OneToMany(mappedBy = "services", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

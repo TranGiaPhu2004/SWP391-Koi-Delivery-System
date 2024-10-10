@@ -17,10 +17,10 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer paymentID;
 
-    @Column(name = "TotalPrice", nullable = false)
+    @Column(name = "totalprice", nullable = false)
     private Float totalPrice;
 
-    @Column(name = "PaymentStatus", nullable = false)
+    @Column(name = "paymentstatus", nullable = false)
     private Boolean paymentStatus;
 
     @OneToMany(mappedBy = "payment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

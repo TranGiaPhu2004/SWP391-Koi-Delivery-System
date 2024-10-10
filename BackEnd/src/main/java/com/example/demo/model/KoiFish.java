@@ -22,17 +22,17 @@ public class KoiFish {
     @JoinColumn(name = "OrderID", referencedColumnName = "OrderID")
     private Order order;
 
-    @Column(name = "CertificateImageLink")
+    @Column(name = "certificateimagelink")
     private String certificateImageLink;
 
-    @Column(name = "FishStatus", nullable = false)
+    @Column(name = "fishstatus", nullable = false)
     private String fishStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "BoxID", referencedColumnName = "BoxID")
     private KoiBox box;
 
-    @Column(name = "KoiCategories", nullable = false)
+    @Column(name = "koicategories", nullable = false)
     private String koiCategories;
 }
 
