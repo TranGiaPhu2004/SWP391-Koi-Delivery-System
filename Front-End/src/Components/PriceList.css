@@ -1,4 +1,3 @@
-
 .PriceList-main-order {
     display: flex;
     flex-direction: row;
@@ -6,17 +5,19 @@
     height: 100%;
 
 }
+
 .PriceList-main-priceList {
     padding: 20px 20px;
-    border-bottom: 2px dashed  #a28089;
+    border-bottom: 2px dashed #a28089;
     width: 70%;
     margin-left: 14%;
 }
-.PriceList-main-priceList p{
+
+.PriceList-main-priceList p {
     text-align: center;
     font-size: 50px;
     font-family: monospace;
-    color: #3D3D74;
+    color: #ff1d58;
     font-weight: 800;
 }
 
@@ -35,13 +36,13 @@
     padding: 15px 15px;
     margin-top: 10px;
     border-bottom: 1px solid black;
-    color: #ff1d58;
+    color: #3D3D74;
     font-weight: 800;
 
 }
 
 .PriceList-message {
-    color: #f75990;
+    color: coral;
     text-align: center;
     margin-left: 27%;
     font-size: 17px;
@@ -180,7 +181,7 @@
     margin-left: 16px;
     display: flex;
     flex-direction: row;
-    gap: 5px;
+    column-gap: 10px;
 }
 
 .PriceList-amount1 .decrement-button1 {
@@ -210,9 +211,13 @@
     background-color: rgb(148, 227, 148);
 }
 
-.PriceList-amount1 .PriceList-count1 {
+.PriceList-amount1 .PriceList-count1,
+.PriceList-amount2 .PriceList-count2,
+.PriceList-amount3 .PriceList-count3 {
     background: antiquewhite;
     font-family: cursive;
+    padding: 10px 10px;
+    width: 48px;
 }
 
 .PriceList-amount2 .PriceList-count2 {
@@ -491,13 +496,15 @@
 
 .PriceList-standard-delivery img,
 .PriceList-fast-delivery img {
-    width: 18%; /* Small image size */
+    width: 18%;
+    /* Small image size */
     height: auto;
 }
 
 .PriceList-fast-delivery {
     margin-left: -30%;
 }
+
 .PriceList-standard-delivery p,
 .PriceList-fast-delivery p {
     font-family: cursive;
