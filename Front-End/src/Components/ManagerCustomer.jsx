@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import logo from '../assets/image/Logo.png';
-import avatar from '../assets/image/avatar.png';
-import search from '../assets/image/search.png';
+import logo from "../assets/image/Logo.png";
+import avatar from "../assets/image/avatar.png";
+import search from "../assets/image/search.png";
 import { Link, useNavigate } from "react-router-dom";
-import './ManagerCustomer.css';
+import LogoutButton from '../Logout';
+import "./ManagerCustomer.css";
 
 const ManagerCustomer = () => {
   const [customers, setCustomers] = useState([]);
@@ -16,7 +17,7 @@ const ManagerCustomer = () => {
     const fetchCustomers = async () => {
       try {
         const token = localStorage.getItem("token");
-        
+
         const response = await fetch("http://localhost:8080/admin/allUser", {
           method: "GET",
           headers: {
@@ -74,19 +75,22 @@ const ManagerCustomer = () => {
   const updateUser = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`http://localhost:8080/users/${selectedUser.userID}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          // Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          username: selectedUser.username,
-          password: selectedUser.password,
-          email: selectedUser.email,
-          phonecontact: selectedUser.phonecontact,
-        }),
-      });
+      const response = await fetch(
+        `http://localhost:8080/users/${selectedUser.userID}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            // Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            username: selectedUser.username,
+            password: selectedUser.password,
+            email: selectedUser.email,
+            phonecontact: selectedUser.phonecontact,
+          }),
+        }
+      );
 
       if (response.ok) {
         const updatedUser = await response.json();
@@ -108,7 +112,7 @@ const ManagerCustomer = () => {
     <div className="ManagerCustomer-container">
       <aside className="ManagerCustomer-sidebar">
         <div className="ManagerCustomer-logo">
-          <img src={logo} alt="Logo" /> 
+          <img src={logo} alt="Logo" />
         </div>
         <nav className="ManagerCustomer-nav">
           <ul className="ManagerCustomer-nav-list">
@@ -121,13 +125,17 @@ const ManagerCustomer = () => {
             <li className="ManagerCustomer-nav-item">Help</li>
           </ul>
         </nav>
-        <button className="ManagerCustomer-logout">Logout</button>
+        <LogoutButton></LogoutButton>
       </aside>
 
       <main className="ManagerCustomer-main-content">
         <header className="ManagerCustomer-header">
           <div className="ManagerCustomer-user-info">
-            <img src={avatar} alt="User Avatar" className="ManagerCustomer-avatar" />
+            <img
+              src={avatar}
+              alt="User Avatar"
+              className="ManagerCustomer-avatar"
+            />
             <div className="ManagerCustomer-user-details">
               <h3>Vũ Đức Mạnh</h3>
               <p>Manager</p>
@@ -135,49 +143,66 @@ const ManagerCustomer = () => {
           </div>
           <div className="ManagerCustomer-search-container">
             <input type="text" placeholder="Search..." />
-            <img src={search} alt='Search Icon' className="ManagerCustomer-search-icon" />
+            <img
+              src={search}
+              alt="Search Icon"
+              className="ManagerCustomer-search-icon"
+            />
           </div>
           <div className="ManagerCustomer-add-account">
             <Link to="/AddNewAccount">
-              <button className="ManagerCustomer-add-button">+ Add New Account</button>
+              <button className="ManagerCustomer-add-button">
+                + Add New Account
+              </button>
             </Link>
           </div>
         </header>
 
         <div className="ManagerCustomer-product-management">
           <h1>Customer Account Management</h1>
-          {error && <p style={{ color: 'red' }}>{error}</p>}
+          {error && <p style={{ color: "red" }}>{error}</p>}
           {selectedUser && (
-  <div className="ManagerCustomer-update-form">
-    <h2>Update User</h2>
-    <input
-      type="text"
-      value={selectedUser.username || ""}
-      onChange={(e) => setSelectedUser({ ...selectedUser, username: e.target.value })}
-      placeholder="Username"
-    />
-    <input
-      type="password"
-      value={selectedUser.password || ""}
-      onChange={(e) => setSelectedUser({ ...selectedUser, password: e.target.value })}
-      placeholder="Password"
-    />
-    <input
-      type="email"
-      value={selectedUser.email || ""}
-      onChange={(e) => setSelectedUser({ ...selectedUser, email: e.target.value })}
-      placeholder="Email"
-    />
-    <input
-      type="text"
-      value={selectedUser.phonecontact || ""}
-      onChange={(e) => setSelectedUser({ ...selectedUser, phonecontact: e.target.value })}
-      placeholder="Phone"
-    />
-    <button onClick={updateUser}>Save Changes</button>
-    <button onClick={() => setSelectedUser(null)}>Cancel</button>
-  </div>
-)}
+            <div className="ManagerCustomer-update-form">
+              <h2>Update User</h2>
+              <input
+                type="text"
+                value={selectedUser.username || ""}
+                onChange={(e) =>
+                  setSelectedUser({ ...selectedUser, username: e.target.value })
+                }
+                placeholder="Username"
+              />
+              <input
+                type="password"
+                value={selectedUser.password || ""}
+                onChange={(e) =>
+                  setSelectedUser({ ...selectedUser, password: e.target.value })
+                }
+                placeholder="Password"
+              />
+              <input
+                type="email"
+                value={selectedUser.email || ""}
+                onChange={(e) =>
+                  setSelectedUser({ ...selectedUser, email: e.target.value })
+                }
+                placeholder="Email"
+              />
+              <input
+                type="text"
+                value={selectedUser.phonecontact || ""}
+                onChange={(e) =>
+                  setSelectedUser({
+                    ...selectedUser,
+                    phonecontact: e.target.value,
+                  })
+                }
+                placeholder="Phone"
+              />
+              <button onClick={updateUser}>Save Changes</button>
+              <button onClick={() => setSelectedUser(null)}>Cancel</button>
+            </div>
+          )}
 
           <table className="ManagerCustomer-customer-table">
             <thead>
@@ -197,7 +222,7 @@ const ManagerCustomer = () => {
                   <td>{customer.username}</td>
                   <td>{customer.password}</td>
                   <td>{customer.email}</td>
-                  <td>{customer.phonecontact || 'N/A'}</td>
+                  <td>{customer.phonecontact || "N/A"}</td>
                   <td>
                     <button
                       className="ManagerCustomer-btn-update"
