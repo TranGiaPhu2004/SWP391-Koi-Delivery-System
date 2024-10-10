@@ -7,11 +7,13 @@ import PaymentMethods from './Page/Payment-Methods/PaymentMethod';
 import Manager from './Page/Manager/Manager'
 import DeliveryTracking from './Page/View-Order-Tracking/ViewOrderTracking'
 import AddNewAccount from './Page/Add-new-account/Add-new-account'
+
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <Router>
+      
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
