@@ -74,7 +74,7 @@
     width: 167%;
 }
 
-ul {
+.HeaderPriceList-list ul {
     display: flex;
     justify-content: center;
     flex-direction: row;
@@ -91,7 +91,7 @@ ul {
     margin-top: -40px;
 }
 
-li {
+.HeaderPriceList-list li {
     text-align: center;
 }
 
