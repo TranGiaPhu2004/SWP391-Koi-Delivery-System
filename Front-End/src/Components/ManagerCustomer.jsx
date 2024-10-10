@@ -8,6 +8,7 @@ import './ManagerCustomer.css';
 const ManagerCustomer = () => {
   const [customers, setCustomers] = useState([]);
   const [error, setError] = useState("");
+  const [selectedUser, setSelectedUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,8 +20,8 @@ const ManagerCustomer = () => {
         const response = await fetch("http://localhost:8080/admin/allUser", {
           method: "GET",
           headers: {
-           
             "Content-Type": "application/json",
+            // Authorization: `Bearer ${token}`,
           },
         });
 
@@ -40,6 +41,68 @@ const ManagerCustomer = () => {
 
     fetchCustomers();
   }, [navigate]);
+
+  // Hàm để xóa người dùng
+  const deleteUser = async (id) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(`http://localhost:8080/users/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          // Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        // Xóa thành công, cập nhật lại danh sách người dùng
+        setCustomers(customers.filter((customer) => customer.userID !== id));
+      } else {
+        setError("Failed to delete user.");
+      }
+    } catch (error) {
+      setError("Error deleting user. Please try again.");
+    }
+  };
+
+  // Hàm mở form cập nhật với dữ liệu người dùng hiện tại
+  const openUpdateForm = (customer) => {
+    setSelectedUser(customer);
+  };
+
+  // Hàm xử lý cập nhật người dùng
+  const updateUser = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(`http://localhost:8080/users/${selectedUser.userID}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          // Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          username: selectedUser.username,
+          password: selectedUser.password,
+          email: selectedUser.email,
+          phonecontact: selectedUser.phonecontact,
+        }),
+      });
+
+      if (response.ok) {
+        const updatedUser = await response.json();
+        setCustomers(
+          customers.map((customer) =>
+            customer.userID === updatedUser.userID ? updatedUser : customer
+          )
+        );
+        setSelectedUser(null); // Đóng form cập nhật
+      } else {
+        setError("Failed to update user.");
+      }
+    } catch (error) {
+      setError("Error updating user. Please try again.");
+    }
+  };
 
   return (
     <div className="ManagerCustomer-container">
@@ -84,14 +147,46 @@ const ManagerCustomer = () => {
         <div className="ManagerCustomer-product-management">
           <h1>Customer Account Management</h1>
           {error && <p style={{ color: 'red' }}>{error}</p>}
+          {selectedUser && (
+  <div className="ManagerCustomer-update-form">
+    <h2>Update User</h2>
+    <input
+      type="text"
+      value={selectedUser.username || ""}
+      onChange={(e) => setSelectedUser({ ...selectedUser, username: e.target.value })}
+      placeholder="Username"
+    />
+    <input
+      type="password"
+      value={selectedUser.password || ""}
+      onChange={(e) => setSelectedUser({ ...selectedUser, password: e.target.value })}
+      placeholder="Password"
+    />
+    <input
+      type="email"
+      value={selectedUser.email || ""}
+      onChange={(e) => setSelectedUser({ ...selectedUser, email: e.target.value })}
+      placeholder="Email"
+    />
+    <input
+      type="text"
+      value={selectedUser.phonecontact || ""}
+      onChange={(e) => setSelectedUser({ ...selectedUser, phonecontact: e.target.value })}
+      placeholder="Phone"
+    />
+    <button onClick={updateUser}>Save Changes</button>
+    <button onClick={() => setSelectedUser(null)}>Cancel</button>
+  </div>
+)}
+
           <table className="ManagerCustomer-customer-table">
             <thead>
               <tr>
-              <th>ID</th>
+                <th>ID</th>
                 <th>Name</th>
+                <th>Password</th>
                 <th>Email</th>
                 <th>Phone</th>
-                <th>Status</th>
                 <th>Options</th>
               </tr>
             </thead>
@@ -100,12 +195,22 @@ const ManagerCustomer = () => {
                 <tr key={customer.userID}>
                   <td>{customer.userID}</td>
                   <td>{customer.username}</td>
+                  <td>{customer.password}</td>
                   <td>{customer.email}</td>
-                  <td>{customer.phone || 'N/A'}</td>
-                  <td>{customer.status || 'Active'}</td>
+                  <td>{customer.phonecontact || 'N/A'}</td>
                   <td>
-                    <button className="ManagerCustomer-btn-update">Update</button>
-                    <button className="ManagerCustomer-btn-delete">Delete</button>
+                    <button
+                      className="ManagerCustomer-btn-update"
+                      onClick={() => openUpdateForm(customer)}
+                    >
+                      Update
+                    </button>
+                    <button
+                      className="ManagerCustomer-btn-delete"
+                      onClick={() => deleteUser(customer.userID)}
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}
