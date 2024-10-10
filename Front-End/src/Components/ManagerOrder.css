@@ -1,0 +1,236 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+  }
+    
+  .ManagerOrder-container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+  }
+  
+  .ManagerOrder-logo{
+    margin-left: 10px;
+  }
+  
+  .ManagerOrder-sidebar {
+    background-color: white;
+    /* background-color: #1a1a2e; */
+    width: 300px;
+    height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    position: fixed; /* Sidebar cố định vị trí */
+    top: 0; /* Đảm bảo nó dính trên cùng của trang */
+    left: 0; /* Đặt sidebar ở phía trái màn hình */
+  }
+  
+  .ManagerOrder-nav-list {
+    list-style-type: none;
+  }
+  
+  .ManagerOrder-nav-item:hover {
+    color: #ff4b5c;
+    transition: color 0.3s ease;
+  }
+  
+  
+  .ManagerOrder-nav-item {
+    color: #2B3D55;
+    margin: 20px 0px 20px 10px;
+    cursor: pointer;
+    font-weight: 900;
+    font-size: larger;
+  }
+  
+  .ManagerOrder-logout {
+    background-color: #ff4b5c;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: auto;
+  }
+  
+  .ManagerOrder-main-content {
+    /* padding: 20px; */
+    width: calc(100% - 250px); 
+    margin-left: 300px; /* Đẩy nội dung chính sang phải bằng với chiều rộng của sidebar */
+    width: calc(100% - 300px); 
+    margin-left: 300px;
+    height: 100vh;
+  }
+  
+  .ManagerOrder-header {
+    border: white;
+    background-color: #F9F9F9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .ManagerOrder-user-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .ManagerOrder-avatar {
+    border-radius: 50%;
+    margin-left: 20px;
+    width: 50px;
+  }
+  
+  .ManagerOrder-user-details {
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: black;
+  }
+  
+  .ManagerOrder-search-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: white; /* Nền trắng cho cả khối */
+    /* padding: 5px; */
+    margin-right: 35px;
+    width: 400px; /* Điều chỉnh kích thước của khối */
+  }
+  
+  .ManagerOrder-search-container input {
+    padding: 5px 10px;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    background-color: white; /* Nền trắng cho ô input */
+    color: #333; /* Màu chữ cho thanh tìm kiếm */
+  }
+  
+  .ManagerOrder-search-icon {
+    width: 25px; /* Kích thước icon */
+    height: 25px;
+    margin-left: -40px; /* Kéo icon vào gần cạnh phải của ô input */
+    cursor: pointer;
+    background-color: white; /* Đảm bảo icon có nền trắng */
+    padding: 2px; /* Thêm một chút khoảng trống cho icon */
+    border-radius: 50%; /* Tạo hình tròn cho icon nếu cần */
+  }
+  
+  
+  .ManagerOrder-order-management {
+    padding: 10px; 
+    width: 100%;
+    background-color: #2B3D55;
+    height: 100%;
+  }
+  
+  .ManagerOrder-order-management h1 {
+    margin-bottom: 20px;
+    margin-top: 5px;
+  }
+   
+  .ManagerOrder-order-table {
+    width: 98%; /* Đảm bảo bảng không vượt quá khung nhìn */
+    margin-left: 5px;
+    table-layout: fixed; /* Cố định chiều rộng các cột để bảng không bị tràn */
+    border-collapse: collapse;
+    background-color: #F9F9F9;
+    color: black;
+    overflow-x: auto; /* Cho phép cuộn ngang nếu nội dung quá dài */
+  
+  }
+  
+  .ManagerOrder-order-table th, .ManagerOrder-order-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+    white-space: nowrap; /* Không cho phép xuống dòng */
+    overflow: hidden; /* Ẩn nội dung nếu quá dài */
+    text-overflow: ellipsis; /* Thêm dấu "..." nếu nội dung bị cắt ngắn */
+  }
+  /* Đặt chiều rộng cho cột ID nhỏ hơn các cột khác */
+  .ManagerOrder-order-table th:nth-child(1),
+  .ManagerOrder-order-table td:nth-child(1) {
+  width: 50px; /* Bạn có thể điều chỉnh kích thước nhỏ hơn */
+  text-align: center; /* Căn giữa nội dung cột ID */
+  }
+  
+  .ManagerOrder-order-table th {
+    background-color: #F9F9F9;
+    font-weight: bold;
+    position: sticky; /* Làm cho tiêu đề dính */
+    top: 0; /* Dính ở phía trên cùng */
+    z-index: 1; /* Đảm bảo tiêu đề luôn ở trên cùng */
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4); /* Thêm hiệu ứng đổ bóng khi cuộn */
+  }
+  
+  .ManagerOrder-order-table tr:nth-child(even) {
+    background-color: #F9F9F9;
+  } 
+  
+  .ManagerOrder-order-table tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  .ManagerOrder-order-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+    white-space: nowrap; /* Không cho phép xuống dòng */
+    overflow: hidden; /* Ẩn nội dung nếu quá dài */
+    text-overflow: ellipsis; /* Thêm dấu "..." nếu nội dung bị cắt ngắn */
+    position: relative; /* Thêm thuộc tính để định vị cho phần tử con */
+}
+
+.ManagerOrder-toggle-icon {
+    width: 16px; /* Kích thước biểu tượng nhỏ hơn */
+    height: 16px; /* Kích thước biểu tượng nhỏ hơn */
+    position: absolute; /* Định vị tuyệt đối */
+    right: 10px; /* Căn lề bên phải để biểu tượng nằm ở cuối */
+    top: 50%; /* Đưa biểu tượng vào giữa theo chiều dọc */
+    transform: translateY(-50%); /* Đưa biểu tượng lên giữa */
+}
+.ManagerOrder-btn-update img, .ManagerOrder-btn-delete img {
+    width: 24px;
+    height: 24px;
+  }
+  /* CSS cho các nút Update và Delete */
+  .ManagerOrder-btn-update,
+  .ManagerOrder-btn-delete {
+    padding: 5px 10px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .ManagerOrder-btn-update {
+    margin-left: 5px;
+    background-color: #4CAF50;
+    /* Màu xanh cho nút Update */
+    color: white;
+  }
+  
+  .ManagerOrder-btn-update:hover {
+    background-color: #45a049;
+    /* Màu đậm hơn khi hover */
+  }
+  
+  .ManagerOrder-btn-delete {
+    background-color: #f44336;
+    /* Màu đỏ cho nút Delete */
+    color: white;
+  }
+  
+  .ManagerOrder-btn-delete:hover {
+    background-color: #da190b;
+    /* Màu đậm hơn khi hover */
+  }
