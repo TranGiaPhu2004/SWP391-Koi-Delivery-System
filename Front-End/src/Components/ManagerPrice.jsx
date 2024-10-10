@@ -1,6 +1,7 @@
 import logo from '../assets/image/Logo.png'
 import avatar from '../assets/image/avatar.png'
 import search from '../assets/image/search.png'
+import EditIcon from '../assets/image/edit.svg';
 import './ManagerPrice.css';
 
 const ManagerPrice = () => {
@@ -19,9 +20,9 @@ const ManagerPrice = () => {
         </div>
           <nav className="ManagerPrice-nav">
             <ul className="ManagerPrice-nav-list">
-              <li className="ManagerPrice-nav-item">Product Management</li>
-              <li className="ManagerPrice-nav-item">Statistics</li>
-              <li className="ManagerPrice-nav-item">Report</li>
+              <li className="ManagerPrice-nav-item">Account Management</li>
+              <li className="ManagerPrice-nav-item">Price Management</li>
+              <li className="ManagerPrice-nav-item">Order Management</li>
               <li className="ManagerPrice-nav-item">Notification</li>
               <li className="ManagerPrice-nav-item">Settings</li>
               <li className="ManagerPrice-nav-item">Account</li>
@@ -69,8 +70,10 @@ const ManagerPrice = () => {
                   <td>{customer.name}</td>
                   <td>{customer.price}</td>
                   <td>{customer.status}</td>
-                  <td>
-                    <button className="ManagerPrice-btn-update">Update</button>
+                  <td>                 
+                    <button className="ManagerPrice-btn-update">
+                          <img src={EditIcon} alt="Edit" />
+                    </button>
                   </td>
                 </tr>
               ))}

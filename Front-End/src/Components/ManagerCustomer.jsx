@@ -116,9 +116,9 @@ const ManagerCustomer = () => {
         </div>
         <nav className="ManagerCustomer-nav">
           <ul className="ManagerCustomer-nav-list">
-            <li className="ManagerCustomer-nav-item">Product Management</li>
-            <li className="ManagerCustomer-nav-item">Statistics</li>
-            <li className="ManagerCustomer-nav-item">Report</li>
+            <li className="ManagerCustomer-nav-item">Account Management</li>
+            <li className="ManagerCustomer-nav-item">Price Management</li>
+            <li className="ManagerCustomer-nav-item">Order Management</li>
             <li className="ManagerCustomer-nav-item">Notification</li>
             <li className="ManagerCustomer-nav-item">Settings</li>
             <li className="ManagerCustomer-nav-item">Account</li>
