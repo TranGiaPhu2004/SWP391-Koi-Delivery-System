@@ -17,16 +17,16 @@ public class Delivery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long deliveryID;
 
-    @Column(name = "DeliveryMethod", nullable = false)
+    @Column(name = "deliverymethod", nullable = false)
     private String deliveryMethod;
 
-    @Column(name = "Price", nullable = false)
+    @Column(name = "price", nullable = false)
     private Float price;
 
-    @Column(name = "DeliveryStatus", nullable = false)
+    @Column(name = "deliverystatus", nullable = false)
     private Boolean deliveryStatus;
 
-    @OneToMany(mappedBy = "delivery", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "delivery", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Order> orders;
 
 }

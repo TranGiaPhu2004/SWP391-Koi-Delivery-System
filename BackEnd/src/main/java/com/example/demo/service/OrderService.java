@@ -6,12 +6,19 @@ import com.example.demo.dto.response.MsgResponseDTO;
 import com.example.demo.model.*;
 import com.example.demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
 @Service
 public class OrderService {
+
+
+    @Autowired
+    private IUserRepository userRepository;
+
     @Autowired
     private IOrderRepository orderRepository;
 
@@ -27,7 +34,15 @@ public class OrderService {
     @Autowired
     private IPaymentRepository paymentRepository;
 
+
+
+
     public MsgResponseDTO createOrder(OrderCreateRequestDTO request) {
+//        thêm đoạn code này và add user vào order sau khi front end gửi đc token trên header
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String username = authentication.getName();
+//        User user = userRepository.findByUsername(username)
+//                .orElseThrow(() -> new RuntimeException("User not found"));
 
         //Lấy Service,Delivery
         Services services = serviceRepository.findById(request.getServiceID())

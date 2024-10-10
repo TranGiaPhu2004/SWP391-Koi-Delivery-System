@@ -19,6 +19,6 @@ public class OrderStatus {
     @Column(name = "StatusName", length = 100)
     private String statusName;
 
-    @OneToMany(mappedBy = "orderStatus", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "orderStatus", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Order> orders;
 }
