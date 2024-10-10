@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import pickoi1 from '../assets/image/pickoi1.png'
 import pickoi2 from '../assets/image/pickoi2.png'
@@ -72,19 +72,139 @@ function PriceList() {
         setIsNoneSelected(false);
     };
 
-    
 
-    const [boxes, setBoxes] = useState([]); // Chuyển về mảng để có thể sử dụng reduce
+    const [boxes, setBoxes] = useState([
+        { boxid: 'S01', quantity: 0, price: parseFloat(1200000) },
+        { boxid: 'S02', quantity: 0, price: 700000 },
+        { boxid: 'S03', quantity: 0, price: 400000 }
+
+
+    ]);
+
+    // const [boxes, setBoxes] = useState([]); // Chuyển về mảng để có thể sử dụng reduce
     const [boxid, setBoxid] = useState('');
     const [quantity, setQuantity] = useState(0); // Thay đổi thành số để dễ tính toán
     const [selectedServices, setSelectedServices] = useState([]); // Các dịch vụ đã chọn
     const [deliveries, setDeliveries] = useState([]);
     const [serviceID, setServiceID] = useState('');
     const [deliveryID, setDeliveryID] = useState('');
-    const [errorMessage, setErrorMessage] = useState ('');
-    const [price, setPrice] = useState ('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [price, setPrice] = useState('');
+    const [loading, setLoading] = useState(true); // Kiểm soát trạng thái loading
+    // const handlePriceList = async (e) => {
+    //     e.preventDefault();
 
-    const handlePriceList = async (e) => {
+    //     // Tính tổng giá của các hộp theo từng boxid
+    //     const totalBoxPrice = boxes.reduce((total, box) => {
+    //         return total + (box.price * box.quantity); // Tổng giá cho từng hộp
+    //     }, 0);
+
+    //     // Tính tổng giá của các dịch vụ đã chọn
+    //     const totalServicePrice = selectedServices.reduce((total, service) => {
+    //         return total + service.price; // Tổng giá dịch vụ = giá mỗi dịch vụ
+    //     }, 0);
+
+    //     // Lấy giá của phương thức giao hàng dựa trên deliveryID
+    //     const selectedDelivery = deliveries.find(delivery => delivery.id === deliveryID);
+
+    //     const totalDeliveryPrice = selectedDelivery ? selectedDelivery.price : 0; // Giá vận chuyển
+
+    //     // Tính tổng giá đơn hàng
+    //     const totalPrice = totalBoxPrice + totalServicePrice + totalDeliveryPrice; // Tổng giá
+
+
+    //     // Tạo đối tượng dữ liệu để gửi lên API
+    //     const priceListData = {
+    //         boxes: [
+    //             {
+    //                 boxid: boxid,
+    //                 price: price,
+    //                 quantity: quantity,
+    //             }
+
+    //         ],
+    //         serviceID: serviceID,
+    //         deliveryID: deliveryID,
+    //         totalPrice: totalPrice,
+    //     };
+
+    //     try {
+    //         // Gửi yêu cầu POST đến API
+    //         const response = await fetch("http://localhost:8080/orders/create", {
+    //             method: "POST",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //             },
+    //             body: JSON.stringify(priceListData),
+    //         });
+
+    //         // Kiểm tra phản hồi từ API
+    //         if (response.ok) {
+    //             const data = await response.json();
+    //             // Lưu token vào localStorage hoặc sessionStorage
+    //             localStorage.setItem("token", data.token);
+    //         }
+
+    //     } catch (error) {
+    //         setErrorMessage("Error logging in");
+    //     }
+
+    // };
+
+    // Hàm lấy dữ liệu từ database khi component được render
+
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             // Lấy danh sách các hộp từ database
+    //             const boxesResponse = await fetch('/api/boxes');
+    //             const boxesData = await boxesResponse.json();
+    //             setBoxes(boxesData); // Lưu danh sách hộp vào state
+
+    //             // Lấy danh sách dịch vụ đã chọn
+    //             const servicesResponse = await fetch('/api/services');
+    //             const servicesData = await servicesResponse.json();
+    //             setSelectedServices(servicesData); // Lưu danh sách dịch vụ vào state
+
+    //             // Lấy danh sách phương thức giao hàng
+    //             const deliveriesResponse = await fetch('/api/deliveries');
+    //             const deliveriesData = await deliveriesResponse.json();
+    //             setDeliveries(deliveriesData); // Lưu danh sách phương thức giao hàng vào state
+
+    //             // Cập nhật phương thức giao hàng mặc định (ví dụ chọn cái đầu tiên)
+    //             if (deliveriesData.length > 0) {
+    //                 setDeliveryID(deliveriesData[0].id); // Chọn phương thức giao hàng đầu tiên
+    //             }
+
+    //             setLoading(false); // Hoàn tất việc tải dữ liệu
+    //         } catch (error) {
+    //             console.error('Error fetching data:', error);
+    //             setLoading(false); // Nếu có lỗi vẫn phải dừng loading
+    //         }
+    //     };
+
+    //     fetchData(); // Gọi hàm fetchData để tải dữ liệu
+    // }, []); // Mảng rỗng [] đảm bảo useEffect chỉ chạy một lần khi component được mount
+
+    // Hàm để tăng số lượng
+    const incrementQuantity = (boxid) => {
+        setBoxes(prevBoxes =>
+            prevBoxes.map(box =>
+                box.boxid === boxid ? { ...box, quantity: box.quantity + 1 } : box
+            )
+        );
+    };
+
+    // Hàm để giảm số lượng
+    const decrementQuantity = (boxid) => {
+        setBoxes(prevBoxes =>
+            prevBoxes.map(box =>
+                box.boxid === boxid && box.quantity > 0 ? { ...box, quantity: box.quantity - 1 } : box
+            )
+        );
+    };
+
+    const handlePriceList = (e) => {
         e.preventDefault();
 
         // Tính tổng giá của các hộp theo từng boxid
@@ -99,55 +219,42 @@ function PriceList() {
 
         // Lấy giá của phương thức giao hàng dựa trên deliveryID
         const selectedDelivery = deliveries.find(delivery => delivery.id === deliveryID);
-
         const totalDeliveryPrice = selectedDelivery ? selectedDelivery.price : 0; // Giá vận chuyển
 
         // Tính tổng giá đơn hàng
         const totalPrice = totalBoxPrice + totalServicePrice + totalDeliveryPrice; // Tổng giá
 
-
         // Tạo đối tượng dữ liệu để gửi lên API
         const priceListData = {
-            boxes: [
-                {
-                    boxid: boxid,
-                    price: price,
-                    quantity: quantity,
-                }
-
-            ],
-            serviceID: serviceID,
+            boxes: boxes.map((box) => ({
+                boxid: box.boxid,
+                quantity: box.quantity,
+            })),
+            serviceID: selectedServices.map(service => service.serviceID),
             deliveryID: deliveryID,
             totalPrice: totalPrice,
         };
-        
-        try {
-            // Gửi yêu cầu POST đến API
-            const response = await fetch("http://localhost:8080/orders/create", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(priceListData),
-            });
 
-            // Kiểm tra phản hồi từ API
-            if (response.ok) {
-                const data = await response.json();
-                // Lưu token vào localStorage hoặc sessionStorage
-                localStorage.setItem("token", data.token);
-            }
-
-        } catch (error) {
-            setErrorMessage("Error logging in");
-        }
-
+        console.log('Price List Data:', priceListData);
+        console.log('Total Price:', totalPrice);
     };
+
+    // if (loading) {
+    //     return <div>Loading data...</div>; // Hiển thị khi dữ liệu đang được tải
+    // }
+
+    const boxS01 = boxes.find((box) => box.boxid === 'S01');
+
+    const boxS02 = boxes.find((box) => box.boxid === 'S02');
+
+    const boxS03 = boxes.find((box) => box.boxid === 'S03');
+
+
 
     return (
         <>
             <div className="PriceList-main-priceList">
-                <p>🚚Koi Delivery Service    Price List🎏</p>
+                <p>🚚Koi Delivery Service Price List🎏</p>
 
             </div>
             <div className="PriceList-BoxChoosing">
@@ -175,18 +282,31 @@ function PriceList() {
 
                             </div>
                             <div className="PriceList-amount1">
-                                <button className={`decrement-button1 ${count1 > 0 ? 'active' : 'blurred'}`}
-                                    onClick={decrement1}>
-                                    -
-                                </button>
-                                <button className='PriceList-count1'>
-                                    {count1}
-                                </button>
-                                <button className='increment-button1' onClick={increment1}>
-                                    +
-                                </button>
+                                {boxS01 && (
+                                    <div key={boxS01.boxid}>
+                                        {/* Nút giảm số lượng */}
+                                        <button
+                                            className='decrement-button1'
+                                            onClick={() => decrementQuantity(boxS01.boxid)}
+                                        >
+                                            -
+                                        </button>
 
+                                        {/* Hiển thị số lượng của box */}
+                                        <button className='PriceList-count1'>
+                                            {boxS01.quantity} {/* Đảm bảo rằng giá trị này được hiển thị */}
+                                        </button>
 
+                                        {/* Nút tăng số lượng */}
+                                        <button
+                                            className='increment-button1'
+                                            onClick={() => incrementQuantity(boxS01.boxid)}
+                                        >
+                                            +
+                                        </button>
+                                        <p>{boxS01.quantity * boxS01.price}</p>
+                                    </div>
+                                )}
                             </div>
                         </div>
                         <button className='PriceList-button' onClick={Delete1}>Delete</button>
@@ -204,8 +324,8 @@ function PriceList() {
                                 <p>contains at least <br /> <span>5-10</span> Koi Fish</p>
 
                             </div>
-                            <div className="PriceList-amount2">
-                                <button className={`decrement-button2 ${count2 > 0 ? 'active' : 'blurred'}`}
+                            {/* <div className="PriceList-amount2"> */}
+                            {/* <button className={`decrement-button2 ${count2 > 0 ? 'active' : 'blurred'}`}
                                     onClick={decrement2}>
                                     -
                                 </button>
@@ -214,7 +334,36 @@ function PriceList() {
                                 </button>
                                 <button onClick={increment2} className='increment-button2'>
                                     +
-                                </button>
+                                </button> */}
+                            {/* </div> */}
+
+                            <div className="PriceList-amount2">
+                                {boxS02 && (
+                                    <div key={boxS02.boxid}>
+                                        {/* Nút giảm số lượng */}
+                                        <button
+                                            className='decrement-button2'
+                                            onClick={() => decrementQuantity(boxS02.boxid)}
+                                        >
+                                            -
+                                        </button>
+
+                                        {/* Hiển thị số lượng của box */}
+                                        <button className='PriceList-count2'>
+                                            {boxS02.quantity} {/* Đảm bảo rằng giá trị này được hiển thị */}
+                                        </button>
+
+                                        {/* Nút tăng số lượng */}
+                                        <button
+                                            className='increment-button2'
+                                            onClick={() => incrementQuantity(boxS02.boxid)}
+                                        >
+                                            +
+                                        </button>
+                                        <p>{boxS02.quantity * boxS02.price}</p>
+                                        <p>{boxS01.quantity * boxS01.price + boxS02.quantity * boxS02.price + boxS03.quantity * boxS03.price}</p>
+                                    </div>
+                                )}
                             </div>
                         </div>
                         <button className='PriceList-button' onClick={Delete2}>Delete</button>
@@ -230,7 +379,7 @@ function PriceList() {
                                 <p>contains at least <span>3-5</span> Koi Fish maximum</p>
 
                             </div>
-                            <div className="PriceList-amount3">
+                            {/* <div className="PriceList-amount3">
                                 <button className={`decrement-button3 ${count3 > 0 ? 'active' : 'blurred'}`}
                                     onClick={decrement3}>
                                     -
@@ -238,10 +387,41 @@ function PriceList() {
                                 <button className='PriceList-count3'>
                                     {count3}
                                 </button>
+
                                 <button onClick={increment3} className='increment-button3'>
                                     +
                                 </button>
+                            </div> */}
+
+                            <div className="PriceList-amount3">
+                                {boxS03 && (
+                                    <div key={boxS03.boxid}>
+                                        {/* Nút giảm số lượng */}
+                                        <button
+                                            className='decrement-button3'
+                                            onClick={() => decrementQuantity(boxS03.boxid)}
+                                        >
+                                            -
+                                        </button>
+
+                                        {/* Hiển thị số lượng của box */}
+                                        <button className='PriceList-count3'>
+                                            {boxS03.quantity} {/* Đảm bảo rằng giá trị này được hiển thị */}
+                                        </button>
+
+                                        {/* Nút tăng số lượng */}
+                                        <button
+                                            className='increment-button3'
+                                            onClick={() => incrementQuantity(boxS03.boxid)}>
+                                            +
+                                        </button>
+                                        <p>{boxS03.quantity * boxS03.price}</p>
+
+                                    </div>
+                                )}
                             </div>
+
+
                         </div>
                         <button className='PriceList-button' onClick={Delete3}>Delete</button>
                     </div>
