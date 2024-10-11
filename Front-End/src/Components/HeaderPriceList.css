@@ -74,36 +74,26 @@
     width: 167%;
 }
 
-.HeaderPriceList-list ul {
+.HeaderPriceList-list {
     display: flex;
-    justify-content: center;
     flex-direction: row;
-    column-gap: 80px;
+    justify-content: space-around; /* You can adjust this to control spacing */
+    align-items: center;
+    list-style: none;
     padding: 0;
-    margin: 0 auto;
-    list-style-type: none;
-    width: 180%;
-    max-width: 100vw;
-    /* Đảm bảo không tràn ra khỏi màn hình */
-    box-sizing: border-box;
-    font-family: 'Kay Pho Du';
-    font-size: 50px;
-    margin-top: -40px;
+    margin: 0;
 }
 
-.HeaderPriceList-list li {
-    text-align: center;
+.headerList {
+    margin: 0 15px; /* Adjust margin between items */
 }
 
-.HeaderPriceList-list a {
-    color: #333;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 10px 15px;
-
+.headerList a {
+    text-decoration: none;
+    color: black; /* Adjust link color */
+    font-size: 16px; /* Adjust font size */
 }
 
-.HeaderPriceList-list a:hover {
-    color: #007bff;
-    cursor: grab;
+.headerList a:hover {
+    color: #007BFF; /* Color change on hover */
 }
