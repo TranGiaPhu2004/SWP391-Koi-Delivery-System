@@ -74,6 +74,7 @@
     display: flex;
     flex-direction: row;
     column-gap: 80px;
+    margin-left: 30px;
 }
 
 .PriceList-pic-koi1,
@@ -373,11 +374,11 @@
     cursor: grab;
 }
 
-.PriceList-cancel {
+/* .PriceList-cancel {
     text-align: center;
     color: #3D3D74;
     font-weight: 700;
-}
+} */
 
 .PriceList-order-details .cancel:hover {
     cursor: grab;
@@ -398,7 +399,7 @@
     margin-top: 50px;
 }
 
-.PriceList-none,
+
 .PriceList-package,
 .PriceList-health,
 .PriceList-temperatureControl,
@@ -423,7 +424,7 @@
     margin-left: 8%;
 }
 
-.PriceList-none label,
+
 .PriceList-package label,
 .PriceList-temperatureControl label,
 .PriceList-health label,
@@ -436,7 +437,7 @@
 
 }
 
-.PriceList-none img,
+
 .PriceList-package img,
 .PriceList-health img,
 .PriceList-insurance img {
@@ -447,7 +448,7 @@
     margin-top: 5px;
 }
 
-.PriceList-none p,
+
 .PriceList-package p,
 .PriceList-temperatureControl p,
 .PriceList-health p,
@@ -458,7 +459,7 @@
     font-weight: 800;
 }
 
-.PriceList-none h4,
+
 .PriceList-package h4,
 .PriceList-temperatureControl h4,
 .PriceList-health h4,
@@ -473,12 +474,19 @@
 
 
 .PriceList-Delivery {
-    display: flex;
-    margin-top: 20px;
-    column-gap: 10%;
+   display: flex;
+   flex-direction: row;
+   margin-left: 40%;
+   margin-top: 2%;
+   column-gap: 140px;
 }
 
-.PriceList-standard-delivery,
+.PriceList-Delivery-map {
+    display: flex;
+    flex-direction: column;
+}
+
+/* .PriceList-standard-delivery,
 .PriceList-fast-delivery {
     display: flex;
     flex-direction: column;
@@ -498,12 +506,12 @@
 .PriceList-fast-delivery img {
     width: 18%;
     /* Small image size */
-    height: auto;
-}
+    /* height: auto;
+} */
 
 .PriceList-fast-delivery {
     margin-left: -30%;
-}
+} */
 
 .PriceList-standard-delivery p,
 .PriceList-fast-delivery p {
@@ -525,8 +533,10 @@
     color: #fff;
     font-family: monospace;
     font-size: 20px;
+    margin-left: 12px;
 }
 
 .PriceList-buttonn button:hover {
     transform: scale(1.1);
 }
+

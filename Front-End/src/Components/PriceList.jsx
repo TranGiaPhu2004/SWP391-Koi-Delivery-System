@@ -6,91 +6,51 @@ import pickoi3 from '../assets/image/pickoi3.png'
 import packaging from '../assets/image/packaging.png'
 import deliveryInsurance from '../assets/image/deliveryInsurance.png'
 import health from '../assets/image/health.png'
-import cancel from '../assets/image/cancel.png'
-import temperatureControl from '../assets/image/temperatureControl.png'
+
 import standardDelivery from '../assets/image/standardDelivery.png'
 import fastDelivery from '../assets/image/fastDelivery.png'
 import './PriceList.css'
 function PriceList() {
 
-    const [count1, setCount1] = useState(0);
-    const [count2, setCount2] = useState(0);
-    const [count3, setCount3] = useState(0);
+    // const [count1, setCount1] = useState(0);
+    // const [count2, setCount2] = useState(0);
+    // const [count3, setCount3] = useState(0);
 
 
-    const increment1 = () => {
-        setCount1((c) => c + 1);
-    }
-    const increment2 = () => {
-        setCount2((c) => c + 1);
-    }
-    const increment3 = () => {
-        setCount3((c) => c + 1);
-    }
-    const decrement1 = () => {
-        if (count1 > 0) {
-            setCount1((c) => c - 1);
-        } else {
-            alert('Sorry, you could not decrement when amount of boxes begin from Zero ...')
-        }
-    }
-    const decrement2 = () => {
-        if (count2 > 0) {
-            setCount2((c) => c - 1);
-        } else {
-            alert('Sorry, you could not decrement when amount of boxes begin from Zero ...')
-        }
-    }
-    const decrement3 = () => {
-        if (count3 > 0) {
-            setCount3((c) => c - 1);
-        } else {
-            alert('Sorry, you could not decrement when amount of boxes begin from Zero ...')
-        }
-    }
-
-    const Delete1 = () => {
-        setCount1(0);
-    }
-    const Delete2 = () => {
-        setCount2(0);
-    }
-    const Delete3 = () => {
-        setCount3(0);
-    }
+    // const increment1 = () => {
+    //     setCount1((c) => c + 1);
+    // }
+    // const increment2 = () => {
+    //     setCount2((c) => c + 1);
+    // }
+    // const increment3 = () => {
+    //     setCount3((c) => c + 1);
+    // }
+    // const decrement1 = () => {
+    //     if (count1 > 0) {
+    //         setCount1((c) => c - 1);
+    //     } else {
+    //         alert('Sorry, you could not decrement when amount of boxes begin from Zero ...')
+    //     }
+    // }
+    // const decrement2 = () => {
+    //     if (count2 > 0) {
+    //         setCount2((c) => c - 1);
+    //     } else {
+    //         alert('Sorry, you could not decrement when amount of boxes begin from Zero ...')
+    //     }
+    // }
+    // const decrement3 = () => {
+    //     if (count3 > 0) {
+    //         setCount3((c) => c - 1);
+    //     } else {
+    //         alert('Sorry, you could not decrement when amount of boxes begin from Zero ...')
+    //     }
+    // }
 
 
-    const [isNoneSelected, setIsNoneSelected] = useState(false);
-
-    // set lại none = true khi click vào "None"
-    const handleNoneChange = () => {
-        setIsNoneSelected(true);
-    };
-
-    // giữ nguyên giá trị các checkbox còn lại
-    const handleOptionChange = () => {
-        setIsNoneSelected(false);
-    };
 
 
-    const [boxes, setBoxes] = useState([
-        { boxid: 'S01', quantity: 0, price: parseFloat(1200000) },
-        { boxid: 'S02', quantity: 0, price: 700000 },
-        { boxid: 'S03', quantity: 0, price: 400000 }
-
-
-    ]);
-
-    // const [boxes, setBoxes] = useState([]); // Chuyển về mảng để có thể sử dụng reduce
-    const [boxid, setBoxid] = useState('');
-    const [quantity, setQuantity] = useState(0); // Thay đổi thành số để dễ tính toán
-    const [selectedServices, setSelectedServices] = useState([]); // Các dịch vụ đã chọn
-    const [deliveries, setDeliveries] = useState([]);
-    const [serviceID, setServiceID] = useState('');
-    const [deliveryID, setDeliveryID] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
-    const [price, setPrice] = useState('');
-    const [loading, setLoading] = useState(true); // Kiểm soát trạng thái loading
     // const handlePriceList = async (e) => {
     //     e.preventDefault();
 
@@ -186,6 +146,49 @@ function PriceList() {
     //     fetchData(); // Gọi hàm fetchData để tải dữ liệu
     // }, []); // Mảng rỗng [] đảm bảo useEffect chỉ chạy một lần khi component được mount
 
+
+    const [boxes, setBoxes] = useState([
+        { boxid: 'S01', quantity: 0, price: 400000 },
+        { boxid: 'S02', quantity: 0, price: 700000 },
+        { boxid: 'S03', quantity: 0, price: 1200000 }
+    ]);
+    // const [boxes, setBoxes] = useState([]); // Chuyển về mảng để có thể sử dụng reduce
+    const [boxid, setBoxid] = useState('');
+    const [quantity, setQuantity] = useState(0); // Thay đổi thành số để dễ tính toán
+    const [selectedServices, setSelectedServices] = useState({
+        packaging: { id: 1, isSelected: false, price: 200000 },
+        health: { id: 2, isSelected: false, price: 150000 },
+        deliveryInsurance: { id: 3, isSelected: false, price: 500000 }
+    });
+    // const [deliveries, setDeliveries] = useState([]);
+    const [serviceID, setServiceID] = useState('');
+    const [deliveryID, setDeliveryID] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [price, setPrice] = useState('');
+    const [loading, setLoading] = useState(true); // Kiểm soát trạng thái loading
+
+    const [deliveries, setDeliveries] = useState([
+        { deliveryid: 'S1', price: 300000, isSelectedd: false },
+        { deliveryid: 'S2', price: 850000, isSelectedd: false },
+    ]);
+
+
+    // Hàm xử lý khi chọn phương thức giao hàng
+    const handleDeliveryChange = (deliveryid) => {
+        setDeliveries(prevDeliveries =>
+            prevDeliveries.map(delivery =>
+                delivery.deliveryid === deliveryid
+                    ? { ...delivery, isSelectedd: true }
+                    : { ...delivery, isSelectedd: false }
+            )
+        );
+    };
+
+
+    // Lấy tổng giá của phương thức giao hàng được chọn
+    const selectedDelivery = deliveries.find(delivery => delivery.isSelectedd);
+    const totalDeliveryPrice = selectedDelivery ? selectedDelivery.price : 0;
+
     // Hàm để tăng số lượng
     const incrementQuantity = (boxid) => {
         setBoxes(prevBoxes =>
@@ -203,6 +206,38 @@ function PriceList() {
             )
         );
     };
+
+    // hàm xử lý checkbox được chọn
+    const handleOptionChange = (e) => {
+        const { name, checked } = e.target;
+
+        // Cập nhật trạng thái của dịch vụ khi checkbox được chọn hoặc bỏ chọn
+        setSelectedServices(prevState => ({
+            ...prevState,
+            [name]: {
+                ...prevState[name],
+                isSelected: checked
+            }
+        }));
+    };
+
+    // TÍNH TỔNG DỊCH VỤ ĐÃ CHỌN
+    const totalServicePrice = Object.values(selectedServices).reduce((total, service) => {
+        return service.isSelected ? total + service.price : total;
+    }, 0);
+
+    // TÍNH TỔNG GIÁ BOXES ĐÃ CHỌN
+    const totalBoxesPrice = Object.values(boxes).reduce((total, box) => {
+        return box.quantity > 0 ? total + (box.price * box.quantity) : total;
+    }, 0);
+
+
+    const DeleteBox = (boxId) => {
+        setBoxes(boxes => boxes.map(box =>
+            box.boxid === boxId ? { ...box, quantity: 0 } : box
+        ));
+    };
+
 
     const handlePriceList = (e) => {
         e.preventDefault();
@@ -238,6 +273,11 @@ function PriceList() {
         console.log('Price List Data:', priceListData);
         console.log('Total Price:', totalPrice);
     };
+
+
+
+
+
 
     // if (loading) {
     //     return <div>Loading data...</div>; // Hiển thị khi dữ liệu đang được tải
@@ -282,34 +322,39 @@ function PriceList() {
 
                             </div>
                             <div className="PriceList-amount1">
-                                {boxS01 && (
-                                    <div key={boxS01.boxid}>
+                                {boxS03 && (
+                                    <div key={boxS03.boxid}>
                                         {/* Nút giảm số lượng */}
                                         <button
                                             className='decrement-button1'
-                                            onClick={() => decrementQuantity(boxS01.boxid)}
+                                            onClick={() => decrementQuantity(boxS03.boxid)}
                                         >
                                             -
                                         </button>
 
                                         {/* Hiển thị số lượng của box */}
                                         <button className='PriceList-count1'>
-                                            {boxS01.quantity} {/* Đảm bảo rằng giá trị này được hiển thị */}
+                                            {boxS03.quantity} {/* Đảm bảo rằng giá trị này được hiển thị */}
                                         </button>
 
                                         {/* Nút tăng số lượng */}
                                         <button
                                             className='increment-button1'
-                                            onClick={() => incrementQuantity(boxS01.boxid)}
+                                            onClick={() => incrementQuantity(boxS03.boxid)}
                                         >
                                             +
                                         </button>
-                                        <p>{boxS01.quantity * boxS01.price}</p>
+                                        <br /><br />
+                                        <button
+                                            className='PriceList-button'
+                                            onClick={() => DeleteBox('S03')}
+                                        >Delete</button>
+
                                     </div>
                                 )}
                             </div>
                         </div>
-                        <button className='PriceList-button' onClick={Delete1}>Delete</button>
+
                     </div>
 
 
@@ -339,7 +384,7 @@ function PriceList() {
 
                             <div className="PriceList-amount2">
                                 {boxS02 && (
-                                    <div key={boxS02.boxid}>
+                                    <div key={boxS02.boxid} className='PriceList-amount2-button'>
                                         {/* Nút giảm số lượng */}
                                         <button
                                             className='decrement-button2'
@@ -360,13 +405,22 @@ function PriceList() {
                                         >
                                             +
                                         </button>
-                                        <p>{boxS02.quantity * boxS02.price}</p>
-                                        <p>{boxS01.quantity * boxS01.price + boxS02.quantity * boxS02.price + boxS03.quantity * boxS03.price}</p>
+
+                                        <br /><br />
+                                        <button
+                                            className='PriceList-button'
+                                            onClick={() => DeleteBox('S02')}
+                                        >Delete</button>
+
+                                        <div className="PriceList-total">
+                                            <h3>Total Boxes Price <br /> {totalBoxesPrice.toLocaleString()} vnđ</h3>
+                                        </div>
                                     </div>
+
                                 )}
                             </div>
                         </div>
-                        <button className='PriceList-button' onClick={Delete2}>Delete</button>
+
                     </div>
                     <div className="PriceList-pic-koi3">
                         <div className="PriceList-price">
@@ -379,51 +433,42 @@ function PriceList() {
                                 <p>contains at least <span>3-5</span> Koi Fish maximum</p>
 
                             </div>
-                            {/* <div className="PriceList-amount3">
-                                <button className={`decrement-button3 ${count3 > 0 ? 'active' : 'blurred'}`}
-                                    onClick={decrement3}>
-                                    -
-                                </button>
-                                <button className='PriceList-count3'>
-                                    {count3}
-                                </button>
-
-                                <button onClick={increment3} className='increment-button3'>
-                                    +
-                                </button>
-                            </div> */}
 
                             <div className="PriceList-amount3">
-                                {boxS03 && (
-                                    <div key={boxS03.boxid}>
+                                {boxS01 && (
+                                    <div key={boxS01.boxid}>
                                         {/* Nút giảm số lượng */}
                                         <button
                                             className='decrement-button3'
-                                            onClick={() => decrementQuantity(boxS03.boxid)}
+                                            onClick={() => decrementQuantity(boxS01.boxid)}
                                         >
                                             -
                                         </button>
 
                                         {/* Hiển thị số lượng của box */}
                                         <button className='PriceList-count3'>
-                                            {boxS03.quantity} {/* Đảm bảo rằng giá trị này được hiển thị */}
+                                            {boxS01.quantity} {/* Đảm bảo rằng giá trị này được hiển thị */}
                                         </button>
 
                                         {/* Nút tăng số lượng */}
                                         <button
                                             className='increment-button3'
-                                            onClick={() => incrementQuantity(boxS03.boxid)}>
+                                            onClick={() => incrementQuantity(boxS01.boxid)}>
                                             +
                                         </button>
-                                        <p>{boxS03.quantity * boxS03.price}</p>
-
+                                        <br />
+                                        <br />
+                                        <button
+                                            className='PriceList-button'
+                                            onClick={() => DeleteBox('S01')}
+                                        >Delete</button>
                                     </div>
                                 )}
                             </div>
 
 
                         </div>
-                        <button className='PriceList-button' onClick={Delete3}>Delete</button>
+
                     </div>
                 </div>
             </div>
@@ -437,77 +482,58 @@ function PriceList() {
                     😍You could also choose services that makes yourself comfort😍
                 </div>
 
-
                 <div className="PriceList-Services">
-
-                    <div className='PriceList-none'>
-                        <label>
-                            <input type="radio" name='none' value='none'
-                                onChange={handleNoneChange}
-                            />
-                            <img src={cancel} alt="" />
-                            <h4>None</h4>
-                            <p>0 vnđ</p>
-                        </label>
-
-                    </div>
-
-
-
-
-                    <div className='PriceList-temperatureControl'>
-                        <label>
-                            <input type="checkbox" name='temperatureControl' value='temperatureControl'
-                                disabled={isNoneSelected} //disabled: thuộc tính làm vô hiệu hóa tương tác người dùng
-                                // vì khi click vào "None" => các checkbox còn lại sẽ 0 được phép chọn
-                                onChange={handleOptionChange}
-                            />
-                            <img src={temperatureControl} alt="Temperature Control" />
-                            <h4>Temperature Control</h4>
-                            <p>50.000 vnđ</p>
-                        </label>
-
-                    </div>
-
+                    {/* Professional Packaging */}
                     <div className='PriceList-package'>
                         <label>
-                            <input type="checkbox" name='packaging' value='packaging'
-                                disabled={isNoneSelected}
+                            <input
+                                type="checkbox"
+                                name='packaging'
+                                value='packaging'
                                 onChange={handleOptionChange}
                             />
                             <img src={packaging} alt="Professional Packing" />
                             <h4>Profession Packaging</h4>
                             <p>200.000 vnđ</p>
                         </label>
-
                     </div>
 
+                    {/* Health Checking */}
                     <div className='PriceList-health'>
                         <label>
-                            <input type="checkbox" name='health' value='health'
-                                disabled={isNoneSelected}
+                            <input
+                                type="checkbox"
+                                name='health'
+                                value='health'
                                 onChange={handleOptionChange}
                             />
-                            <img src={health} alt="Professional Packing" />
+                            <img src={health} alt="Health Checking" />
                             <h4>Health Checking</h4>
                             <p>150.000 vnđ</p>
+                            <br />
+                            <br />
+                            <div className="PriceList-total">
+                                <h3>Total Services Price: {totalServicePrice.toLocaleString()} vnđ</h3>
+                            </div>
                         </label>
-
                     </div>
 
-
+                    {/* Delivery Insurance */}
                     <div className='PriceList-insurance'>
                         <label>
-                            <input type="checkbox" name='deliveryInsurance' value='deliveryInsurance'
-                                disabled={isNoneSelected}
+                            <input
+                                type="checkbox"
+                                name='deliveryInsurance'
+                                value='deliveryInsurance'
                                 onChange={handleOptionChange}
                             />
-                            <img src={deliveryInsurance} alt="Professional Packing" />
+                            <img src={deliveryInsurance} alt="Delivery Insurance" />
                             <h4>Delivery Insurance</h4>
                             <p>500.000 vnđ</p>
                         </label>
-
                     </div>
+
+
 
                 </div>
 
@@ -524,25 +550,31 @@ function PriceList() {
 
 
                     <div className="PriceList-Delivery">
-                        <div className='PriceList-standard-delivery'>
-                            <label>
-                                <input type="radio" name='Delivery' value='standardDelivery' />
-                                <img src={fastDelivery} alt="Standard Delivery" />
-                                <h4>Standard Delivery</h4>
-                                <p>300.000 vnđ</p>
-                            </label>
-
-                        </div>
-
-                        <div className='PriceList-fast-delivery'>
-                            <label>
-                                <input type="radio" name='Delivery' value='fastDelivery' />
-                                <img src={standardDelivery} alt="Fast Delivery" />
-                                <h4>Express Delivery</h4>
-                                <p>850.000 vnđ</p>
-                            </label>
-
-                        </div>
+                        {/* Lặp qua các phương thức giao hàng để hiển thị radio */}
+                       
+                        {deliveries.map(delivery => (
+                            <div key={delivery.deliveryid} className='PriceList-Delivery-map'>
+                                <label>
+                                    <input
+                                        type="radio"
+                                        name="Delivery"
+                                        value={delivery.deliveryid}
+                                        checked={delivery.isSelectedd}
+                                        onChange={() => handleDeliveryChange(delivery.deliveryid)}
+                                    />
+                                    <h4>{delivery.deliveryid === 'S1' ? 'Standard Delivery' : 'Express Delivery'}</h4>
+            
+                                    <p>{delivery.price.toLocaleString()} vnđ</p>
+                                </label>
+                            </div>
+                        ))}
+                        
+                        {/* Hiển thị tổng giá cho phương thức giao hàng đã chọn */}
+                        {totalDeliveryPrice > 0 && (
+                            <div className="PriceList-total">
+                                <h3>Total Delivery Price: {totalDeliveryPrice.toLocaleString()} vnđ</h3>
+                            </div>
+                        )}
                     </div>
 
 

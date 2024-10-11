@@ -7,7 +7,7 @@ import PaymentMethods from './Page/Payment-Methods/PaymentMethod';
 import Manager from './Page/Manager/Manager'
 import DeliveryTracking from './Page/View-Order-Tracking/ViewOrderTracking'
 import AddNewAccount from './Page/Add-new-account/Add-new-account'
-
+import DeliveryPriceList from './Page/Delivery-Price-List/DeliveryPriceList.jsx'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
         <Route path="/ForgotPass" element={<ForgotPassword />} />
         <Route path="/Payment" element={<PaymentMethods />} />
 
-        <Route path="/Manager" element={<Manager />} />
+        <Route path="/Manager" element={<DeliveryPriceList />} />
         <Route path="/DeliveryTracking" element={<DeliveryTracking />} />
         <Route path="/AddNewAccount" element={<AddNewAccount />} />
 
