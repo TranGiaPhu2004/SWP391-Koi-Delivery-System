@@ -13,69 +13,58 @@ const ManagerCustomer = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Hàm để lấy danh sách người dùng
     const fetchCustomers = async () => {
       try {
         const token = localStorage.getItem("token");
-
         const response = await fetch("http://localhost:8080/admin/allUser", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            // Authorization: `Bearer ${token}`,
+            //Authorization: `Bearer ${token}`,
           },
         });
 
         if (response.ok) {
           const data = await response.json();
-          setCustomers(data); // Cập nhật state với danh sách người dùng
+          setCustomers(data);
         } else if (response.status === 401) {
-          // Token không hợp lệ, điều hướng người dùng về trang đăng nhập
           navigate("/login");
         } else {
-          setError("Failed to fetch users.");
+          setError("Failed to fetch users. Please try again later.");
         }
       } catch (error) {
-        setError("Error fetching users. Please try again.");
+        setError("Error fetching users. Please check your network and try again.");
       }
     };
 
     fetchCustomers();
   }, [navigate]);
 
-  // Hàm để xóa người dùng
+  const deleteUser = async (id) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(`http://localhost:8080/users/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          //Authorization: `Bearer ${token}`,
+        },
+      });
 
-const deleteUser = async (id) => {
-  try {
-    const token = localStorage.getItem("token");
-    const response = await fetch(`http://localhost:8080/users/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        //Authorization: `Bearer ${token}`,
-      },
-    });
-
-    if (response.ok) {
-      const deletedUser = await response.json();
-      // Xóa người dùng thành công, cập nhật lại danh sách người dùng
-      setCustomers(customers.filter((customer) => customer.userID !== deletedUser.userID));
-      setError(""); // Xóa thông báo lỗi nếu có
-    } else {
-      setError("Failed to delete user.");
+      if (response.ok) {
+        setCustomers(customers.filter((customer) => customer.userID !== id));
+      } else {
+        setError("Failed to delete user.");
+      }
+    } catch (error) {
+      setError("Error deleting user. Please try again.");
     }
-  } catch (error) {
-    setError("Error deleting user. Please try again.");
-  }
-};
+  };
 
-
-  // Hàm mở form cập nhật với dữ liệu người dùng hiện tại
   const openUpdateForm = (customer) => {
     setSelectedUser(customer);
   };
 
-  // Hàm xử lý cập nhật người dùng
   const updateUser = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -85,7 +74,7 @@ const deleteUser = async (id) => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            // Authorization: `Bearer ${token}`,
+            //Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             username: selectedUser.username,
@@ -103,7 +92,7 @@ const deleteUser = async (id) => {
             customer.userID === updatedUser.userID ? updatedUser : customer
           )
         );
-        setSelectedUser(null); // Đóng form cập nhật
+        setSelectedUser(null);
       } else {
         setError("Failed to update user.");
       }
@@ -129,17 +118,13 @@ const deleteUser = async (id) => {
             <li className="ManagerCustomer-nav-item">Help</li>
           </ul>
         </nav>
-        <LogoutButton></LogoutButton>
+        <LogoutButton />
       </aside>
 
       <main className="ManagerCustomer-main-content">
         <header className="ManagerCustomer-header">
           <div className="ManagerCustomer-user-info">
-            <img
-              src={avatar}
-              alt="User Avatar"
-              className="ManagerCustomer-avatar"
-            />
+            <img src={avatar} alt="User Avatar" className="ManagerCustomer-avatar" />
             <div className="ManagerCustomer-user-details">
               <h3>Vũ Đức Mạnh</h3>
               <p>Manager</p>
@@ -147,17 +132,11 @@ const deleteUser = async (id) => {
           </div>
           <div className="ManagerCustomer-search-container">
             <input type="text" placeholder="Search..." />
-            <img
-              src={search}
-              alt="Search Icon"
-              className="ManagerCustomer-search-icon"
-            />
+            <img src={search} alt="Search Icon" className="ManagerCustomer-search-icon" />
           </div>
           <div className="ManagerCustomer-add-account">
             <Link to="/AddNewAccount">
-              <button className="ManagerCustomer-add-button">
-                + Add New Account
-              </button>
+              <button className="ManagerCustomer-add-button">+ Add New Account</button>
             </Link>
           </div>
         </header>
@@ -196,10 +175,7 @@ const deleteUser = async (id) => {
                 type="text"
                 value={selectedUser.phonecontact || ""}
                 onChange={(e) =>
-                  setSelectedUser({
-                    ...selectedUser,
-                    phonecontact: e.target.value,
-                  })
+                  setSelectedUser({ ...selectedUser, phonecontact: e.target.value })
                 }
                 placeholder="Phone"
               />
