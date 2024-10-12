@@ -44,27 +44,31 @@ const ManagerCustomer = () => {
   }, [navigate]);
 
   // Hàm để xóa người dùng
-  const deleteUser = async (id) => {
-    try {
-      const token = localStorage.getItem("token");
-      const response = await fetch(`http://localhost:8080/users/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          // Authorization: `Bearer ${token}`,
-        },
-      });
 
-      if (response.ok) {
-        // Xóa thành công, cập nhật lại danh sách người dùng
-        setCustomers(customers.filter((customer) => customer.userID !== id));
-      } else {
-        setError("Failed to delete user.");
-      }
-    } catch (error) {
-      setError("Error deleting user. Please try again.");
+const deleteUser = async (id) => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`http://localhost:8080/users/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        //Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (response.ok) {
+      const deletedUser = await response.json();
+      // Xóa người dùng thành công, cập nhật lại danh sách người dùng
+      setCustomers(customers.filter((customer) => customer.userID !== deletedUser.userID));
+      setError(""); // Xóa thông báo lỗi nếu có
+    } else {
+      setError("Failed to delete user.");
     }
-  };
+  } catch (error) {
+    setError("Error deleting user. Please try again.");
+  }
+};
+
 
   // Hàm mở form cập nhật với dữ liệu người dùng hiện tại
   const openUpdateForm = (customer) => {
