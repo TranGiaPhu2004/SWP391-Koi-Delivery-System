@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/users")
 @Tag(name = "User Controller")
+@CrossOrigin(origins = "http://localhost:5173") // Cho phép từ origin http://localhost:5173
 public class UserController {
 
     @Autowired
