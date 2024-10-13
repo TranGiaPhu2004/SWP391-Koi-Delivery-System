@@ -87,7 +87,7 @@ const ManagerCustomer = () => {
 
       if (response.ok) {
         const updatedUser = await response.json();
-        setCustomers(
+        setCustomers(customers =>
           customers.map((customer) =>
             customer.userID === updatedUser.userID ? updatedUser : customer
           )
