@@ -12,6 +12,15 @@ const ManagerCustomer = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const navigate = useNavigate();
 
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        
+        // Nếu không có token, điều hướng về trang đăng nhập
+        if (!token) {
+            navigate('/login', { replace: true });
+        }
+    }, [navigate]);
+
   useEffect(() => {
     // Hàm để lấy danh sách người dùng
     const fetchCustomers = async () => {
@@ -99,7 +108,9 @@ const ManagerCustomer = () => {
             customer.userID === updatedUser.userID ? updatedUser : customer
           )
         );
+        
         setSelectedUser(null); // Đóng form cập nhật
+        
       } else {
         setError("Failed to update user.");
       }
