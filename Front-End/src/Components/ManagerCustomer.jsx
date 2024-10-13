@@ -3,54 +3,55 @@ import logo from "../assets/image/Logo.png";
 import avatar from "../assets/image/avatar.png";
 import search from "../assets/image/search.png";
 import { Link, useNavigate } from "react-router-dom";
-import LogoutButton from '../Logout';
+import LogoutButton from "../Logout";
 import "./ManagerCustomer.css";
 
 const ManagerCustomer = () => {
   const [customers, setCustomers] = useState([]);
   const [error, setError] = useState("");
   const [selectedUser, setSelectedUser] = useState(null);
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        
-        // Nếu không có token, điều hướng về trang đăng nhập
-        if (!token) {
-            navigate('/login', { replace: true });
-        }
-    }, [navigate]);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    // Nếu không có token, điều hướng về trang đăng nhập
+    if (!token) {
+      navigate("/login", { replace: true });
+    }
+  }, [navigate]);
 
   useEffect(() => {
-    // Hàm để lấy danh sách người dùng
-    const fetchCustomers = async () => {
-      try {
-        const token = localStorage.getItem("token");
-
-        const response = await fetch("http://localhost:8080/admin/allUser", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            // Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          setCustomers(data); // Cập nhật state với danh sách người dùng
-        } else if (response.status === 401) {
-          // Token không hợp lệ, điều hướng người dùng về trang đăng nhập
-          navigate("/login");
-        } else {
-          setError("Failed to fetch users.");
-        }
-      } catch (error) {
-        setError("Error fetching users. Please try again.");
-      }
-    };
-
     fetchCustomers();
   }, [navigate]);
+
+  // Hàm để lấy danh sách người dùng
+  const fetchCustomers = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await fetch("http://localhost:8080/admin/allUser", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          // Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setCustomers(data); // Cập nhật state với danh sách người dùng
+      } else if (response.status === 401) {
+        // Token không hợp lệ, điều hướng người dùng về trang đăng nhập
+        navigate("/login");
+      } else {
+        setError("Failed to fetch users.");
+      }
+    } catch (error) {
+      setError("Error fetching users. Please try again.");
+    }
+  };
 
   // Hàm để xóa người dùng
   const deleteUser = async (id) => {
@@ -102,15 +103,9 @@ const ManagerCustomer = () => {
       );
 
       if (response.ok) {
-        const updatedUser = await response.json();
-        setCustomers(
-          customers.map((customer) =>
-            customer.userID === updatedUser.userID ? updatedUser : customer
-          )
-        );
-        
+        setMessage("Update successfully");
+        fetchCustomers();
         setSelectedUser(null); // Đóng form cập nhật
-        
       } else {
         setError("Failed to update user.");
       }
@@ -172,6 +167,7 @@ const ManagerCustomer = () => {
         <div className="ManagerCustomer-product-management">
           <h1>Customer Account Management</h1>
           {error && <p style={{ color: "red" }}>{error}</p>}
+          {message && <p style={{ color: "green" }}>{message}</p>}
           {selectedUser && (
             <div className="ManagerCustomer-update-form">
               <h2>Update User</h2>
