@@ -6,6 +6,7 @@ import com.example.demo.dto.response.UserResponseDTO;
 import com.example.demo.service.AuthService;
 import com.example.demo.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,7 @@ public class AdminController {
     private final UserService userService;
     private final AuthService authService;
 
+    @Autowired
     public AdminController(UserService userService, AuthService authService) {
         this.userService = userService;
         this.authService = authService;
@@ -31,7 +33,8 @@ public class AdminController {
     }
 
     @PostMapping("/employee")
-    public ResponseEntity<MsgResponseDTO> createEmployee(@RequestBody CreateEmployeeRequestDTO request) {
+    public ResponseEntity<MsgResponseDTO> createEmployee
+            (@RequestBody CreateEmployeeRequestDTO request) {
 
         MsgResponseDTO response = authService.createEmployee(request); // Gọi service
 

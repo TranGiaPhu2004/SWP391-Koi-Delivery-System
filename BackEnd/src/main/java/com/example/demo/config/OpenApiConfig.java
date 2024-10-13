@@ -17,8 +17,10 @@ public class OpenApiConfig {
         return new OpenAPI().info(new Info().title("SWP391 api")
                         .version("1.0")
                         .description("Koi delivery ordering sys")
-                        .license(new License().name("Api license").url("https://opensource.org/licenses/LICENSE-2.0.html")))
-                .servers(List.of(new Server().url("http://localhost:8080/").description("Server test")));
+                        .license(new License().name("Api license")
+                        .url("https://opensource.org/licenses/LICENSE-2.0.html")))
+                        .servers(List.of(new Server()
+                        .url("http://localhost:8080/").description("Server test")));
     }
 
     @Bean

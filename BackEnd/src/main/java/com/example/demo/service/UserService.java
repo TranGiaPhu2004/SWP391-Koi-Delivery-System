@@ -45,7 +45,7 @@ public class UserService {
         MsgResponseDTO msg = new MsgResponseDTO();
         if (user != null) {
             logger.info("Delete user id: " + id);
-            logger.info("Delete User "+id+" start");
+            logger.info("Delete User " + id + " start");
 //            xóa order mới xóa user
 //            orderRepository.deleteByUser(user);
             List<Order> orders = orderRepository.findByUser(user);

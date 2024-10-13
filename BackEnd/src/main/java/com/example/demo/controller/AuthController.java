@@ -40,7 +40,7 @@ public class AuthController {
         LoginResponseDTO response = authService.login(request); // Gọi phương thức login
         logger.info("Login method completed");
         if (response.getToken() != null) {
-            logger.info("Send token completed");// Tạo đối tượng phản hồi
+            logger.info("Send token completed"); // Tạo đối tượng phản hồi
             return ResponseEntity.ok(response); // Trả về token nếu đăng nhập thành công
         } else {
             logger.info("Login fail");
@@ -79,7 +79,7 @@ public class AuthController {
         RegisterResponseDTO response = new RegisterResponseDTO();
         response.setMsg(msg);
         logger.info("Register method completed");
-        if(msg.equals("User registered successfully")){
+        if (msg.equals("User registered successfully")) {
             return ResponseEntity.ok(response); // Code là 200
         }
         else {

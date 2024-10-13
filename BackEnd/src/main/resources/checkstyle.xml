@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+        "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+        "https://checkstyle.sourceforge.io/dtds/configuration_1_3.dtd">
+
+<module name="Checker">
+    <module name="TreeWalker">
+        <!-- Kiểm tra khoảng trắng sau dấu câu -->
+        <module name="WhitespaceAfter"/>
+
+        <!-- Kiểm tra khoảng trắng xung quanh các toán tử -->
+        <module name="WhitespaceAround"/>
+
+        <!-- Kiểm tra các import không sử dụng -->
+        <module name="UnusedImports"/>
+
+        <!-- Kiểm tra Magic Number -->
+        <module name="MagicNumber"/>
+
+<!--        &lt;!&ndash; Kiểm tra tên lớp &ndash;&gt;-->
+<!--        <module name="IllegalClassName">-->
+<!--            <property name="format" value="^[A-Z][a-zA-Z0-9]*$"/> &lt;!&ndash; Tên lớp phải bắt đầu bằng chữ hoa &ndash;&gt;-->
+<!--        </module>-->
+
+<!--        &lt;!&ndash; Kiểm tra tên phương thức &ndash;&gt;-->
+<!--        <module name="IllegalCatch">-->
+<!--            <property name="format" value="^([a-z][a-zA-Z0-9]*)$"/> &lt;!&ndash; Tên phương thức phải bắt đầu bằng chữ thường &ndash;&gt;-->
+<!--        </module>-->
+
+<!--        &lt;!&ndash; Kiểm tra tên biến &ndash;&gt;-->
+<!--        <module name="IllegalIdentifier">-->
+<!--            <property name="format" value="^([a-z][a-zA-Z0-9]*)$"/> &lt;!&ndash; Tên biến phải bắt đầu bằng chữ thường &ndash;&gt;-->
+<!--        </module>-->
+    </module>
+
+    <module name="FileLength">
+        <property name="max" value="1000"/> <!-- Giới hạn 1000 dòng -->
+    </module>
+</module>

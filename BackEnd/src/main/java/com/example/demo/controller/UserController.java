@@ -24,10 +24,10 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDTO> getUserById(@PathVariable Integer id) {
         UserResponseDTO user = userService.getUserById(id);
-        if(user == null) {
+        if (user == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        else{
+        else {
             return ResponseEntity.ok(user);
         }
     }
@@ -36,10 +36,10 @@ public class UserController {
     @DeleteMapping("/{id}")
     public ResponseEntity<MsgResponseDTO> deleteUserById( @PathVariable Integer id) {
         MsgResponseDTO response = userService.deleteUserById(id);
-        if(response.isSuccess()){
+        if (response.isSuccess()) {
             return ResponseEntity.ok(response);
         }
-        else{
+        else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
