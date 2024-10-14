@@ -31,11 +31,8 @@
   /* Đặt sidebar ở phía trái màn hình */
 }
 
-.ManagerCustomer-nav {
+.ManagerCustomer-nav-list {
   list-style-type: none;
-
-
-
 }
 
 .ManagerCustomer-nav-item:hover {
@@ -43,13 +40,20 @@
   transition: color 0.3s ease;
 }
 
-
 .ManagerCustomer-nav-item {
   color: #2B3D55;
   margin: 20px 0px 20px 10px;
   cursor: pointer;
   font-weight: 900;
-  font-size: larger;
+  font-size: large;
+}
+.ManagerCustomer-nav-item a {
+  color: #2B3D55;
+  text-decoration: none; /* Loại bỏ gạch chân */
+  display: block; /* Để dễ dàng kích hoạt toàn bộ khu vực */
+  margin: 20px 0px 20px 10px;
+  font-weight: 900;
+  font-size: large;
 }
 
 .ManagerCustomer-logout {
@@ -63,14 +67,13 @@
 }
 
 .ManagerCustomer-main-content {
-  /* padding: 20px; */
+  padding: 0;
   width: calc(100% - 250px);
   /* Đảm bảo rằng khung chính mở rộng */
   margin-left: 300px;
   /* Đẩy nội dung chính sang phải bằng với chiều rộng của sidebar */
   width: calc(100% - 300px);
-  /* Đảm bảo chiều rộng đúng */
-  margin-left: 300px;
+  height: 100vh;
 }
 
 .ManagerCustomer-header {
@@ -153,6 +156,7 @@
   padding: 10px;
   width: 99%;
   background-color: #2B3D55;
+  height: 100%;
 }
 
 .ManagerCustomer-product-management h1 {
