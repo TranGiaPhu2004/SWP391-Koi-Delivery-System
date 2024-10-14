@@ -16,7 +16,7 @@ public class OrderStatus {
     @Column(name = "Order_StatusID")
     private Integer orderStatusID;
 
-    @Column(name = "StatusName", length = 100)
+    @Column(name = "statusname", length = 100)
     private String statusName;
 
     @OneToMany(mappedBy = "orderStatus", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

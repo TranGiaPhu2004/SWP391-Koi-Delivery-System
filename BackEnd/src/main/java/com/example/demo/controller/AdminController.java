@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
-@Tag(name = "Admin Controller")
+@Tag(name = "Admin Controller (API của trang Admin)")
 public class AdminController {
     private final UserService userService;
     private final AuthService authService;

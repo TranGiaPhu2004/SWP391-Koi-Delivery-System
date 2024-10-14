@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping("/auth")
-@Tag(name = "Authentication Controller")
+@Tag(name = "Authentication Controller (API về xác thực)")
 public class AuthController {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);

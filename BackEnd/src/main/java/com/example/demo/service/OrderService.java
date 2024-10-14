@@ -65,6 +65,7 @@ public class OrderService {
         order.setDelivery(delivery);
         order.setPayment(savePayment); // Set the saved payment to the order
         order.setOrderDate(LocalDate.now());
+        order.setTotalPrice(request.getTotalPrice());
         // Save the order
         Order savedOrder = orderRepository.save(order);
 

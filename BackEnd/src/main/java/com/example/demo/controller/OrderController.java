@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/orders")
-@Tag(name = "Order Controller")
+@Tag(name = "Order Controller (API thực hiện CRUD)")
 public class OrderController {
     private final OrderService orderService;
 
