@@ -2,7 +2,9 @@ package com.example.demo.service;
 
 import com.example.demo.dto.request.BoxDTO;
 import com.example.demo.dto.request.OrderCreateRequestDTO;
+import com.example.demo.dto.response.AllOrderResponseDTO;
 import com.example.demo.dto.response.MsgResponseDTO;
+import com.example.demo.dto.response.OrderDTO;
 import com.example.demo.model.*;
 import com.example.demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class OrderService {
@@ -33,8 +37,6 @@ public class OrderService {
 
     @Autowired
     private IPaymentRepository paymentRepository;
-
-
 
 
     public MsgResponseDTO createOrder(OrderCreateRequestDTO request) {
@@ -81,5 +83,31 @@ public class OrderService {
         msg.setMsg("Order created successfully");
 
         return msg;
+    }
+
+    public AllOrderResponseDTO getAllOrders() {
+
+        AllOrderResponseDTO orderList = new AllOrderResponseDTO();
+        List<Order> orders = orderRepository.findAll();
+
+        if (orders.isEmpty()) {
+            orderList.setSuccess(Boolean.FALSE);
+            return orderList;
+        }
+
+        List<OrderDTO> orderDTOList = new ArrayList<>();
+        for (Order order : orders) {
+            OrderDTO allOrders = new OrderDTO();
+            allOrders.setOrderID(order.getOrderID());
+            allOrders.setOrderDate(order.getOrderDate());
+            allOrders.setStartPlace(order.getStartPlace());
+            allOrders.setEndPlace(order.getEndPlace());
+            allOrders.setTotalPrice(order.getTotalPrice());
+            allOrders.setCustomsImageLink(order.getCustomsImageLink());
+            orderDTOList.add(allOrders);
+        }
+        orderList.setSuccess(Boolean.TRUE);
+        orderList.setOrders(orderDTOList);
+        return orderList;
     }
 }
