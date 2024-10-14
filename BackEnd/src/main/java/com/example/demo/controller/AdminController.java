@@ -1,11 +1,14 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.request.CreateEmployeeRequestDTO;
+import com.example.demo.dto.response.AllOrderResponseDTO;
 import com.example.demo.dto.response.MsgResponseDTO;
 import com.example.demo.dto.response.UserResponseDTO;
 import com.example.demo.service.AuthService;
+import com.example.demo.service.OrderService;
 import com.example.demo.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,10 +20,12 @@ import java.util.List;
 public class AdminController {
     private final UserService userService;
     private final AuthService authService;
+    private final OrderService orderService;
 
-    public AdminController(UserService userService, AuthService authService) {
+    public AdminController(UserService userService, AuthService authService, OrderService orderService) {
         this.userService = userService;
         this.authService = authService;
+        this.orderService = orderService;
     }
 
     // Lấy tất cả người dùng
@@ -36,6 +41,17 @@ public class AdminController {
         MsgResponseDTO response = authService.createEmployee(request); // Gọi service
 
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/allOrder")
+    public ResponseEntity<AllOrderResponseDTO> getAllOrders() {
+        AllOrderResponseDTO response = orderService.getAllOrders();
+        if(response.isSuccess()){
+            return ResponseEntity.ok(response);
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 }
 
