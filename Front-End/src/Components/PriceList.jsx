@@ -7,145 +7,10 @@ import packaging from '../assets/image/packaging.png'
 import deliveryInsurance from '../assets/image/deliveryInsurance.png'
 import health from '../assets/image/health.png'
 
-import standardDelivery from '../assets/image/standardDelivery.png'
-import fastDelivery from '../assets/image/fastDelivery.png'
 import './PriceList.css'
 function PriceList() {
 
-    // const [count1, setCount1] = useState(0);
-    // const [count2, setCount2] = useState(0);
-    // const [count3, setCount3] = useState(0);
-
-
-    // const increment1 = () => {
-    //     setCount1((c) => c + 1);
-    // }
-    // const increment2 = () => {
-    //     setCount2((c) => c + 1);
-    // }
-    // const increment3 = () => {
-    //     setCount3((c) => c + 1);
-    // }
-    // const decrement1 = () => {
-    //     if (count1 > 0) {
-    //         setCount1((c) => c - 1);
-    //     } else {
-    //         alert('Sorry, you could not decrement when amount of boxes begin from Zero ...')
-    //     }
-    // }
-    // const decrement2 = () => {
-    //     if (count2 > 0) {
-    //         setCount2((c) => c - 1);
-    //     } else {
-    //         alert('Sorry, you could not decrement when amount of boxes begin from Zero ...')
-    //     }
-    // }
-    // const decrement3 = () => {
-    //     if (count3 > 0) {
-    //         setCount3((c) => c - 1);
-    //     } else {
-    //         alert('Sorry, you could not decrement when amount of boxes begin from Zero ...')
-    //     }
-    // }
-
-
-
-
-    // const handlePriceList = async (e) => {
-    //     e.preventDefault();
-
-    //     // Tính tổng giá của các hộp theo từng boxid
-    //     const totalBoxPrice = boxes.reduce((total, box) => {
-    //         return total + (box.price * box.quantity); // Tổng giá cho từng hộp
-    //     }, 0);
-
-    //     // Tính tổng giá của các dịch vụ đã chọn
-    //     const totalServicePrice = selectedServices.reduce((total, service) => {
-    //         return total + service.price; // Tổng giá dịch vụ = giá mỗi dịch vụ
-    //     }, 0);
-
-    //     // Lấy giá của phương thức giao hàng dựa trên deliveryID
-    //     const selectedDelivery = deliveries.find(delivery => delivery.id === deliveryID);
-
-    //     const totalDeliveryPrice = selectedDelivery ? selectedDelivery.price : 0; // Giá vận chuyển
-
-    //     // Tính tổng giá đơn hàng
-    //     const totalPrice = totalBoxPrice + totalServicePrice + totalDeliveryPrice; // Tổng giá
-
-
-    //     // Tạo đối tượng dữ liệu để gửi lên API
-    //     const priceListData = {
-    //         boxes: [
-    //             {
-    //                 boxid: boxid,
-    //                 price: price,
-    //                 quantity: quantity,
-    //             }
-
-    //         ],
-    //         serviceID: serviceID,
-    //         deliveryID: deliveryID,
-    //         totalPrice: totalPrice,
-    //     };
-
-    //     try {
-    //         // Gửi yêu cầu POST đến API
-    //         const response = await fetch("http://localhost:8080/orders/create", {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify(priceListData),
-    //         });
-
-    //         // Kiểm tra phản hồi từ API
-    //         if (response.ok) {
-    //             const data = await response.json();
-    //             // Lưu token vào localStorage hoặc sessionStorage
-    //             localStorage.setItem("token", data.token);
-    //         }
-
-    //     } catch (error) {
-    //         setErrorMessage("Error logging in");
-    //     }
-
-    // };
-
-    // Hàm lấy dữ liệu từ database khi component được render
-
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             // Lấy danh sách các hộp từ database
-    //             const boxesResponse = await fetch('/api/boxes');
-    //             const boxesData = await boxesResponse.json();
-    //             setBoxes(boxesData); // Lưu danh sách hộp vào state
-
-    //             // Lấy danh sách dịch vụ đã chọn
-    //             const servicesResponse = await fetch('/api/services');
-    //             const servicesData = await servicesResponse.json();
-    //             setSelectedServices(servicesData); // Lưu danh sách dịch vụ vào state
-
-    //             // Lấy danh sách phương thức giao hàng
-    //             const deliveriesResponse = await fetch('/api/deliveries');
-    //             const deliveriesData = await deliveriesResponse.json();
-    //             setDeliveries(deliveriesData); // Lưu danh sách phương thức giao hàng vào state
-
-    //             // Cập nhật phương thức giao hàng mặc định (ví dụ chọn cái đầu tiên)
-    //             if (deliveriesData.length > 0) {
-    //                 setDeliveryID(deliveriesData[0].id); // Chọn phương thức giao hàng đầu tiên
-    //             }
-
-    //             setLoading(false); // Hoàn tất việc tải dữ liệu
-    //         } catch (error) {
-    //             console.error('Error fetching data:', error);
-    //             setLoading(false); // Nếu có lỗi vẫn phải dừng loading
-    //         }
-    //     };
-
-    //     fetchData(); // Gọi hàm fetchData để tải dữ liệu
-    // }, []); // Mảng rỗng [] đảm bảo useEffect chỉ chạy một lần khi component được mount
-
+    
 
     const [boxes, setBoxes] = useState([
         { boxid: 'S01', quantity: 0, price: 400000 },
@@ -182,6 +47,7 @@ function PriceList() {
                     : { ...delivery, isSelectedd: false }
             )
         );
+        
     };
 
 
@@ -197,6 +63,46 @@ function PriceList() {
             )
         );
     };
+
+    
+    const [totalPrice, setTotalPrice] = useState(0);
+    const [orderID, setOrderID] = useState(0); // Giả sử bạn có `orderID` từ trước
+
+    const handleSubmit = async () => {
+        const requestData = {
+            orderID: orderID,
+            boxes: [
+                {
+                    boxid: 1, // Thay thế với ID box thực tế
+                    quantity: quantity
+                },
+                
+            ],
+            serviceID: 1, // Thay thế với ID service thực tế nếu có
+            deliveryID: 1, // Thay thế với ID delivery thực tế nếu có
+            totalPrice: 1000
+        };
+
+        try {
+            const response = await fetch('http://localhost:8080/orders/create', {
+                method: 'POST', // Hoặc 'PUT' tùy theo API của bạn
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData),
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                console.log('Cập nhật thành công:', result);
+            } else {
+                console.error('Lỗi khi cập nhật:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Lỗi khi gửi yêu cầu:', error);
+        }
+    };
+
 
     // Hàm để giảm số lượng theo boxID
     const decrementQuantity = (boxid) => {
@@ -240,26 +146,7 @@ function PriceList() {
 
 
     const handlePriceList = (e) => {
-        // e.preventDefault();
-
-        // // Tính tổng giá của các hộp theo từng boxid
-        // const totalBoxPrice = boxes.reduce((total, box) => {
-        //     return total + (box.price * box.quantity); // Tổng giá cho từng hộp
-        // }, 0);
-
-        // // Tính tổng giá của các dịch vụ đã chọn
-        // const totalServicePrice = selectedServices.reduce((total, service) => {
-        //     return total + service.price; // Tổng giá dịch vụ = giá mỗi dịch vụ
-        // }, 0);
-
-        // // Lấy giá của phương thức giao hàng dựa trên deliveryID
-        // const selectedDelivery = deliveries.find(delivery => delivery.id === deliveryID);
-        // const totalDeliveryPrice = selectedDelivery ? selectedDelivery.price : 0; // Giá vận chuyển
-
-        // // Tính tổng giá đơn hàng
-        // const totalPrice = totalBoxPrice + totalServicePrice + totalDeliveryPrice; // Tổng giá
-
-        // Tạo đối tượng dữ liệu để gửi lên API
+       
         const priceListData = {
             boxes: boxes.map((box) => ({
                 boxid: box.boxid,
@@ -274,52 +161,6 @@ function PriceList() {
         console.log('Total Price:', totalPrice);
     };
 
-    // const [orderID, setOrderID] = useState('');
-    // const CreateOrder = () => {
-    //     const [response, setResponse] = useState(null);
-
-    //     const createOrder = async () => {
-    //         const orderData = {
-    //             orderID: orderID,
-    //             boxes: [
-    //                 {
-    //                     boxid: 1,
-    //                     quantity: 3
-    //                 },
-    //                 {
-    //                     boxid: 3,
-    //                     quantity: 5
-    //                 }
-    //             ],
-    //             serviceID: 1,
-    //             deliveryID: 2,
-    //             totalPrice: 10000
-    //         };
-
-    //         try {
-    //             const res = await fetch('http://localhost:8080/orders/create', {
-    //                 method: 'POST',
-    //                 headers: {
-    //                     'Content-Type': 'application/json',
-    //                     'Authorization': 'Bearer YOUR_AUTH_TOKEN', // Nếu cần token cho xác thực
-    //                 },
-    //                 body: JSON.stringify(orderData),
-    //             });
-
-    //             const data = await res.json();
-    //             setResponse(data);
-    //         } catch (error) {
-    //             console.error('Error:', error);
-    //         }
-    //     };
-    // }
-
-
-    
-
-    // if (loading) {
-    //     return <div>Loading data...</div>; // Hiển thị khi dữ liệu đang được tải
-    // }
 
     const boxS01 = boxes.find((box) => box.boxid === 'S01');
 
@@ -331,7 +172,7 @@ function PriceList() {
 
     return (
         <>
-        <form></form>
+        
             <div className="PriceList-main-priceList">
                 <p>🚚Koi Delivery Service Price List🎏</p>
 
@@ -619,7 +460,10 @@ function PriceList() {
 
                     <Link to='/Payment'>
                         <div className="PriceList-buttonn">
-                            <button type='submit'>Order Completion</button>
+                        <div>
+            {/* Giao diện lựa chọn quantity và tính toán totalPrice */}
+            <button onClick={handleSubmit}>Complete Order</button>
+        </div>
                         </div>
                     </Link>
 
