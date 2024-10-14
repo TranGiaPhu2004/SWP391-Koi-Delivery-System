@@ -8,11 +8,13 @@ import ArrowDown from '../assets/image/arrow-down.svg';
 import ArrowUp from '../assets/image/arrow-up.svg';
 import './ManagerOrder.css';
 import LogoutButton from "../Logout";
+import { Link, useNavigate } from "react-router-dom";
 
 const ManagerOrder = () => {
   const [orders, setOrders] = useState([]);
   const [expandedOrder, setExpandedOrder] = useState(null); // Trạng thái để theo dõi đơn hàng nào đang được mở rộng
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Hàm để lấy danh sách đơn hàng từ API
@@ -54,9 +56,15 @@ const ManagerOrder = () => {
         </div>
         <nav className="ManagerOrder-nav">
           <ul className="ManagerOrder-nav-list">
-            <li className="ManagerOrder-nav-item">Account Management</li>
-            <li className="ManagerOrder-nav-item">Price Management</li>
-            <li className="ManagerOrder-nav-item">Order Management</li>
+            <li className="ManagerOrder-nav-item"><Link to="/Manager">
+            Account Management
+      </Link></li>
+            <li className="ManagerOrder-nav-item"><Link to="/PriceManager">
+            Price Manager
+      </Link></li>
+            <li className="ManagerOrder-nav-item"><Link to="/ManagerOrder">
+            Order Manager
+      </Link></li>
             <li className="ManagerOrder-nav-item">Notification</li>
             <li className="ManagerOrder-nav-item">Settings</li>
             <li className="ManagerOrder-nav-item">Account</li>

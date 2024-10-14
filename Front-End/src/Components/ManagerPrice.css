@@ -29,7 +29,7 @@
     left: 0; /* Đặt sidebar ở phía trái màn hình */
   }
   
-  .ManagerPrice-nav {
+  .ManagerPrice-nav-list {
     list-style-type: none;
    
     
@@ -47,7 +47,16 @@
     margin: 20px 0px 20px 10px;
     cursor: pointer;
     font-weight: 900;
-    font-size: larger;
+    font-size: large;
+  }
+
+  .ManagerPrice-nav-item a {
+    color: #2B3D55;
+    text-decoration: none; /* Loại bỏ gạch chân */
+    display: block; /* Để dễ dàng kích hoạt toàn bộ khu vực */
+    margin: 20px 0px 20px 10px;
+    font-weight: 900;
+    font-size: large;
   }
   
   .ManagerPrice-logout {
@@ -61,11 +70,10 @@
   }
   
   .ManagerPrice-main-content {
-    /* padding: 20px; */
+    padding: 0;
     width: calc(100% - 250px); 
     margin-left: 300px; /* Đẩy nội dung chính sang phải bằng với chiều rộng của sidebar */
     width: calc(100% - 300px); 
-    margin-left: 300px;
     height: 100vh;
   }
   

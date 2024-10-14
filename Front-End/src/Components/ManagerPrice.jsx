@@ -4,13 +4,17 @@ import search from '../assets/image/search.png'
 import EditIcon from '../assets/image/edit.svg';
 import './ManagerPrice.css';
 import LogoutButton from "../Logout";
+import { Link, useNavigate } from "react-router-dom";
 
 const ManagerPrice = () => {
+  const navigate = useNavigate();
+
   const customers = [
     { id: 1, name: 'Small Box', price: '100k', status: 'Active' },
     { id: 2, name: 'Medium Box', price: '200k', status: 'Inactive' },
     { id: 3, name: 'Large Box', price: '500k', status: 'Active' },
     { id: 4, name: 'Service', price: '500k', status: 'Active' },
+    
   ];
 
   return (
@@ -21,9 +25,15 @@ const ManagerPrice = () => {
         </div>
           <nav className="ManagerPrice-nav">
             <ul className="ManagerPrice-nav-list">
-              <li className="ManagerPrice-nav-item">Account Management</li>
-              <li className="ManagerPrice-nav-item">Price Management</li>
-              <li className="ManagerPrice-nav-item">Order Management</li>
+              <li className="ManagerPrice-nav-item"><Link to="/Manager">
+            Account Management
+      </Link></li>
+              <li className="ManagerPrice-nav-item"><Link to="/PriceManager">
+            Price Manager
+      </Link></li>
+              <li className="ManagerPrice-nav-item"><Link to="/ManagerOrder">
+            Order Manager
+      </Link></li>
               <li className="ManagerPrice-nav-item">Notification</li>
               <li className="ManagerPrice-nav-item">Settings</li>
               <li className="ManagerPrice-nav-item">Account</li>
