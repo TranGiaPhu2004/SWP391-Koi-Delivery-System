@@ -26,7 +26,7 @@ function Header() {
         <nav className='Home-nav'>
           <a href="/">Home</a>
           <a href="/services">Services</a>
-          <a href="/about">About Us</a>
+          <a href="/PriceList">PriceList</a>
           <a href="/contact">Contact</a>
           <a href="/news">News</a>
         </nav>
