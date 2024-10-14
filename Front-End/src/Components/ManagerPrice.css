@@ -199,6 +199,9 @@
   text-align: center; /* Căn giữa các nút trong cột */
   }
   
+  .ManagerPrice-btn-update img{
+    width: 10%;
+  }
   /* CSS cho các nút Update và Delete */
   .ManagerPrice-btn-update{
     padding: 5px 10px;

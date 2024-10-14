@@ -3,6 +3,7 @@ import avatar from '../assets/image/avatar.png'
 import search from '../assets/image/search.png'
 import EditIcon from '../assets/image/edit.svg';
 import './ManagerPrice.css';
+import LogoutButton from "../Logout";
 
 const ManagerPrice = () => {
   const customers = [
@@ -29,7 +30,7 @@ const ManagerPrice = () => {
               <li className="ManagerPrice-nav-item">Help</li>
              </ul>
           </nav>
-        <button className="ManagerPrice-logout">Logout</button>
+        <LogoutButton></LogoutButton>
       </aside>
 
       <main className="ManagerPrice-main-content">

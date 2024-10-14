@@ -8,6 +8,8 @@ import Manager from './Page/Manager/Manager'
 import DeliveryTracking from './Page/View-Order-Tracking/ViewOrderTracking'
 import AddNewAccount from './Page/Add-new-account/Add-new-account'
 import DeliveryPriceList from './Page/Delivery-Price-List/DeliveryPriceList.jsx'
+import ManagerPrice from './Components/ManagerPrice.jsx';
+import ManagerOrder from './Components/ManagerOrder.jsx';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 function App() {
   return (
@@ -19,7 +21,8 @@ function App() {
         <Route path="/Register" element={<Register />} />
         <Route path="/ForgotPass" element={<ForgotPassword />} />
         <Route path="/Payment" element={<PaymentMethods />} />
-
+        <Route path="/PriceManager" element={<ManagerPrice />} />
+        <Route path="/ManagerOrder" element={<ManagerOrder />} />
         <Route path="/Manager" element={<Manager />} />
         <Route path="/DeliveryTracking" element={<DeliveryTracking />} />
         <Route path="/AddNewAccount" element={<AddNewAccount />} />

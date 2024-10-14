@@ -123,8 +123,12 @@ const ManagerCustomer = () => {
         <nav className="ManagerCustomer-nav">
           <ul className="ManagerCustomer-nav-list">
             <li className="ManagerCustomer-nav-item">Account Management</li>
-            <li className="ManagerCustomer-nav-item">Price Management</li>
-            <li className="ManagerCustomer-nav-item">Order Management</li>
+            <li className="ManagerCustomer-nav-item"><Link to="/PriceManager">
+        Price Manager
+      </Link></li>
+            <li className="ManagerCustomer-nav-item"><Link to="/ManagerOrder">
+        Order Manager
+      </Link></li>
             <li className="ManagerCustomer-nav-item">Notification</li>
             <li className="ManagerCustomer-nav-item">Settings</li>
             <li className="ManagerCustomer-nav-item">Account</li>
