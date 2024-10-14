@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Tag(name = "Health Check Controller")
+@Tag(name = "Health Check Controller (Kiểm tra server)")
 public class HealthCheckController {
 
     private static final Logger logger = LoggerFactory.getLogger(HealthCheckController.class);
