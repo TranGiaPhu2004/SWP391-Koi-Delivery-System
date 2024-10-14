@@ -37,6 +37,10 @@
     color: #ff4b5c;
     transition: color 0.3s ease;
   }
+  .ManagerOrder-nav-item:hover a {
+    color: #ff4b5c; /* Màu chữ khi hover */
+    transition: color 0.3s ease; /* Hiệu ứng chuyển màu */
+  }
   
   
   .ManagerOrder-nav-item {

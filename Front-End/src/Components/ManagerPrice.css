@@ -30,15 +30,17 @@
   }
   
   .ManagerPrice-nav-list {
-    list-style-type: none;
-   
-    
-    
+    list-style-type: none; 
   }
   
   .ManagerPrice-nav-item:hover {
     color: #ff4b5c;
     transition: color 0.3s ease;
+  }
+
+  .ManagerPrice-nav-item:hover a {
+    color: #ff4b5c; /* Màu chữ khi hover */
+    transition: color 0.3s ease; /* Hiệu ứng chuyển màu */
   }
   
   

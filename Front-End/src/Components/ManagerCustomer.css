@@ -40,6 +40,11 @@
   transition: color 0.3s ease;
 }
 
+.ManagerCustomer-nav-item:hover a {
+  color: #ff4b5c; /* Màu chữ khi hover */
+  transition: color 0.3s ease; /* Hiệu ứng chuyển màu */
+}
+
 .ManagerCustomer-nav-item {
   color: #2B3D55;
   margin: 20px 0px 20px 10px;
