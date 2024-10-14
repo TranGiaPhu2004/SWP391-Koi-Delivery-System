@@ -27,16 +27,5 @@ public class OrderController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/allOrder")
-    public ResponseEntity<AllOrderResponseDTO> getAllOrders() {
-        AllOrderResponseDTO response = orderService.getAllOrders();
-        if(response.isSuccess()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        else {
-            return ResponseEntity.ok(response);
-        }
-    }
-
 }
 
