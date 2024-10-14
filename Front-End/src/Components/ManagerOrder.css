@@ -234,3 +234,12 @@
     background-color: #da190b;
     /* Màu đậm hơn khi hover */
   }
+
+  .ManagerOrder-customs-image {
+    width: 150px; /* hoặc giá trị bạn muốn */
+    height: auto; /* Để giữ tỷ lệ của ảnh */
+    max-height: 100px; /* Giới hạn chiều cao tối đa nếu cần */
+    object-fit: cover; /* Giữ tỷ lệ ảnh và cắt phần thừa nếu cần */
+    border-radius: 8px; /* Tạo góc bo tròn nếu muốn */
+  }
+  
