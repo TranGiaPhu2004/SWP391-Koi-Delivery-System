@@ -173,7 +173,7 @@ function PriceList() {
     ]);
 
 
-    // Hàm xử lý khi chọn phương thức giao hàng
+    // Hàm xử lý khi chọn "PHƯƠNG THỨC GIAO HÀNG"
     const handleDeliveryChange = (deliveryid) => {
         setDeliveries(prevDeliveries =>
             prevDeliveries.map(delivery =>
@@ -198,7 +198,7 @@ function PriceList() {
         );
     };
 
-    // Hàm để giảm số lượng
+    // Hàm để giảm số lượng theo boxID
     const decrementQuantity = (boxid) => {
         setBoxes(prevBoxes =>
             prevBoxes.map(box =>
@@ -240,24 +240,24 @@ function PriceList() {
 
 
     const handlePriceList = (e) => {
-        e.preventDefault();
+        // e.preventDefault();
 
-        // Tính tổng giá của các hộp theo từng boxid
-        const totalBoxPrice = boxes.reduce((total, box) => {
-            return total + (box.price * box.quantity); // Tổng giá cho từng hộp
-        }, 0);
+        // // Tính tổng giá của các hộp theo từng boxid
+        // const totalBoxPrice = boxes.reduce((total, box) => {
+        //     return total + (box.price * box.quantity); // Tổng giá cho từng hộp
+        // }, 0);
 
-        // Tính tổng giá của các dịch vụ đã chọn
-        const totalServicePrice = selectedServices.reduce((total, service) => {
-            return total + service.price; // Tổng giá dịch vụ = giá mỗi dịch vụ
-        }, 0);
+        // // Tính tổng giá của các dịch vụ đã chọn
+        // const totalServicePrice = selectedServices.reduce((total, service) => {
+        //     return total + service.price; // Tổng giá dịch vụ = giá mỗi dịch vụ
+        // }, 0);
 
-        // Lấy giá của phương thức giao hàng dựa trên deliveryID
-        const selectedDelivery = deliveries.find(delivery => delivery.id === deliveryID);
-        const totalDeliveryPrice = selectedDelivery ? selectedDelivery.price : 0; // Giá vận chuyển
+        // // Lấy giá của phương thức giao hàng dựa trên deliveryID
+        // const selectedDelivery = deliveries.find(delivery => delivery.id === deliveryID);
+        // const totalDeliveryPrice = selectedDelivery ? selectedDelivery.price : 0; // Giá vận chuyển
 
-        // Tính tổng giá đơn hàng
-        const totalPrice = totalBoxPrice + totalServicePrice + totalDeliveryPrice; // Tổng giá
+        // // Tính tổng giá đơn hàng
+        // const totalPrice = totalBoxPrice + totalServicePrice + totalDeliveryPrice; // Tổng giá
 
         // Tạo đối tượng dữ liệu để gửi lên API
         const priceListData = {
@@ -274,10 +274,48 @@ function PriceList() {
         console.log('Total Price:', totalPrice);
     };
 
+    // const [orderID, setOrderID] = useState('');
+    // const CreateOrder = () => {
+    //     const [response, setResponse] = useState(null);
+
+    //     const createOrder = async () => {
+    //         const orderData = {
+    //             orderID: orderID,
+    //             boxes: [
+    //                 {
+    //                     boxid: 1,
+    //                     quantity: 3
+    //                 },
+    //                 {
+    //                     boxid: 3,
+    //                     quantity: 5
+    //                 }
+    //             ],
+    //             serviceID: 1,
+    //             deliveryID: 2,
+    //             totalPrice: 10000
+    //         };
+
+    //         try {
+    //             const res = await fetch('http://localhost:8080/orders/create', {
+    //                 method: 'POST',
+    //                 headers: {
+    //                     'Content-Type': 'application/json',
+    //                     'Authorization': 'Bearer YOUR_AUTH_TOKEN', // Nếu cần token cho xác thực
+    //                 },
+    //                 body: JSON.stringify(orderData),
+    //             });
+
+    //             const data = await res.json();
+    //             setResponse(data);
+    //         } catch (error) {
+    //             console.error('Error:', error);
+    //         }
+    //     };
+    // }
 
 
-
-
+    
 
     // if (loading) {
     //     return <div>Loading data...</div>; // Hiển thị khi dữ liệu đang được tải
@@ -293,6 +331,7 @@ function PriceList() {
 
     return (
         <>
+        <form></form>
             <div className="PriceList-main-priceList">
                 <p>🚚Koi Delivery Service Price List🎏</p>
 
@@ -551,7 +590,7 @@ function PriceList() {
 
                     <div className="PriceList-Delivery">
                         {/* Lặp qua các phương thức giao hàng để hiển thị radio */}
-                       
+
                         {deliveries.map(delivery => (
                             <div key={delivery.deliveryid} className='PriceList-Delivery-map'>
                                 <label>
@@ -563,12 +602,12 @@ function PriceList() {
                                         onChange={() => handleDeliveryChange(delivery.deliveryid)}
                                     />
                                     <h4>{delivery.deliveryid === 'S1' ? 'Standard Delivery' : 'Express Delivery'}</h4>
-            
+
                                     <p>{delivery.price.toLocaleString()} vnđ</p>
                                 </label>
                             </div>
                         ))}
-                        
+
                         {/* Hiển thị tổng giá cho phương thức giao hàng đã chọn */}
                         {totalDeliveryPrice > 0 && (
                             <div className="PriceList-total">
