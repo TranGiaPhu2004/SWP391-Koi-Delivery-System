@@ -1,0 +1,17 @@
+.TYFP-Container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.TYPM{
+    display: flex;
+    padding-left: 10%;
+    margin-right: 10%;
+    justify-content: center;
+    align-items: center;
+}
+.btnReturn{
+    background-color: red;
+}
