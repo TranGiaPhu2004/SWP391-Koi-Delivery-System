@@ -12,139 +12,139 @@ import fastDelivery from '../assets/image/fastDelivery.png'
 import './PriceList.css'
 function PriceList() {
 
-    // const [count1, setCount1] = useState(0);
-    // const [count2, setCount2] = useState(0);
-    // const [count3, setCount3] = useState(0);
+    const [count1, setCount1] = useState(0);
+    const [count2, setCount2] = useState(0);
+    const [count3, setCount3] = useState(0);
 
 
-    // const increment1 = () => {
-    //     setCount1((c) => c + 1);
-    // }
-    // const increment2 = () => {
-    //     setCount2((c) => c + 1);
-    // }
-    // const increment3 = () => {
-    //     setCount3((c) => c + 1);
-    // }
-    // const decrement1 = () => {
-    //     if (count1 > 0) {
-    //         setCount1((c) => c - 1);
-    //     } else {
-    //         alert('Sorry, you could not decrement when amount of boxes begin from Zero ...')
-    //     }
-    // }
-    // const decrement2 = () => {
-    //     if (count2 > 0) {
-    //         setCount2((c) => c - 1);
-    //     } else {
-    //         alert('Sorry, you could not decrement when amount of boxes begin from Zero ...')
-    //     }
-    // }
-    // const decrement3 = () => {
-    //     if (count3 > 0) {
-    //         setCount3((c) => c - 1);
-    //     } else {
-    //         alert('Sorry, you could not decrement when amount of boxes begin from Zero ...')
-    //     }
-    // }
+    const increment1 = () => {
+        setCount1((c) => c + 1);
+    }
+    const increment2 = () => {
+        setCount2((c) => c + 1);
+    }
+    const increment3 = () => {
+        setCount3((c) => c + 1);
+    }
+    const decrement1 = () => {
+        if (count1 > 0) {
+            setCount1((c) => c - 1);
+        } else {
+            alert('Sorry, you could not decrement when amount of boxes begin from Zero ...')
+        }
+    }
+    const decrement2 = () => {
+        if (count2 > 0) {
+            setCount2((c) => c - 1);
+        } else {
+            alert('Sorry, you could not decrement when amount of boxes begin from Zero ...')
+        }
+    }
+    const decrement3 = () => {
+        if (count3 > 0) {
+            setCount3((c) => c - 1);
+        } else {
+            alert('Sorry, you could not decrement when amount of boxes begin from Zero ...')
+        }
+    }
 
 
 
 
-    // const handlePriceList = async (e) => {
-    //     e.preventDefault();
+    const handlePriceList = async (e) => {
+        e.preventDefault();
 
-    //     // Tính tổng giá của các hộp theo từng boxid
-    //     const totalBoxPrice = boxes.reduce((total, box) => {
-    //         return total + (box.price * box.quantity); // Tổng giá cho từng hộp
-    //     }, 0);
+        // Tính tổng giá của các hộp theo từng boxid
+        const totalBoxPrice = boxes.reduce((total, box) => {
+            return total + (box.price * box.quantity); // Tổng giá cho từng hộp
+        }, 0);
 
-    //     // Tính tổng giá của các dịch vụ đã chọn
-    //     const totalServicePrice = selectedServices.reduce((total, service) => {
-    //         return total + service.price; // Tổng giá dịch vụ = giá mỗi dịch vụ
-    //     }, 0);
+        // Tính tổng giá của các dịch vụ đã chọn
+        const totalServicePrice = selectedServices.reduce((total, service) => {
+            return total + service.price; // Tổng giá dịch vụ = giá mỗi dịch vụ
+        }, 0);
 
-    //     // Lấy giá của phương thức giao hàng dựa trên deliveryID
-    //     const selectedDelivery = deliveries.find(delivery => delivery.id === deliveryID);
+        // Lấy giá của phương thức giao hàng dựa trên deliveryID
+        const selectedDelivery = deliveries.find(delivery => delivery.id === deliveryID);
 
-    //     const totalDeliveryPrice = selectedDelivery ? selectedDelivery.price : 0; // Giá vận chuyển
+        const totalDeliveryPrice = selectedDelivery ? selectedDelivery.price : 0; // Giá vận chuyển
 
-    //     // Tính tổng giá đơn hàng
-    //     const totalPrice = totalBoxPrice + totalServicePrice + totalDeliveryPrice; // Tổng giá
+        // Tính tổng giá đơn hàng
+        const totalPrice = totalBoxPrice + totalServicePrice + totalDeliveryPrice; // Tổng giá
 
 
-    //     // Tạo đối tượng dữ liệu để gửi lên API
-    //     const priceListData = {
-    //         boxes: [
-    //             {
-    //                 boxid: boxid,
-    //                 price: price,
-    //                 quantity: quantity,
-    //             }
+        // Tạo đối tượng dữ liệu để gửi lên API
+        const priceListData = {
+            boxes: [
+                {
+                    boxid: boxid,
+                    price: price,
+                    quantity: quantity,
+                }
 
-    //         ],
-    //         serviceID: serviceID,
-    //         deliveryID: deliveryID,
-    //         totalPrice: totalPrice,
-    //     };
+            ],
+            serviceID: serviceID,
+            deliveryID: deliveryID,
+            totalPrice: totalPrice,
+        };
 
-    //     try {
-    //         // Gửi yêu cầu POST đến API
-    //         const response = await fetch("http://localhost:8080/orders/create", {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify(priceListData),
-    //         });
+        try {
+            // Gửi yêu cầu POST đến API
+            const response = await fetch("http://localhost:8080/orders/create", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(priceListData),
+            });
 
-    //         // Kiểm tra phản hồi từ API
-    //         if (response.ok) {
-    //             const data = await response.json();
-    //             // Lưu token vào localStorage hoặc sessionStorage
-    //             localStorage.setItem("token", data.token);
-    //         }
+            // Kiểm tra phản hồi từ API
+            if (response.ok) {
+                const data = await response.json();
+                // Lưu token vào localStorage hoặc sessionStorage
+                localStorage.setItem("token", data.token);
+            }
 
-    //     } catch (error) {
-    //         setErrorMessage("Error logging in");
-    //     }
+        } catch (error) {
+            setErrorMessage("Error logging in");
+        }
 
-    // };
+    };
 
-    // Hàm lấy dữ liệu từ database khi component được render
+    //Hàm lấy dữ liệu từ database khi component được render
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             // Lấy danh sách các hộp từ database
-    //             const boxesResponse = await fetch('/api/boxes');
-    //             const boxesData = await boxesResponse.json();
-    //             setBoxes(boxesData); // Lưu danh sách hộp vào state
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                // Lấy danh sách các hộp từ database
+                const boxesResponse = await fetch('/api/boxes');
+                const boxesData = await boxesResponse.json();
+                setBoxes(boxesData); // Lưu danh sách hộp vào state
 
-    //             // Lấy danh sách dịch vụ đã chọn
-    //             const servicesResponse = await fetch('/api/services');
-    //             const servicesData = await servicesResponse.json();
-    //             setSelectedServices(servicesData); // Lưu danh sách dịch vụ vào state
+                // Lấy danh sách dịch vụ đã chọn
+                const servicesResponse = await fetch('/api/services');
+                const servicesData = await servicesResponse.json();
+                setSelectedServices(servicesData); // Lưu danh sách dịch vụ vào state
 
-    //             // Lấy danh sách phương thức giao hàng
-    //             const deliveriesResponse = await fetch('/api/deliveries');
-    //             const deliveriesData = await deliveriesResponse.json();
-    //             setDeliveries(deliveriesData); // Lưu danh sách phương thức giao hàng vào state
+                // Lấy danh sách phương thức giao hàng
+                const deliveriesResponse = await fetch('/api/deliveries');
+                const deliveriesData = await deliveriesResponse.json();
+                setDeliveries(deliveriesData); // Lưu danh sách phương thức giao hàng vào state
 
-    //             // Cập nhật phương thức giao hàng mặc định (ví dụ chọn cái đầu tiên)
-    //             if (deliveriesData.length > 0) {
-    //                 setDeliveryID(deliveriesData[0].id); // Chọn phương thức giao hàng đầu tiên
-    //             }
+                // Cập nhật phương thức giao hàng mặc định (ví dụ chọn cái đầu tiên)
+                if (deliveriesData.length > 0) {
+                    setDeliveryID(deliveriesData[0].id); // Chọn phương thức giao hàng đầu tiên
+                }
 
-    //             setLoading(false); // Hoàn tất việc tải dữ liệu
-    //         } catch (error) {
-    //             console.error('Error fetching data:', error);
-    //             setLoading(false); // Nếu có lỗi vẫn phải dừng loading
-    //         }
-    //     };
+                setLoading(false); // Hoàn tất việc tải dữ liệu
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                setLoading(false); // Nếu có lỗi vẫn phải dừng loading
+            }
+        };
 
-    //     fetchData(); // Gọi hàm fetchData để tải dữ liệu
-    // }, []); // Mảng rỗng [] đảm bảo useEffect chỉ chạy một lần khi component được mount
+        fetchData(); // Gọi hàm fetchData để tải dữ liệu
+    }, []); // Mảng rỗng [] đảm bảo useEffect chỉ chạy một lần khi component được mount
 
 
     const [boxes, setBoxes] = useState([
@@ -152,7 +152,7 @@ function PriceList() {
         { boxid: 'S02', quantity: 0, price: 700000 },
         { boxid: 'S03', quantity: 0, price: 1200000 }
     ]);
-    // const [boxes, setBoxes] = useState([]); // Chuyển về mảng để có thể sử dụng reduce
+    //const [boxes, setBoxes] = useState([]); // Chuyển về mảng để có thể sử dụng reduce
     const [boxid, setBoxid] = useState('');
     const [quantity, setQuantity] = useState(0); // Thay đổi thành số để dễ tính toán
     const [selectedServices, setSelectedServices] = useState({
@@ -239,40 +239,40 @@ function PriceList() {
     };
 
 
-    const handlePriceList = (e) => {
-        // e.preventDefault();
+    // const handlePriceList = (e) => {
+    //     e.preventDefault();
 
-        // // Tính tổng giá của các hộp theo từng boxid
-        // const totalBoxPrice = boxes.reduce((total, box) => {
-        //     return total + (box.price * box.quantity); // Tổng giá cho từng hộp
-        // }, 0);
+    //     // Tính tổng giá của các hộp theo từng boxid
+    //     const totalBoxPrice = boxes.reduce((total, box) => {
+    //         return total + (box.price * box.quantity); // Tổng giá cho từng hộp
+    //     }, 0);
 
-        // // Tính tổng giá của các dịch vụ đã chọn
-        // const totalServicePrice = selectedServices.reduce((total, service) => {
-        //     return total + service.price; // Tổng giá dịch vụ = giá mỗi dịch vụ
-        // }, 0);
+    //     // Tính tổng giá của các dịch vụ đã chọn
+    //     const totalServicePrice = selectedServices.reduce((total, service) => {
+    //         return total + service.price; // Tổng giá dịch vụ = giá mỗi dịch vụ
+    //     }, 0);
 
-        // // Lấy giá của phương thức giao hàng dựa trên deliveryID
-        // const selectedDelivery = deliveries.find(delivery => delivery.id === deliveryID);
-        // const totalDeliveryPrice = selectedDelivery ? selectedDelivery.price : 0; // Giá vận chuyển
+    //     // Lấy giá của phương thức giao hàng dựa trên deliveryID
+    //     const selectedDelivery = deliveries.find(delivery => delivery.id === deliveryID);
+    //     const totalDeliveryPrice = selectedDelivery ? selectedDelivery.price : 0; // Giá vận chuyển
 
-        // // Tính tổng giá đơn hàng
-        // const totalPrice = totalBoxPrice + totalServicePrice + totalDeliveryPrice; // Tổng giá
+    //     // Tính tổng giá đơn hàng
+    //     const totalPrice = totalBoxPrice + totalServicePrice + totalDeliveryPrice; // Tổng giá
 
-        // Tạo đối tượng dữ liệu để gửi lên API
-        const priceListData = {
-            boxes: boxes.map((box) => ({
-                boxid: box.boxid,
-                quantity: box.quantity,
-            })),
-            serviceID: selectedServices.map(service => service.serviceID),
-            deliveryID: deliveryID,
-            totalPrice: totalPrice,
-        };
+    //     // Tạo đối tượng dữ liệu để gửi lên API
+    //     const priceListData = {
+    //         boxes: boxes.map((box) => ({
+    //             boxid: box.boxid,
+    //             quantity: box.quantity,
+    //         })),
+    //         serviceID: selectedServices.map(service => service.serviceID),
+    //         deliveryID: deliveryID,
+    //         totalPrice: totalPrice,
+    //     };
 
-        console.log('Price List Data:', priceListData);
-        console.log('Total Price:', totalPrice);
-    };
+    //     console.log('Price List Data:', priceListData);
+    //     console.log('Total Price:', totalPrice);
+    // };
 
     // const [orderID, setOrderID] = useState('');
     // const CreateOrder = () => {
@@ -321,11 +321,11 @@ function PriceList() {
     //     return <div>Loading data...</div>; // Hiển thị khi dữ liệu đang được tải
     // }
 
-    const boxS01 = boxes.find((box) => box.boxid === 'S01');
+    // const boxS01 = boxes.find((box) => box.boxid === 'S01');
 
-    const boxS02 = boxes.find((box) => box.boxid === 'S02');
+    // const boxS02 = boxes.find((box) => box.boxid === 'S02');
 
-    const boxS03 = boxes.find((box) => box.boxid === 'S03');
+    // const boxS03 = boxes.find((box) => box.boxid === 'S03');
 
 
 
