@@ -73,7 +73,7 @@
     width: 167%;
 }
 
-.HeaderOrderDelete-list ul {
+.HeaderOrderDelete-list {
     display: flex;
     justify-content: center;
     flex-direction: row;

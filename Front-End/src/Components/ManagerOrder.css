@@ -147,6 +147,8 @@
   .ManagerOrder-order-management h1 {
     margin-bottom: 20px;
     margin-top: 5px;
+    color: #F9F9F9;
+    font-family: 'Courier New', Courier, monospace;
   }
    
   .ManagerOrder-order-table {

@@ -1,6 +1,6 @@
 
 
-import './HeaderOrderDelete.css'; // CSS file for header styling
+import './HeaderOrderDelete.css'; 
 
 import pic from '../assets/image/KoiExpress.png'
 import user from '../assets/image/user.png'
@@ -28,7 +28,7 @@ function HeaderOrderDelete() {
                     <li><a href="/about">About us</a></li>
                     <li><a href="/">Home</a></li>
                     <li><a href="/services">Services</a></li>
-                    <li><a href="/tracking">Delivery Tracking</a></li>
+                    <li><a href="/DeliveryTracking">Order Tracking</a></li>
                     <li><a href="/contact">Contact</a></li>
                     <li><a href="/news">News</a></li>
                 </ul>

@@ -1,7 +1,5 @@
 
 
-
-
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import pickoi1 from '../assets/image/pickoi1.png'
@@ -211,7 +209,7 @@ function PriceList() {
                 </div>
             </div>
 
-            <div className="PriceList-BoxChoosing">
+            <div className="PriceList-Servicess">
                 <div className="PriceList-paymentmethods">
                     Services
                 </div>
@@ -273,10 +271,48 @@ function PriceList() {
 
                 </div>
 
-                <div className="PriceList-BoxChoosing">
-                    <div className="PriceList-paymentmethods">
-                        Delivery Categories
+                <div className='PriceList-Informationnn'>
+                    <div className="PriceList-DeliveryAddress">
+                        <div className='PriceList-form'>
+                            <h3>Delivery Information Form</h3>
+
+                            <div className='PriceList-input'>
+                                <label htmlFor="pickupPoint">Pick-up</label>
+                                <textarea type="text" id="pickupPoint" name="pickupPoint" placeholder="From" />
+                            </div>
+                            <div className='PriceList-input'>
+                                <label htmlFor="deliveryPoint">Destination</label>
+                                <textarea type="text" id="deliveryPoint" name="deliveryPoint" placeholder="To" />
+                                
+                            </div>
+                        </div>
                     </div>
+
+                    <div className="PriceList-DeliveryTypes">
+                        <div className="PriceList-paymentmethodss">
+                            Delivery Categories
+                        </div>
+                        <div className="PriceList-line"></div>
+                        <div className="PriceList-message">
+                            🚚Customer is our Core Priority🚚 <br></br>
+                            We could not step in operation process smoothly <br></br>without you❤️
+                        </div>
+
+                        <div className="PriceList-Delivery">
+                            <div className='PriceList-Delivery-map'>
+                                <label>
+                                    <input type="radio" name="Delivery" />
+                                    <h4>Standard Delivery</h4>
+                                    <p>300.000 vnđ</p>
+                                </label>
+                            </div>
+                            <div className='PriceList-Delivery-map'>
+                                <label>
+                                    <input type="radio" name="Delivery" />
+                                    <h4>Express Delivery</h4>
+                                    <p>850.000 vnđ</p>
+                                </label>
+                            </div>
 
                     <div className="PriceList-message">
                         🚚Customer is our Core Priority🚚 <br></br>
@@ -315,13 +351,15 @@ function PriceList() {
 
                     </div>
 
-                    <Link to='/view'>
-                        <div className="PriceList-buttonn">
-                            <button type='submit'>Order Completion</button>
-                        </div>
-                    </Link>
+        
 
                 </div>
+
+                <Link to='/view'>
+                    <div className="PriceList-buttonn">
+                        <button type='submit'>Order Completion</button>
+                    </div>
+                </Link>
 
             </div>
 
