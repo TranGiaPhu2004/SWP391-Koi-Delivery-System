@@ -7,6 +7,7 @@ import PaymentMethods from './Page/Payment-Methods/PaymentMethod';
 import Manager from './Page/Manager/Manager'
 import DeliveryTracking from './Page/View-Order-Tracking/ViewOrderTracking'
 import AddNewAccount from './Page/Add-new-account/Add-new-account'
+import DeliveryStatus from './Page/Delivery-Status/DeliveryStatus.jsx';
 import DeliveryPriceList from './Page/Delivery-Price-List/DeliveryPriceList.jsx'
 import PriceList from './Components/PriceList.jsx';
 import ManagerPrice from './Components/ManagerPrice.jsx';
@@ -25,6 +26,7 @@ function App() {
         <Route path="/PriceManager" element={<ManagerPrice />} />
         <Route path="/ManagerOrder" element={<ManagerOrder />} />
         <Route path="/Manager" element={<Manager />} />
+        <Route path="/DeliveryStatus" element={<DeliveryStatus />} />
         <Route path="/PriceList" element={<PriceList />} />
         <Route path="/DeliveryTracking" element={<DeliveryTracking />} />
         <Route path="/AddNewAccount" element={<AddNewAccount />} />

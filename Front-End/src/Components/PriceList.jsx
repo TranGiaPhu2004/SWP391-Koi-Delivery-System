@@ -1,4 +1,5 @@
 
+
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import pickoi1 from '../assets/image/pickoi1.png'
@@ -270,8 +271,6 @@ function PriceList() {
 
                 </div>
 
-
-
                 <div className='PriceList-Informationnn'>
                     <div className="PriceList-DeliveryAddress">
                         <div className='PriceList-form'>
@@ -314,9 +313,45 @@ function PriceList() {
                                     <p>850.000 vnđ</p>
                                 </label>
                             </div>
-                        </div>
+
+                    <div className="PriceList-message">
+                        🚚Customer is our Core Priority🚚 <br></br>
+                        We could not step in operation process smoothly without you❤️
                     </div>
 
+                    <div className="PriceList-Delivery">
+
+                        <div className='PriceList-Delivery-map'>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="Delivery"
+
+                                />
+                                <h4>Standard Delivery</h4>
+
+                                <p>300.000 vnđ</p>
+                            </label>
+                        </div>
+
+                        <div className='PriceList-Delivery-map'>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="Delivery"
+
+                                />
+                                <h4>Express Delivery</h4>
+
+                                <p>850.000 vnđ</p>
+                            </label>
+                        </div>
+
+
+
+                    </div>
+
+        
 
                 </div>
 
