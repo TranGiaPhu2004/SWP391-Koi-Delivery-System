@@ -48,7 +48,7 @@ function LoginHeaderMethod() {
           navigate("/Payment");
         }
         else if (data.role === "Delivery Staff") {
-          navigate("/DeliveryTracking");
+          navigate("/DeliveryStatus");
         }
       } else {
         setErrorMessage("Invalid username or password");
