@@ -20,6 +20,7 @@
     font-family: monospace;
     color: #ff1d58;
     font-weight: 800;
+    white-space: nowrap;
 }
 
 .PriceList-BoxChoosing {
@@ -189,6 +190,12 @@
 .PriceList-amount2 .PriceList-amount2-button,
 .PriceList-amount3 .PriceList-amount3-button {
     margin-top: -30px;
+}
+
+.PriceList-amount1-button .PriceList-button,
+.PriceList-amount2-button .PriceList-button,
+.PriceList-amount3-button .PriceList-button {
+    margin-top: 20px;
 }
 
 .PriceList-amount1 .decrement-button1 {
