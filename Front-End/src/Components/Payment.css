@@ -1,17 +1,16 @@
 .Payment-main {
+    width: 100%;
     max-width: 100vw;
 }
 
 .Payment-header {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    text-align: center;
     padding: 15px 20px;
     background-color: #fff;
-    width: 165%;
-    margin-left: -12%;
-    
+    width: 100%;
+    max-width: 100vw;
     /*  max-width: 100vw : Đảm bảo header không vượt quá chiều rộng màn hình */
     box-sizing: border-box;
     margin-bottom: 20px;
@@ -27,13 +26,14 @@
 .Payment-koi-logo {
     height: 80px;
     margin-right: 20px;
+    border-radius: 30px;
 }
 
 
 .Payment-express-logo {
     display: flex;
     align-items: center;
-    
+    margin-left: 55%;
 }
 
 .Payment-express-logo img {
@@ -50,13 +50,12 @@
 .Payment-user-actions {
     display: flex;
     box-sizing: border-box;
-   
+    margin-left: 50%;
 }
 
 .Payment-user-icon,
 .Payment-cart-icon {
     height: 30px;
-    margin-right: 5%;
 }
 
 .Payment-user-icon,
@@ -74,7 +73,7 @@
     width: 167%;
 }
 
-.Payment-list ul {
+.Payment-list {
     display: flex;
     justify-content: center;
     flex-direction: row;

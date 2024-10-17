@@ -55,6 +55,13 @@ const ManagerCustomer = () => {
 
   // Hàm để xóa người dùng
   const deleteUser = async (id) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this user?"
+    );
+    if (!confirmDelete) {
+      return; // Người dùng đã hủy việc xóa
+    }
+
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(`http://localhost:8080/users/${id}`, {
@@ -103,7 +110,7 @@ const ManagerCustomer = () => {
       );
 
       if (response.ok) {
-        setMessage("Update successfully");
+        
         fetchCustomers();
         setSelectedUser(null); // Đóng form cập nhật
       } else {
@@ -122,15 +129,15 @@ const ManagerCustomer = () => {
         </div>
         <nav className="ManagerCustomer-nav">
           <ul className="ManagerCustomer-nav-list">
-            <li className="ManagerCustomer-nav-item"><Link to="/Manager">
-            Account Management
-      </Link></li>
-            <li className="ManagerCustomer-nav-item"><Link to="/PriceManager">
-        Price Manager
-      </Link></li>
-            <li className="ManagerCustomer-nav-item"><Link to="/ManagerOrder">
-        Order Manager
-      </Link></li>
+            <li className="ManagerCustomer-nav-item">
+              <Link to="/Manager">Account Management</Link>
+            </li>
+            <li className="ManagerCustomer-nav-item">
+              <Link to="/PriceManager">Price Manager</Link>
+            </li>
+            <li className="ManagerCustomer-nav-item">
+              <Link to="/ManagerOrder">Order Manager</Link>
+            </li>
             <li className="ManagerCustomer-nav-item">Notification</li>
             <li className="ManagerCustomer-nav-item">Settings</li>
             <li className="ManagerCustomer-nav-item">Account</li>

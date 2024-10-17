@@ -11,6 +11,7 @@
     border-bottom: 2px dashed #a28089;
     width: 70%;
     margin-left: 14%;
+
 }
 
 .PriceList-main-priceList p {
@@ -19,6 +20,7 @@
     font-family: monospace;
     color: #ff1d58;
     font-weight: 800;
+    white-space: nowrap;
 }
 
 .PriceList-BoxChoosing {
@@ -30,11 +32,11 @@
 .PriceList-paymentmethods {
     text-align: center;
     margin-left: 37%;
-    font-size: 40px;
+    font-size: 30px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     width: 30%;
-    padding: 15px 15px;
-    margin-top: 10px;
+    padding: 20px 20px;
+    margin-top: -20px;
     border-bottom: 1px solid black;
     color: #3D3D74;
     font-weight: 800;
@@ -45,12 +47,11 @@
     color: coral;
     text-align: center;
     margin-left: 27%;
-    font-size: 17px;
+    font-size: 15px;
     font-family: monospace;
     width: 50%;
     margin-top: 20px;
     font-weight: bolder;
-
 
 }
 
@@ -74,7 +75,7 @@
     display: flex;
     flex-direction: row;
     column-gap: 80px;
-    margin-left: 30px;
+    margin-left: 5%;
 }
 
 .PriceList-pic-koi1,
@@ -103,7 +104,7 @@
 .PriceList-pic-koi2 img,
 .PriceList-pic-koi3 img {
     width: 70%;
-    height: 70%;
+    height: 30%;
 }
 
 .PriceList-pic1 {
@@ -185,6 +186,18 @@
     column-gap: 10px;
 }
 
+.PriceList-amount1 .PriceList-amount1-button,
+.PriceList-amount2 .PriceList-amount2-button,
+.PriceList-amount3 .PriceList-amount3-button {
+    margin-top: -30px;
+}
+
+.PriceList-amount1-button .PriceList-button,
+.PriceList-amount2-button .PriceList-button,
+.PriceList-amount3-button .PriceList-button {
+    margin-top: 20px;
+}
+
 .PriceList-amount1 .decrement-button1 {
     transition: filter 0.3s ease;
     background-color: rgb(243, 146, 146);
@@ -226,12 +239,10 @@
     font-family: cursive;
 }
 
-
 .PriceList-amount3 .PriceList-count3 {
     background: antiquewhite;
     font-family: cursive;
 }
-
 
 
 .PriceList-amount2 {
@@ -239,7 +250,6 @@
     flex-direction: row;
     gap: 5px;
 }
-
 
 .PriceList-amount2 .decrement-button2 {
     transition: filter 0.3s ease;
@@ -255,7 +265,6 @@
     filter: none;
     cursor: pointer;
 }
-
 
 .PriceList-amount3 {
     margin-left: 16px;
@@ -281,11 +290,21 @@
 }
 
 
-
 .PriceList-button {
     color: red;
     background-color: antiquewhite;
     font-family: 'Courier New', Courier, monospace;
+
+}
+
+
+.PriceList-button:hover {
+    transform: scale(1.2);
+    border: none;
+}
+
+.PriceList-button:active {
+    outline: none;
 }
 
 .PriceList-order-information {
@@ -329,7 +348,6 @@
     font-weight: 800;
     font-size: 30px;
     border-bottom: 3px solid white;
-
 }
 
 .PriceList-order-details .line {
@@ -339,12 +357,10 @@
 
 }
 
-
 .PriceList-order-details button {
     width: 100%;
     font-family: 'Courier New', Courier, monospace;
 }
-
 
 .PriceList-payment-button {
     background-color: #3D3D74;
@@ -396,7 +412,48 @@
     align-items: center;
     margin-top: 2%;
     margin-left: -9%;
-    margin-top: 50px;
+
+}
+
+.PriceList-DeliveryTypes {
+    display: flex;
+    flex-direction: column;
+    column-gap: 30px;
+    text-align: center;
+    align-items: center;
+    margin-top: 7%;
+}
+
+.PriceList-DeliveryTypes .PriceList-paymentmethodss {
+    text-align: center;
+    
+    font-size: 30px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    width: 30%;
+    padding: 20px 20px;
+    margin-top: -20px;
+    margin-left: -9%;
+    color: #3D3D74;
+    font-weight: 800;
+}
+
+.PriceList-line {
+    width: 100%;
+    border: 1px solid black;
+    margin-left: 32%;
+    
+}
+
+.PriceList-DeliveryTypes .PriceList-message {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    margin-right: -10%;
+}
+
+.PriceList-DeliveryTypes .PriceList-Delivery {
+    margin-right: 3%;
 }
 
 
@@ -424,7 +481,6 @@
     margin-left: 8%;
 }
 
-
 .PriceList-package label,
 .PriceList-temperatureControl label,
 .PriceList-health label,
@@ -437,17 +493,15 @@
 
 }
 
-
 .PriceList-package img,
 .PriceList-health img,
 .PriceList-insurance img {
-    width: 38%;
+    width: 20%;
     /* Small but sharp */
     height: auto;
     border-radius: 10px;
     margin-top: 5px;
 }
-
 
 .PriceList-package p,
 .PriceList-temperatureControl p,
@@ -459,7 +513,6 @@
     font-weight: 800;
 }
 
-
 .PriceList-package h4,
 .PriceList-temperatureControl h4,
 .PriceList-health h4,
@@ -468,17 +521,12 @@
     font-size: 17px;
 }
 
-.PriceList-temperatureControl img {
-    width: 38%;
-}
-
-
 .PriceList-Delivery {
-   display: flex;
-   flex-direction: row;
-   margin-left: 40%;
-   margin-top: 2%;
-   column-gap: 140px;
+    display: flex;
+    flex-direction: row;
+    margin-left: 40%;
+    margin-top: 2%;
+    column-gap: 140px;
 }
 
 .PriceList-Delivery-map {
@@ -494,7 +542,6 @@
     text-align: center;
 }
 
-
 .PriceList-standard-delivery label,
 .PriceList-fast-delivery label {
     display: flex;
@@ -506,12 +553,12 @@
 .PriceList-fast-delivery img {
     width: 18%;
     /* Small image size */
-    /* height: auto;
+/* height: auto;
 } */
 
 .PriceList-fast-delivery {
     margin-left: -30%;
-} */
+}
 
 .PriceList-standard-delivery p,
 .PriceList-fast-delivery p {
@@ -520,7 +567,6 @@
     color: #3D3D74;
     font-weight: 800;
 }
-
 
 .PriceList-buttonn {
     background-color: #fff;
@@ -540,3 +586,73 @@
     transform: scale(1.1);
 }
 
+.PriceList-DeliveryAddress {
+    margin-top: 5%;
+    margin-left: 10%;
+    
+}
+
+.PriceList-DeliveryAddress .PriceList-form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    row-gap: 20px;
+    background-color: rgb(220, 219, 219);
+    width: 420px;
+    height: 340px;
+    white-space: nowrap;
+    padding: 20px 20px;
+    border-radius: 20px;
+}
+
+
+.PriceList-Informationnn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    white-space: nowrap;
+    margin-left: -10%;
+    width: 100%;
+}
+
+.PriceList-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.PriceList-input textarea {
+    width: 70%;
+    height: 80%;
+    border-radius: 10px;
+    border-style: none;
+    padding: 10px 10px;
+    box-sizing: border-box;
+    display: flex;
+   
+}
+
+.PriceList-input textarea::placeholder {
+    font-family: cursive;
+}
+
+.PriceList-form h3 {
+    padding: 10px 10px;
+    font-size: 23px;
+    
+    color: #3D3D74;
+    font-weight: 700;
+
+    border-bottom: 1px solid #fff;
+}
+
+.PriceList-form h3,
+.PriceList-input label {
+    text-align: center;
+}
+
+.PriceList-input label {
+    font-size: 20px;
+    font-family: monospace;
+    
+}

@@ -1,5 +1,6 @@
 package com.example.demo.dto.request;
 
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 public class OrderCreateRequestDTO implements Serializable {
     private Integer orderID;
+    private String startPlace;
+    private String endPlace;
     private List<BoxDTO> boxes;
     private Integer serviceID;
     private Integer deliveryID;

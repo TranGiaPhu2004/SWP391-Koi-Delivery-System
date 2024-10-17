@@ -61,6 +61,8 @@ public class OrderService {
         // Create a new Order entity
         Order order = new Order();
         // Lưu field của order
+        order.setStartPlace(request.getStartPlace());
+        order.setEndPlace(request.getEndPlace());
         order.setServices(services);
         order.setDelivery(delivery);
         order.setPayment(savePayment); // Set the saved payment to the order
