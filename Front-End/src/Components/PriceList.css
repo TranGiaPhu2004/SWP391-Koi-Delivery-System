@@ -203,25 +203,16 @@
     background-color: rgb(243, 146, 146);
 }
 
-.PriceList-amount1 .decrement-button1.blurred {
-    filter: blur(0);
-    cursor: not-allowed;
-}
 
-.PriceList-amount1 .decrement-button1.active {
-    filter: none;
-    cursor: pointer;
-}
-
-.PriceList-amount1 .increment-button1 {
+.PriceList-amount1 .PriceList-increment-button1 {
     background-color: rgb(148, 227, 148);
 }
 
-.PriceList-amount2 .increment-button2 {
+.PriceList-amount2 .PriceList-increment-button2 {
     background-color: rgb(148, 227, 148);
 }
 
-.PriceList-amount3 .increment-button3 {
+.PriceList-amount3 .PriceList-increment-button3 {
     background-color: rgb(148, 227, 148);
 }
 
@@ -582,9 +573,6 @@
     margin-left: 12px;
 }
 
-.PriceList-buttonn button:hover {
-    transform: scale(1.1);
-}
 
 .PriceList-DeliveryAddress {
     margin-top: 5%;
