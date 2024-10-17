@@ -1,0 +1,33 @@
+.Home-Customer-content{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: white; /* Tùy chỉnh màu nền */
+    z-index: 1000; /* Đảm bảo header luôn ở trên cùng */
+}
+.Home-Customer-nav{
+    position: fixed; /* Đảm bảo navbar luôn ở trên cùng, ngay cả khi bạn cuộn */
+    top: 0;
+    right: 0;
+    padding: 10px;
+    background-color: white; /* Tùy chọn: màu nền */
+    z-index: 1000; /* Đảm bảo navbar ở trên các thành phần khác */
+    margin-right: 40%;
+    margin-top: 30px;
+}
+.Home-Customer-nav a {
+    margin: 0 10px; /* Tùy chỉnh giá trị 10px theo ý bạn */
+    color: black;
+  }
+.Home-Customer-Avatar {
+    width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  right: 40px;
+  }
+
+
+
