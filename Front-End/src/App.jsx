@@ -25,7 +25,7 @@ function App() {
         <Route path="/Payment" element={<PaymentMethods />} />
         <Route path="/PriceManager" element={<ManagerPrice />} />
         <Route path="/ManagerOrder" element={<ManagerOrder />} />
-        <Route path="/Manager" element={<Manager />} />
+        <Route path="/Manager" element={<DeliveryPriceList />} />
         <Route path="/DeliveryStatus" element={<DeliveryStatus />} />
         <Route path="/PriceList" element={<PriceList />} />
         <Route path="/DeliveryTracking" element={<DeliveryTracking />} />

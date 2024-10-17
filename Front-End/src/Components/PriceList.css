@@ -432,7 +432,6 @@
     width: 30%;
     padding: 20px 20px;
     margin-top: -20px;
-    margin-left: -9%;
     color: #3D3D74;
     font-weight: 800;
 }
@@ -441,6 +440,7 @@
     width: 100%;
     border: 1px solid black;
     margin-left: 32%;
+    opacity: 0.5;
     
 }
 
