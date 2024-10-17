@@ -75,7 +75,7 @@
     width: 167%;
 }
 
-.HeaderDeliveryStatus-list ul {
+.HeaderDeliveryStatus-list  {
     display: flex;
     justify-content: center;
     flex-direction: row;
