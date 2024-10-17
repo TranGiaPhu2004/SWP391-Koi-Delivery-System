@@ -25,8 +25,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable) // Disable CSRF for simplicity in token-based auth
+                .cors(AbstractHttpConfigurer::disable) // Disable CORS
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/**").permitAll()
 //                        .requestMatchers("/test").permitAll()
 //                        .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/test/admin").hasAuthority("Admin")
