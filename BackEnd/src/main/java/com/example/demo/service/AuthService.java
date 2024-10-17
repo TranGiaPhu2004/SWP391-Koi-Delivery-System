@@ -122,11 +122,13 @@ public class AuthService {
         if (userRepository.existsByUsername(request.getUsername())) {
             logger.info("Username Exist");
             msg.setMsg("Username already taken.");
+            msg.setSuccess(Boolean.FALSE);
             return msg;
         }
         if (userRepository.existsByEmail(request.getEmail())) {
             logger.info("Email Exist");
             msg.setMsg("Email already taken.");
+            msg.setSuccess(Boolean.FALSE);
             return msg;
         }
 
@@ -146,6 +148,7 @@ public class AuthService {
         userRepository.save(user);
         logger.info("Save to DB success");
         msg.setMsg("Create Employee successfully");
+        msg.setSuccess(Boolean.TRUE);
         return msg;
     }
 }

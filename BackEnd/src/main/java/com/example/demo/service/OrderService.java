@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderService {
@@ -25,6 +26,9 @@ public class OrderService {
 
     @Autowired
     private IOrderRepository orderRepository;
+
+    @Autowired
+    private IOrderStatusRepository orderStatusRepository;
 
     @Autowired
     private IContainRepository containRepository;
@@ -112,5 +116,31 @@ public class OrderService {
         orderList.setSuccess(Boolean.TRUE);
         orderList.setOrders(orderDTOList);
         return orderList;
+    }
+
+    public MsgResponseDTO updateOrderStatus(Integer orderID, Integer statusID) {
+
+        MsgResponseDTO msg = new MsgResponseDTO();
+        Optional<Order> orders = orderRepository.findById(orderID);
+        Optional<OrderStatus> orderStatus = orderStatusRepository.findById(statusID);
+        if (orders.isPresent() && orderStatus.isPresent()) {
+            Order order = orders.get();
+            if (order.getOrderStatus().equals(orderStatus.get())) {
+                msg.setMsg("Order status is the same");
+                msg.setSuccess(Boolean.FALSE);
+                return msg;
+            }
+            order.setOrderStatus(orderStatus.get());
+            orderRepository.save(order);
+            msg.setMsg("Order status updated successfully");
+            msg.setSuccess(Boolean.TRUE);
+            return msg;
+        }
+        else {
+            msg.setMsg("Order not found OR Order Status not found");
+            msg.setSuccess(Boolean.FALSE);
+            return msg;
+        }
+
     }
 }

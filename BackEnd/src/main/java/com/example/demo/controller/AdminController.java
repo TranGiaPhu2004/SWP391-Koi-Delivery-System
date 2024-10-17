@@ -39,17 +39,19 @@ public class AdminController {
     public ResponseEntity<MsgResponseDTO> createEmployee(@RequestBody CreateEmployeeRequestDTO request) {
 
         MsgResponseDTO response = authService.createEmployee(request); // Gọi service
-
-        return ResponseEntity.ok(response);
+        if (response.isSuccess()) {
+            return ResponseEntity.ok(response); //200
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response); //401
+        }
     }
 
     @GetMapping("/allOrder")
     public ResponseEntity<AllOrderResponseDTO> getAllOrders() {
         AllOrderResponseDTO response = orderService.getAllOrders();
-        if(response.isSuccess()){
+        if (response.isSuccess()) {
             return ResponseEntity.ok(response);
-        }
-        else {
+        } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }

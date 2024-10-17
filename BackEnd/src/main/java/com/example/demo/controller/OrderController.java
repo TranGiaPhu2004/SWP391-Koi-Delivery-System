@@ -27,5 +27,16 @@ public class OrderController {
         return ResponseEntity.ok(response);
     }
 
+    @PutMapping("/{orderID}/status/{statusID}")
+    public ResponseEntity<MsgResponseDTO> updateOrderStatus(@PathVariable Integer orderID, @PathVariable Integer statusID) {
+        MsgResponseDTO response = orderService.updateOrderStatus(orderID, statusID);
+        if (response.isSuccess()){
+            return ResponseEntity.ok(response);
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
+        }
+    }
+
 }
 
