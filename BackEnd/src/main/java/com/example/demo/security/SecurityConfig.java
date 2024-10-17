@@ -26,14 +26,16 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable) // Disable CSRF for simplicity in token-based auth
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/auth/login/username").permitAll()
-                        .requestMatchers("/auth/login/email").permitAll()
+                        .requestMatchers("/auth/**").permitAll()
 //                        .requestMatchers("/test").permitAll()
 //                        .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/test/admin").hasAuthority("Admin")
                         .requestMatchers("/test/customer").hasAuthority("Customer")
                         .requestMatchers("/test/whoami").permitAll()
                         .requestMatchers("/test","/swagger-ui/**","/v3/api-docs/**").permitAll()
+                        .requestMatchers("/admin/**").hasAuthority("Admin")
+                        .requestMatchers("/orders/**").hasAuthority("Customter")
+                        .requestMatchers("/users/**").hasAuthority("Customer")
                         .anyRequest().authenticated()) // All other routes require authentication
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class); // Add JWT filter
 
