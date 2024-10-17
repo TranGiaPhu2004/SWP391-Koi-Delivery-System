@@ -12,8 +12,10 @@ import DeliveryPriceList from "./Page/Delivery-Price-List/DeliveryPriceList.jsx"
 import PriceList from "./Components/PriceList.jsx";
 import ManagerPrice from "./Components/ManagerPrice.jsx";
 import ManagerOrder from "./Components/ManagerOrder.jsx";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ViewOrder from "../src/Page/SaleStaff/ViewOrder_SaleStaff.jsx";
+import HomeCus from './Page/Home/Home_Customer.jsx'
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
 function App() {
   return (
     <Router>
@@ -31,6 +33,7 @@ function App() {
         <Route path="/DeliveryTracking" element={<DeliveryTracking />} />
         <Route path="/AddNewAccount" element={<AddNewAccount />} />
         <Route path="/ViewOrder" element={<ViewOrder />} />
+        <Route path="/HomeCus" element={<HomeCus />} />
       </Routes>
     </Router>
   );
