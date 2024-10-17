@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.request.OrderCreateRequestDTO;
 import com.example.demo.dto.response.AllOrderResponseDTO;
 import com.example.demo.dto.response.MsgResponseDTO;
+import com.example.demo.dto.response.OrderStatusResponseDTO;
 import com.example.demo.service.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -27,6 +28,7 @@ public class OrderController {
         return ResponseEntity.ok(response);
     }
 
+    @Operation(summary = "Update OrderStatus")
     @PutMapping("/{orderID}/status/{statusID}")
     public ResponseEntity<MsgResponseDTO> updateOrderStatus(@PathVariable Integer orderID, @PathVariable Integer statusID) {
         MsgResponseDTO response = orderService.updateOrderStatus(orderID, statusID);
@@ -35,6 +37,16 @@ public class OrderController {
         }
         else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
+        }
+    }
+
+    @GetMapping("/{orderID}/status")
+    public ResponseEntity<OrderStatusResponseDTO> getAllOrderStatus(@PathVariable Integer orderID) {
+        OrderStatusResponseDTO response = orderService.getOrderStatusByOrderID(orderID);
+        if (response.isSuccess()){
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 
