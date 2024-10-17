@@ -35,7 +35,7 @@ const ManagerCustomer = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          // Authorization: `Bearer ${token}`,
+           Authorization: `Bearer ${token}`,
         },
       });
 
@@ -68,7 +68,7 @@ const ManagerCustomer = () => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          // Authorization: `Bearer ${token}`,
+           Authorization: `Bearer ${token}`,
         },
       });
 
@@ -98,7 +98,7 @@ const ManagerCustomer = () => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            // Authorization: `Bearer ${token}`,
+             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             username: selectedUser.username,
