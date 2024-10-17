@@ -83,7 +83,7 @@ public class AuthController {
             return ResponseEntity.ok(response); // Code là 200
         }
         else {
-            return ResponseEntity.badRequest().body(response); // Code là 400
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response); // Code là 403
         }
     }
 }
