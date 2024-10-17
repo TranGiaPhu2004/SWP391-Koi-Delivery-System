@@ -15,10 +15,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +23,7 @@ import org.slf4j.LoggerFactory;
 @RestController
 @RequestMapping("/auth")
 @Tag(name = "Authentication Controller (API về xác thực)")
+@CrossOrigin(origins = "http://localhost:5173")
 public class AuthController {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
