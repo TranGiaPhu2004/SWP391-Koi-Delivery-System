@@ -42,10 +42,10 @@ function LoginHeaderMethod() {
         if (data.role === "Admin") {
           navigate("/Manager");
         } else if (data.role === "User") {
-          navigate("/Payment");
+          navigate("/HomeCus");
         }
         else if (data.role === "Customer") {
-          navigate("/Payment");
+          navigate("/HomeCus");
         }
         else if (data.role === "Delivery Staff") {
           navigate("/DeliveryStatus");

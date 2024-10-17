@@ -49,9 +49,6 @@ const ViewOrder_SaleStaff = () => {
         <nav className="ManagerCustomer-nav">
           <ul className="ManagerCustomer-nav-list">
             <li className="ManagerCustomer-nav-item">View Order</li>
-            <li className="ManagerCustomer-nav-item">
-              List Order From Customer
-            </li>
           </ul>
         </nav>
         <button className="ManagerCustomer-logout">Logout</button>
