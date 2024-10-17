@@ -1,8 +1,11 @@
 package com.example.demo.config;
 
+import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.servers.Server;
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +21,16 @@ public class OpenApiConfig {
                         .version("1.0")
                         .description("Koi delivery ordering sys")
                         .license(new License().name("Api license").url("https://opensource.org/licenses/LICENSE-2.0.html")))
-                .servers(List.of(new Server().url("http://localhost:8080/").description("Server test")));
+                .servers(List.of(new Server().url("http://localhost:8080/").description("Server test")))
+                .components(
+                        new Components().addSecuritySchemes(
+                                "bearerAuth",
+                                new SecurityScheme()
+                                        .type(SecurityScheme.Type.HTTP)
+                                        .scheme("bearer")
+                                        .bearerFormat("JWT")))
+                .security(List.of(new SecurityRequirement().addList("bearerAuth")))
+                ;
     }
 
     @Bean

@@ -9,6 +9,9 @@ import com.example.demo.dto.response.RegisterResponseDTO;
 import com.example.demo.service.*;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,7 +51,22 @@ public class AuthController {
         }
     }
 
-    @Operation(summary = "Login = username")
+    @Operation(
+            summary = "Login with username",
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    required = true,
+                    content = @Content(
+                            mediaType = "application/json",
+                            examples = @ExampleObject(
+                                    value = "{\n  \"username\": \"admin\",\n  \"password\": \"admin123\"\n}"
+                            )
+                    )
+            ),
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Successful login"),
+                    @ApiResponse(responseCode = "401", description = "Unauthorized")
+            }
+    )
     @PostMapping("/login/username")
     public ResponseEntity<LoginResponseDTO> loginByUsername(@RequestBody LoginByUsernameRequestDTO request) {
         LoginResponseDTO response = authService.loginByUsername(request);
