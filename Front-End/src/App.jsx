@@ -13,7 +13,7 @@ import PriceList from "./Components/PriceList.jsx";
 import ManagerPrice from "./Components/ManagerPrice.jsx";
 import ManagerOrder from "./Components/ManagerOrder.jsx";
 import ViewOrder from "../src/Page/SaleStaff/ViewOrder_SaleStaff.jsx";
-import HomeCus from './Page/Home/Home_Customer.jsx'
+import HomeCus from "./Page/Home/Home_Customer.jsx";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
         <Route path="/Payment" element={<PaymentMethods />} />
         <Route path="/PriceManager" element={<ManagerPrice />} />
         <Route path="/ManagerOrder" element={<ManagerOrder />} />
-        <Route path="/Manager" element={<DeliveryPriceList />} />
+        <Route path="/Manager" element={<Manager />} />
         <Route path="/DeliveryStatus" element={<DeliveryStatus />} />
         <Route path="/PriceList" element={<PriceList />} />
         <Route path="/DeliveryTracking" element={<DeliveryTracking />} />
