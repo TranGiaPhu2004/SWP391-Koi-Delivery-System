@@ -5,6 +5,7 @@ import com.example.demo.dto.request.OrderCreateRequestDTO;
 import com.example.demo.dto.response.AllOrderResponseDTO;
 import com.example.demo.dto.response.MsgResponseDTO;
 import com.example.demo.dto.response.OrderDTO;
+import com.example.demo.dto.response.OrderStatusResponseDTO;
 import com.example.demo.model.*;
 import com.example.demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -141,6 +142,21 @@ public class OrderService {
             msg.setSuccess(Boolean.FALSE);
             return msg;
         }
+    }
 
+    public OrderStatusResponseDTO getOrderStatusByOrderID(Integer orderID) {
+        OrderStatusResponseDTO response = new OrderStatusResponseDTO();
+        Optional<Order> orders = orderRepository.findById(orderID);
+        if (orders.isPresent()) {
+            OrderStatus status = orders.get().getOrderStatus();
+            response.setOrderStatusID(status.getOrderStatusID());
+            response.setStatusName(status.getStatusName());
+            response.setSuccess(Boolean.TRUE);
+            return response;
+        }
+        else {
+            response.setSuccess(Boolean.FALSE);
+            return response;
+        }
     }
 }
