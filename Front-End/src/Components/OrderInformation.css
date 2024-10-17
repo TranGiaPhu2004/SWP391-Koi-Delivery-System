@@ -6,18 +6,18 @@
 
 }
 
-.OrderInformation-paymentmethods {
+.OrderInformation-paymentmethods p {
     text-align: center;
-    margin-left: 53%;
-    font-size: 40px;
+    margin-left: 47%;
+    font-size: 30px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    width: 40%;
     padding: 15px 15px;
     margin-top: 20px;
-    border-bottom: 2px solid black;
+    border-bottom: 1px solid black;
     color: #3D3D74;
     font-weight: 800;
-
+    white-space: nowrap;
+    width: 50%;
 }
 
 .OrderInformation-message {
@@ -192,20 +192,19 @@
 .OrderInformation-amount1 .OrderInformation-count1 {
     background: antiquewhite;
     font-family: cursive;
-    pointer-events: none;
+
 }
 
 .OrderInformation-amount2 .OrderInformation-count2 {
     background: antiquewhite;
     font-family: cursive;
-    pointer-events: none;
+
 }
 
 
 .OrderInformation-amount3 .OrderInformation-count3 {
     background: antiquewhite;
     font-family: cursive;
-    pointer-events: none;
 }
 
 
@@ -225,7 +224,7 @@
 
 .OrderInformation-amount2 .decrement-button2.blurred {
     filter: blur(0);
-    cursor: not-allowed;
+
 }
 
 .OrderInformation-amount2 .decrement-button2.active {

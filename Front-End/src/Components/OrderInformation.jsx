@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+
 import { useState } from 'react';
 import './OrderInformation.css'
 import pickoi1 from '../assets/image/pickoi1.png'
@@ -9,99 +9,11 @@ import { Link } from 'react-router-dom';
 
 const OrderInformation = ({ totalOrder, deliveryCost, totalAmount, deliveryTo }) => {
 
-
-
-    const [count1, setCount1] = useState(0);
-    const [count2, setCount2] = useState(0);
-    const [count3, setCount3] = useState(0);
-
-
-
-    const decrement1 = () => {
-        if (count1 > 0) {
-            setCount1((c) => c - 1);
-        } else {
-            alert('Sorry, you could not decrement when amount of boxes begin from Zero ...')
-        }
-    }
-    const decrement2 = () => {
-        if (count2 > 0) {
-            setCount2((c) => c - 1);
-        } else {
-            alert('Sorry, you could not decrement when amount of boxes begin from Zero ...')
-        }
-    }
-    const decrement3 = () => {
-        if (count3 > 0) {
-            setCount3((c) => c - 1);
-        } else {
-            alert('Sorry, you could not decrement when amount of boxes begin from Zero ...')
-        }
-    }
-
-    const Delete1 = () => {
-        setCount1(0);
-    }
-    const Delete2 = () => {
-        setCount2(0);
-    }
-    const Delete3 = () => {
-        setCount3(0);
-    }
-
-    // const [orderID, setOrderID] = useState('');
-    // const [boxID, setBoxID] = useState("");
-    // const [price, setPrice] = useState("");
-    // const [boxSize, setBoxSize] = useState('');
-    // const [quantity, setQuantity] = useState('');
-    // const [koiBoxes, setKoiBoxes] = useState([{ boxID: '', quantity: '' }]);
-    // // Hàm để thêm một KoiBox mới
-    // const addKoiBox = () => {
-    //     setKoiBoxes([...koiBoxes, { boxID: '', price: '', boxSize: '', quantity: '' }]);
-    // };
-
-    // const handleBoxChoosing = async (e) => {
-    //     e.preventDefault();
-
-    //     const BoxData = {
-    //         OrderID: orderID,
-    //         koiBoxes: koiBoxes.map(box => ({
-    //             boxID: box.boxID,      //lấy ra boxID
-    //             price: box.price,      // giá
-    //             boxSize: box.boxSize,  // kích thước
-    //             quantity: box.quantity // số lượng boxes
-    //         }))
-    //     };
-
-    //     try {
-    //         const response = await fetch("http://localhost:8080/auth/ViewOrder", {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify(BoxData),
-    //         });
-
-    //         if (response.ok) {
-    //             const data = await response.json();
-    //         }
-    //     } catch (error) {
-    //         prompt('Something went wrong...');
-
-    //     }
-    // };
-
-
     return (
         <>
             <div className="OrderInformation-paymentmethods">
-                Box Choosing
+                <p>📦Your order is getting ready🚚 <br></br> 🌐🎏❤️</p>
             </div>
-            <div className="OrderInformation-message">
-                📦📦Please choose boxes suited for you📦📦
-            </div>
-
-
             <div className="OrderInformation-main-order">
                 <div className="OrderInformation-main-pic">
                     <div className="OrderInformation-pic-koi1">
@@ -120,7 +32,7 @@ const OrderInformation = ({ totalOrder, deliveryCost, totalAmount, deliveryTo })
                                 -
                             </button>
                             <button className='OrderInformation-count1'>
-                                {count1}
+                                
                             </button>
                             <button className='increment-button1'>
                                 +
@@ -147,7 +59,7 @@ const OrderInformation = ({ totalOrder, deliveryCost, totalAmount, deliveryTo })
                                 -
                             </button>
                             <button className='OrderInformation-count2'>
-                                {count2}
+                                
                             </button>
                             <button className='increment-button2'>
                                 +
@@ -170,7 +82,7 @@ const OrderInformation = ({ totalOrder, deliveryCost, totalAmount, deliveryTo })
                                 -
                             </button>
                             <button className='OrderInformation-count3'>
-                                {count3}
+                              
                             </button>
                             <button className='increment-button3'>
                                 +
@@ -184,14 +96,14 @@ const OrderInformation = ({ totalOrder, deliveryCost, totalAmount, deliveryTo })
                     <div className='OrderInformation-order-details'>
                         <h2>Order Information</h2>
                         <div className='OrderInformation-line'></div>
-                        <p>Total order: {totalOrder} {(count1 + count2) * parseFloat(1000000)} vnđ</p>
+                        <p>Total order: {totalOrder} { parseFloat(1000000)} vnđ</p>
                         <p>Delivery Cost: {deliveryCost} vnđ</p>
-                        <span>Total Amount: {totalAmount} {(count1 + count2) * parseFloat(1000000)} vnđ</span>
+                        <span>Total Amount: {totalAmount} { parseFloat(1000000)} vnđ</span>
                         <p>Delivery to: {deliveryTo}</p>
                         <p>By pressing the button, I agree to the <a href="#">Terms and Conditions.</a></p>
 
                         <Link to='/Payment'>
-                            <button className="OrderInformation-payment-button">{(count1 + count2) * parseFloat(100000000)} vnđ Payment
+                            <button className="OrderInformation-payment-button">{ parseFloat(100000000)} vnđ Payment
                                 <a href="#"><span>→</span></a></button>
                         </Link>
                         <div className="OrderInformation-cancel">
@@ -209,11 +121,5 @@ const OrderInformation = ({ totalOrder, deliveryCost, totalAmount, deliveryTo })
     );
 }
 
-OrderInformation.propTypes = {
-    totalOrder: PropTypes.string.isRequired,
-    deliveryCost: PropTypes.string.isRequired,
-    totalAmount: PropTypes.string.isRequired,
-    deliveryTo: PropTypes.string.isRequired,
-};
 
 export default OrderInformation
