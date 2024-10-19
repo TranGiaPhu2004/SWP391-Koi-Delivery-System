@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.request.CreateEmployeeRequestDTO;
-import com.example.demo.dto.response.AllOrderResponseDTO;
+import com.example.demo.dto.response.ListOrderResponseDTO;
 import com.example.demo.dto.response.MsgResponseDTO;
 import com.example.demo.dto.response.UserResponseDTO;
 import com.example.demo.service.AuthService;
@@ -48,8 +48,8 @@ public class AdminController {
     }
 
     @GetMapping("/allOrder")
-    public ResponseEntity<AllOrderResponseDTO> getAllOrders() {
-        AllOrderResponseDTO response = orderService.getAllOrders();
+    public ResponseEntity<ListOrderResponseDTO> getAllOrders() {
+        ListOrderResponseDTO response = orderService.getAllOrders();
         if (response.isSuccess()) {
             return ResponseEntity.ok(response);
         } else {
