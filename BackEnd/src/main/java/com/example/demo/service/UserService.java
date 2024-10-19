@@ -102,9 +102,9 @@ public class UserService implements UserDetailsService {
             user.setPassword(updateUser.getPassword());
             user.setEmail(updateUser.getEmail());
             user.setPhonecontact(updateUser.getPhonecontact());
-            logger.info("Update user id: " + id + "start");
+            logger.info("Update user id: " + id + " start");
             userRepository.save(user);
-            logger.info("Update user id: " + id + "end");
+            logger.info("Update user id: " + id + " end");
             msg.setMsg("Update User "+id+" successfully");
             msg.setSuccess(Boolean.TRUE);
         }

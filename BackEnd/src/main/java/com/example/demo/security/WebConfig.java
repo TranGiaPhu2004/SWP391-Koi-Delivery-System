@@ -17,7 +17,8 @@ public class WebConfig {
                         .allowedOrigins("http://localhost:5173") // Cho phép từ origin này
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
-                        .allowCredentials(true); // Cho phép gửi cookie và các thông tin xác thực
+                        .allowCredentials(true) // Cho phép gửi cookie và các thông tin xác thực
+                ;
             }
         };
     }
