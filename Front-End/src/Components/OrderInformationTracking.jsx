@@ -7,34 +7,43 @@ import track5 from '../assets/image/track5.png';
 import './OrderInformationTracking.css';
 
 function OrderInformationTracking() {
-    const [orders, setOrders] = useState([]); // Khởi tạo với mảng rỗng để tránh lỗi undefined
+    const [orderStatus, setOrderStatus] = useState(null); // Trạng thái đơn hàng cụ thể
+    const [orderId, setOrderId] = useState(''); // Để người dùng nhập mã đơn hàng
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const token = localStorage.getItem('token'); // Lấy token từ localStorage
 
-    useEffect(() => {
-        // Hàm để lấy danh sách đơn hàng từ API
-        const fetchOrders = async () => {
-            try {
-                const response = await fetch('http://localhost:8080/orderStatus/allStatus', {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        // Authorization: `Bearer ${token}`, // Nếu cần token
-                    },
-                });
+    // Hàm để lấy trạng thái đơn hàng khi người dùng nhấn "Check Status"
+    const fetchOrderStatus = async () => {
+        if (!orderId) {
+            setError("Please enter a valid Order ID.");
+            return;
+        }
 
-                if (response.ok) {
-                    const data = await response.json();
-                    setOrders(data.orders || []); // Đảm bảo rằng orders luôn là một mảng
-                } else {
-                    setError("Failed to fetch orders.");
-                }
-            } catch (error) {
-                setError("Error fetching orders. Please try again.");
+        setLoading(true);
+        setError('');
+
+        try {
+            const response = await fetch(`http://localhost:8080/orders/${orderId}/status`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`, // Sử dụng token nếu cần
+                },
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setOrderStatus(data); // Lưu trạng thái đơn hàng
+            } else {
+                setError("Failed to fetch order status.");
             }
-        };
-
-        fetchOrders();
-    }, []);
+        } catch (error) {
+            setError("Error fetching order status. Please try again.");
+        } finally {
+            setLoading(false);
+        }
+    };
 
     // Map giữa tên trạng thái và hình ảnh tương ứng
     const statusImages = {
@@ -51,25 +60,37 @@ function OrderInformationTracking() {
                 <p>ORDER TRACKING</p>
             </div>
 
+            <div className="OrderInformationTracking-order-id">
+                <label htmlFor="orderId">Order ID:</label>
+                <input 
+                    type="text" 
+                    id="orderId" 
+                    value={orderId} 
+                    onChange={(e) => setOrderId(e.target.value)} 
+                    placeholder="Enter your order ID"
+                />
+                <button onClick={fetchOrderStatus} disabled={loading || !orderId}>
+                    {loading ? 'Loading...' : 'Check Status'}
+                </button>
+            </div>
+
             {error && <p style={{ color: 'red' }}>{error}</p>}
 
             <div className='OrderInformationTracking-tracking-order'>
-                {orders.length > 0 ? (
-                    orders.map((order) => (
-                        <div key={order.orderID} className='OrderInformationTracking-tracking'>
-                            <img 
-                                className='OrderInformationTracking-pic' 
-                                src={statusImages[order.status] || track1} 
-                                alt={order.status} 
-                            />
-                            <p>{order.status}</p>
-                            <label htmlFor="">
-                                {getStatusDescription(order.status)}
-                            </label>
-                        </div>
-                    ))
+                {orderStatus ? (
+                    <div className='OrderInformationTracking-tracking'>
+                        <img 
+                            className='OrderInformationTracking-pic' 
+                            src={statusImages[orderStatus.statusName] || track1} 
+                            alt={orderStatus.statusName} 
+                        />
+                        <p>{orderStatus.statusName}</p>
+                        <label>
+                            {getStatusDescription(orderStatus.statusName)}
+                        </label>
+                    </div>
                 ) : (
-                    <p>No orders available</p>
+                    <p>No order status available</p>
                 )}
             </div>
         </div>

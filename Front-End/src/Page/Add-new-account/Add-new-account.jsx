@@ -16,12 +16,22 @@ function RegisterMethod() {
   const [successMessage, setSuccessMessage] = useState("");
 
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     // Lấy danh sách vai trò từ backend
     const fetchRoles = async () => {
       try {
-        const response = await fetch("http://localhost:8080/role");
+        const response = await fetch("http://localhost:8080/role",
+           {
+            method: "GET",
+            headers: {
+              
+              Authorization: `Bearer ${token}`,
+            },
+            
+          }
+        );
         if (response.ok) {
           const data = await response.json();
           setRoles(data.allRole); // Cập nhật state với danh sách vai trò
