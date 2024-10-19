@@ -12,26 +12,25 @@ import { Link, useNavigate } from "react-router-dom";
 
 const ManagerOrder = () => {
   const [orders, setOrders] = useState([]);
-  const [expandedOrder, setExpandedOrder] = useState(null); // Trạng thái để theo dõi đơn hàng nào đang được mở rộng
+  const [expandedOrder, setExpandedOrder] = useState(null);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Hàm để lấy danh sách đơn hàng từ API
     const fetchOrders = async () => {
       try {
-        const token = localStorage.getItem('token'); // Nếu API yêu cầu token xác thực
+        const token = localStorage.getItem('token');
         const response = await fetch('http://localhost:8080/admin/allOrder', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            //Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
 
         if (response.ok) {
           const data = await response.json();
-          setOrders(data.orders); // Cập nhật state với danh sách đơn hàng từ API
+          setOrders(data.orders);
         } else {
           setError('Failed to fetch orders.');
         }
@@ -43,9 +42,13 @@ const ManagerOrder = () => {
     fetchOrders();
   }, []);
 
-  // Hàm bật/tắt trạng thái mở rộng cho từng order
   const toggleOrder = (id) => {
     setExpandedOrder(expandedOrder === id ? null : id);
+  };
+
+  // Function to handle navigation to the OrderDeliveryStatus page
+  const handleViewDeliveryStatus = (orderID) => {
+    navigate(`/DeliveryStatus/${orderID}`);
   };
 
   return (
@@ -56,22 +59,22 @@ const ManagerOrder = () => {
         </div>
         <nav className="ManagerOrder-nav">
           <ul className="ManagerOrder-nav-list">
-            <li className="ManagerOrder-nav-item"><Link to="/Manager">
-            Account Management
-      </Link></li>
-            <li className="ManagerOrder-nav-item"><Link to="/PriceManager">
-            Price Manager
-      </Link></li>
-            <li className="ManagerOrder-nav-item"><Link to="/ManagerOrder">
-            Order Manager
-      </Link></li>
+            <li className="ManagerOrder-nav-item">
+              <Link to="/Manager">Account Management</Link>
+            </li>
+            <li className="ManagerOrder-nav-item">
+              <Link to="/PriceManager">Price Manager</Link>
+            </li>
+            <li className="ManagerOrder-nav-item">
+              <Link to="/ManagerOrder">Order Manager</Link>
+            </li>
             <li className="ManagerOrder-nav-item">Notification</li>
             <li className="ManagerOrder-nav-item">Settings</li>
             <li className="ManagerOrder-nav-item">Account</li>
             <li className="ManagerOrder-nav-item">Help</li>
           </ul>
         </nav>
-       <LogoutButton></LogoutButton>
+        <LogoutButton />
       </aside>
 
       <main className="ManagerOrder-main-content">
@@ -129,6 +132,12 @@ const ManagerOrder = () => {
                             <img src={order.customsImageLink} alt="Customs" className="ManagerOrder-customs-image" />
                           </div>
                           <div className="ManagerOrder-detail-buttons">
+                            <button 
+                              className="ManagerOrder-btn-view-status"
+                              onClick={() => handleViewDeliveryStatus(order.orderID)}
+                            >
+                              View Delivery Status
+                            </button>
                             <button className="ManagerOrder-btn-update">
                               <img src={EditIcon} alt="Edit" />
                             </button>

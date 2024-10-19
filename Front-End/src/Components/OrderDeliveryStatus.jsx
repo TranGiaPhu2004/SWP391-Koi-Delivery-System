@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import track1 from '../assets/image/track1.png';
 import track2 from '../assets/image/track2.png';
 import track3 from '../assets/image/track3.png';
@@ -7,17 +8,18 @@ import track5 from '../assets/image/track5.png';
 import './OrderDeliveryStatus.css';
 
 function OrderDeliveryStatus() {
+    const { orderId } = useParams(); // Get orderId from the URL parameter
     const [status, setStatus] = useState(0);
-    const [orderId, setOrderId] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
-    const fetchOrderStatus = async () => {
-        if (!orderId) {
-            setError('Please enter a valid Order ID.');
-            return;
+    useEffect(() => {
+        if (orderId) {
+            fetchOrderStatus();
         }
+    }, [orderId]);
 
+    const fetchOrderStatus = async () => {
         setLoading(true);
         setError('');
 
@@ -35,9 +37,9 @@ function OrderDeliveryStatus() {
             }
 
             const data = await response.json();
-            console.log('Received data:', data); // Kiểm tra dữ liệu nhận được từ API
-            const statusId = data.orderStatusID-1; // Lấy orderStatusID từ phản hồi
-            setStatus(statusId); // Cập nhật trạng thái đơn hàng
+            console.log('Received data:', data); // Check the data received from the API
+            const statusId = data.orderStatusID - 1; // Adjust the status to match the index
+            setStatus(statusId);
 
         } catch (err) {
             console.error('Error fetching order status:', err);
@@ -48,16 +50,11 @@ function OrderDeliveryStatus() {
     };
 
     const handleSubmit = async () => {
-        if (!orderId) {
-            setError('Please enter a valid Order ID.');
-            return;
-        }
-
         setLoading(true);
         setError('');
 
         try {
-            const statusId = status+1;
+            const statusId = status + 1;
             const response = await fetch(`http://localhost:8080/orders/${orderId}/status/${statusId}`, {
                 method: 'PUT',
                 headers: {
@@ -93,12 +90,8 @@ function OrderDeliveryStatus() {
                     type="text" 
                     id="orderId" 
                     value={orderId} 
-                    onChange={(e) => setOrderId(e.target.value)} 
-                    placeholder="Enter your order ID"
+                    readOnly 
                 />
-                <button onClick={fetchOrderStatus} disabled={loading || !orderId}>
-                    {loading ? 'Loading...' : 'Check Status'}
-                </button>
             </div>
 
             <div className='OrderDeliveryStatus-tracking-order'>
