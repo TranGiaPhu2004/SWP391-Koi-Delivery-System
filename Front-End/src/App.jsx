@@ -28,7 +28,7 @@ function App() {
         <Route path="/PriceManager" element={<ManagerPrice />} />
         <Route path="/ManagerOrder" element={<ManagerOrder />} />
         <Route path="/Manager" element={<Manager />} />
-        <Route path="/DeliveryStatus" element={<DeliveryStatus />} />
+        <Route path="/DeliveryStatus/:orderId" element={<DeliveryStatus />} />
         <Route path="/PriceList" element={<PriceList />} />
         <Route path="/DeliveryTracking" element={<DeliveryTracking />} />
         <Route path="/AddNewAccount" element={<AddNewAccount />} />
