@@ -2,7 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dto.request.BoxDTO;
 import com.example.demo.dto.request.OrderCreateRequestDTO;
-import com.example.demo.dto.response.AllOrderResponseDTO;
+import com.example.demo.dto.response.ListOrderResponseDTO;
 import com.example.demo.dto.response.MsgResponseDTO;
 import com.example.demo.dto.response.OrderDTO;
 import com.example.demo.dto.response.OrderStatusResponseDTO;
@@ -42,6 +42,8 @@ public class OrderService {
 
     @Autowired
     private IPaymentRepository paymentRepository;
+    @Autowired
+    private AuthService authService;
 
 
     public MsgResponseDTO createOrder(OrderCreateRequestDTO request) {
@@ -93,9 +95,9 @@ public class OrderService {
         return msg;
     }
 
-    public AllOrderResponseDTO getAllOrders() {
+    public ListOrderResponseDTO getAllOrders() {
 
-        AllOrderResponseDTO orderList = new AllOrderResponseDTO();
+        ListOrderResponseDTO orderList = new ListOrderResponseDTO();
         List<Order> orders = orderRepository.findAll();
 
         if (orders.isEmpty()) {
@@ -103,20 +105,7 @@ public class OrderService {
             return orderList;
         }
 
-        List<OrderDTO> orderDTOList = new ArrayList<>();
-        for (Order order : orders) {
-            OrderDTO allOrders = new OrderDTO();
-            allOrders.setOrderID(order.getOrderID());
-            allOrders.setOrderDate(order.getOrderDate());
-            allOrders.setStartPlace(order.getStartPlace());
-            allOrders.setEndPlace(order.getEndPlace());
-            allOrders.setTotalPrice(order.getTotalPrice());
-            allOrders.setCustomsImageLink(order.getCustomsImageLink());
-            orderDTOList.add(allOrders);
-        }
-        orderList.setSuccess(Boolean.TRUE);
-        orderList.setOrders(orderDTOList);
-        return orderList;
+        return getListOrderResponseDTO(orderList, orders);
     }
 
     public MsgResponseDTO updateOrderStatus(Integer orderID, Integer statusID) {
@@ -136,8 +125,7 @@ public class OrderService {
             msg.setMsg("Order status updated successfully");
             msg.setSuccess(Boolean.TRUE);
             return msg;
-        }
-        else {
+        } else {
             msg.setMsg("Order not found OR Order Status not found");
             msg.setSuccess(Boolean.FALSE);
             return msg;
@@ -153,10 +141,47 @@ public class OrderService {
             response.setStatusName(status.getStatusName());
             response.setSuccess(Boolean.TRUE);
             return response;
-        }
-        else {
+        } else {
             response.setSuccess(Boolean.FALSE);
             return response;
         }
+    }
+
+    public ListOrderResponseDTO getUserOrders() {
+        String username = authService.getCurrentUsername();
+        ListOrderResponseDTO response = new ListOrderResponseDTO();
+        Optional<User> users = userRepository.findByUsername(username);
+        if (users.isPresent()) {
+            List<Order> orders = orderRepository.findByUser(users.get());
+            if (!orders.isEmpty()) {
+                return getListOrderResponseDTO(response, orders);
+            } else {
+                response.setSuccess(Boolean.TRUE);
+                response.setMessage("Customer has no orders");
+                response.setOrders(new ArrayList<>());
+                return response;
+            }
+        } else {
+            response.setSuccess(Boolean.FALSE);
+            response.setMessage("Customer not found");
+            return response;
+        }
+    }
+
+    private ListOrderResponseDTO getListOrderResponseDTO(ListOrderResponseDTO response, List<Order> orders) {
+        List<OrderDTO> orderDTOList = new ArrayList<>();
+        for (Order order : orders) {
+            OrderDTO dto = new OrderDTO();
+            dto.setOrderID(order.getOrderID());
+            dto.setOrderDate(order.getOrderDate());
+            dto.setStartPlace(order.getStartPlace());
+            dto.setEndPlace(order.getEndPlace());
+            dto.setTotalPrice(order.getTotalPrice());
+            dto.setCustomsImageLink(order.getCustomsImageLink());
+            orderDTOList.add(dto);
+        }
+        response.setSuccess(Boolean.TRUE);
+        response.setOrders(orderDTOList);
+        return response;
     }
 }
