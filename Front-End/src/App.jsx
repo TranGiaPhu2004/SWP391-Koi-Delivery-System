@@ -14,6 +14,7 @@ import ManagerPrice from "./Components/ManagerPrice.jsx";
 import ManagerOrder from "./Components/ManagerOrder.jsx";
 import ViewOrder from "../src/Page/SaleStaff/ViewOrder_SaleStaff.jsx";
 import HomeCus from "./Page/Home/Home_Customer.jsx";
+import ViewOrderCustomer from './Page/View-Order/ViewOrder.jsx'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -34,6 +35,8 @@ function App() {
         <Route path="/AddNewAccount" element={<AddNewAccount />} />
         <Route path="/ViewOrder" element={<ViewOrder />} />
         <Route path="/HomeCus" element={<HomeCus />} />
+        <Route path="/view" element={<ViewOrderCustomer />} />
+
       </Routes>
     </Router>
   );
