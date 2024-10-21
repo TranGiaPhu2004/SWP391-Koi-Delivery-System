@@ -1,0 +1,512 @@
+body {
+    background-color: #f3f4f6;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .update-profile-container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    margin: 30px;
+    margin-left: 220px;
+
+  }
+  
+  .update-profile-container h1 {
+    font-weight: normal;
+    margin-bottom: 20px;
+    margin-top: 0;
+    color: #1f2937;
+    margin-left: 20px;
+  }
+ 
+  .update-profile-main-content h2  {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #1f2937;
+  }
+  
+  .update-profile-flex {
+    display: flex;
+    gap: 90px
+  }
+  
+  .update-profile-sidebar {
+    width: 25%;
+    background-color: #f9fafb;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    position: relative; /* Để có thể định vị nút bên trong sidebar */
+    display: flex;
+    flex-direction: column; /* Bố cục theo chiều dọc */
+    
+  }
+  
+  .update-profile-sidebar h2 {
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: black;
+    margin-top: 5px;
+    margin-bottom: 15px;
+  }
+  
+  .update-profile-sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .update-profile-sidebar ul li {
+    margin-bottom: 10px;
+  }
+  
+  .update-profile-sidebar a {
+    text-decoration: none;
+    color: #2563eb;
+  }
+  
+  .update-profile-sidebar a:hover {
+    text-decoration: underline;
+  }
+  .update-profile-logout{
+    width: 100%; /* Đặt chiều rộng nút bằng 100% so với sidebar */
+    padding: 10px; /* Khoảng cách bên trong nút */
+    background-color: #ff4d4d; /* Màu nền đỏ */
+    color: white; /* Màu chữ */
+    border: none; /* Loại bỏ đường viền */
+    border-radius: 4px; /* Bo góc */
+    font-size: 16px; /* Kích thước chữ */
+    cursor: pointer; /* Con trỏ chuột thành dạng tay */
+    margin-top: auto; /* Đẩy nút xuống cuối */
+    text-align: center; /* Căn giữa nội dung */
+}
+
+.update-profile-logout:hover {
+    background-color: #e60000; /* Màu nền khi hover */
+}
+  
+  .update-profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .update-profile-header img {
+    border-radius: 50%;
+    margin-right: 17px;
+
+  }
+  
+  .update-profile-header span {
+    font-weight: bold;
+    color: #1f2937;
+    font-size: 20px;
+  }
+  
+  .update-profile-main-content {
+    margin-top: -20px;
+    width: 75%;
+    margin-left: -45px;
+    margin-right: 10px;
+  }
+  
+  .update-profile-main-content p {
+    margin-bottom: 15px;
+    line-height: 1.5;
+    color: #4b5563;
+  }
+  
+  .update-profile-main-content strong {
+    color: #1f2937;
+  }
+  
+  /* .confirm-box {
+    background-color: #dbeafe;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .confirm-box i {
+    color: #2563eb;
+    margin-right: 10px;
+  }
+  
+  .confirm-box button {
+    margin-left: auto;
+    background-color: #2563eb;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .confirm-box button:hover {
+    background-color: #1e40af;
+  } */
+  
+  .update-profile-form-section {
+    margin-top: 20px;
+  }
+  
+  .update-profile-form-section label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+  
+  .update-profile-form-section input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e5e7eb;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .update-profile-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+ 
+  .update-profile-form-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Hai cột có kích thước bằng nhau */
+    gap: 1px; /* Khoảng cách giữa các ô */
+    margin-bottom: 20px;
+  }
+  
+  .update-profile-form-section label {
+    font-weight: bold; /* Làm đậm chữ cho nhãn */
+    margin-bottom: 8px;
+    display: block;
+    color: black; /* Màu chữ đen */
+  }
+  
+  .update-profile-form-section input {
+    width: 90%; /* Đảm bảo ô input chiếm toàn bộ chiều rộng của cột */
+    padding: 10px; /* Đệm bên trong ô input */
+    border: 1px solid #ccc; /* Viền của ô */
+    border-radius: 5px; /* Bo tròn các góc */
+    background-color: #fff; /* Màu nền trắng */
+    font-size: 16px; /* Kích thước chữ */
+    color: black;
+  }
+  
+  .update-profile-form-section input:focus {
+    outline: none; /* Xóa viền mặc định khi focus */
+    border-color: #007BFF; /* Đổi màu viền khi ô input được chọn */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Tạo hiệu ứng đổ bóng khi focus */
+  }
+  /* Định dạng cho ô nhập mật khẩu */
+  .update-profile-password-container {
+    display: flex;
+    align-items: center; /* Căn giữa theo chiều dọc */
+    position: relative; /* Để có thể định vị biểu tượng mắt */
+    
+    margin-right: 17px;
+}
+  
+.update-profile-password-container input {
+    width: 100%; /* Đặt chiều rộng ô nhập bằng 100% */
+    padding: 10px; /* Khoảng cách bên trong */
+    padding-right: 40px; /* Thêm không gian cho nút con mắt bên phải */
+    border: 1px solid #ccc; /* Đường viền xung quanh */
+    border-radius: 4px; /* Bo góc */
+    font-size: 16px; /* Kích thước chữ */
+    color: black; /* Màu chữ */
+    background-color: white; /* Màu nền */
+
+}
+  
+.update-profile-toggle-password {
+    background: transparent; /* Nền trong suốt */
+    border: none; /* Loại bỏ viền của nút */
+    cursor: pointer; /* Con trỏ chuột thành dạng tay */
+    position: absolute; /* Định vị biểu tượng mắt */
+    right: 10px; /* Cách bên phải 10px */
+
+    transform: translateY(-50%); /* Dịch chuyển biểu tượng để căn giữa theo chiều dọc */
+    padding: 0; /* Loại bỏ khoảng cách padding */
+}
+
+.update-profile-toggle-password img {
+    width: 20px; /* Đặt kích thước biểu tượng vừa với ô nhập */
+    height: 20px;
+    display: block; /* Đảm bảo hình ảnh hiển thị dưới dạng block */
+}
+.update-profile-update-button-container {
+    grid-column: 1 / span 2; /* Đẩy nút rộng qua 2 cột */
+    display: flex;
+    justify-content: flex-end; /* Đẩy nút qua bên phải */
+    padding-top: 20px; /* Thêm khoảng cách phía trên */
+    margin-right: 15px;
+}
+
+.update-profile-update-button {
+    background-color: #4CAF50; /* Màu nền xanh */
+    color: white; /* Màu chữ trắng */
+    padding: 10px 20px; /* Kích thước và khoảng cách trong nút */
+    border: none; /* Loại bỏ viền */
+    border-radius: 5px; /* Bo góc nút */
+    font-size: 16px; /* Kích thước chữ */
+    cursor: pointer; /* Con trỏ chuột khi hover */
+    transition: background-color 0.3s ease; /* Hiệu ứng hover */
+}
+
+.update-profile-update-button:hover {
+    background-color: #45a049; /* Đổi màu nền khi hover */
+}
+
+
+/* body {
+    background-color: #f3f4f6;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .update-profile-container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    margin: 30px;
+    margin-left: 220px;
+
+  }
+  
+  .update-profile-container h1 {
+    font-weight: normal;
+    margin-bottom: 20px;
+    margin-top: 0;
+    color: #1f2937;
+    margin-left: 20px;
+  }
+ 
+  .update-profile-main-content h2  {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #1f2937;
+  }
+  
+  .update-profile-flex {
+    display: flex;
+    gap: 90px
+  }
+  
+  .update-profile-sidebar {
+    width: 25%;
+    background-color: #f9fafb;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    position: relative; 
+    display: flex;
+    flex-direction: column; 
+    
+  }
+  
+  .update-profile-sidebar h2 {
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: black;
+    margin-top: 5px;
+    margin-bottom: 15px;
+  }
+  
+  .update-profile-sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .update-profile-sidebar ul li {
+    margin-bottom: 10px;
+  }
+  
+  .update-profile-sidebar a {
+    text-decoration: none;
+    color: #2563eb;
+  }
+  
+  .update-profile-sidebar a:hover {
+    text-decoration: underline;
+  }
+  .update-profile-logout{
+    width: 100%; 
+    padding: 10px; 
+    background-color: #ff4d4d;
+    color: white; 
+    border: none; 
+    border-radius: 4px;
+    font-size: 16px; 
+    cursor: pointer;
+    margin-top: auto; 
+    text-align: center; 
+}
+
+.update-profile-logout:hover {
+    background-color: #e60000;
+}
+  
+  .update-profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .update-profile-header img {
+    border-radius: 50%;
+    margin-right: 17px;
+
+  }
+  
+  .update-profile-header span {
+    font-weight: bold;
+    color: #1f2937;
+    font-size: 20px;
+  }
+  
+  .update-profile-main-content {
+    margin-top: -20px;
+    width: 75%;
+    margin-left: -45px;
+    margin-right: 10px;
+  }
+  
+  .update-profile-main-content p {
+    margin-bottom: 15px;
+    line-height: 1.5;
+    color: #4b5563;
+  }
+  
+  .update-profile-main-content strong {
+    color: #1f2937;
+  }
+  
+  .update-profile-form-section {
+    margin-top: 20px;
+  }
+  
+  .update-profile-form-section label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+  
+  .update-profile-form-section input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e5e7eb;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .update-profile-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+ 
+  .update-profile-form-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 1px; 
+    margin-bottom: 20px;
+  }
+  
+  .update-profile-form-section label {
+    font-weight: bold; 
+    margin-bottom: 8px;
+    display: block;
+    color: black; 
+  }
+  
+  .update-profile-form-section input {
+    width: 90%; 
+    padding: 10px; 
+    border: 1px solid #ccc;
+    border-radius: 5px; 
+    background-color: #fff; 
+    font-size: 16px; 
+    color: black;
+  }
+  
+  .update-profile-form-section input:focus {
+    outline: none; 
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+  }
+
+  .update-profile-password-container {
+    display: flex;
+    align-items: center; 
+    position: relative; 
+    
+    margin-right: 17px;
+}
+  
+.update-profile-password-container input {
+    width: 100%; 
+    padding: 10px; 
+    padding-right: 40px;
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    font-size: 16px; 
+    color: black; 
+    background-color: white; 
+
+}
+  
+.update-profile-toggle-password {
+    background: transparent; 
+    border: none; 
+    cursor: pointer; 
+    position: absolute; 
+    right: 10px; 
+
+    transform: translateY(-50%); 
+    padding: 0; 
+}
+
+.update-profile-toggle-password img {
+    width: 20px; 
+    height: 20px;
+    display: block; 
+}
+.update-profile-update-button-container {
+    grid-column: 1 / span 2; 
+    display: flex;
+    justify-content: flex-end; 
+    padding-top: 20px;
+    margin-right: 15px;
+}
+
+.update-profile-update-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px; 
+    border: none;
+    border-radius: 5px; 
+    font-size: 16px; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+}
+
+.update-profile-update-button:hover {
+    background-color: #45a049; 
+} */

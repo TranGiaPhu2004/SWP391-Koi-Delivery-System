@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import track1 from '../assets/image/track1.png';
 import track2 from '../assets/image/track2.png';
 import track3 from '../assets/image/track3.png';
@@ -8,25 +8,67 @@ import track5 from '../assets/image/track5.png';
 import './OrderDeliveryStatus.css';
 
 function OrderDeliveryStatus() {
+    const { orderId } = useParams(); // Get orderId from the URL parameter
     const [status, setStatus] = useState(0);
-    const [orderId, setOrderId] = useState(''); // New state for orderId
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
-    const handleSubmit = async () => {
-        if (!orderId) {
-            setError('Please enter a valid Order ID.');
-            return;
+    useEffect(() => {
+        if (orderId) {
+            fetchOrderStatus();
         }
+    }, [orderId]);
 
+    const fetchOrderStatus = async () => {
         setLoading(true);
         setError('');
 
         try {
-            const statusId = status; // Use the status state as statusId
-            const response = await axios.put(`http://localhost:8080/orders/${orderId}/status/${statusId+1}`);
+            const response = await fetch(`http://localhost:8080/orders/${orderId}/status`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                },
+            });
 
-            console.log('Order status updated successfully:', response.data);
+            if (!response.ok) {
+                throw new Error('Failed to fetch order status.');
+            }
+
+            const data = await response.json();
+            console.log('Received data:', data); // Check the data received from the API
+            const statusId = data.orderStatusID - 1; // Adjust the status to match the index
+            setStatus(statusId);
+
+        } catch (err) {
+            console.error('Error fetching order status:', err);
+            setError('Failed to fetch order status. Please try again.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleSubmit = async () => {
+        setLoading(true);
+        setError('');
+
+        try {
+            const statusId = status + 1;
+            const response = await fetch(`http://localhost:8080/orders/${orderId}/status/${statusId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to update order status.');
+            }
+
+            const data = await response.json();
+            console.log('Order status updated successfully:', data);
             alert('Order status updated successfully!');
         } catch (err) {
             console.error('Error updating order status:', err);
@@ -48,15 +90,18 @@ function OrderDeliveryStatus() {
                     type="text" 
                     id="orderId" 
                     value={orderId} 
-                    onChange={(e) => setOrderId(e.target.value)} 
-                    placeholder="Enter your order ID"
+                    readOnly 
                 />
             </div>
 
             <div className='OrderDeliveryStatus-tracking-order'>
                 {[track1, track2, track3, track4, track5].map((track, index) => (
                     <div key={index} className={`OrderDeliveryStatus-tracking${index}`}>
-                        <img className={`pic ${status >= index ? 'active' : 'blurred'}`} src={track} alt="" />
+                        <img 
+                            className={`pic ${status >= index ? 'active' : 'blurred'}`} 
+                            src={track} 
+                            alt={`Status ${index}`} 
+                        />
                         <p>{["Order Received", "Order Picked", "Order In Transit", "Out For Delivery", "Reached Destination"][index]}</p>
                         <label>
                             <input 

@@ -37,7 +37,7 @@ public class SecurityConfig {
                         .requestMatchers("/admin/**").permitAll()
                         .requestMatchers("/orders/**").permitAll()
                         .requestMatchers("/users/**").permitAll()
-                        .requestMatchers("/role").permitAll()
+                        .requestMatchers("/role/**").permitAll()
                         .anyRequest().authenticated()) // All other routes require authentication
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class); // Add JWT filter
 
