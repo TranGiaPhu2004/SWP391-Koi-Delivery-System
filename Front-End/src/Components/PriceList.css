@@ -560,9 +560,13 @@
 }
 
 .PriceList-buttonn {
-    background-color: #fff;
+    background-color: #3D3D74;
     margin-top: 3%;
     margin-left: 43%;
+    color: #fff;
+    font-family: monospace;
+    font-size: 20px;
+   
 }
 
 .PriceList-buttonn button {

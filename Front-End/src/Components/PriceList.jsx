@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import pickoi1 from '../assets/image/pickoi1.png';
 import pickoi2 from '../assets/image/pickoi2.png';
 import pickoi3 from '../assets/image/pickoi3.png';
@@ -12,6 +12,8 @@ function PriceList() {
     const [count1, setCount1] = useState(0);
     const [count2, setCount2] = useState(0);
     const [count3, setCount3] = useState(0);
+
+    const navigate = useNavigate();
 
     const increment1 = () => setCount1(c => c + 1);
     const increment2 = () => setCount2(c => c + 1);
@@ -61,7 +63,7 @@ function PriceList() {
             total += 200000;
         } else if (selectedServices === 2) {
             total += 150000;
-        } else if(selectedServices === 3) {
+        } else if (selectedServices === 3) {
             total += 500000;
         }
 
@@ -150,6 +152,9 @@ function PriceList() {
 
             const responseData = await response.json();
             console.log('Phản hồi từ API:', responseData);
+            // ĐIỀU HƯỚNG TỚI TRANG ORDER CREATED SUCCESSFULLY
+            navigate('/view', { replace: true });
+
         } catch (error) {
             console.error('Đã xảy ra lỗi khi gửi yêu cầu POST:', error);
         }
@@ -367,11 +372,8 @@ function PriceList() {
                 </div>
             </div>
 
-            <Link to="/view">
-                <div className="PriceList-buttonn">
-                    <button type="submit" onClick={handleSubmit}>Order Completion</button>
-                </div>
-            </Link>
+            <button className="PriceList-buttonn" type="submit" onClick={handleSubmit}>
+                Order Completion Submit</button>
         </>
     );
 }
