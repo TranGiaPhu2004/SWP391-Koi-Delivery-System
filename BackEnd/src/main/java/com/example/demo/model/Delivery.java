@@ -17,8 +17,13 @@ public class Delivery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long deliveryID;
 
-    @Column(name = "deliverymethod", nullable = false)
-    private String deliveryMethod;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "OrderID")
+    private Order order;
+
+    @ManyToOne
+    @JoinColumn(name = "deliverymethodID")
+    private DeliveryMethod deliverymethod;
 
     @Column(name = "price", nullable = false)
     private Float price;
@@ -26,8 +31,6 @@ public class Delivery {
     @Column(name = "deliverystatus", nullable = false)
     private Boolean deliveryStatus;
 
-    @OneToMany(mappedBy = "delivery", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Order> orders;
 
 }
 
