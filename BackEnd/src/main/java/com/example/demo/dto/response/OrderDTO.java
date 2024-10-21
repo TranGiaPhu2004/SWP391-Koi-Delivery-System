@@ -18,4 +18,5 @@ public class OrderDTO implements Serializable {
     private LocalDate orderDate;
     private Float totalPrice;
     private String customsImageLink;
+    private boolean deliveryStatus;
 }

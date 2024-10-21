@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.controller.AuthController;
 import com.example.demo.dto.request.BoxDTO;
 import com.example.demo.dto.request.OrderCreateRequestDTO;
 import com.example.demo.dto.response.ListOrderResponseDTO;
@@ -8,6 +9,8 @@ import com.example.demo.dto.response.OrderDTO;
 import com.example.demo.dto.response.OrderStatusResponseDTO;
 import com.example.demo.model.*;
 import com.example.demo.repository.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,6 +24,7 @@ import java.util.Optional;
 @Service
 public class OrderService {
 
+    private static final Logger logger = LoggerFactory.getLogger(OrderService.class);
 
     @Autowired
     private IUserRepository userRepository;
@@ -42,57 +46,77 @@ public class OrderService {
 
     @Autowired
     private IPaymentRepository paymentRepository;
+
+    @Autowired
+    private IDeliveryMethodRepository deliveryMethodRepository;
+
     @Autowired
     private AuthService authService;
 
 
     public MsgResponseDTO createOrder(OrderCreateRequestDTO request) {
-//        thêm đoạn code này và add user vào order sau khi front end gửi đc token trên header
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String username = authentication.getName();
-//        User user = userRepository.findByUsername(username)
-//                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        //Lấy Service,Delivery
-        Services services = serviceRepository.findById(request.getServiceID())
-                .orElseThrow(() -> new RuntimeException("Service not found"));
-        Delivery delivery = deliveryRepository.findById(request.getDeliveryID())
-                .orElseThrow(() -> new RuntimeException("Delivery not found"));
-        //Tạo payment
-        Payment payment = new Payment();
-        payment.setTotalPrice(request.getTotalPrice());
-        payment.setPaymentStatus(false);
-        //Lưu payment
-        Payment savePayment = paymentRepository.save(payment);
-
-        // Create a new Order entity
-        Order order = new Order();
-        // Lưu field của order
-        order.setStartPlace(request.getStartPlace());
-        order.setEndPlace(request.getEndPlace());
-        order.setServices(services);
-        order.setDelivery(delivery);
-        order.setPayment(savePayment); // Set the saved payment to the order
-        order.setOrderDate(LocalDate.now());
-        order.setTotalPrice(request.getTotalPrice());
-        // Save the order
-        Order savedOrder = orderRepository.save(order);
-
-        // Process the boxes in the request and save Contain entities
-        for (BoxDTO boxDTO : request.getBoxes()) {
-            Contain contain = new Contain();
-            contain.setOrderID(savedOrder.getOrderID());
-            contain.setBoxID(boxDTO.getBoxid());
-            contain.setQuantity(boxDTO.getQuantity());
-
-            // Save the contain
-            containRepository.save(contain);
-        }
-
         MsgResponseDTO msg = new MsgResponseDTO();
-        msg.setMsg("Order created successfully");
+        String username = authService.getCurrentUsername();
+        User users = userRepository.findByUsername(username).orElse(null);
+        if (users != null) {
+            msg.setSuccess(Boolean.FALSE);
+            msg.setMsg("Authorization User not found");
+            return msg;
+        }
+        try {
+            // Service
+            Services services = serviceRepository.findById(request.getServiceID())
+                    .orElseThrow(() -> new RuntimeException("Service not found"));
+            //Tạo payment
+            Payment payment = new Payment();
+            payment.setTotalPrice(request.getTotalPrice());
+            //Order vừa đc tạo xem như là đã thanh toán
+            //Nhớ fix lại khi có page sales staff và view userOrder
+            payment.setPaymentStatus(true);
+            //Lưu payment
+            Payment savePayment = paymentRepository.save(payment);
 
-        return msg;
+            // Create a new Order entity
+            Order order = new Order();
+            // Lưu field của order
+            order.setStartPlace(request.getStartPlace());
+            order.setEndPlace(request.getEndPlace());
+            order.setServices(services);
+            order.setPayment(savePayment); // Set the saved payment to the order
+            order.setOrderDate(LocalDate.now());
+            order.setTotalPrice(request.getTotalPrice());
+            order.setOrderStatus(orderStatusRepository.findById(1).orElse(null));
+            // Save the order
+            Order savedOrder = orderRepository.save(order);
+
+
+            Delivery delivery = new Delivery();
+            delivery.setOrder(savedOrder);
+            delivery.setDeliverymethod(deliveryMethodRepository.findById(request.getDeliveryID()).orElse(null));
+            delivery.setDeliveryStatus(Boolean.FALSE);
+            delivery.setPrice(request.getTotalPrice());
+            // Save delivery
+            deliveryRepository.save(delivery);
+
+            // Process the boxes in the request and save Contain entities
+            for (BoxDTO boxDTO : request.getBoxes()) {
+                Contain contain = new Contain();
+                contain.setOrderID(savedOrder.getOrderID());
+                contain.setBoxID(boxDTO.getBoxid());
+                contain.setQuantity(boxDTO.getQuantity());
+
+                // Save the contain
+                containRepository.save(contain);
+            }
+            msg.setMsg("Order created successfully");
+            msg.setSuccess(Boolean.TRUE);
+            return msg;
+        } catch (Exception exception) {
+            msg.setSuccess(Boolean.FALSE);
+            msg.setMsg(exception.getMessage());
+            logger.error("Error in method {}: {}", "createOrder", exception.getMessage(), exception);
+            return msg;
+        }
     }
 
     public ListOrderResponseDTO getAllOrders() {
@@ -178,10 +202,37 @@ public class OrderService {
             dto.setEndPlace(order.getEndPlace());
             dto.setTotalPrice(order.getTotalPrice());
             dto.setCustomsImageLink(order.getCustomsImageLink());
+            dto.setDeliveryStatus(order.getDelivery().getDeliveryStatus());
             orderDTOList.add(dto);
         }
         response.setSuccess(Boolean.TRUE);
         response.setOrders(orderDTOList);
         return response;
+    }
+
+    public ListOrderResponseDTO getPayedOrder() {
+        ListOrderResponseDTO response = new ListOrderResponseDTO();
+        try {
+            List<Order> orders = orderRepository.findAll();
+
+            // list emty = no payed orders
+            if(orders.isEmpty()) {
+                response.setSuccess(Boolean.TRUE);
+                response.setMessage("There are no payed orders");
+            }
+
+            List<Order> payedOrderList = new ArrayList<>();
+            for (Order order : orders) {
+                // nếu true thì là đã payed
+                if (order.getPayment().getPaymentStatus()) {
+                    payedOrderList.add(order);
+                }
+            }
+            return getListOrderResponseDTO(response, payedOrderList);
+        } catch (Exception e) {
+            response.setSuccess(Boolean.FALSE);
+            response.setMessage("Customer not found");
+            return response;
+        }
     }
 }

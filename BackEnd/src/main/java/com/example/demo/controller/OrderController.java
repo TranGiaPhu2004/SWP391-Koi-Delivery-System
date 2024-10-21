@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.request.OrderCreateRequestDTO;
+import com.example.demo.dto.response.ListOrderResponseDTO;
 import com.example.demo.dto.response.MsgResponseDTO;
 import com.example.demo.dto.response.OrderStatusResponseDTO;
 import com.example.demo.service.OrderService;
@@ -25,17 +26,20 @@ public class OrderController {
     @PostMapping("/create")
     public ResponseEntity<MsgResponseDTO> createOrder(@RequestBody OrderCreateRequestDTO request) {
         MsgResponseDTO response = orderService.createOrder(request);
-        return ResponseEntity.ok(response);
+        if (response.isSuccess()) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(response); //201
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+        }
     }
 
     @Operation(summary = "Update OrderStatus")
     @PutMapping("/{orderID}/status/{statusID}")
     public ResponseEntity<MsgResponseDTO> updateOrderStatus(@PathVariable Integer orderID, @PathVariable Integer statusID) {
         MsgResponseDTO response = orderService.updateOrderStatus(orderID, statusID);
-        if (response.isSuccess()){
+        if (response.isSuccess()) {
             return ResponseEntity.ok(response);
-        }
-        else {
+        } else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
         }
     }
@@ -43,10 +47,20 @@ public class OrderController {
     @GetMapping("/{orderID}/status")
     public ResponseEntity<OrderStatusResponseDTO> getAllOrderStatus(@PathVariable Integer orderID) {
         OrderStatusResponseDTO response = orderService.getOrderStatusByOrderID(orderID);
-        if (response.isSuccess()){
+        if (response.isSuccess()) {
             return ResponseEntity.ok(response);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+    @GetMapping("/payment/payed")
+    public ResponseEntity<ListOrderResponseDTO> getPayedOrder(@RequestParam Integer orderID) {
+        ListOrderResponseDTO response = orderService.getPayedOrder();
+        if (response.isSuccess()) {
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
