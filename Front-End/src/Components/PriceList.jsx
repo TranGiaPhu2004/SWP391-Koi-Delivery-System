@@ -50,7 +50,7 @@ function PriceList() {
     const boxPrices = [1200000, 700000, 400000]; // Large Box, Medium Box, Small Box
 
 
-
+    //TÍNH TỔNG TIỀN DỊCH VỤ ĐÃ CHỌN
     const calculateTotalPrice = () => {
         let total = 0;
         //TỔNG CÁC BOXES ĐÃ CHỌN
@@ -77,6 +77,7 @@ function PriceList() {
 
         return total;
     };
+
 
     const handleServiceChange = (e) => {
         const valuee = e.target.value;
@@ -137,6 +138,8 @@ function PriceList() {
             totalPrice: calculateTotalPrice(), // Tính tổng giá
         };
 
+ 
+
         try {
             const response = await fetch('http://localhost:8080/orders/create', {
                 method: 'POST',
@@ -152,8 +155,8 @@ function PriceList() {
 
             const responseData = await response.json();
             console.log('Phản hồi từ API:', responseData);
-            // ĐIỀU HƯỚNG TỚI TRANG ORDER CREATED SUCCESSFULLY
-            navigate('/view', { replace: true });
+            // ĐIỀU HƯỚNG TỚI TRANG VIEW ORDER vừa mới khởi tạo
+            navigate('/OrderInformation', { state: { data } });
 
         } catch (error) {
             console.error('Đã xảy ra lỗi khi gửi yêu cầu POST:', error);
@@ -372,8 +375,11 @@ function PriceList() {
                 </div>
             </div>
 
-            <button className="PriceList-buttonn" type="submit" onClick={handleSubmit}>
-                Order Completion Submit</button>
+            <div className="PriceList-buttonn">
+                <button type="submit" onClick={handleSubmit}>
+                    Order Completion</button>
+            </div>
+
         </>
     );
 }
