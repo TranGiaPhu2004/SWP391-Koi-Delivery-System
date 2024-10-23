@@ -31,7 +31,9 @@ function MomoMethod() {
           <img src={MomoQR} alt="QR Code" className="momoQR" />
           <p>Quét mã QR để thanh toán</p>
           <p>Sử dụng App MoMo hoặc ứng dụng camera hỗ trợ QR code để quét mã</p>
-          <a href="/HomeCus">Nhấn vào đây khi đã thanh toán thành công</a>
+          <a href="/ThanksforPayment">
+            Nhấn vào đây khi đã thanh toán thành công
+          </a>
         </div>
       </div>
     </div>
