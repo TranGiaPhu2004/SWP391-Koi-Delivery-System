@@ -67,7 +67,7 @@ function PriceList() {
             total += 500000;
         }
 
-        // LOẠI HÌNH VẬN CHUYỂN
+        // LOẠI HÌNH VẬN CHUYỂN theo ID
 
         if (deliveryType === 1) {
             total += 300000;
