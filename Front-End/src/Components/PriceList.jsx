@@ -374,7 +374,7 @@ function PriceList() {
             </div>
 
             <button className="PriceList-buttonn" type="submit" onClick={handleSubmit}>
-                Order Completion Submit</button>
+                Order Completion </button>
         </>
     );
 }
