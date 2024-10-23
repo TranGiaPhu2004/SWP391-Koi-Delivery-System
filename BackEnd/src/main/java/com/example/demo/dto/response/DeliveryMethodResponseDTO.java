@@ -11,14 +11,10 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MsgResponseDTO implements Serializable {
+public class DeliveryMethodResponseDTO extends MsgResponseDTO implements Serializable {
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private int deliveryMethodId;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private int httpCode;
-
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private String msg;
-
-    @JsonIgnore
-    private boolean success;
+    private String methodName;
 }
