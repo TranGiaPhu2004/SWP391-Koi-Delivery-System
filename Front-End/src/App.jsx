@@ -17,6 +17,7 @@ import ViewOrderCustomer from './Page/View-Order/ViewOrder.jsx'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import OrderInformation from './Page/View-Order/ViewOrder.jsx'
 import DeleteOrder from './Page/Delete-Order/DeleteOrder.jsx'
+import DeliveryViewOrder from "./Page/DeliveryViewOrder/DeliveryViewOrder.jsx";
 function App() {
   return (
     <Router>
@@ -31,13 +32,14 @@ function App() {
         <Route path="/Manager" element={<Manager />} />
         <Route path="/DeliveryStatus/:orderId" element={<DeliveryStatus />} />
         <Route path="/PriceList" element={<PriceList />} />
-        <Route path="/DeliveryTracking" element={<DeliveryTracking />} />
+        <Route path="/DeliveryTracking/:orderId" element={<DeliveryTracking />} />
         <Route path="/AddNewAccount" element={<AddNewAccount />} />
         <Route path="/ViewOrder" element={<ViewOrder />} />
         <Route path="/HomeCus" element={<HomeCus />} />
         <Route path="/view" element={<ViewOrderCustomer />} />
         <Route path="/OrderInformation" element={<OrderInformation />} />
         <Route path="/DeleteOrder" element={<DeleteOrder />} />
+        <Route path="/DeliveryViewOrder" element={<DeliveryViewOrder />} />
 
       </Routes>
     </Router>

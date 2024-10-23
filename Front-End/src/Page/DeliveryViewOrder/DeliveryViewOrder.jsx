@@ -6,11 +6,11 @@ import EditIcon from '../../assets/image/edit.svg';
 import DeleteIcon from '../../assets/image/delete.svg';
 import ArrowDown from '../../assets/image/arrow-down.svg';
 import ArrowUp from '../../assets/image/arrow-up.svg';
-import '../../Components/ManagerCustomer.css';
+import '../../Components/ManagerOrder.css';
 import LogoutButton from "../../Logout";
 import { Link, useNavigate } from "react-router-dom";
 
-const ManagerOrder = () => {
+const DeliveryViewOrder = () => {
   const [orders, setOrders] = useState([]);
   const [expandedOrder, setExpandedOrder] = useState(null);
   const [error, setError] = useState("");
@@ -20,7 +20,7 @@ const ManagerOrder = () => {
     const fetchOrders = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:8080/users/orders', {
+        const response = await fetch('http://localhost:8080/orders/delivery/false', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ const ManagerOrder = () => {
 
   // Function to handle navigation to the OrderDeliveryStatus page
   const handleViewDeliveryStatus = (orderID) => {
-    navigate(`/DeliveryTracking/${orderID}`);
+    navigate(`/DeliveryStatus/${orderID}`);
   };
 
   return (
@@ -67,7 +67,7 @@ const ManagerOrder = () => {
             <img src={avatar} alt="User Avatar" className="ManagerOrder-avatar" />
             <div className="ManagerOrder-user-details">
               <h3>Vũ Đức Mạnh</h3>
-              <p>Manager</p>
+              <p>Delivery Staff</p>
             </div>
           </div>
           <div className="ManagerOrder-search-container">
@@ -92,7 +92,7 @@ const ManagerOrder = () => {
             </thead>
             <tbody>
               {orders.map((order) => (
-                <React.Fragment key={order.orderID}>
+                
                   <tr onClick={() => toggleOrder(order.orderID)}>
                     <td>{order.orderID}</td>
                     <td>{order.orderDate}</td>
@@ -100,40 +100,20 @@ const ManagerOrder = () => {
                     <td>{order.endPlace}</td>
                     <td>{order.totalPrice}</td>
                     <td>
-                      <img 
-                        src={expandedOrder === order.orderID ? ArrowUp : ArrowDown} 
-                        alt="Toggle" 
-                        className="ManagerOrder-toggle-icon" 
-                      />
-                    </td>
-                  </tr>
-                  {expandedOrder === order.orderID && (
-                    <tr className="ManagerOrder-order-details">
-                      <td colSpan="6">
-                        <div className="ManagerOrder-order-detail-content">
-                          <div>
-                            <strong>Customs Image:</strong>
-                            <img src={order.customsImageLink} alt="Customs" className="ManagerOrder-customs-image" />
-                          </div>
-                          <div className="ManagerOrder-detail-buttons">
+                    <div className="ManagerOrder-detail-buttons">
                             <button 
                               className="ManagerOrder-btn-view-status"
                               onClick={() => handleViewDeliveryStatus(order.orderID)}
                             >
-                              View Delivery Status
+                              View and Update Status
                             </button>
-                            <button className="ManagerOrder-btn-update">
-                              <img src={EditIcon} alt="Edit" />
-                            </button>
-                            <button className="ManagerOrder-btn-delete">
-                              <img src={DeleteIcon} alt="Delete" />
-                            </button>
+                            
                           </div>
-                        </div>
-                      </td>
-                    </tr>
-                  )}
-                </React.Fragment>
+                     
+                    </td>
+                  </tr>
+                  
+                
               ))}
             </tbody>
           </table>
@@ -143,4 +123,4 @@ const ManagerOrder = () => {
   );
 };
 
-export default ManagerOrder;
+export default DeliveryViewOrder;
