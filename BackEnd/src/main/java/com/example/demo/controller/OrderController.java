@@ -6,6 +6,9 @@ import com.example.demo.dto.response.MsgResponseDTO;
 import com.example.demo.dto.response.OrderStatusResponseDTO;
 import com.example.demo.service.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,7 +60,13 @@ public class OrderController {
 
     @Operation(summary = "get delivery Order by delivery Status")
     @GetMapping("/delivery/{status}")
-    public ResponseEntity<ListOrderResponseDTO> getDeliveryOrder(@PathVariable String status) {
+    public ResponseEntity<ListOrderResponseDTO> getDeliveryOrder(
+            @Parameter(
+                    description = "Delivery status, allowed values: true, false, null",
+                    in = ParameterIn.PATH,
+                    schema = @Schema(type = "string", allowableValues = {"true", "false", "null"})
+            )
+            @PathVariable String status) {
         ListOrderResponseDTO response = orderService.getDeliveryOrder(status);
         if (response.isSuccess()) {
             return ResponseEntity.ok(response);
