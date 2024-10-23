@@ -8,6 +8,7 @@ import com.example.demo.dto.response.OrderDTO;
 import com.example.demo.dto.response.OrderStatusResponseDTO;
 import com.example.demo.model.*;
 import com.example.demo.repository.*;
+import org.aspectj.weaver.ast.Or;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -134,7 +135,7 @@ public class OrderService {
             return orderList;
         }
 
-        return getListOrderResponseDTO(orderList, orders);
+        return getListOrderResponseDTO(orders);
     }
 
     public MsgResponseDTO updateOrderStatus(Integer orderID, Integer statusID) {
@@ -188,7 +189,7 @@ public class OrderService {
         if (users.isPresent()) {
             List<Order> orders = orderRepository.findByUser(users.get());
             if (!orders.isEmpty()) {
-                return getListOrderResponseDTO(response, orders);
+                return getListOrderResponseDTO(orders);
             } else {
                 response.setSuccess(Boolean.TRUE);
                 response.setMessage("Customer has no orders");
@@ -203,11 +204,12 @@ public class OrderService {
     }
 
     private ListOrderResponseDTO getListOrderResponseDTO
-            (ListOrderResponseDTO response, List<Order> orders) {
+            (List<Order> orders) {
         //chuyển đổi model order sang responseDTO
+        ListOrderResponseDTO response = new ListOrderResponseDTO();
         List<OrderDTO> orderDTOList = new ArrayList<>();
         for (Order order : orders) {
-            logger.info("Order ID : " + order.getOrderID());
+            logger.info("GET---Order ID : " + order.getOrderID());
             OrderDTO dto = new OrderDTO();
             dto.setOrderID(order.getOrderID());
             dto.setOrderDate(order.getOrderDate());
@@ -225,7 +227,7 @@ public class OrderService {
         return response;
     }
 
-    public ListOrderResponseDTO getDeliveryOrder() {
+    public ListOrderResponseDTO getDeliveryOrder(String status) {
         ListOrderResponseDTO response = new ListOrderResponseDTO();
         try {
             List<Order> orders = orderRepository.findAll();
@@ -233,28 +235,51 @@ public class OrderService {
                 response.setSuccess(Boolean.TRUE);
                 response.setMessage("There are no delivery orders");
             }
-            logger.info("-----");
-            List<Order> deliveryOrderList = new ArrayList<>();
-            for (Order order : orders) {
-                // đề phòng order ko có bảng delivery
-                if (order.getDelivery() != null) {
-                    logger.info(order.getOrderID() + " : " + order.getDelivery().getDeliveryStatus());
-                    // order chưa delivery thì lưu lại
-                    if (!order.getDelivery().getDeliveryStatus()) {
-                        deliveryOrderList.add(order);
-                        logger.info("---Add: " + order.getOrderID());
-                    }
-                } else {
-                    logger.info("---Delivery Null : " + order.getOrderID());
-                }
-            }
-            logger.info("-----abc");
-            logger.info("get thanh cong");
-            return getListOrderResponseDTO(response, deliveryOrderList);
+            return getDeliveryOrderByStatus(orders, status);
         } catch (Exception e) {
             response.setSuccess(Boolean.FALSE);
             response.setMessage(e.getMessage());
             return response;
         }
+    }
+
+    public ListOrderResponseDTO getDeliveryOrderByStatus(List<Order> orders, String status) {
+        logger.info("-----" + status);
+        List<Order> deliveryOrderList = new ArrayList<>();
+        if (status.equals("null")) {
+            for (Order order : orders) {
+                logger.info("Order ID : " + order.getOrderID());
+                if (order.getDelivery() == null) {
+                    // order chưa delivery thì lưu lại
+                    logger.info("---Delivery Status : null");
+                    deliveryOrderList.add(order);
+                    logger.info("---Add: " + order.getOrderID());
+                }
+            }
+        } else {
+            for (Order order : orders) {
+                Boolean deliveryStatus = null;
+                if (status.equals("true")) {
+                    deliveryStatus = true;
+                } else {
+                    deliveryStatus = false;
+                }
+                logger.info("Delivery Status : " + deliveryStatus);
+                // order co bang delivery = confirm
+                logger.info("Order ID : " + order.getOrderID());
+                if (order.getDelivery() != null) {
+                    logger.info("--- Get : " + order.getDelivery().getDeliveryStatus()
+                            .equals(deliveryStatus));
+                    if (order.getDelivery().getDeliveryStatus()
+                            .equals(deliveryStatus)) {
+                        // order delivery thì dung nhu status thi luu lai
+                        logger.info("---Delivery Status : " + order.getDelivery().getDeliveryStatus());
+                        deliveryOrderList.add(order);
+                        logger.info("---Add: " + order.getOrderID());
+                    }
+                }
+            }
+        }
+        return getListOrderResponseDTO(deliveryOrderList);
     }
 }
