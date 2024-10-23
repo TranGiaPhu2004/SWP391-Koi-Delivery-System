@@ -13,6 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ListOrderResponseDTO implements Serializable {
+    
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<OrderDTO> orders;
 
     @JsonIgnore
