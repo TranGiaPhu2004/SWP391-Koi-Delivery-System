@@ -28,7 +28,7 @@ public class Delivery {
     @Column(name = "price", nullable = false)
     private Float price;
 
-    @Column(name = "deliverystatus", nullable = false)
+    @Column(name = "deliverystatus")
     private Boolean deliveryStatus;
 }
 
