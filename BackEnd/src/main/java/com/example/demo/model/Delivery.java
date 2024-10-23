@@ -30,7 +30,5 @@ public class Delivery {
 
     @Column(name = "deliverystatus", nullable = false)
     private Boolean deliveryStatus;
-
-
 }
 
