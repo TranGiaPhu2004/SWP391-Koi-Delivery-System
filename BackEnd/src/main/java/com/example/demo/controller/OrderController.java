@@ -55,10 +55,10 @@ public class OrderController {
         }
     }
 
-    @Operation(summary = "get Non delivery Order for delivery Staff")
-    @GetMapping("/delivery/false")
-    public ResponseEntity<ListOrderResponseDTO> getDeliveryOrder() {
-        ListOrderResponseDTO response = orderService.getDeliveryOrder();
+    @Operation(summary = "get delivery Order by delivery Status")
+    @GetMapping("/delivery/{status}")
+    public ResponseEntity<ListOrderResponseDTO> getDeliveryOrder(@PathVariable String status) {
+        ListOrderResponseDTO response = orderService.getDeliveryOrder(status);
         if (response.isSuccess()) {
             return ResponseEntity.ok(response);
         } else {
