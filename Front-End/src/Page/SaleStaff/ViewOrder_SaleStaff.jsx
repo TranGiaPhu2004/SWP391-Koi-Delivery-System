@@ -1,120 +1,134 @@
-import React, { useEffect, useState } from "react";
-import logo from "../../assets/image/Logo.png";
-import avatar from "../../assets/image/avatar.png";
-import search from "../../assets/image/search.png";
+import React, { useState, useEffect } from 'react';
+import logo from '../../assets/image/Logo.png';
+import avatar from '../../assets/image/avatar.png';
+import search from '../../assets/image/search.png';
+import EditIcon from '../../assets/image/edit.svg';
+import DeleteIcon from '../../assets/image/delete.svg';
+import ArrowDown from '../../assets/image/arrow-down.svg';
+import ArrowUp from '../../assets/image/arrow-up.svg';
+import '../../Components/ManagerCustomer.css';
+import LogoutButton from "../../Logout";
 import { Link, useNavigate } from "react-router-dom";
-import "../../Components/OrderDetail.css";
-const ViewOrder_SaleStaff = () => {
-  const Order = [
-    {
-      id: 1,
-      Startplace: "Place A",
-      Endplace: "Place B",
-      OrderDate: "2024-10-01",
-      PaymentID: "1",
-      DeliveryID: "1",
-      ServiceID: "1",
-      ttprice: "150",
-      userID: "1",
-      OrderStatus: "1",
-    },
-    {
-      id: 2,
-      Startplace: "Place X",
-      Endplace: "Place Y",
-      OrderDate: "2024-10-05",
-      PaymentID: "2",
-      DeliveryID: "2",
-      ServiceID: "2",
-      ttprice: "200",
-      userID: "2",
-      OrderStatus: "2",
-    },
-  ];
-  const [selectedOrder, setSelectedOrder] = useState(null);
 
-  const handleViewDetails = (orderId) => {
-    if (selectedOrder === orderId) {
-      setSelectedOrder(null); // Ẩn chi tiết nếu nhấn lại vào cùng đơn hàng
-    } else {
-      setSelectedOrder(orderId); // Hiển thị chi tiết đơn hàng
-    }
+const ManagerOrder = () => {
+  const [orders, setOrders] = useState([]);
+  const [expandedOrder, setExpandedOrder] = useState(null);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await fetch('http://localhost:8080/users/orders', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setOrders(data.orders);
+        } else {
+          setError('Failed to fetch orders.');
+        }
+      } catch (error) {
+        setError('Error fetching orders. Please check your network and try again.');
+      }
+    };
+
+    fetchOrders();
+  }, []);
+
+  const toggleOrder = (id) => {
+    setExpandedOrder(expandedOrder === id ? null : id);
   };
+
+  // Function to handle navigation to the OrderDeliveryStatus page
+  const handleViewDeliveryStatus = (orderID) => {
+    navigate(`/DeliveryStatus/${orderID}`);
+  };
+
   return (
-    <div className="ManagerCustomer-container">
-      <aside className="ManagerCustomer-sidebar">
-        <div className="ManagerCustomer-logo">
+    <div className="ManagerOrder-container">
+      <aside className="ManagerOrder-sidebar">
+        <div className="ManagerOrder-logo">
           <img src={logo} alt="Logo" />
         </div>
-        <nav className="ManagerCustomer-nav">
-          <ul className="ManagerCustomer-nav-list">
-            <li className="ManagerCustomer-nav-item">View Order</li>
-          </ul>
-        </nav>
-        <button className="ManagerCustomer-logout">Logout</button>
+        
+        <LogoutButton />
       </aside>
-      <main className="ManagerPrice-main-content">
-        <header className="ManagerPrice-header">
-          <div className="ManagerPrice-user-info">
-            <img
-              src={avatar}
-              alt="User Avatar"
-              className="ManagerPrice-avatar"
-            />
-            <div className="ManagerPrice-user-details">
-              <h3>NAME</h3>
-              <p>Sale Staff</p>
+
+      <main className="ManagerOrder-main-content">
+        <header className="ManagerOrder-header">
+          <div className="ManagerOrder-user-info">
+            <img src={avatar} alt="User Avatar" className="ManagerOrder-avatar" />
+            <div className="ManagerOrder-user-details">
+              <h3>Vũ Đức Mạnh</h3>
+              <p>Manager</p>
             </div>
           </div>
-          <div className="ManagerPrice-search-container">
+          <div className="ManagerOrder-search-container">
             <input type="text" placeholder="Search..." />
-            <img
-              src={search}
-              alt="Search Icon"
-              className="ManagerPrice-search-icon"
-            />
+            <img src={search} alt="Search Icon" className="ManagerOrder-search-icon" />
           </div>
         </header>
-        <div className="ManagerPrice-price-management">
-          <h1>Order List</h1>
-          <table className="ManagerPrice-price-table">
+
+        <div className="ManagerOrder-order-management">
+          <h1>Order Management</h1>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+          <table className="ManagerOrder-order-table">
             <thead>
               <tr>
                 <th>ID</th>
-                <th>TotalPrice</th>
-                <th>UserID</th>
-                <th>OrderStatus</th>
+                <th>Order Date</th>
+                <th>Start Place</th>
+                <th>End Place</th>
+                <th>Total Price</th>
+                <th>Details</th>
               </tr>
             </thead>
             <tbody>
-              {Order.map((Order) => (
-                <React.Fragment key={Order.id}>
-                  <tr>
-                    <td>{Order.id}</td>
-                    <td>{Order.ttprice}</td>
-                    <td>{Order.userID}</td>
-                    <td>{Order.OrderStatus}</td>
+              {orders.map((order) => (
+                <React.Fragment key={order.orderID}>
+                  <tr onClick={() => toggleOrder(order.orderID)}>
+                    <td>{order.orderID}</td>
+                    <td>{order.orderDate}</td>
+                    <td>{order.startPlace}</td>
+                    <td>{order.endPlace}</td>
+                    <td>{order.totalPrice}</td>
                     <td>
-                      <button
-                        className={selectedOrder === Order.id}
-                        onClick={() => handleViewDetails(Order.id)}
-                      >
-                        {selectedOrder === Order.id
-                          ? "Hide Details"
-                          : "View Details"}
-                      </button>
+                      <img 
+                        src={expandedOrder === order.orderID ? ArrowUp : ArrowDown} 
+                        alt="Toggle" 
+                        className="ManagerOrder-toggle-icon" 
+                      />
                     </td>
                   </tr>
-                  {selectedOrder === Order.id && (
-                    <tr>
-                      <td colSpan="5">
-                        <div>
-                          <p>Start Place: {Order.Startplace}</p>
-                          <p>End Place: {Order.Endplace}</p>
-                          <p>Order Date: {Order.OrderDate}</p>
-                          <p>Payment ID: {Order.PaymentID}</p>
-                          <p>Delivery ID: {Order.DeliveryID}</p>
-                          <p>Service ID: {Order.ServiceID}</p>
+                  {expandedOrder === order.orderID && (
+                    <tr className="ManagerOrder-order-details">
+                      <td colSpan="6">
+                        <div className="ManagerOrder-order-detail-content">
+                          <div>
+                            <strong>Customs Image:</strong>
+                            <img src={order.customsImageLink} alt="Customs" className="ManagerOrder-customs-image" />
+                          </div>
+                          <div className="ManagerOrder-detail-buttons">
+                            <button 
+                              className="ManagerOrder-btn-view-status"
+                              onClick={() => handleViewDeliveryStatus(order.orderID)}
+                            >
+                              View Delivery Status
+                            </button>
+                            <button className="ManagerOrder-btn-update">
+                              <img src={EditIcon} alt="Edit" />
+                            </button>
+                            <button className="ManagerOrder-btn-delete">
+                              <img src={DeleteIcon} alt="Delete" />
+                            </button>
+                          </div>
                         </div>
                       </td>
                     </tr>
@@ -129,4 +143,4 @@ const ViewOrder_SaleStaff = () => {
   );
 };
 
-export default ViewOrder_SaleStaff;
+export default ManagerOrder;
