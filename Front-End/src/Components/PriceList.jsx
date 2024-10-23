@@ -154,7 +154,7 @@ function PriceList() {
             const responseData = await response.json();
             console.log('Phản hồi từ API:', responseData);
             // ĐIỀU HƯỚNG TỚI TRANG ORDER CREATED SUCCESSFULLY
-            navigate('/view', { replace: true });
+            navigate('/OrderInformation', { state: {data} });
 
         } catch (error) {
             console.error('Đã xảy ra lỗi khi gửi yêu cầu POST:', error);
