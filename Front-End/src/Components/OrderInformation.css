@@ -269,8 +269,8 @@
 
 
 .OrderInformation-order-information {
-    margin-top: 18%;
-    margin-left: 40%;
+    margin-top: 16%;
+    margin-left: 37%;
 
 }
 
@@ -292,8 +292,8 @@
     border-radius: 30px;
     border: none;
     line-height: 2;
-    width: 420px;
-    height: 430px;
+    width: 480px;
+    height: 540px;
 }
 
 .OrderInformation-order-details span {
@@ -367,4 +367,11 @@
 
 .OrderInformation-button:active {
     border: none;
+}
+
+.OrderInformation-amount1 span,
+.OrderInformation-amount2 span,
+.OrderInformation-amount3 span {
+    padding: 10px 10px;
+    border-radius: 50px;
 }

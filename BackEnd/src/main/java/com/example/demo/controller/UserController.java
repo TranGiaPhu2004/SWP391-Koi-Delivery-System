@@ -72,12 +72,12 @@ public class UserController {
 
     @Operation(summary = "Get User's Order")
     @GetMapping("/orders")
-    public ResponseEntity<?> getUserOrders(){
+    public ResponseEntity<ListOrderResponseDTO> getUserOrders(){
         ListOrderResponseDTO response = orderService.getUserOrders();
         if(response.isSuccess()){
             return ResponseEntity.ok(response);
         } else if (!response.getMessage().isEmpty()){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }

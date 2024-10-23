@@ -44,6 +44,7 @@ public class OrderController {
         }
     }
 
+    @Operation(summary = "Get order Status")
     @GetMapping("/{orderID}/status")
     public ResponseEntity<OrderStatusResponseDTO> getAllOrderStatus(@PathVariable Integer orderID) {
         OrderStatusResponseDTO response = orderService.getOrderStatusByOrderID(orderID);
@@ -54,13 +55,14 @@ public class OrderController {
         }
     }
 
-    @GetMapping("/payment/payed")
-    public ResponseEntity<ListOrderResponseDTO> getPayedOrder(@RequestParam Integer orderID) {
-        ListOrderResponseDTO response = orderService.getPayedOrder();
+    @Operation(summary = "get Non delivery Order for delivery Staff")
+    @GetMapping("/delivery/false")
+    public ResponseEntity<ListOrderResponseDTO> getDeliveryOrder() {
+        ListOrderResponseDTO response = orderService.getDeliveryOrder();
         if (response.isSuccess()) {
             return ResponseEntity.ok(response);
         } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
 

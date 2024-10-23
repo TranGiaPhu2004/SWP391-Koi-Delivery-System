@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.controller.AuthController;
 import com.example.demo.dto.request.BoxDTO;
 import com.example.demo.dto.request.OrderCreateRequestDTO;
 import com.example.demo.dto.response.ListOrderResponseDTO;
@@ -12,8 +11,6 @@ import com.example.demo.repository.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -56,14 +53,11 @@ public class OrderService {
 
     public MsgResponseDTO createOrder(OrderCreateRequestDTO request) {
         MsgResponseDTO msg = new MsgResponseDTO();
-        String username = authService.getCurrentUsername();
-        User users = userRepository.findByUsername(username).orElse(null);
-        if (users != null) {
-            msg.setSuccess(Boolean.FALSE);
-            msg.setMsg("Authorization User not found");
-            return msg;
-        }
+
         try {
+            String username = authService.getCurrentUsername();
+            User users = userRepository.findByUsername(username).orElse(null);
+
             // Service
             Services services = serviceRepository.findById(request.getServiceID())
                     .orElseThrow(() -> new RuntimeException("Service not found"));
@@ -86,7 +80,10 @@ public class OrderService {
             order.setOrderDate(LocalDate.now());
             order.setTotalPrice(request.getTotalPrice());
             order.setOrderStatus(orderStatusRepository.findById(1).orElse(null));
-            // Save the order
+            if (users != null) {
+                order.setUser(users);
+            }
+//             Save the order
             Order savedOrder = orderRepository.save(order);
 
 
@@ -110,6 +107,14 @@ public class OrderService {
             }
             msg.setMsg("Order created successfully");
             msg.setSuccess(Boolean.TRUE);
+
+            if (users == null) {
+                msg.setSuccess(Boolean.FALSE);
+                msg.setMsg("Authorization User not found");
+//                thêm return sau khi front end thêm đc token vào
+//                return msg;
+            }
+
             return msg;
         } catch (Exception exception) {
             msg.setSuccess(Boolean.FALSE);
@@ -133,27 +138,32 @@ public class OrderService {
     }
 
     public MsgResponseDTO updateOrderStatus(Integer orderID, Integer statusID) {
-
         MsgResponseDTO msg = new MsgResponseDTO();
-        Optional<Order> orders = orderRepository.findById(orderID);
-        Optional<OrderStatus> orderStatus = orderStatusRepository.findById(statusID);
-        if (orders.isPresent() && orderStatus.isPresent()) {
-            Order order = orders.get();
-            if (order.getOrderStatus().equals(orderStatus.get())) {
-                msg.setMsg("Order status is the same");
+        try {
+            Order order = orderRepository.findById(orderID).orElse(null);
+            OrderStatus orderStatus = orderStatusRepository.findById(statusID).orElse(null);
+            if (order != null && orderStatus != null) {
+                if (order.getOrderStatus().getOrderStatusID().equals(orderStatus.getOrderStatusID())) {
+                    msg.setMsg("Order status is the same");
+                    msg.setSuccess(Boolean.FALSE);
+                    return msg;
+                }
+                order.setOrderStatus(orderStatus);
+                orderRepository.save(order);
+                msg.setMsg("Order status updated successfully");
+                msg.setSuccess(Boolean.TRUE);
+                return msg;
+            } else {
+                msg.setMsg("Order not found OR Order Status not found");
                 msg.setSuccess(Boolean.FALSE);
                 return msg;
             }
-            order.setOrderStatus(orderStatus.get());
-            orderRepository.save(order);
-            msg.setMsg("Order status updated successfully");
-            msg.setSuccess(Boolean.TRUE);
-            return msg;
-        } else {
-            msg.setMsg("Order not found OR Order Status not found");
+        } catch (Exception e) {
+            msg.setMsg(e.getMessage());
             msg.setSuccess(Boolean.FALSE);
             return msg;
         }
+
     }
 
     public OrderStatusResponseDTO getOrderStatusByOrderID(Integer orderID) {
@@ -192,9 +202,12 @@ public class OrderService {
         }
     }
 
-    private ListOrderResponseDTO getListOrderResponseDTO(ListOrderResponseDTO response, List<Order> orders) {
+    private ListOrderResponseDTO getListOrderResponseDTO
+            (ListOrderResponseDTO response, List<Order> orders) {
+        //chuyển đổi model order sang responseDTO
         List<OrderDTO> orderDTOList = new ArrayList<>();
         for (Order order : orders) {
+            logger.info("Order ID : " + order.getOrderID());
             OrderDTO dto = new OrderDTO();
             dto.setOrderID(order.getOrderID());
             dto.setOrderDate(order.getOrderDate());
@@ -202,7 +215,9 @@ public class OrderService {
             dto.setEndPlace(order.getEndPlace());
             dto.setTotalPrice(order.getTotalPrice());
             dto.setCustomsImageLink(order.getCustomsImageLink());
-            dto.setDeliveryStatus(order.getDelivery().getDeliveryStatus());
+            if (order.getDelivery() != null) {
+                dto.setDeliveryStatus(order.getDelivery().getDeliveryStatus());
+            }
             orderDTOList.add(dto);
         }
         response.setSuccess(Boolean.TRUE);
@@ -210,28 +225,35 @@ public class OrderService {
         return response;
     }
 
-    public ListOrderResponseDTO getPayedOrder() {
+    public ListOrderResponseDTO getDeliveryOrder() {
         ListOrderResponseDTO response = new ListOrderResponseDTO();
         try {
             List<Order> orders = orderRepository.findAll();
-
-            // list emty = no payed orders
-            if(orders.isEmpty()) {
+            if (orders.isEmpty()) {
                 response.setSuccess(Boolean.TRUE);
-                response.setMessage("There are no payed orders");
+                response.setMessage("There are no delivery orders");
             }
-
-            List<Order> payedOrderList = new ArrayList<>();
+            logger.info("-----");
+            List<Order> deliveryOrderList = new ArrayList<>();
             for (Order order : orders) {
-                // nếu true thì là đã payed
-                if (order.getPayment().getPaymentStatus()) {
-                    payedOrderList.add(order);
+                // đề phòng order ko có bảng delivery
+                if (order.getDelivery() != null) {
+                    logger.info(order.getOrderID() + " : " + order.getDelivery().getDeliveryStatus());
+                    // order chưa delivery thì lưu lại
+                    if (!order.getDelivery().getDeliveryStatus()) {
+                        deliveryOrderList.add(order);
+                        logger.info("---Add: " + order.getOrderID());
+                    }
+                } else {
+                    logger.info("---Delivery Null : " + order.getOrderID());
                 }
             }
-            return getListOrderResponseDTO(response, payedOrderList);
+            logger.info("-----abc");
+            logger.info("get thanh cong");
+            return getListOrderResponseDTO(response, deliveryOrderList);
         } catch (Exception e) {
             response.setSuccess(Boolean.FALSE);
-            response.setMessage("Customer not found");
+            response.setMessage(e.getMessage());
             return response;
         }
     }
