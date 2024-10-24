@@ -78,6 +78,7 @@ function PriceList() {
         return total;
     };
 
+    // XỬ LÝ KHI CHỌN DỊCH VỤ (SERVICES)
     const handleServiceChange = (e) => {
         const valuee = e.target.value;
         // if (valuee === 'packaging') {
@@ -102,6 +103,7 @@ function PriceList() {
         };
     }
 
+    // XỬ LÝ KHI CHỌN LOẠI HÌNH VẬN CHUYỂN (DELIVERY)
     const handleDeliveryChange = (e) => {
         const value = e.target.value;
         if (value === 'standard') {
@@ -373,8 +375,10 @@ function PriceList() {
                 </div>
             </div>
 
-            <button className="PriceList-buttonn" type="submit" onClick={handleSubmit}>
-                Order Completion </button>
+            <div className="PriceList-buttonn">
+                <button type="submit" onClick={handleSubmit}>
+                    Order Completion</button>
+            </div>
         </>
     );
 }

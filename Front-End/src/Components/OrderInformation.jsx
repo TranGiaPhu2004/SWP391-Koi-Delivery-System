@@ -8,7 +8,9 @@ import { Link } from 'react-router-dom';
 
 const OrderInformation = () => {
     const location = useLocation();
+
     const { state } = location;
+    // kiểm tra xem trong hệ thống đã tồn tại state chứa dữ liệu chưa ?
     const orderData = state ? state.data : {};
 
     const { totalPrice, startPlace, endPlace, deliveryType, boxes } = orderData;
@@ -17,6 +19,7 @@ const OrderInformation = () => {
     const formatCurrency = (amount) => {
         return amount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
     };
+
 
     const initialCount1 = boxes.find(box => box.boxid === 1)?.quantity || 0;
     const initialCount2 = boxes.find(box => box.boxid === 2)?.quantity || 0;
@@ -104,14 +107,17 @@ const OrderInformation = () => {
                         <h2>Order Information</h2>
                         <div className='OrderInformation-line'></div>
                         <p>Total order: {formatCurrency(totalPrice - DeliveryType())}</p>
-                        <p>shipping not included</p>
+
                         <p>Delivery Cost: {formatCurrency(DeliveryType())} </p>
                         <span>Total Amount: {formatCurrency(totalPrice)}</span>
                         <p>Sent from: {startPlace}</p>
                         <p>Delivery to: {endPlace}</p>
                         <p>By pressing the button, I agree to the <a href="#">Terms and Conditions.</a></p>
 
-                        <Link to='/Payment'>
+                        <Link
+                            to='/Payment'
+                            state={{ orderData: { totalPrice, startPlace, endPlace, deliveryType, boxes } }}
+                        >
                             <button className="OrderInformation-payment-button">
                                 {formatCurrency(totalPrice)} Payment <span>→</span>
                             </button>
