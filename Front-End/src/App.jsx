@@ -11,7 +11,7 @@ import DeliveryStatus from "./Page/Delivery-Status/DeliveryStatus.jsx";
 import PriceList from "./Components/PriceList.jsx";
 import ManagerPrice from "./Components/ManagerPrice.jsx";
 import ManagerOrder from "./Components/ManagerOrder.jsx";
-import ViewOrder from "../src/Page/SaleStaff/ViewOrder_SaleStaff.jsx";
+import ViewOrder from "./Page/SaleStaff/ViewOrder_SaleStaff.jsx";
 import HomeCus from "./Page/Home/Home_Customer.jsx";
 import ViewOrderCustomer from "./Page/View-Order/ViewOrder.jsx";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -20,6 +20,7 @@ import DeleteOrder from "./Page/Delete-Order/DeleteOrder.jsx";
 import DeliveryViewOrder from "./Page/DeliveryViewOrder/DeliveryViewOrder.jsx";
 import ThanksforPayment from "./Page/Payment-Methods/ThanksForPayments.jsx";
 import ConfirmOrder from "./Page/SaleStaff/ConfirmOrder.jsx";
+import SalesStaffOrder from "./Page/SaleStaff/SaleStaffViewOrder.jsx";
 function App() {
   return (
     <Router>
@@ -46,9 +47,11 @@ function App() {
         <Route path="/DeleteOrder" element={<DeleteOrder />} />
         <Route path="/DeliveryViewOrder" element={<DeliveryViewOrder />} />
         <Route path="/ThanksforPayment" element={<ThanksforPayment />} />
-        <Route path="/ConfirmOrder" element={<ConfirmOrder />} />
+        <Route path="/ConfirmOrder/:orderId" element={<ConfirmOrder />} />
+        <Route path="/SalesStaffOrder" element={<SalesStaffOrder />} />
       </Routes>
     </Router>
+    
   );
 }
 

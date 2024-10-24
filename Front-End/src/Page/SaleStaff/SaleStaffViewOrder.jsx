@@ -10,7 +10,7 @@ import '../../Components/ManagerCustomer.css';
 import LogoutButton from "../../Logout";
 import { Link, useNavigate } from "react-router-dom";
 
-const CustomerOrder = () => {
+const SalesStaffOrder = () => {
   const [orders, setOrders] = useState([]);
   const [expandedOrder, setExpandedOrder] = useState(null);
   const [error, setError] = useState("");
@@ -25,7 +25,7 @@ const CustomerOrder = () => {
     const fetchOrders = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:8080/users/orders', {
+        const response = await fetch('http://localhost:8080/orders/delivery/null', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ const CustomerOrder = () => {
 
   // Function to handle navigation to the OrderDeliveryStatus page
   const handleViewDeliveryStatus = (orderID) => {
-    navigate(`/DeliveryTracking/${orderID}`);
+    navigate(`ConfirmOrder/${orderID}`);
   };
 
   const filteredOrders = orders.filter((order) =>
@@ -103,7 +103,7 @@ const CustomerOrder = () => {
         </header>
 
         <div className="ManagerOrder-order-management">
-          <h1>Order Management</h1>
+          <h1>Order Confirm</h1>
           {error && <p style={{ color: 'red' }}>{error}</p>}
           <table className="ManagerOrder-order-table">
             <thead>
@@ -118,7 +118,7 @@ const CustomerOrder = () => {
             </thead>
             <tbody>
               {currentOrders.map((order) => (
-                <React.Fragment key={order.orderID}>
+                
                   <tr onClick={() => toggleOrder(order.orderID)}>
                     <td>{order.orderID}</td>
                     <td>{order.orderDate}</td>
@@ -126,40 +126,18 @@ const CustomerOrder = () => {
                     <td>{order.endPlace}</td>
                     <td>{order.totalPrice}</td>
                     <td>
-                      <img 
-                        src={expandedOrder === order.orderID ? ArrowUp : ArrowDown} 
-                        alt="Toggle" 
-                        className="ManagerOrder-toggle-icon" 
-                      />
-                    </td>
-                  </tr>
-                  {expandedOrder === order.orderID && (
-                    <tr className="ManagerOrder-order-details">
-                      <td colSpan="6">
-                        <div className="ManagerOrder-order-detail-content">
-                          <div>
-                            <strong>Customs Image:</strong>
-                            <img src={order.customsImageLink} alt="Customs" className="ManagerOrder-customs-image" />
-                          </div>
-                          <div className="ManagerOrder-detail-buttons">
-                            <button 
+                    <button 
                               className="ManagerOrder-btn-view-status"
                               onClick={() => handleViewDeliveryStatus(order.orderID)}
                             >
                               View Delivery Status
                             </button>
-                            <button className="ManagerOrder-btn-update">
-                              <img src={EditIcon} alt="Edit" />
-                            </button>
-                            <button className="ManagerOrder-btn-delete">
-                              <img src={DeleteIcon} alt="Delete" />
-                            </button>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                  )}
-                </React.Fragment>
+                      
+                    </td>
+
+                  </tr>
+                 
+                
               ))}
             </tbody>
           </table>
@@ -183,4 +161,4 @@ const CustomerOrder = () => {
   );
 };
 
-export default CustomerOrder;
+export default SalesStaffOrder;
