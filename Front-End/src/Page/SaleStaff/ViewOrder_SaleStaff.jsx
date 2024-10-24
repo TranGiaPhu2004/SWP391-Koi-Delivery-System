@@ -10,7 +10,7 @@ import '../../Components/ManagerCustomer.css';
 import LogoutButton from "../../Logout";
 import { Link, useNavigate } from "react-router-dom";
 
-const ManagerOrder = () => {
+const CustomerOrder = () => {
   const [orders, setOrders] = useState([]);
   const [expandedOrder, setExpandedOrder] = useState(null);
   const [error, setError] = useState("");
@@ -183,4 +183,4 @@ const ManagerOrder = () => {
   );
 };
 
-export default ManagerOrder;
+export default CustomerOrder;
