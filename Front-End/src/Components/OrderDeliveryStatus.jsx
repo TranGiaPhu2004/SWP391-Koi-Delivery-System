@@ -6,12 +6,14 @@ import track3 from '../assets/image/track3.png';
 import track4 from '../assets/image/track4.png';
 import track5 from '../assets/image/track5.png';
 import './OrderDeliveryStatus.css';
+import { Link, useNavigate } from "react-router-dom";
 
 function OrderDeliveryStatus() {
     const { orderId } = useParams(); // Get orderId from the URL parameter
     const [status, setStatus] = useState(0);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (orderId) {
@@ -65,11 +67,12 @@ function OrderDeliveryStatus() {
 
             if (!response.ok) {
                 throw new Error('Failed to update order status.');
+            }else{const data = await response.json();
+                console.log('Order status updated successfully:', data);
+                alert('Order status updated successfully!');
+                navigate('/DeliveryViewOrder');
             }
 
-            const data = await response.json();
-            console.log('Order status updated successfully:', data);
-            alert('Order status updated successfully!');
         } catch (err) {
             console.error('Error updating order status:', err);
             setError('The order delivery status is not change!');
