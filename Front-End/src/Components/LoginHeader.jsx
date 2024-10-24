@@ -51,7 +51,7 @@ function LoginHeaderMethod() {
           navigate("/DeliveryViewOrder");
         }
         else if (data.role === "Sales Staff") {
-          navigate("/SalesStaffOrder");
+          navigate("/ConfirmOrder");
         }
       } else {
         setErrorMessage("Invalid username or password");

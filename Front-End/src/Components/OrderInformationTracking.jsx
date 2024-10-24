@@ -41,8 +41,8 @@ function OrderInformationTracking() {
             const statusId = data.orderStatusID - 1; // Adjust the status to match the index
             setStatus(statusId);
 
-        } catch (err) {
-            console.error('Error fetching order status:', err);
+        } catch (error) {
+            console.error('Error fetching order status:', error);
             setError('Failed to fetch order status. Please try again.');
         } finally {
             setLoading(false);

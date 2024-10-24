@@ -20,7 +20,7 @@ import DeleteOrder from "./Page/Delete-Order/DeleteOrder.jsx";
 import DeliveryViewOrder from "./Page/DeliveryViewOrder/DeliveryViewOrder.jsx";
 import ThanksforPayment from "./Page/Payment-Methods/ThanksForPayments.jsx";
 import ConfirmOrder from "./Page/SaleStaff/ConfirmOrder.jsx";
-import SalesStaffOrder from "./Page/SaleStaff/SaleStaffViewOrder.jsx";
+
 function App() {
   return (
     <Router>
@@ -47,8 +47,8 @@ function App() {
         <Route path="/DeleteOrder" element={<DeleteOrder />} />
         <Route path="/DeliveryViewOrder" element={<DeliveryViewOrder />} />
         <Route path="/ThanksforPayment" element={<ThanksforPayment />} />
-        <Route path="/ConfirmOrder/:orderId" element={<ConfirmOrder />} />
-        <Route path="/SalesStaffOrder" element={<SalesStaffOrder />} />
+        <Route path="/ConfirmOrder" element={<ConfirmOrder />} />
+        
       </Routes>
     </Router>
     
