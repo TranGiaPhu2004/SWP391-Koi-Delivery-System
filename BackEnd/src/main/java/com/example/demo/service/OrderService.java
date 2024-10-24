@@ -149,8 +149,15 @@ public class OrderService {
                     return msg;
                 }
                 order.setOrderStatus(orderStatus);
-                orderRepository.save(order);
-                msg.setMsg("Order status updated successfully");
+
+                if (statusID ==5){
+                    order.getDelivery().setDeliveryStatus(Boolean.TRUE);
+                    orderRepository.save(order);
+                    msg.setMsg("Delivery has been completed");
+                } else {
+                    orderRepository.save(order);
+                    msg.setMsg("Order status updated successfully");
+                }
                 msg.setSuccess(Boolean.TRUE);
                 return msg;
             } else {

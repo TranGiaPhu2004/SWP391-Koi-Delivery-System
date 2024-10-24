@@ -14,6 +14,12 @@ const ManagerOrder = () => {
   const [orders, setOrders] = useState([]);
   const [expandedOrder, setExpandedOrder] = useState(null);
   const [error, setError] = useState("");
+  const [searchQuery, setSearchQuery] = useState(""); // State for search query
+
+  // Pagination states
+  const [currentPage, setCurrentPage] = useState(1); // Current page
+  const [ordersPerPage] = useState(12); // Number of orders per page
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -51,6 +57,19 @@ const ManagerOrder = () => {
     navigate(`/DeliveryStatus/${orderID}`);
   };
 
+  // Filter orders based on the search query (search by order date)
+  const filteredOrders = orders.filter((order) =>
+    order.orderDate.includes(searchQuery)
+  );
+
+  // Get current orders for the current page
+  const indexOfLastOrder = currentPage * ordersPerPage;
+  const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
+  const currentOrders = filteredOrders.slice(indexOfFirstOrder, indexOfLastOrder);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div className="ManagerOrder-container">
       <aside className="ManagerOrder-sidebar">
@@ -68,10 +87,7 @@ const ManagerOrder = () => {
             <li className="ManagerOrder-nav-item">
               <Link to="/ManagerOrder">Order Manager</Link>
             </li>
-            <li className="ManagerOrder-nav-item">Notification</li>
-            <li className="ManagerOrder-nav-item">Settings</li>
-            <li className="ManagerOrder-nav-item">Account</li>
-            <li className="ManagerOrder-nav-item">Help</li>
+           
           </ul>
         </nav>
         <LogoutButton />
@@ -87,7 +103,12 @@ const ManagerOrder = () => {
             </div>
           </div>
           <div className="ManagerOrder-search-container">
-            <input type="text" placeholder="Search..." />
+            <input
+              type="text"
+              placeholder="Search by order date..."
+              value={searchQuery} // Bind searchQuery to the input field
+              onChange={(e) => setSearchQuery(e.target.value)} // Update searchQuery state on input change
+            />
             <img src={search} alt="Search Icon" className="ManagerOrder-search-icon" />
           </div>
         </header>
@@ -107,7 +128,7 @@ const ManagerOrder = () => {
               </tr>
             </thead>
             <tbody>
-              {orders.map((order) => (
+              {currentOrders.map((order) => (
                 <React.Fragment key={order.orderID}>
                   <tr onClick={() => toggleOrder(order.orderID)}>
                     <td>{order.orderID}</td>
@@ -153,6 +174,15 @@ const ManagerOrder = () => {
               ))}
             </tbody>
           </table>
+
+          {/* Pagination controls */}
+          <div className="ManagerOrder-pagination">
+            {Array.from({ length: Math.ceil(filteredOrders.length / ordersPerPage) }).map((_, idx) => (
+              <button key={idx} onClick={() => paginate(idx + 1)} className={currentPage === idx + 1 ? 'active' : ''}>
+                {idx + 1}
+              </button>
+            ))}
+          </div>
         </div>
       </main>
     </div>

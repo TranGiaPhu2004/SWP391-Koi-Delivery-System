@@ -11,15 +11,16 @@ import DeliveryStatus from "./Page/Delivery-Status/DeliveryStatus.jsx";
 import PriceList from "./Components/PriceList.jsx";
 import ManagerPrice from "./Components/ManagerPrice.jsx";
 import ManagerOrder from "./Components/ManagerOrder.jsx";
-import ViewOrder from "../src/Page/SaleStaff/ViewOrder_SaleStaff.jsx";
+import ViewOrder from "./Page/SaleStaff/ViewOrder_SaleStaff.jsx";
 import HomeCus from "./Page/Home/Home_Customer.jsx";
-import ViewOrderCustomer from './Page/View-Order/ViewOrder.jsx'
+import ViewOrderCustomer from "./Page/View-Order/ViewOrder.jsx";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import OrderInformation from './Page/View-Order/ViewOrder.jsx'
-import DeleteOrder from './Page/Delete-Order/DeleteOrder.jsx'
+import OrderInformation from "./Page/View-Order/ViewOrder.jsx";
+import DeleteOrder from "./Page/Delete-Order/DeleteOrder.jsx";
 import DeliveryViewOrder from "./Page/DeliveryViewOrder/DeliveryViewOrder.jsx";
 import MomoMethod from './Page/Payment-Methods/MomoMethod.jsx'
 import VNPayMethod from './Page/Payment-Methods/VnPayMethod.jsx'
+
 function App() {
   return (
     <Router>
@@ -34,7 +35,10 @@ function App() {
         <Route path="/Manager" element={<Manager />} />
         <Route path="/DeliveryStatus/:orderId" element={<DeliveryStatus />} />
         <Route path="/PriceList" element={<PriceList />} />
-        <Route path="/DeliveryTracking/:orderId" element={<DeliveryTracking />} />
+        <Route
+          path="/DeliveryTracking/:orderId"
+          element={<DeliveryTracking />}
+        />
         <Route path="/AddNewAccount" element={<AddNewAccount />} />
         <Route path="/ViewOrder" element={<ViewOrder />} />
         <Route path="/HomeCus" element={<HomeCus />} />
@@ -42,11 +46,14 @@ function App() {
         <Route path="/OrderInformation" element={<OrderInformation />} />
         <Route path="/DeleteOrder" element={<DeleteOrder />} />
         <Route path="/DeliveryViewOrder" element={<DeliveryViewOrder />} />
+
         <Route path="/momoo" element={<MomoMethod/>} />
         <Route path="/vnpayy" element={<VNPayMethod/>} />
 
+
       </Routes>
     </Router>
+    
   );
 }
 
