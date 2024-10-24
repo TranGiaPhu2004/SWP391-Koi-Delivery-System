@@ -1,0 +1,149 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+.ConfirmOrder-Container {
+    width: 100vw;
+  display: flex;
+  }
+  .ConfirmOrder-sidebar {
+    background-color: white;
+  /* background-color: #1a1a2e; */
+  width: 300px;
+  height: 100vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  position: fixed;
+  /* Sidebar cố định vị trí */
+  top: 0;
+  /* Đảm bảo nó dính trên cùng của trang */
+  left: 0;
+  /* Đặt sidebar ở phía trái màn hình */
+  }
+  
+  .ConfirmOrder-logo {
+    margin-left: 10px;
+  }
+  
+  .ConfirmOrder-nav-list {
+    list-style-type: none;
+  }
+  
+  .ConfirmOrder-nav-item {
+    color: #2B3D55;
+  margin: 20px 0px 20px 10px;
+  cursor: pointer;
+  font-weight: 900;
+  font-size: large;
+  }
+  
+  .ConfirmOrder-nav-item a {
+    color: #2B3D55;
+  text-decoration: none; /* Loại bỏ gạch chân */
+  display: block; /* Để dễ dàng kích hoạt toàn bộ khu vực */
+  margin: 20px 0px 20px 10px;
+  font-weight: 900;
+  font-size: large;
+  }
+  
+  .ConfirmOrder-Content {
+    padding: 0;
+  width: calc(100% - 250px);
+  /* Đảm bảo rằng khung chính mở rộng */
+  margin-left: 300px;
+  /* Đẩy nội dung chính sang phải bằng với chiều rộng của sidebar */
+  width: calc(100% - 300px);
+  height: 100vh;
+  background-color: #2B3D55;
+  }
+  
+  .ConfirmOrder-header {
+    border: white;
+  background-color: #F9F9F9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  }
+  
+  .Confirm-user-info {
+    display: flex;
+  align-items: center;
+  }
+  
+  .Confirm-avatar {
+    border-radius: 50%;
+  margin-left: 20px;
+  width: 50px;
+  }
+  
+  .ConfirmOrder-Table h1 {
+    margin-bottom: 20px;
+  margin-top: 5px;
+  color: #FFF;
+  }
+  
+  .ConfirmOrder-Table table {
+    max-width: 100%;
+  /* Đảm bảo bảng không vượt quá khung nhìn */
+  padding: 0;
+  /* Xóa bỏ mọi padding không cần thiết */
+  margin-left: 5px;
+  width: 99%;
+  table-layout: fixed;
+  /* Cố định chiều rộng các cột để bảng không bị tràn */
+  border-collapse: collapse;
+  background-color: #F9F9F9;
+  color: black;
+  overflow-x: auto;
+  /* Cho phép cuộn ngang nếu nội dung quá dài */
+  }
+  
+  .ConfirmOrder-Table th,
+  .ConfirmOrder-Table td {
+    padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+  white-space: nowrap;
+  /* Không cho phép xuống dòng */
+  overflow: hidden;
+  /* Ẩn nội dung nếu quá dài */
+  text-overflow: ellipsis;
+  /* Thêm dấu "..." nếu nội dung bị cắt ngắn */
+  }
+  .ConfirmOrder-Table th:nth-child(1),
+.ConfirmOrder-Table td:nth-child(1) {
+  width: 50px;
+  /* Bạn có thể điều chỉnh kích thước nhỏ hơn */
+  text-align: center;
+  /* Căn giữa nội dung cột ID */
+}
+
+
+  
+  .ConfirmOrder-btn {
+    background-color: #27ae60;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .RejectOrder-btn {
+    background-color: #e74c3c;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    margin-left: 5px;
+    cursor: pointer;
+  }
+  
+  .ConfirmOrder-btn:hover,
+  .RejectOrder-btn:hover {
+    opacity: 0.9;
+  } 
+  
