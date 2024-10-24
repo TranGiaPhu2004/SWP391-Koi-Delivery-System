@@ -18,8 +18,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import OrderInformation from "./Page/View-Order/ViewOrder.jsx";
 import DeleteOrder from "./Page/Delete-Order/DeleteOrder.jsx";
 import DeliveryViewOrder from "./Page/DeliveryViewOrder/DeliveryViewOrder.jsx";
-import ThanksforPayment from "./Page/Payment-Methods/ThanksForPayments.jsx";
-import ConfirmOrder from "./Page/SaleStaff/ConfirmOrder.jsx";
+import MomoMethod from './Page/Payment-Methods/MomoMethod.jsx'
+import VNPayMethod from './Page/Payment-Methods/VnPayMethod.jsx'
 
 function App() {
   return (
@@ -46,9 +46,11 @@ function App() {
         <Route path="/OrderInformation" element={<OrderInformation />} />
         <Route path="/DeleteOrder" element={<DeleteOrder />} />
         <Route path="/DeliveryViewOrder" element={<DeliveryViewOrder />} />
-        <Route path="/ThanksforPayment" element={<ThanksforPayment />} />
-        <Route path="/ConfirmOrder" element={<ConfirmOrder />} />
-        
+
+        <Route path="/momoo" element={<MomoMethod/>} />
+        <Route path="/vnpayy" element={<VNPayMethod/>} />
+
+
       </Routes>
     </Router>
     

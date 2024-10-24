@@ -1,11 +1,4 @@
-html, body {
-  height: 100%;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: Arial, sans-serif;
-}
+
 .Momo-Payment {
   width: 900px;
   padding: 20px;
@@ -15,6 +8,7 @@ html, body {
   text-align: center;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   background-color: #d404a7;
+  margin-left: 35%;
 }
 
 .Momo-Content {
