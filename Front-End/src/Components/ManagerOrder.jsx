@@ -14,6 +14,7 @@ const ManagerOrder = () => {
   const [orders, setOrders] = useState([]);
   const [expandedOrder, setExpandedOrder] = useState(null);
   const [error, setError] = useState("");
+  const [searchQuery, setSearchQuery] = useState(""); // State for search query
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -51,6 +52,11 @@ const ManagerOrder = () => {
     navigate(`/DeliveryStatus/${orderID}`);
   };
 
+  // Filter orders based on the search query (search by order date)
+  const filteredOrders = orders.filter((order) =>
+    order.orderDate.includes(searchQuery)
+  );
+
   return (
     <div className="ManagerOrder-container">
       <aside className="ManagerOrder-sidebar">
@@ -87,7 +93,12 @@ const ManagerOrder = () => {
             </div>
           </div>
           <div className="ManagerOrder-search-container">
-            <input type="text" placeholder="Search..." />
+            <input
+              type="text"
+              placeholder="Search by order date..."
+              value={searchQuery} // Bind searchQuery to the input field
+              onChange={(e) => setSearchQuery(e.target.value)} // Update searchQuery state on input change
+            />
             <img src={search} alt="Search Icon" className="ManagerOrder-search-icon" />
           </div>
         </header>
@@ -107,7 +118,7 @@ const ManagerOrder = () => {
               </tr>
             </thead>
             <tbody>
-              {orders.map((order) => (
+              {filteredOrders.map((order) => (
                 <React.Fragment key={order.orderID}>
                   <tr onClick={() => toggleOrder(order.orderID)}>
                     <td>{order.orderID}</td>

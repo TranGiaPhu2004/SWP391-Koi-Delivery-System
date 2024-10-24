@@ -11,6 +11,7 @@ const ManagerCustomer = () => {
   const [error, setError] = useState("");
   const [selectedUser, setSelectedUser] = useState(null);
   const [message, setMessage] = useState("");
+  const [searchQuery, setSearchQuery] = useState(""); // State for search query
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -110,7 +111,6 @@ const ManagerCustomer = () => {
       );
 
       if (response.ok) {
-        
         fetchCustomers();
         setSelectedUser(null); // Đóng form cập nhật
       } else {
@@ -120,6 +120,11 @@ const ManagerCustomer = () => {
       setError("Error updating user. Please try again.");
     }
   };
+
+  // Filter customers based on the searchQuery
+  const filteredCustomers = customers.filter(customer =>
+    customer.username.toString().includes(searchQuery)
+  );
 
   return (
     <div className="ManagerCustomer-container">
@@ -161,7 +166,12 @@ const ManagerCustomer = () => {
             </div>
           </div>
           <div className="ManagerCustomer-search-container">
-            <input type="text" placeholder="Search..." />
+            <input
+              type="text"
+              placeholder="Search by username..."
+              value={searchQuery} // Bind searchQuery to input
+              onChange={(e) => setSearchQuery(e.target.value)} // Update searchQuery on input change
+            />
             <img
               src={search}
               alt="Search Icon"
@@ -236,7 +246,7 @@ const ManagerCustomer = () => {
               </tr>
             </thead>
             <tbody>
-              {customers.map((customer) => (
+              {filteredCustomers.map((customer) => (
                 <tr key={customer.userID}>
                   <td>{customer.userID}</td>
                   <td>{customer.username}</td>
