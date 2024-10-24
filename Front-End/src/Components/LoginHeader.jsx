@@ -55,6 +55,7 @@ function LoginHeaderMethod() {
       }
     } catch (error) {
       setErrorMessage("Error logging in");
+      throw new Error("Error logging in");
     }
   };
   //------
