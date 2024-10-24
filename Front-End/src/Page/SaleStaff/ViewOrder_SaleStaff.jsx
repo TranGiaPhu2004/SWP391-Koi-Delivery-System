@@ -14,7 +14,12 @@ const ManagerOrder = () => {
   const [orders, setOrders] = useState([]);
   const [expandedOrder, setExpandedOrder] = useState(null);
   const [error, setError] = useState("");
+  const [searchQuery, setSearchQuery] = useState(""); 
   const navigate = useNavigate();
+
+  // Pagination states
+  const [currentPage, setCurrentPage] = useState(1); // Current page
+  const [ordersPerPage] = useState(12); // Number of orders per page
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -51,6 +56,22 @@ const ManagerOrder = () => {
     navigate(`/DeliveryTracking/${orderID}`);
   };
 
+  const filteredOrders = orders.filter((order) =>
+    order.orderDate.includes(searchQuery)
+  );
+
+  // Get current orders for the current page
+  const indexOfLastOrder = currentPage * ordersPerPage;
+  const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
+  const currentOrders = filteredOrders.slice(
+    indexOfFirstOrder,
+    indexOfLastOrder
+  );
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+
   return (
     <div className="ManagerOrder-container">
       <aside className="ManagerOrder-sidebar">
@@ -67,11 +88,16 @@ const ManagerOrder = () => {
             <img src={avatar} alt="User Avatar" className="ManagerOrder-avatar" />
             <div className="ManagerOrder-user-details">
               <h3>Vũ Đức Mạnh</h3>
-              <p>Manager</p>
+              <p>Customer</p>
             </div>
           </div>
           <div className="ManagerOrder-search-container">
-            <input type="text" placeholder="Search..." />
+            <input
+              type="text"
+              placeholder="Search by order date..."
+              value={searchQuery} // Bind searchQuery to the input field
+              onChange={(e) => setSearchQuery(e.target.value)} // Update searchQuery state on input change
+            />
             <img src={search} alt="Search Icon" className="ManagerOrder-search-icon" />
           </div>
         </header>
@@ -91,7 +117,7 @@ const ManagerOrder = () => {
               </tr>
             </thead>
             <tbody>
-              {orders.map((order) => (
+              {currentOrders.map((order) => (
                 <React.Fragment key={order.orderID}>
                   <tr onClick={() => toggleOrder(order.orderID)}>
                     <td>{order.orderID}</td>
@@ -137,6 +163,20 @@ const ManagerOrder = () => {
               ))}
             </tbody>
           </table>
+          {/* Pagination controls */}
+          <div className="ManagerOrder-pagination">
+            {Array.from({
+              length: Math.ceil(filteredOrders.length / ordersPerPage),
+            }).map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => paginate(idx + 1)}
+                className={currentPage === idx + 1 ? "active" : ""}
+              >
+                {idx + 1}
+              </button>
+            ))}
+          </div>
         </div>
       </main>
     </div>

@@ -72,7 +72,7 @@ function OrderDeliveryStatus() {
             alert('Order status updated successfully!');
         } catch (err) {
             console.error('Error updating order status:', err);
-            setError('Failed to update order status. Please try again.');
+            setError('The order delivery status is not change!');
         } finally {
             setLoading(false);
         }
