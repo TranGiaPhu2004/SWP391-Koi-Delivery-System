@@ -6,7 +6,7 @@ import "../../Components/ManagerCustomer.css";
 import LogoutButton from "../../Logout";
 
 
-const SalesStaffOrder = () => {
+const ConfirmOrder = () => {
   const [orders, setOrders] = useState([]);
   
   const [error, setError] = useState("");
@@ -180,4 +180,4 @@ const SalesStaffOrder = () => {
   );
 };
 
-export default SalesStaffOrder;
+export default ConfirmOrder;
