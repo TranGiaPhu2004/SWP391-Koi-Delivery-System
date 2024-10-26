@@ -103,7 +103,7 @@ const CustomerOrder = () => {
         </header>
 
         <div className="ManagerOrder-order-management">
-          <h1>Order Management</h1>
+          <h1>Order List</h1>
           {error && <p style={{ color: 'red' }}>{error}</p>}
           <table className="ManagerOrder-order-table">
             <thead>

@@ -115,7 +115,7 @@ const DeliveryViewOrder = () => {
         </header>
 
         <div className="ManagerOrder-order-management">
-          <h1>Order Management</h1>
+          <h1>Order Need To Delivery</h1>
           {error && <p style={{ color: "red" }}>{error}</p>}
           <table className="ManagerOrder-order-table">
             <thead>
