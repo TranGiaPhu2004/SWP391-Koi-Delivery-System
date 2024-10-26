@@ -13,7 +13,7 @@ const OrderInformation = () => {
     // kiểm tra xem trong hệ thống đã tồn tại state chứa dữ liệu chưa ?
     const orderData = state ? state.data : {};
 
-    const { totalPrice, startPlace, endPlace, deliveryType, boxes } = orderData;
+    const { totalPrice, startPlace, endPlace, deliveryID, boxes } = orderData;
 
     // CHUYỂN SANG ĐƠN VỊ TIỀN TỂ LÀ VNĐ
     const formatCurrency = (amount) => {
@@ -31,7 +31,7 @@ const OrderInformation = () => {
 
     // Delivery cost calculation
     const DeliveryType = () => {
-        return deliveryType === 1 ? 300000 : 850000;
+        return deliveryID === 1 ? 300000 : 850000;
     };
 
     return (
@@ -116,7 +116,7 @@ const OrderInformation = () => {
 
                         <Link
                             to='/Payment'
-                            state={{ orderData: { totalPrice, startPlace, endPlace, deliveryType, boxes } }}
+                            state={{ orderData: { totalPrice, startPlace, endPlace, deliveryID, boxes } }}
                         >
                             <button className="OrderInformation-payment-button">
                                 {formatCurrency(totalPrice)} Payment <span>→</span>

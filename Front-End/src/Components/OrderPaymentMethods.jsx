@@ -9,10 +9,10 @@ function OrderPaymentMethods() {
 
     const location = useLocation();
     const { orderData } = location.state || {};
-    const { totalPrice, startPlace, endPlace, deliveryType } = orderData || {};
+    const { totalPrice, startPlace, endPlace, deliveryID } = orderData || {};
 
     const DeliveryType = () => {
-        return deliveryType === 1 ? 300000 : 850000;
+        return deliveryID === 1 ? 300000 : 850000;
     };
 
     // CHUYỂN SANG ĐƠN VỊ TIỀN TỂ LÀ VNĐ
@@ -27,12 +27,28 @@ function OrderPaymentMethods() {
     }
 
     const handleQRCodeOrderCompletion = () => {
+        if (!selectedPaymentMethod) {
+            alert('Please select one of the payment methods!');
+            return;
+        }
         switch (selectedPaymentMethod) {
             case 'momo':
-                navigate('/momoo');
+                navigate('/momoo', {
+                    state: {
+                        totalPrice,
+                        startPlace,
+                        endPlace
+                    }
+                });
                 break;
             case 'vnpay':
-                navigate('/vnpayy');
+                navigate('/vnpayy', {
+                    state: {
+                        totalPrice,
+                        startPlace,
+                        endPlace
+                    }
+                });
                 break;
             default:
                 alert('Please select one of two payment methods!');
