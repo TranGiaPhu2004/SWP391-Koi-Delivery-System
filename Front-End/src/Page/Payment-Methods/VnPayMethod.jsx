@@ -2,40 +2,45 @@ import VnPayQR from "../../assets/image/VnPayQR.png";
 import logo3 from "../../assets/image/Logo.png";
 import "../../Components/VnPayQR.css";
 import vnpay from "../../assets/image/vnpay.png";
-import { Link, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 function VnPayMethod() {
+  // Retrieve passed data from the state
+  const location = useLocation();
+  const { totalPrice, startPlace, endPlace } = location.state || {}; // Use optional chaining for safety
+
+  const formatCurrencyyy = (amount) => {
+    return amount.toLocaleString("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    });
+  };
   return (
     <div className="vnpay-Payment">
       <div className="vnpay-header">
         <img src={logo3} alt="logo-vnpay" />
         <img src={vnpay} alt="vnpay-logo" className="vnpay-logo" />
-        <h2>Cổng thanh toán VNPay</h2>
+        <h2>VNPay Wallet Payment Gateway</h2>
       </div>
 
       <div className="vnpay-Content">
         <div className="vnpay-order-info">
-          <h3>Thông tin đơn hàng</h3>
+          <h3>Order Information</h3>
           <p className="vnpay-info-p">
-            Nhà cung cấp: Công ty Vận Chuyển Koi Express
+            Express Koi Delivery Ordering Enterprise
           </p>
-          <p className="vnpay-info-p">Mã đơn hàng: 001</p>
-          <p
-            className="
-          vnpay-info-p"
-          >
-            Mô tả: Thanh toán hóa đơn 001 qua ví VNPay
+          <p className="vnpay-info-p">
+            Total Amount: {formatCurrencyyy(totalPrice)}
           </p>
-          <p className="vnpay-info-p ">Số tiền: 330.000đ</p>
+          <p className="vnpay-info-p">Sent From: {startPlace}</p>
+          <p className="vnpay-info-p">Delivery to: {endPlace}</p>
         </div>
         <div className="vnpay-qr-code-section">
           <img src={VnPayQR} alt="QR Code" className="vnpayQR" />
-          <p>Quét mã QR để thanh toán</p>
+          <p>Scan QR code to pay</p>
           <p>
-            Sử dụng App VNPay hoặc ứng dụng camera hỗ trợ QR code để quét mã
+            Use MoMo App or camera app that supports QR code to scan the code
           </p>
-          <a href="/ThanksforPayment">
-            Nhấn vào đây khi đã thanh toán thành công
-          </a>
+          <a href="/HomeCus">Click here when payment is successful</a>
         </div>
       </div>
     </div>
