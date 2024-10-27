@@ -57,7 +57,6 @@ function LoginHeaderMethod() {
         setErrorMessage("Invalid username or password");
       }
     } catch (error) {
-      throw("login error");
       setErrorMessage("Error logging in");
     }
   };
