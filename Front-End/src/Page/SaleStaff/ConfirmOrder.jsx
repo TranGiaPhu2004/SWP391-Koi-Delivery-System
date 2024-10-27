@@ -15,7 +15,7 @@ const ConfirmOrder = () => {
 
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
-  const [ordersPerPage] = useState(12);
+  const [ordersPerPage] = useState(10);
 
   
 
