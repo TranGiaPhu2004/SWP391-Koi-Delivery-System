@@ -122,7 +122,9 @@ const OrderInformation = () => {
                                 {formatCurrency(totalPrice)} Payment <span>→</span>
                             </button>
                         </Link>
-                        <Link to='/DeleteOrder'>
+                        <Link to='/DeleteOrder'
+                            state={{ orderData: { totalPrice, startPlace, endPlace, deliveryID, boxes } }}
+                        >
                             <div className="OrderInformation-cancel">
                                 <a href='#'>Delete</a>
                             </div>
