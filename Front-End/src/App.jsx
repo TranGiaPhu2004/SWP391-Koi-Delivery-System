@@ -21,6 +21,7 @@ import DeliveryViewOrder from "./Page/DeliveryViewOrder/DeliveryViewOrder.jsx";
 import MomoMethod from './Page/Payment-Methods/MomoMethod.jsx'
 import VNPayMethod from './Page/Payment-Methods/VnPayMethod.jsx'
 import ConfirmOrder from "./Page/SaleStaff/ConfirmOrder.jsx";
+import DeliveryStatusD from "./Page/Delivery-Status/DeliveryStatusD.jsx";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/ManagerOrder" element={<ManagerOrder />} />
         <Route path="/Manager" element={<Manager />} />
         <Route path="/DeliveryStatus/:orderId" element={<DeliveryStatus />} />
+        <Route path="/DeliveryStatusD/:orderId" element={<DeliveryStatusD />} />
         <Route path="/PriceList" element={<PriceList />} />
         <Route
           path="/DeliveryTracking/:orderId"

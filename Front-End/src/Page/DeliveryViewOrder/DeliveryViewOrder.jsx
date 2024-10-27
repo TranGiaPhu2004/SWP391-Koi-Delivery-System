@@ -57,7 +57,7 @@ const DeliveryViewOrder = () => {
 
   // Function to handle navigation to the OrderDeliveryStatus page
   const handleViewDeliveryStatus = (orderID) => {
-    navigate(`/DeliveryStatus/${orderID}`);
+    navigate(`/DeliveryStatusD/${orderID}`);
   };
 
   // Filter orders based on the search query (search by order date)

@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import track1 from '../assets/image/track1.png';
-import track2 from '../assets/image/track2.png';
-import track3 from '../assets/image/track3.png';
-import track4 from '../assets/image/track4.png';
-import track5 from '../assets/image/track5.png';
-import './OrderDeliveryStatus.css';
+import track1 from '../../assets/image/track1.png';
+import track2 from '../../assets/image/track2.png';
+import track3 from '../../assets/image/track3.png';
+import track4 from '../../assets/image/track4.png';
+import track5 from '../../assets/image/track5.png';
+import '../../Components/OrderDeliveryStatus.css';
 import { Link, useNavigate } from "react-router-dom";
 
-function OrderDeliveryStatus() {
+function DeliveryStatusD() {
     const { orderId } = useParams(); // Get orderId from the URL parameter
     const [status, setStatus] = useState(0);
     const [loading, setLoading] = useState(false);
@@ -70,7 +70,7 @@ function OrderDeliveryStatus() {
             }else{const data = await response.json();
                 console.log('Order status updated successfully:', data);
                 alert('Order status updated successfully!');
-                navigate('/ManagerOrder');
+                navigate('/DeliveryViewOrder');
             }
 
         } catch (err) {
@@ -130,4 +130,4 @@ function OrderDeliveryStatus() {
     );
 }
 
-export default OrderDeliveryStatus;
+export default DeliveryStatusD;
