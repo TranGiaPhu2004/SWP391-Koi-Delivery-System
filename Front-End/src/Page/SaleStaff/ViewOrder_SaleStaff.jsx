@@ -29,7 +29,7 @@ const ManagerOrder = () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
+            // Authorization: `Bearer ${token}`,
           },
         });
 
@@ -38,9 +38,12 @@ const ManagerOrder = () => {
           setOrders(data.orders);
         } else {
           setError('Failed to fetch orders.');
+          throw new Error ('Failed to fetch orders.')
         }
       } catch (error) {
         setError('Error fetching orders. Please check your network and try again.');
+        throw new Error ('Failed to fetch orders.')
+        
       }
     };
 

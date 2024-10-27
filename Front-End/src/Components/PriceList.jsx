@@ -142,13 +142,14 @@ function PriceList() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    // 'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 },
                 body: JSON.stringify(data),
             });
 
             if (!response.ok) {
-                throw new Error('Lỗi phản hồi từ API: ' + response.status);
+                
+                throw new Error("Lỗi phản hồi từ API");
             }
 
             const responseData = await response.json();
@@ -158,6 +159,7 @@ function PriceList() {
 
         } catch (error) {
             console.error('Đã xảy ra lỗi khi gửi yêu cầu POST:', error);
+            throw new Error("Error occur when send API request");
         }
     };
 

@@ -27,19 +27,22 @@ function RegisterMethod() {
             method: "GET",
             headers: {
               
-              Authorization: `Bearer ${token}`,
+               Authorization: `Bearer ${token}`,
             },
             
           }
         );
         if (response.ok) {
           const data = await response.json();
-          setRoles(data.allRole); // Cập nhật state với danh sách vai trò
+          setRoles(data);
+          // setRoles(data.allRole); // Cập nhật state với danh sách vai trò
         } else {
           console.error("Failed to fetch roles");
+          throw new Error('Failed to fetch roles')
         }
       } catch (error) {
         console.error("Error fetching roles:", error);
+        throw new Error('Failed to fetch roles')
       }
     };
 

@@ -41,8 +41,8 @@ function OrderDeliveryStatus() {
             const statusId = data.orderStatusID - 1; // Adjust the status to match the index
             setStatus(statusId);
 
-        } catch (err) {
-            console.error('Error fetching order status:', err);
+        } catch (error) {
+            console.error('Error fetching order status:', error);
             setError('Failed to fetch order status. Please try again.');
         } finally {
             setLoading(false);
@@ -54,7 +54,8 @@ function OrderDeliveryStatus() {
         setError('');
 
         try {
-            const statusId = status + 1;
+            // const statusId = status + 1;
+            const statusId = status-1;
             const response = await fetch(`http://localhost:8080/orders/${orderId}/status/${statusId}`, {
                 method: 'PUT',
                 headers: {
@@ -70,9 +71,9 @@ function OrderDeliveryStatus() {
             const data = await response.json();
             console.log('Order status updated successfully:', data);
             alert('Order status updated successfully!');
-        } catch (err) {
-            console.error('Error updating order status:', err);
-            setError('The order delivery status is not change!');
+        } catch (error) {
+            console.error('Error updating order status:', error);
+            throw new Error('Failed to update order status.');
         } finally {
             setLoading(false);
         }

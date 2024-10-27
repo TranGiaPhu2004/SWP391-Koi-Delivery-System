@@ -26,7 +26,7 @@ const ManagerOrder = () => {
     const fetchOrders = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:8080/admin/allOrder', {
+        const response = await fetch('http://localhost:8080/admin/allOrder1', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -39,9 +39,11 @@ const ManagerOrder = () => {
           setOrders(data.orders);
         } else {
           setError('Failed to fetch orders.');
+          throw new Error("Failed to fetch orders.");
         }
       } catch (error) {
         setError('Error fetching orders. Please check your network and try again.');
+        throw new Error("Error fetching orders. Please check your network and try again.");
       }
     };
 
