@@ -79,9 +79,14 @@ function OrderPaymentMethods() {
                             {formatCurrencyy(totalPrice)} Payment
                         </button>
 
-                        <div className="OrderPaymentMethods-cancel">
-                            <a href="#">Cancel</a>
-                        </div>
+                        <Link to='/DeleteOrder'
+                            state={{ orderData: { totalPrice, startPlace, endPlace, deliveryID} }}
+                        >
+                            <div className="OrderPaymentMethods-cancel">
+                                <a href="#">Cancel</a>
+                            </div>
+                        </Link>
+
                     </div>
 
                     <div className="OrderPaymentMethods-methods">
