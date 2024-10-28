@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import LogoutButton from "../../Logout.jsx";
 
+
 function Home_Customer() {
   const navigate = useNavigate();
   useEffect(() => {
@@ -33,7 +34,9 @@ function Home_Customer() {
         <a href="/ViewOrder">View Order</a>
         
       </nav>
+      <Link to="/Profile">
       <img src={avatar} alt="Avatar" className="Home-Customer-Avatar" />
+      </Link>
     </div>
     <MainContent></MainContent>
     <LogoutButton></LogoutButton>

@@ -55,8 +55,9 @@ body {
     color: black;
     margin-top: 5px;
     margin-bottom: 15px;
+    text-decoration: none;
   }
-  
+
   .update-profile-sidebar ul {
     list-style: none;
     padding: 0;
@@ -110,7 +111,7 @@ body {
   }
   
   .update-profile-main-content {
-    margin-top: -20px;
+    /* margin-top: -10px; */
     width: 75%;
     margin-left: -45px;
     margin-right: 10px;
@@ -267,7 +268,10 @@ body {
 .update-profile-update-button:hover {
     background-color: #45a049; /* Đổi màu nền khi hover */
 }
-
+/* .update-profile-link {
+  text-decoration: none;
+  color: red;
+} */
 
 /* body {
     background-color: #f3f4f6;

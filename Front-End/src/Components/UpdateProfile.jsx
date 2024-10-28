@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './UpdateProfile.css'; 
 import eyeOn from "../assets/image/eye-on.svg";
 import eyeOff from "../assets/image/eye-off.svg";
+import { Link, useNavigate } from "react-router-dom";
 
 const UpdateProfile = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -26,12 +27,12 @@ const UpdateProfile = () => {
             />
             <span>Vũ Đức Mạnh</span>
           </div>
+          <Link to="/Profile" >
           <h2>Profile</h2>
-          
-          <h2>
-             Update Profile
-          </h2>
-          
+          </Link>
+          <Link to="/UpdateProfile" >
+          <h2>Update Profile </h2>
+          </Link>
           <button className="update-profile-logout">Logout</button>
           
         </div>
