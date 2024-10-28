@@ -6,7 +6,7 @@ const OrderInformationDelete = () => {
     const location = useLocation();
     const { orderData } = location.state || {};
     const { totalPrice, startPlace, endPlace, deliveryID } = orderData || {};
-
+    
     const DeliveryType = () => {
         return deliveryID === 1 ? 300000 : 850000;
     };
@@ -15,7 +15,7 @@ const OrderInformationDelete = () => {
         return amount.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'})
     }
 
-    
+
     return (
         <div>
 
