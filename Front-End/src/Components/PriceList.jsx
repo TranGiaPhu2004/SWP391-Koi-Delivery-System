@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import pickoi1 from '../assets/image/pickoi1.png';
 import pickoi2 from '../assets/image/pickoi2.png';
 import pickoi3 from '../assets/image/pickoi3.png';
@@ -12,6 +12,8 @@ function PriceList() {
     const [count1, setCount1] = useState(0);
     const [count2, setCount2] = useState(0);
     const [count3, setCount3] = useState(0);
+
+    const navigate = useNavigate();
 
     const increment1 = () => setCount1(c => c + 1);
     const increment2 = () => setCount2(c => c + 1);
@@ -61,11 +63,11 @@ function PriceList() {
             total += 200000;
         } else if (selectedServices === 2) {
             total += 150000;
-        } else if(selectedServices === 3) {
+        } else if (selectedServices === 3) {
             total += 500000;
         }
 
-        // LOẠI HÌNH VẬN CHUYỂN
+        // LOẠI HÌNH VẬN CHUYỂN theo ID
 
         if (deliveryType === 1) {
             total += 300000;
@@ -76,6 +78,7 @@ function PriceList() {
         return total;
     };
 
+    // XỬ LÝ KHI CHỌN DỊCH VỤ (SERVICES)
     const handleServiceChange = (e) => {
         const valuee = e.target.value;
         // if (valuee === 'packaging') {
@@ -100,6 +103,7 @@ function PriceList() {
         };
     }
 
+    // XỬ LÝ KHI CHỌN LOẠI HÌNH VẬN CHUYỂN (DELIVERY)
     const handleDeliveryChange = (e) => {
         const value = e.target.value;
         if (value === 'standard') {
@@ -140,6 +144,7 @@ function PriceList() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 },
                 body: JSON.stringify(data),
             });
@@ -150,6 +155,9 @@ function PriceList() {
 
             const responseData = await response.json();
             console.log('Phản hồi từ API:', responseData);
+            // ĐIỀU HƯỚNG TỚI TRANG ORDER CREATED SUCCESSFULLY
+            navigate('/OrderInformation', { state: {data} });
+
         } catch (error) {
             console.error('Đã xảy ra lỗi khi gửi yêu cầu POST:', error);
         }
@@ -367,11 +375,10 @@ function PriceList() {
                 </div>
             </div>
 
-            <Link to="/view">
-                <div className="PriceList-buttonn">
-                    <button type="submit" onClick={handleSubmit}>Order Completion</button>
-                </div>
-            </Link>
+            <div className="PriceList-buttonn">
+                <button type="submit" onClick={handleSubmit}>
+                    Order Completion</button>
+            </div>
         </>
     );
 }

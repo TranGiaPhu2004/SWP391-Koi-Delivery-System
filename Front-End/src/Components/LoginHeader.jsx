@@ -48,7 +48,10 @@ function LoginHeaderMethod() {
           navigate("/HomeCus");
         }
         else if (data.role === "Delivery Staff") {
-          navigate("/DeliveryStatus");
+          navigate("/DeliveryViewOrder");
+        }
+        else if (data.role === "Sales Staff") {
+          navigate("/ConfirmOrder");
         }
       } else {
         setErrorMessage("Invalid username or password");

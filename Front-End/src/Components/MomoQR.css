@@ -1,0 +1,102 @@
+.Momo-Payment {
+  width: 900px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #d404a7;
+  margin-left: 35%;
+}
+
+.Momo-Content {
+  display: grid;
+  /* Kích hoạt Grid Layout */
+  grid-template-columns: 1fr 1fr;
+  /* Chia bố cục thành 2 cột */
+  grid-gap: 20px;
+  /* Khoảng cách giữa các cột */
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.momo-order-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #fff;
+  padding: 20px;
+  margin-top: 5px;
+  border-radius: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  height: 90%;
+}
+
+
+.momo-qr-code-section {
+  background-color: #f7f7f7;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.Momo-header {
+  margin-bottom: 20px;
+}
+
+.logo-momo {
+  width: 50px;
+  height: 50px;
+}
+
+.momo-logo {
+  width: 50px;
+  height: 57px;
+  margin-left: 59%;
+}
+
+.Momo-header h2 {
+  color: #fff;
+  margin-top: 10px;
+  font-family: 'Kay Pho Du';
+  font-size: 35px;
+}
+
+.momo-order-info h3 {
+  margin-bottom: 10px;
+  color: #000;
+  font-size: 30px;
+  font-family: monospace;
+
+}
+
+.momoQR {
+  width: 250px;
+  /* Đặt kích thước cố định cho mã QR */
+  border: 2px solid #000;
+  /* Đường viền quanh mã QR */
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.momo-info-p1 {
+  color: #000;
+  font-size: 21px;
+  white-space: nowrap;
+  font-family: 'Kay Pho Du';
+  box-sizing: border-box;
+  padding: 10px 10px;
+}
+
+.momo-info-p {
+  margin-top: 30px;
+  font-style: italic;
+  text-decoration: underline;
+  color: #000;
+  font-family: monospace;
+  font-size: 24px;
+  white-space: nowrap;
+}

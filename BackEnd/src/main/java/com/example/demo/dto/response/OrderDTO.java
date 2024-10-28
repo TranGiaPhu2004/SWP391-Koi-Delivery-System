@@ -1,5 +1,6 @@
 package com.example.demo.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,4 +19,7 @@ public class OrderDTO implements Serializable {
     private LocalDate orderDate;
     private Float totalPrice;
     private String customsImageLink;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Boolean deliveryStatus;
 }

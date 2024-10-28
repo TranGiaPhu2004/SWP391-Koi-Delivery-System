@@ -8,15 +8,25 @@ import Manager from "./Page/Manager/Manager";
 import DeliveryTracking from "./Page/View-Order-Tracking/ViewOrderTracking";
 import AddNewAccount from "./Page/Add-new-account/Add-new-account";
 import DeliveryStatus from "./Page/Delivery-Status/DeliveryStatus.jsx";
-import DeliveryPriceList from "./Page/Delivery-Price-List/DeliveryPriceList.jsx";
 import PriceList from "./Components/PriceList.jsx";
 import ManagerPrice from "./Components/ManagerPrice.jsx";
 import ManagerOrder from "./Components/ManagerOrder.jsx";
-import ViewOrder from "../src/Page/SaleStaff/ViewOrder_SaleStaff.jsx";
+import ViewOrder from "./Page/SaleStaff/ViewOrder_SaleStaff.jsx";
 import HomeCus from "./Page/Home/Home_Customer.jsx";
+
 import Profile from "./Page/Profile/ProfileC.jsx"
 import UpdateProfile from "./Page/Profile/UpdateProfileC.jsx"
+
+import ViewOrderCustomer from "./Page/View-Order/ViewOrder.jsx";
+
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import OrderInformation from "./Page/View-Order/ViewOrder.jsx";
+import DeleteOrder from "./Page/Delete-Order/DeleteOrder.jsx";
+import DeliveryViewOrder from "./Page/DeliveryViewOrder/DeliveryViewOrder.jsx";
+import MomoMethod from './Page/Payment-Methods/MomoMethod.jsx'
+import VNPayMethod from './Page/Payment-Methods/VnPayMethod.jsx'
+import ConfirmOrder from "./Page/SaleStaff/ConfirmOrder.jsx";
+import DeliveryStatusD from "./Page/Delivery-Status/DeliveryStatusD.jsx";
 
 function App() {
   return (
@@ -31,15 +41,31 @@ function App() {
         <Route path="/ManagerOrder" element={<ManagerOrder />} />
         <Route path="/Manager" element={<Manager />} />
         <Route path="/DeliveryStatus/:orderId" element={<DeliveryStatus />} />
+        <Route path="/DeliveryStatusD/:orderId" element={<DeliveryStatusD />} />
         <Route path="/PriceList" element={<PriceList />} />
-        <Route path="/DeliveryTracking" element={<DeliveryTracking />} />
+        <Route
+          path="/DeliveryTracking/:orderId"
+          element={<DeliveryTracking />}
+        />
         <Route path="/AddNewAccount" element={<AddNewAccount />} />
         <Route path="/ViewOrder" element={<ViewOrder />} />
         <Route path="/HomeCus" element={<HomeCus />} />
+
         <Route path="/Profile" element={<Profile/>} />
         <Route path="/UpdateProfile" element={<UpdateProfile/>} />
+
+        <Route path="/view" element={<ViewOrderCustomer />} />
+        <Route path="/OrderInformation" element={<OrderInformation />} />
+        <Route path="/DeleteOrder" element={<DeleteOrder />} />
+        <Route path="/DeliveryViewOrder" element={<DeliveryViewOrder />} />
+        <Route path="/ConfirmOrder" element={<ConfirmOrder />} />
+
+        <Route path="/momoo" element={<MomoMethod/>} />
+        <Route path="/vnpayy" element={<VNPayMethod/>} />
+
       </Routes>
     </Router>
+    
   );
 }
 

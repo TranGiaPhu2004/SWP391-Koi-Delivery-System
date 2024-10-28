@@ -15,7 +15,8 @@ public class OrderStatusService {
 
     public List<StatusResponseDTO> getAllStatus() {
         return orderStatusRepository.findAll().stream()
-                .map(allStatus -> new StatusResponseDTO(allStatus.getStatusName()))
+                .map(allStatus -> new StatusResponseDTO
+                        (allStatus.getStatusName()))
                 .toList();
     }
 }

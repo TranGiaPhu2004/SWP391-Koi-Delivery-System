@@ -11,7 +11,12 @@ const ManagerCustomer = () => {
   const [error, setError] = useState("");
   const [selectedUser, setSelectedUser] = useState(null);
   const [message, setMessage] = useState("");
+  const [searchQuery, setSearchQuery] = useState(""); // State for search query
   const navigate = useNavigate();
+  // Pagination states
+  
+  const [currentPage, setCurrentPage] = useState(1); // Current page
+  const [ordersPerPage] = useState(12); // Number of orders per page
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -35,7 +40,7 @@ const ManagerCustomer = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-           Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -68,7 +73,7 @@ const ManagerCustomer = () => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-           Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -98,7 +103,7 @@ const ManagerCustomer = () => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-             Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             username: selectedUser.username,
@@ -110,7 +115,6 @@ const ManagerCustomer = () => {
       );
 
       if (response.ok) {
-        
         fetchCustomers();
         setSelectedUser(null); // Đóng form cập nhật
       } else {
@@ -120,6 +124,22 @@ const ManagerCustomer = () => {
       setError("Error updating user. Please try again.");
     }
   };
+
+  // Filter customers based on the searchQuery
+  const filteredCustomers = customers.filter((customer) =>
+    customer.username.toString().includes(searchQuery)
+  );
+
+  // Get current orders for the current page
+  const indexOfLastOrder = currentPage * ordersPerPage;
+  const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
+  const currentOrders = filteredCustomers.slice(
+    indexOfFirstOrder,
+    indexOfLastOrder
+  );
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="ManagerCustomer-container">
@@ -138,10 +158,6 @@ const ManagerCustomer = () => {
             <li className="ManagerCustomer-nav-item">
               <Link to="/ManagerOrder">Order Manager</Link>
             </li>
-            <li className="ManagerCustomer-nav-item">Notification</li>
-            <li className="ManagerCustomer-nav-item">Settings</li>
-            <li className="ManagerCustomer-nav-item">Account</li>
-            <li className="ManagerCustomer-nav-item">Help</li>
           </ul>
         </nav>
         <LogoutButton></LogoutButton>
@@ -161,7 +177,12 @@ const ManagerCustomer = () => {
             </div>
           </div>
           <div className="ManagerCustomer-search-container">
-            <input type="text" placeholder="Search..." />
+            <input
+              type="text"
+              placeholder="Search by username..."
+              value={searchQuery} // Bind searchQuery to input
+              onChange={(e) => setSearchQuery(e.target.value)} // Update searchQuery on input change
+            />
             <img
               src={search}
               alt="Search Icon"
@@ -236,7 +257,7 @@ const ManagerCustomer = () => {
               </tr>
             </thead>
             <tbody>
-              {customers.map((customer) => (
+              {currentOrders.map((customer) => (
                 <tr key={customer.userID}>
                   <td>{customer.userID}</td>
                   <td>{customer.username}</td>
@@ -261,6 +282,20 @@ const ManagerCustomer = () => {
               ))}
             </tbody>
           </table>
+          {/* Pagination controls */}
+          <div className="ManagerOrder-pagination">
+            {Array.from({
+              length: Math.ceil(filteredCustomers.length / ordersPerPage),
+            }).map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => paginate(idx + 1)}
+                className={currentPage === idx + 1 ? "active" : ""}
+              >
+                {idx + 1}
+              </button>
+            ))}
+          </div>
         </div>
       </main>
     </div>

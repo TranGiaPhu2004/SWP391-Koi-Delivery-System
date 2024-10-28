@@ -14,6 +14,12 @@ const ManagerOrder = () => {
   const [orders, setOrders] = useState([]);
   const [expandedOrder, setExpandedOrder] = useState(null);
   const [error, setError] = useState("");
+  const [searchQuery, setSearchQuery] = useState(""); // State for search query
+
+  // Pagination states
+  const [currentPage, setCurrentPage] = useState(1); // Current page
+  const [ordersPerPage] = useState(12); // Number of orders per page
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -51,6 +57,19 @@ const ManagerOrder = () => {
     navigate(`/DeliveryStatus/${orderID}`);
   };
 
+  // Filter orders based on the search query (search by order date)
+  const filteredOrders = orders.filter((order) =>
+    order.orderDate.includes(searchQuery)
+  );
+
+  // Get current orders for the current page
+  const indexOfLastOrder = currentPage * ordersPerPage;
+  const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
+  const currentOrders = filteredOrders.slice(indexOfFirstOrder, indexOfLastOrder);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div className="ManagerOrder-container">
       <aside className="ManagerOrder-sidebar">
@@ -68,10 +87,7 @@ const ManagerOrder = () => {
             <li className="ManagerOrder-nav-item">
               <Link to="/ManagerOrder">Order Manager</Link>
             </li>
-            <li className="ManagerOrder-nav-item">Notification</li>
-            <li className="ManagerOrder-nav-item">Settings</li>
-            <li className="ManagerOrder-nav-item">Account</li>
-            <li className="ManagerOrder-nav-item">Help</li>
+           
           </ul>
         </nav>
         <LogoutButton />
@@ -87,7 +103,12 @@ const ManagerOrder = () => {
             </div>
           </div>
           <div className="ManagerOrder-search-container">
-            <input type="text" placeholder="Search..." />
+            <input
+              type="text"
+              placeholder="Search by order date..."
+              value={searchQuery} // Bind searchQuery to the input field
+              onChange={(e) => setSearchQuery(e.target.value)} // Update searchQuery state on input change
+            />
             <img src={search} alt="Search Icon" className="ManagerOrder-search-icon" />
           </div>
         </header>
@@ -107,8 +128,8 @@ const ManagerOrder = () => {
               </tr>
             </thead>
             <tbody>
-              {orders.map((order) => (
-                <React.Fragment key={order.orderID}>
+              {currentOrders.map((order) => (
+                
                   <tr onClick={() => toggleOrder(order.orderID)}>
                     <td>{order.orderID}</td>
                     <td>{order.orderDate}</td>
@@ -116,43 +137,27 @@ const ManagerOrder = () => {
                     <td>{order.endPlace}</td>
                     <td>{order.totalPrice}</td>
                     <td>
-                      <img 
-                        src={expandedOrder === order.orderID ? ArrowUp : ArrowDown} 
-                        alt="Toggle" 
-                        className="ManagerOrder-toggle-icon" 
-                      />
-                    </td>
-                  </tr>
-                  {expandedOrder === order.orderID && (
-                    <tr className="ManagerOrder-order-details">
-                      <td colSpan="6">
-                        <div className="ManagerOrder-order-detail-content">
-                          <div>
-                            <strong>Customs Image:</strong>
-                            <img src={order.customsImageLink} alt="Customs" className="ManagerOrder-customs-image" />
-                          </div>
-                          <div className="ManagerOrder-detail-buttons">
-                            <button 
+                    <button 
                               className="ManagerOrder-btn-view-status"
                               onClick={() => handleViewDeliveryStatus(order.orderID)}
                             >
-                              View Delivery Status
+                              Update Delivery Status
                             </button>
-                            <button className="ManagerOrder-btn-update">
-                              <img src={EditIcon} alt="Edit" />
-                            </button>
-                            <button className="ManagerOrder-btn-delete">
-                              <img src={DeleteIcon} alt="Delete" />
-                            </button>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                  )}
-                </React.Fragment>
+                    </td>
+                  </tr>
+                  
               ))}
             </tbody>
           </table>
+
+          {/* Pagination controls */}
+          <div className="ManagerOrder-pagination">
+            {Array.from({ length: Math.ceil(filteredOrders.length / ordersPerPage) }).map((_, idx) => (
+              <button key={idx} onClick={() => paginate(idx + 1)} className={currentPage === idx + 1 ? 'active' : ''}>
+                {idx + 1}
+              </button>
+            ))}
+          </div>
         </div>
       </main>
     </div>

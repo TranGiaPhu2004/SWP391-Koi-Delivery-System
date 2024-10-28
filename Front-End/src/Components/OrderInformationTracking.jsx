@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import track1 from '../assets/image/track1.png';
 import track2 from '../assets/image/track2.png';
 import track3 from '../assets/image/track3.png';
 import track4 from '../assets/image/track4.png';
 import track5 from '../assets/image/track5.png';
-import './OrderInformationTracking.css';
+import './OrderDeliveryStatus.css';
 
 function OrderInformationTracking() {
-    const [orderStatus, setOrderStatus] = useState(null); // Trạng thái đơn hàng cụ thể
-    const [orderId, setOrderId] = useState(''); // Để người dùng nhập mã đơn hàng
+    const { orderId } = useParams(); // Get orderId from the URL parameter
+    const [status, setStatus] = useState(0);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
-    const token = localStorage.getItem('token'); // Lấy token từ localStorage
+    const [error, setError] = useState('');
 
-    // Hàm để lấy trạng thái đơn hàng khi người dùng nhấn "Check Status"
-    const fetchOrderStatus = async () => {
-        if (!orderId) {
-            setError("Please enter a valid Order ID.");
-            return;
+    useEffect(() => {
+        if (orderId) {
+            fetchOrderStatus();
         }
+    }, [orderId]);
 
+    const fetchOrderStatus = async () => {
         setLoading(true);
         setError('');
 
@@ -28,91 +28,60 @@ function OrderInformationTracking() {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`, // Sử dụng token nếu cần
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 },
             });
 
-            if (response.ok) {
-                const data = await response.json();
-                setOrderStatus(data); // Lưu trạng thái đơn hàng
-            } else {
-                setError("Failed to fetch order status.");
+            if (!response.ok) {
+                throw new Error('Failed to fetch order status.');
             }
+
+            const data = await response.json();
+            console.log('Received data:', data); // Check the data received from the API
+            const statusId = data.orderStatusID - 1; // Adjust the status to match the index
+            setStatus(statusId);
+
         } catch (error) {
-            setError("Error fetching order status. Please try again.");
+            console.error('Error fetching order status:', error);
+            setError('Failed to fetch order status. Please try again.');
         } finally {
             setLoading(false);
         }
     };
 
-    // Map giữa tên trạng thái và hình ảnh tương ứng
-    const statusImages = {
-        "Order Received": track1,
-        "Order Picked": track2,
-        "Order In Transit": track3,
-        "Out For Delivery": track4,
-        "Reach Destination": track5
-    };
+    const statusImages = [track1, track2, track3, track4, track5];
+    const statusTexts = ["Order Received", "Order Picked", "Order In Transit", "Out For Delivery", "Reached Destination"];
+    const statusDescriptions = ["received", "picked", "in transit", "out for delivery", "at destination"];
 
     return (
-        <div className="OrderInformationTracking-main-tracking">
-            <div className="OrderInformationTracking-header-tracking">
-                <p>ORDER TRACKING</p>
+        <div className="OrderDeliveryStatus-main-tracking">
+            <div className="OrderDeliveryStatus-header-tracking">
+                <p>DELIVERY STATUS</p>
             </div>
 
-            <div className="OrderInformationTracking-order-id">
+            <div className="OrderDeliveryStatus-order-id">
                 <label htmlFor="orderId">Order ID:</label>
                 <input 
                     type="text" 
                     id="orderId" 
                     value={orderId} 
-                    onChange={(e) => setOrderId(e.target.value)} 
-                    placeholder="Enter your order ID"
+                    readOnly 
                 />
-                <button onClick={fetchOrderStatus} disabled={loading || !orderId}>
-                    {loading ? 'Loading...' : 'Check Status'}
-                </button>
             </div>
 
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-
-            <div className='OrderInformationTracking-tracking-order'>
-                {orderStatus ? (
-                    <div className='OrderInformationTracking-tracking'>
-                        <img 
-                            className='OrderInformationTracking-pic' 
-                            src={statusImages[orderStatus.statusName] || track1} 
-                            alt={orderStatus.statusName} 
-                        />
-                        <p>{orderStatus.statusName}</p>
-                        <label>
-                            {getStatusDescription(orderStatus.statusName)}
-                        </label>
-                    </div>
-                ) : (
-                    <p>No order status available</p>
-                )}
+            <div className='OrderDeliveryStatus-tracking-order'>
+                <div className={`OrderDeliveryStatus-tracking${status}`}>
+                    <img 
+                        className="pic active" 
+                        src={statusImages[status]} 
+                        alt={`Status ${status}`} 
+                    />
+                    <p>{statusTexts[status]}</p>
+                    <p>Your order is currently {statusDescriptions[status]}.</p>
+                </div>
             </div>
         </div>
     );
-}
-
-// Hàm để trả về mô tả chi tiết của từng trạng thái
-function getStatusDescription(status) {
-    switch (status) {
-        case "Order Received":
-            return "Your order has been received by your courier partner";
-        case "Order Picked":
-            return "Your order has been picked up by your courier partner";
-        case "Order In Transit":
-            return "Your order is on its way to your customer’s address";
-        case "Out For Delivery":
-            return "The courier executive is on its way to deliver the order at your customer’s doorstep";
-        case "Reach Destination":
-            return "Your order has reached your customer’s city";
-        default:
-            return "Unknown status";
-    }
 }
 
 export default OrderInformationTracking;

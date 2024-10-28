@@ -1,33 +1,42 @@
-.Home-Customer-content{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: white; /* Tùy chỉnh màu nền */
-    z-index: 1000; /* Đảm bảo header luôn ở trên cùng */
+.Home-Customer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: white; /* Change as per your preference */
 }
-.Home-Customer-nav{
-    position: fixed; /* Đảm bảo navbar luôn ở trên cùng, ngay cả khi bạn cuộn */
-    top: 0;
-    right: 0;
-    padding: 10px;
-    background-color: white; /* Tùy chọn: màu nền */
-    z-index: 1000; /* Đảm bảo navbar ở trên các thành phần khác */
-    margin-right: 40%;
-    margin-top: 30px;
+
+.Home-flag {
+  height: 70%;
+  margin-right: 10px;
 }
+
+.Home-logo {
+  height: 50px;
+  margin-right: 20px;
+}
+
+.Home-Customer-nav {
+  display: flex;
+  gap: 20px;
+}
+
 .Home-Customer-nav a {
-    margin: 0 10px; /* Tùy chỉnh giá trị 10px theo ý bạn */
-    color: black;
-  }
+  text-decoration: none;
+  color: black; 
+  font-size: 16px;
+  padding: 8px 15px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.Home-Customer-nav a:hover {
+  background-color: #3D3D74;
+  color: #dfff;
+}
+
 .Home-Customer-Avatar {
-    width: 50px;
   height: 50px;
   border-radius: 50%;
-  position: absolute;
-  top: 10px;
-  right: 40px;
-  }
-
-
-
+  margin-left: 20px;
+}
