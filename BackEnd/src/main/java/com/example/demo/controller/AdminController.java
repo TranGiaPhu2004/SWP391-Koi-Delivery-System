@@ -7,11 +7,13 @@ import com.example.demo.dto.response.UserResponseDTO;
 import com.example.demo.service.AuthService;
 import com.example.demo.service.OrderService;
 import com.example.demo.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -30,12 +32,14 @@ public class AdminController {
     }
 
     // Lấy tất cả người dùng
+    @Operation(summary = "get all user in DB")
     @GetMapping("/allUser")
     public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
         List<UserResponseDTO> users = userService.getAllUsers(); // Gọi service
         return ResponseEntity.ok(users);
     }
 
+    @Operation(summary = "create employee account")
     @PostMapping("/employee")
     public ResponseEntity<MsgResponseDTO> createEmployee(@RequestBody CreateEmployeeRequestDTO request) {
 
@@ -47,6 +51,7 @@ public class AdminController {
         }
     }
 
+    @Operation(summary = "get all order")
     @GetMapping("/allOrder")
     public ResponseEntity<ListOrderResponseDTO> getAllOrders() {
         ListOrderResponseDTO response = orderService.getAllOrders();
@@ -55,6 +60,12 @@ public class AdminController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+    }
+
+    @GetMapping("/dashboard/order/date/{date}")
+    public ResponseEntity<?> totalOrdersByDate(@PathVariable Date date) {
+
+        return ResponseEntity.ok("aaa");
     }
 }
 

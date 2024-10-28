@@ -22,4 +22,10 @@ public class OrderDTO implements Serializable {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean deliveryStatus;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Boolean paymentStatus;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Integer orderStatus;
 }

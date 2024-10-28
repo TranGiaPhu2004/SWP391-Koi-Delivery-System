@@ -101,5 +101,15 @@ public class OrderController {
         }
         return ResponseEntity.status(response.getHttpCode()).body(response);
     }
+
+    @PostMapping("/{orderID}/pay")
+    public ResponseEntity<MsgResponseDTO> payOrder(@PathVariable Integer orderID) {
+        MsgResponseDTO response = orderService.payOrder(orderID);
+        if (response.isSuccess()) {
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.status(response.getHttpCode()).body(response);
+        }
+    }
 }
 
