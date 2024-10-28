@@ -7,6 +7,8 @@ import track4 from '../../assets/image/track4.png';
 import track5 from '../../assets/image/track5.png';
 import '../../Components/OrderDeliveryStatus.css';
 import { Link, useNavigate } from "react-router-dom";
+import HeaderDeliveryStatus from '../../Components/HeaderDeliveryStatus';
+import FooterDeliveryStatus from '../../Components/FooterDeliveryStatus';
 
 function DeliveryStatusD() {
     const { orderId } = useParams(); // Get orderId from the URL parameter
@@ -82,6 +84,11 @@ function DeliveryStatusD() {
     };
 
     return (
+        <>
+        <HeaderDeliveryStatus/>
+        
+        
+        
         <div className="OrderDeliveryStatus-main-tracking">
             <div className="OrderDeliveryStatus-header-tracking">
                 <p>DELIVERY STATUS</p>
@@ -127,7 +134,10 @@ function DeliveryStatusD() {
                 {error && <p className="error-message">{error}</p>}
             </div>
         </div>
+        <FooterDeliveryStatus/>
+        </>
     );
+    
 }
 
 export default DeliveryStatusD;

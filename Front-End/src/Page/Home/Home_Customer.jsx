@@ -31,7 +31,7 @@ function Home_Customer() {
         <a href="/HomeCus">Home</a>
         <a href="/PriceList">PriceList</a>
         <a href="/ViewOrder">View Order</a>
-        <a href="/DeliveryTracking">Order Tracking</a>
+        
       </nav>
       <img src={avatar} alt="Avatar" className="Home-Customer-Avatar" />
     </div>

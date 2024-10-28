@@ -282,3 +282,13 @@
   background-color: #da190b;
   /* Màu đậm hơn khi hover */
 }
+
+.ManagerOrder-btn-view-status{
+  background-color: #2B3D55;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin-right: 40px;
+  border-radius: 5px;
+  cursor: pointer;
+}
