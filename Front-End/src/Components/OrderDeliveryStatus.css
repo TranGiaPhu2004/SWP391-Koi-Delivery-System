@@ -164,3 +164,34 @@
     cursor: grab;
 
 }
+
+.custom-alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #4CAF50; /* Màu xanh lá khi thành công */
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.custom-alert span {
+    margin-right: 20px;
+}
+
+.custom-alert button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.custom-alert button:hover {
+    text-decoration: underline;
+}

@@ -17,6 +17,9 @@ const ConfirmOrder = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [ordersPerPage] = useState(10);
 
+  const [alertMessage, setAlertMessage] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
+
   
 
   const fetchOrders = async () => {
@@ -72,14 +75,17 @@ const ConfirmOrder = () => {
 
       if (response.ok) {
         // Refetch orders to update the state
-        setMessage("Order is confirm");
-        alert("The Order is confirm");
+        setAlertMessage("Order ís confirm successfully!");
+        setShowAlert(true);
         fetchOrders();
       } else {
+        setAlertMessage("Failed to confirm the order");
+        setShowAlert(true);
         setError("Failed to confirm the order.");
       }
     } catch (error) {
-      alert("The Order is confirm");
+      setAlertMessage("Order ís confirm successfully!");
+      setShowAlert(true);
       fetchOrders();
     }
   };
@@ -174,6 +180,20 @@ const ConfirmOrder = () => {
               </button>
             ))}
           </div>
+          {showAlert && (
+        <div className="custom-alert">
+          <span>{alertMessage}</span>
+          {/* Khi nhấn nút "Close", sẽ tắt alert và chuyển hướng */}
+          <button
+            onClick={() => {
+              setShowAlert(false); // Tắt alert
+              navigate("/ManagerOrder"); // Chuyển hướng sau khi tắt alert
+            }}
+          >
+            Close
+          </button>
+        </div>
+      )}
         </div>
       </main>
     </div>

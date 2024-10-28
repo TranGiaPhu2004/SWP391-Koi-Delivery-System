@@ -16,6 +16,8 @@ function DeliveryStatusD() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const [alertMessage, setAlertMessage] = useState("");
+    const [showAlert, setShowAlert] = useState(false);
 
     useEffect(() => {
         if (orderId) {
@@ -69,18 +71,21 @@ function DeliveryStatusD() {
 
             if (!response.ok) {
                 throw new Error('Failed to update order status.');
-            }else{const data = await response.json();
-                console.log('Order status updated successfully:', data);
-                alert('Order status updated successfully!');
-                navigate('/DeliveryViewOrder');
+            }else {
+                const data = await response.json();
+                console.log("Order status updated successfully:", data);
+                setAlertMessage("Order status updated successfully!");
+                setShowAlert(true);
+                
+              }
+            } catch (err) {
+              console.error("Error updating order status:", err);
+        
+              setAlertMessage("The order delivery status is not change!");
+              setShowAlert(true);
+            } finally {
+              setLoading(false);
             }
-
-        } catch (err) {
-            console.error('Error updating order status:', err);
-            setError('The order delivery status is not change!');
-        } finally {
-            setLoading(false);
-        }
     };
 
     return (
@@ -133,6 +138,20 @@ function DeliveryStatusD() {
                 </button>
                 {error && <p className="error-message">{error}</p>}
             </div>
+            {showAlert && (
+        <div className="custom-alert">
+          <span>{alertMessage}</span>
+          {/* Khi nhấn nút "Close", sẽ tắt alert và chuyển hướng */}
+          <button
+            onClick={() => {
+              setShowAlert(false); // Tắt alert
+              navigate("/DeliveryViewOrder"); // Chuyển hướng sau khi tắt alert
+            }}
+          >
+            Close
+          </button>
+        </div>
+      )}
         </div>
         <FooterDeliveryStatus/>
         </>
