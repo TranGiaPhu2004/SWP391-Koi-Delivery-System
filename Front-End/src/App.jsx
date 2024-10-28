@@ -14,6 +14,8 @@ import ManagerPrice from "./Components/ManagerPrice.jsx";
 import ManagerOrder from "./Components/ManagerOrder.jsx";
 import ViewOrder from "../src/Page/SaleStaff/ViewOrder_SaleStaff.jsx";
 import HomeCus from "./Page/Home/Home_Customer.jsx";
+import Profile from "./Page/Profile/ProfileC.jsx"
+import UpdateProfile from "./Page/Profile/UpdateProfileC.jsx"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -34,6 +36,8 @@ function App() {
         <Route path="/AddNewAccount" element={<AddNewAccount />} />
         <Route path="/ViewOrder" element={<ViewOrder />} />
         <Route path="/HomeCus" element={<HomeCus />} />
+        <Route path="/Profile" element={<Profile/>} />
+        <Route path="/UpdateProfile" element={<UpdateProfile/>} />
       </Routes>
     </Router>
   );
