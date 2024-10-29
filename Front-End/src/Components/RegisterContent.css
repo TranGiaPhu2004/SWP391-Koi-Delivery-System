@@ -1,41 +1,62 @@
 
 .Register-main {
-  background-color: white;
+  position: relative;
   display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100vw;
-  height: 50vw;
+  height: 100vh;
+  overflow: hidden;
+}
+.Register-LogoRegisterImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover; /* Ensures the image covers the whole screen */
+  z-index: -1; /* Places the background behind the form */
 }
 
 .Register-logo {
+  display: flex;
   justify-content: center;
   align-items: center;
-  display: flex;
-  margin-left: -5%;
+  margin-bottom: 20px;
 }
 
 .Register-form h1 {
-  color: #000;
-  text-align: center;
-  font-family: 'Courier New', Courier, monospace;
-  margin: 5%;
+  font-size: 24px;
+  color: #3d3d74;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
 .Register-form {
   background-color: white;
-  padding: 70px;
-  ;
+  padding: 40px;
+  width: 450px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .Register-input-group {
-  width: 40vw;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .Register-label {
-  color: #3D3D74;
-  margin-right: 5%;
+  color: #3d3d74;
   font-family: monospace;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 16px;
+  display: block;
+  margin-bottom: 5px;
 }
 
 .Register-username-input,
@@ -43,18 +64,41 @@
 .Register-email-input,
 .Register-confirm-password-input,
 .Role-confirm-password-input {
-  width: 40vw;
-  height: 30px;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  width: 80%; /* Adjust width to make inputs narrower */
+  max-width: 300px; /* Set a maximum width to prevent it from expanding too much on larger screens */
+  height: 35px; /* Slightly reduce height for a more compact look */
+  padding: 8px 12px;
+  font-family: 'Lucida Sans', sans-serif;
+  border: 1px solid #dcdcdc;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #333;
+  transition: border-color 0.3s;
+}
+.Register-username-input:focus,
+.Register-password-input:focus,
+.Register-email-input:focus,
+.Register-confirm-password-input:focus,
+.Role-confirm-password-input:focus {
+  border-color: #3d3d74;
+  outline: none;
 }
 
+
 .Register-button {
-  margin-left: 40%;
-  margin-top: 10px;
+  width: 49%;
+  padding: 12px;
+  margin-top: 20px;
   font-family: 'Courier New', Courier, monospace;
+  font-size: 18px;
   background-color: #3D3D74;
-  
-  font-weight: bolder;
   color: #fff;
-  
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.Register-button:hover {
+  background-color: #2c2c57;
 }

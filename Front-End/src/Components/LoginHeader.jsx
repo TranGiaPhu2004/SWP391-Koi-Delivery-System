@@ -1,10 +1,9 @@
 import "./LoginHeader.css";
 import Logo from "../assets/image/Logo.png";
-import LogoLogin from "../assets/image/LogoLogin.png";
+import KoiBackground from "../assets/image/KoiBackground.jpg";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 
 function LoginHeaderMethod() {
   const [username, setUsername] = useState("");
@@ -21,7 +20,7 @@ function LoginHeaderMethod() {
       usernameOrEmail: username,
       password: password,
     };
-        
+
     try {
       // Gửi yêu cầu POST đến API
       const response = await fetch("http://localhost:8080/auth/login", {
@@ -43,14 +42,11 @@ function LoginHeaderMethod() {
           navigate("/Manager");
         } else if (data.role === "User") {
           navigate("/HomeCus");
-        }
-        else if (data.role === "Customer") {
+        } else if (data.role === "Customer") {
           navigate("/HomeCus");
-        }
-        else if (data.role === "Delivery Staff") {
+        } else if (data.role === "Delivery Staff") {
           navigate("/DeliveryViewOrder");
-        }
-        else if (data.role === "Sales Staff") {
+        } else if (data.role === "Sales Staff") {
           navigate("/ConfirmOrder");
         }
       } else {
@@ -64,9 +60,7 @@ function LoginHeaderMethod() {
 
   return (
     <div className="Login-main">
-      <div className="Login-LogoLogin">
-        <img src={LogoLogin} alt="LogoLogin" className="Login-LogoLoginImg" />
-      </div>
+      <img src={KoiBackground} alt="LogoLogin" className="Login-LogoLoginImg" />
       <div className="Login-form">
         <div className="Login-logo">
           <img src={Logo} alt="Logo" />
