@@ -1,6 +1,6 @@
 
 
-import './Payment.css'; 
+import './Payment.css';
 
 import pic from '../assets/image/KoiExpress.png'
 import user from '../assets/image/user.png'
@@ -25,12 +25,11 @@ function Payment() {
 
             <div className="Payment-choice">
                 <ul className='Payment-list'>
-                    <li><a href="/about">About us</a></li>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/services">Services</a></li>
-                    <li><a href="/DeliveryTracking">Order Tracking</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                    <li><a href="/news">News</a></li>
+                    <li className='headerPaymentList' ><a href="/about">About us</a></li>
+                    <li className='headerPaymentList'><a href="/">Home</a></li>
+                    <li className='headerPaymentList'><a href="/services">Services</a></li>
+                    <li className='headerPaymentList'><a href="/contact">Contact</a></li>
+                    <li className='headerPaymentList'><a href="/news">News</a></li>
                 </ul>
             </div>
 
