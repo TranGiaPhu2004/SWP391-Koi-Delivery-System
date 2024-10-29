@@ -1,6 +1,6 @@
 import "./RegisterContent.css";
 import Logo from "../assets/image/Logo.png";
-import LogoLogin from "../assets/image/LogoLogin.png";
+import KoiBackground from "../assets/image/KoiBackground.jpg";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -45,7 +45,9 @@ function RegisterMethod() {
       });
 
       if (response.ok) {
-        setSuccessMessage("Registration successful. Redirecting to login page...");
+        setSuccessMessage(
+          "Registration successful. Redirecting to login page..."
+        );
         setErrorMessage("");
         // Redirect to login page after a short delay
         setTimeout(() => {
@@ -59,16 +61,20 @@ function RegisterMethod() {
         setSuccessMessage("");
       }
     } catch (error) {
-      setErrorMessage("Error registering. Please check your network and try again.");
+      setErrorMessage(
+        "Error registering. Please check your network and try again."
+      );
       setSuccessMessage("");
     }
   };
 
   return (
     <div className="Register-main">
-      <div className="Register-LogoRegister">
-        <img src={LogoLogin} alt="LogoRegister" className="Register-LogoRegisterImg" />
-      </div>
+      <img
+        src={KoiBackground}
+        alt="LogoRegister"
+        className="Register-LogoRegisterImg"
+      />
       <div className="Register-form">
         <div className="Register-logo">
           <img src={Logo} alt="Logo" />
