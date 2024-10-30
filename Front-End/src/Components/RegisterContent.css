@@ -83,7 +83,21 @@
   border-color: #3d3d74;
   outline: none;
 }
-
+.Register-links{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  font-family: monospace;
+  font-size: 14px;
+}
+.Register-links a {
+  color: #3d3d74;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.Register-links a:hover {
+  color: #6c63ff;
+}
 
 .Register-button {
   width: 49%;
