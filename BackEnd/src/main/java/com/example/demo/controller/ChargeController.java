@@ -5,28 +5,33 @@ import com.example.demo.service.StripeService;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
 import lombok.extern.java.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Log
 @RestController
+@RequestMapping("/payment")
 public class ChargeController {
+
+    private static final Logger logger = LoggerFactory.getLogger(ChargeController.class);
+
 
     @Autowired
     StripeService paymentsService;
 
     @PostMapping("/charge")
-    public String charge(PaymentRequestDTO paymentRequest, Model model) throws StripeException {
-        paymentRequest.setDescription("Example charge");
-        paymentRequest.setCurrency(PaymentRequestDTO.Currency.USD);
-        Charge charge = paymentsService.charge(paymentRequest);
-        model.addAttribute("id", charge.getId());
-        model.addAttribute("status", charge.getStatus());
-        model.addAttribute("chargeId", charge.getId());
-        model.addAttribute("balance_transaction", charge.getBalanceTransaction());
+    public String charge(@RequestBody PaymentRequestDTO request) throws StripeException {
+        logger.info("------------------------------------------------");
+        logger.info(request.getStripeToken());
+        Charge charge = paymentsService.charge(request);
+//        model.addAttribute("id", charge.getId());
+//        model.addAttribute("status", charge.getStatus());
+//        model.addAttribute("chargeId", charge.getId());
+//        model.addAttribute("balance_transaction", charge.getBalanceTransaction());
+        logger.info("charge created");
         return "result";
     }
 

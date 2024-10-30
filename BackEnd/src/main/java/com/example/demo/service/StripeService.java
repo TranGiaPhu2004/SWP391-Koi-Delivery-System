@@ -25,14 +25,9 @@ public class StripeService {
     public Charge charge(PaymentRequestDTO paymentRequest)
             throws StripeException {
         Map<String, Object> chargeParams = new HashMap<>();
-//        chargeParams.put("amount", paymentRequest.getAmount());
-//        chargeParams.put("currency", paymentRequest.getCurrency());
-//        chargeParams.put("description", paymentRequest.getDescription());
-//        chargeParams.put("source", paymentRequest.getStripeToken());
-
-        chargeParams.put("amount", 50000);
-        chargeParams.put("currency", PaymentRequestDTO.Currency.VND);
-        chargeParams.put("description", "Hello World");
+        chargeParams.put("amount", paymentRequest.getAmount());
+        chargeParams.put("currency", paymentRequest.getCurrency());
+        chargeParams.put("description", paymentRequest.getDescription());
         chargeParams.put("source", paymentRequest.getStripeToken());
         return Charge.create(chargeParams);
     }
