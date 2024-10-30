@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const CheckoutForm = () => {
   const stripe = useStripe();
@@ -10,7 +12,11 @@ const CheckoutForm = () => {
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [successMessage, setSuccessMessage] = useState(""); // State for success message
-
+  const location = useLocation();
+  const { orderData } = location.state || {};
+  const { totalPrice} = orderData || {};
+  const navigate = useNavigate();
+ 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsProcessing(true);
@@ -30,7 +36,7 @@ const CheckoutForm = () => {
     }
 
     const paymentData = {
-      amount: parseInt(amount),
+      amount: parseInt(totalPrice),
       currency: "VND",
       stripeToken: token.id,
       description,
@@ -53,6 +59,9 @@ const CheckoutForm = () => {
       }
       setPaymentSucceeded(true);
       setSuccessMessage("Payment completed successfully!"); // Set success message
+      setTimeout(() => {
+        navigate('/HomeCus'); // Điều hướng sau 2 giây
+      }, 2000); // 2000ms = 2 giây
     } catch (error) {
       setCardError("An error occurred while processing the payment.");
     } finally {
@@ -107,6 +116,7 @@ const CheckoutForm = () => {
   };
 
   return (
+    <>
     <div style={styles.form}>
       <form onSubmit={handleSubmit}>
         <div style={{ marginBottom: "15px" }}>
@@ -115,7 +125,7 @@ const CheckoutForm = () => {
         <input
           type="number"
           placeholder="Amount"
-          value={amount}
+          value={totalPrice}
           onChange={(e) => setAmount(e.target.value)}
           required
           style={styles.input}
@@ -148,6 +158,7 @@ const CheckoutForm = () => {
         )}
       </form>
     </div>
+    </>
   );
 };
 

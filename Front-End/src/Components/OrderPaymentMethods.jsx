@@ -33,11 +33,9 @@ function OrderPaymentMethods() {
         }
         switch (selectedPaymentMethod) {
             case 'momo':
-                navigate('/momoo', {
+                navigate('/checkout', {
                     state: {
-                        totalPrice,
-                        startPlace,
-                        endPlace
+                        totalPrice                        
                     }
                 });
                 break;
