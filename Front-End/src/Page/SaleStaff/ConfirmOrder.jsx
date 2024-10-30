@@ -78,15 +78,24 @@ const ConfirmOrder = () => {
         setAlertMessage("Order ís confirm successfully!");
         setShowAlert(true);
         fetchOrders();
+        setTimeout(() => {
+          setShowAlert(false)
+        }, 2000); // 2000ms = 2 giây
       } else {
         setAlertMessage("Failed to confirm the order");
         setShowAlert(true);
         setError("Failed to confirm the order.");
+        setTimeout(() => {
+          setShowAlert(false)
+        }, 2000); // 2000ms = 2 giây
       }
     } catch (error) {
       setAlertMessage("Order ís confirm successfully!");
       setShowAlert(true);
       fetchOrders();
+      setTimeout(() => {
+        setShowAlert(false)
+      }, 2000); // 2000ms = 2 giây
     }
   };
 
@@ -184,14 +193,7 @@ const ConfirmOrder = () => {
         <div className="custom-alert">
           <span>{alertMessage}</span>
           {/* Khi nhấn nút "Close", sẽ tắt alert và chuyển hướng */}
-          <button
-            onClick={() => {
-              setShowAlert(false); // Tắt alert
-              navigate("/ManagerOrder"); // Chuyển hướng sau khi tắt alert
-            }}
-          >
-            Close
-          </button>
+          
         </div>
       )}
         </div>
