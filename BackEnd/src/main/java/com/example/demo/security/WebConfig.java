@@ -14,7 +14,7 @@ public class WebConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:5173") // Cho phép từ origin này
+                        .allowedOrigins("http://localhost:5173","http://localhost:63342/") // Cho phép từ origin này
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true) // Cho phép gửi cookie và các thông tin xác thực

@@ -65,9 +65,7 @@ public class OrderService {
             //Tạo payment
             Payment payment = new Payment();
             payment.setTotalPrice(request.getTotalPrice());
-            //Order vừa đc tạo xem như là đã thanh toán
-            //Nhớ fix lại khi có page sales staff và view userOrder
-            payment.setPaymentStatus(true);
+            payment.setPaymentStatus(false);
             //Lưu payment
             Payment savePayment = paymentRepository.save(payment);
 
@@ -226,6 +224,12 @@ public class OrderService {
             if (order.getDelivery() != null) {
                 dto.setDeliveryStatus(order.getDelivery().getDeliveryStatus());
             }
+            if (order.getOrderStatus() != null) {
+                dto.setOrderStatus(order.getOrderStatus().getOrderStatusID());
+            }
+            if (order.getPayment() != null) {
+                dto.setPaymentStatus(order.getPayment().getPaymentStatus());
+            }
             orderDTOList.add(dto);
         }
         response.setSuccess(Boolean.TRUE);
@@ -283,5 +287,42 @@ public class OrderService {
             }
         }
         return getListOrderResponseDTO(deliveryOrderList);
+    }
+
+    public MsgResponseDTO payOrder(Integer orderID) {
+        MsgResponseDTO response = new MsgResponseDTO();
+        try {
+            Order order = orderRepository.findById(orderID).orElse(null);
+            if (order != null) {
+                if (order.getPayment() != null) {
+                    logger.info("---Payment status : " + order.getPayment().getPaymentStatus());
+                    if (!order.getPayment().getPaymentStatus()) {
+                        order.getPayment().setPaymentStatus(Boolean.TRUE);
+                        orderRepository.save(order);
+
+                        response.setSuccess(Boolean.TRUE);
+                        response.setMsg("Pay order successfully");
+                        response.setHttpCode(200);
+                    } else {
+                        response.setSuccess(Boolean.FALSE);
+                        response.setMsg("Order "+order.getOrderID()+" had been paid");
+                        response.setHttpCode(400);
+                    }
+                } else {
+                    response.setSuccess(Boolean.FALSE);
+                    response.setMsg("Payment is null");
+                    response.setHttpCode(404);
+                }
+            } else {
+                response.setSuccess(Boolean.FALSE);
+                response.setMsg("Order not found");
+                response.setHttpCode(404);
+            }
+        } catch (Exception e) {
+            response.setHttpCode(500);
+            response.setSuccess(Boolean.FALSE);
+            response.setMsg(e.getMessage());
+        }
+        return response;
     }
 }
