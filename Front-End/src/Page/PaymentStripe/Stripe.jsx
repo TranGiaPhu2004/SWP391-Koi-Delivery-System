@@ -57,15 +57,7 @@ const CheckoutForm = () => {
         <CardElement
           options={{
             hidePostalCode: true, // Tắt phần nhập ZIP code
-            style: {
-              base: {
-                fontSize: "16px",
-                color: "#32325d",
-                "::placeholder": {
-                  color: "#aab7c4",
-                },
-              },
-            },
+            
           }}
         />
       </div>
