@@ -116,14 +116,10 @@ const OrderInformation = () => {
             </p>
 
             <Link
-              to="/Payment"
+              to="/checkout"
               state={{
                 orderData: {
-                  totalPrice,
-                  startPlace,
-                  endPlace,
-                  deliveryID,
-                  boxes,
+                  totalPrice                  
                 },
               }}
             >
