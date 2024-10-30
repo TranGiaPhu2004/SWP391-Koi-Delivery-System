@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import "../../Components/CheckoutForm.css"; // Thêm tệp CSS cho form
+import "../../Components/CheckoutForm.css"; // Add your CSS file
 
 const CheckoutForm = () => {
   const stripe = useStripe();
@@ -8,6 +8,8 @@ const CheckoutForm = () => {
   const [cardError, setCardError] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [paymentSucceeded, setPaymentSucceeded] = useState(false);
+  const [amount, setAmount] = useState(""); // State for amount
+  const [description, setDescription] = useState(""); // State for description
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -26,22 +28,28 @@ const CheckoutForm = () => {
       setCardError(error.message);
       setIsProcessing(false);
     } else {
-      alert(`Token created successfully: ${token.id}`);
+      // Prepare payload for backend
+      const paymentData = {
+        amount: parseInt(amount), // Ensure amount is an integer
+        currency: "VND",
+        stripeToken: token.id,
+        description: description,
+      };
 
-      // Gửi token đến backend
-      const response = await fetch("http://localhost:8080/charge", {
+      // Send token to backend
+      const response = await fetch("http://localhost:8080/payment/charge", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token: token.id }),
+        body: JSON.stringify(paymentData),
       });
 
       const responseData = await response.json();
       alert(`Server response: ${JSON.stringify(responseData)}`);
 
-      if (result.error) {
-        console.error(result.error.message);
+      if (responseData.error) {
+        console.error(responseData.error);
       } else {
-        if (result.paymentIntent.status === "succeeded") {
+        if (responseData.paymentIntent.status === "succeeded") {
           setPaymentSucceeded(true);
           console.log("Payment succeeded");
         }
@@ -56,11 +64,24 @@ const CheckoutForm = () => {
       <div className="card-element">
         <CardElement
           options={{
-            hidePostalCode: true, // Tắt phần nhập ZIP code
-            
+            hidePostalCode: true, // Hide postal code field
           }}
         />
       </div>
+      <input
+        type="number"
+        placeholder="Amount"
+        value={amount}
+        onChange={(e) => setAmount(e.target.value)}
+        required
+      />
+      <input
+        type="text"
+        placeholder="Description"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        required
+      />
       <button
         type="submit"
         disabled={!stripe || isProcessing}
