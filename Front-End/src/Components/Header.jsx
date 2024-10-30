@@ -27,7 +27,7 @@ function Header() {
           <a href="/">Home</a>
           <a href="/services">Services</a>
           
-          <a href="/contact">Contact</a>
+          <a href="/checkout">Contact</a>
           <a href="/news">News</a>
         </nav>
         <div className="Home-auth-buttons">
