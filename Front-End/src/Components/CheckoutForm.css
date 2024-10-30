@@ -1,0 +1,31 @@
+.checkout-form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 0 auto; /* Canh giữa form */
+  }
+  
+  .card-element {
+    margin-bottom: 20px; /* Tạo khoảng cách giữa CardElement và nút */
+    padding: 10px;
+    border: 1px solid #ccc; /* Thêm viền để dễ nhìn hơn */
+    border-radius: 5px;
+  }
+  
+  .pay-button {
+    padding: 10px;
+    background-color: #6772e5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .pay-button:disabled {
+    background-color: #ccc;
+  }
+  
+  .pay-button:hover {
+    background-color: #555abf;
+  }
+  
