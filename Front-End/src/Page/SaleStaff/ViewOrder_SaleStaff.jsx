@@ -118,7 +118,7 @@ const CustomerOrder = () => {
             </thead>
             <tbody>
               {currentOrders.map((order) => (
-                <React.Fragment key={order.orderID}>
+                
                   <tr onClick={() => toggleOrder(order.orderID)}>
                     <td>{order.orderID}</td>
                     <td>{order.orderDate}</td>
@@ -126,40 +126,24 @@ const CustomerOrder = () => {
                     <td>{order.endPlace}</td>
                     <td>{order.totalPrice}</td>
                     <td>
-                      <img 
-                        src={expandedOrder === order.orderID ? ArrowUp : ArrowDown} 
-                        alt="Toggle" 
-                        className="ManagerOrder-toggle-icon" 
-                      />
-                    </td>
-                  </tr>
-                  {expandedOrder === order.orderID && (
-                    <tr className="ManagerOrder-order-details">
-                      <td colSpan="6">
-                        <div className="ManagerOrder-order-detail-content">
-                          <div>
-                            <strong>Customs Image:</strong>
-                            <img src={order.customsImageLink} alt="Customs" className="ManagerOrder-customs-image" />
-                          </div>
-                          <div className="ManagerOrder-detail-buttons">
+                    <div className="ManagerOrder-detail-buttons">
                             <button 
                               className="ManagerOrder-btn-view-status"
                               onClick={() => handleViewDeliveryStatus(order.orderID)}
                             >
                               View Delivery Status
                             </button>
-                            <button className="ManagerOrder-btn-update">
+                            {/* <button className="ManagerOrder-btn-update">
                               <img src={EditIcon} alt="Edit" />
                             </button>
                             <button className="ManagerOrder-btn-delete">
                               <img src={DeleteIcon} alt="Delete" />
-                            </button>
+                            </button> */}
                           </div>
-                        </div>
-                      </td>
-                    </tr>
-                  )}
-                </React.Fragment>
+                    </td>
+                  </tr>
+                 
+                
               ))}
             </tbody>
           </table>

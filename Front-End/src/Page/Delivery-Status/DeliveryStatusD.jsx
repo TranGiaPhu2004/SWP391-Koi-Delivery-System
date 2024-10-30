@@ -7,6 +7,8 @@ import track4 from '../../assets/image/track4.png';
 import track5 from '../../assets/image/track5.png';
 import '../../Components/OrderDeliveryStatus.css';
 import { Link, useNavigate } from "react-router-dom";
+import HeaderDeliveryStatus from '../../Components/HeaderDeliveryStatus';
+import FooterDeliveryStatus from '../../Components/FooterDeliveryStatus';
 
 function DeliveryStatusD() {
     const { orderId } = useParams(); // Get orderId from the URL parameter
@@ -14,6 +16,8 @@ function DeliveryStatusD() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const [alertMessage, setAlertMessage] = useState("");
+    const [showAlert, setShowAlert] = useState(false);
 
     useEffect(() => {
         if (orderId) {
@@ -67,21 +71,29 @@ function DeliveryStatusD() {
 
             if (!response.ok) {
                 throw new Error('Failed to update order status.');
-            }else{const data = await response.json();
-                console.log('Order status updated successfully:', data);
-                alert('Order status updated successfully!');
-                navigate('/DeliveryViewOrder');
+            }else {
+                const data = await response.json();
+                console.log("Order status updated successfully:", data);
+                setAlertMessage("Order status updated successfully!");
+                setShowAlert(true);
+                
+              }
+            } catch (err) {
+              console.error("Error updating order status:", err);
+        
+              setAlertMessage("The order delivery status is not change!");
+              setShowAlert(true);
+            } finally {
+              setLoading(false);
             }
-
-        } catch (err) {
-            console.error('Error updating order status:', err);
-            setError('The order delivery status is not change!');
-        } finally {
-            setLoading(false);
-        }
     };
 
     return (
+        <>
+        <HeaderDeliveryStatus/>
+        
+        
+        
         <div className="OrderDeliveryStatus-main-tracking">
             <div className="OrderDeliveryStatus-header-tracking">
                 <p>DELIVERY STATUS</p>
@@ -126,8 +138,25 @@ function DeliveryStatusD() {
                 </button>
                 {error && <p className="error-message">{error}</p>}
             </div>
+            {showAlert && (
+        <div className="custom-alert">
+          <span>{alertMessage}</span>
+          {/* Khi nhấn nút "Close", sẽ tắt alert và chuyển hướng */}
+          <button
+            onClick={() => {
+              setShowAlert(false); // Tắt alert
+              navigate("/DeliveryViewOrder"); // Chuyển hướng sau khi tắt alert
+            }}
+          >
+            Close
+          </button>
         </div>
+      )}
+        </div>
+        <FooterDeliveryStatus/>
+        </>
     );
+    
 }
 
 export default DeliveryStatusD;

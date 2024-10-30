@@ -1,16 +1,14 @@
 import "./ForgotPasswordContent.css";
 import Logo from "../assets/image/Logo.png";
-import LogoLogin from "../assets/image/LogoLogin.png";
+import KoiBackground from "../assets/image/KoiBackground.jpg";
 function ForgotPasswordContent() {
   return (
     <div className="ForgotPassword-main">
-      <div className="ForgotPassword-LogoForgotPassword">
-        <img
-          src={LogoLogin}
-          alt="LogoForgotPassword"
-          className="ForgotPassword-LogoForgotPassword"
-        />
-      </div>
+      <img
+        src={KoiBackground}
+        alt="LogoForgotPassword"
+        className="ForgotPassword-LogoForgotPassword"
+      />
 
       <div className="ForgotPassword-form">
         <div className="ForgotPassword-logo">

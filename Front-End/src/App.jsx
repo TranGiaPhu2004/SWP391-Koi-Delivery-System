@@ -13,7 +13,12 @@ import ManagerPrice from "./Components/ManagerPrice.jsx";
 import ManagerOrder from "./Components/ManagerOrder.jsx";
 import ViewOrder from "./Page/SaleStaff/ViewOrder_SaleStaff.jsx";
 import HomeCus from "./Page/Home/Home_Customer.jsx";
+
+import Profile from "./Page/Profile/ProfileC.jsx"
+import UpdateProfile from "./Page/Profile/UpdateProfileC.jsx"
+
 import ViewOrderCustomer from "./Page/View-Order/ViewOrder.jsx";
+
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import OrderInformation from "./Page/View-Order/ViewOrder.jsx";
 import DeleteOrder from "./Page/Delete-Order/DeleteOrder.jsx";
@@ -45,6 +50,10 @@ function App() {
         <Route path="/AddNewAccount" element={<AddNewAccount />} />
         <Route path="/ViewOrder" element={<ViewOrder />} />
         <Route path="/HomeCus" element={<HomeCus />} />
+
+        <Route path="/Profile" element={<Profile/>} />
+        <Route path="/UpdateProfile" element={<UpdateProfile/>} />
+
         <Route path="/view" element={<ViewOrderCustomer />} />
         <Route path="/OrderInformation" element={<OrderInformation />} />
         <Route path="/DeleteOrder" element={<DeleteOrder />} />
@@ -53,7 +62,6 @@ function App() {
 
         <Route path="/momoo" element={<MomoMethod/>} />
         <Route path="/vnpayy" element={<VNPayMethod/>} />
-
 
       </Routes>
     </Router>
