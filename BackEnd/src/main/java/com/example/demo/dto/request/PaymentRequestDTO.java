@@ -19,5 +19,6 @@ public class PaymentRequestDTO implements Serializable {
     private Currency currency;
     private String stripeEmail;
     private String stripeToken;
+    private Integer OrderID;
 
 }

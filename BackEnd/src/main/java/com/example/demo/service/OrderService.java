@@ -304,7 +304,6 @@ public class OrderService {
                     if (!order.getPayment().getPaymentStatus()) {
                         order.getPayment().setPaymentStatus(Boolean.TRUE);
                         orderRepository.save(order);
-
                         response.setSuccess(Boolean.TRUE);
                         response.setMsg("Pay order successfully");
                         response.setHttpCode(200);
