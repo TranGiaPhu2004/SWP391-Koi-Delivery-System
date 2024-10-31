@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import "../../Components/OrderInformation.css";
+import pickoi1 from "../../assets/image/pickoi1.png";
+import pickoi2 from "../../assets/image/pickoi2.png";
+import pickoi3 from "../../assets/image/pickoi3.png";
+import Payment from '../../Components/Payment.jsx'
+import PaymentFooter from '../../Components/PaymentFooter.jsx'
 
 const CheckoutForm = () => {
   const stripe = useStripe();
@@ -14,13 +20,32 @@ const CheckoutForm = () => {
   const [successMessage, setSuccessMessage] = useState(""); // State for success message
   const location = useLocation();
   const { orderData } = location.state || {};
-  const { totalPrice} = orderData || {};
+  const { totalPrice, startPlace, endPlace, deliveryID, boxes } =
+    orderData || {};
   const navigate = useNavigate();
- 
+
+  const initialCount1 = boxes.find((box) => box.boxid === 1)?.quantity || 0;
+  const initialCount2 = boxes.find((box) => box.boxid === 2)?.quantity || 0;
+  const initialCount3 = boxes.find((box) => box.boxid === 3)?.quantity || 0;
+
+  const [number1, setNumber1] = useState(initialCount1);
+  const [number2, setNumber2] = useState(initialCount2);
+  const [number3, setNumber3] = useState(initialCount3);
+
+  const DeliveryType = () => {
+    return deliveryID === 1 ? 300000 : 850000;
+  };
 
   // Hàm để định dạng số tiền với dấu phẩy
   const formatAmount = (amount) => {
-    return new Intl.NumberFormat('vi-VN', { style: 'decimal' }).format(amount);
+    return new Intl.NumberFormat("vi-VN", { style: "decimal" }).format(amount);
+  };
+
+  const formatCurrency = (amount) => {
+    return amount.toLocaleString("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    });
   };
 
   // Hiển thị số tiền đã định dạng
@@ -61,15 +86,20 @@ const CheckoutForm = () => {
 
       if (responseData.error) {
         setCardError(responseData.error.message || "Payment failed.");
-      } else if (responseData.paymentIntent && responseData.paymentIntent.status === "succeeded") {
+      } else if (
+        responseData.paymentIntent &&
+        responseData.paymentIntent.status === "succeeded"
+      ) {
         setAmount("");
         setDescription("");
         elements.getElement(CardElement).clear();
       }
       setPaymentSucceeded(true);
-      setSuccessMessage("Payment completed successfully!"); // Set success message
+      setSuccessMessage(
+        "Payment completed successfully! Redirect to home page after 2 second."
+      ); // Set success message
       setTimeout(() => {
-        navigate('/HomeCus'); // Điều hướng sau 2 giây
+        navigate("/HomeCus"); // Điều hướng sau 2 giây
       }, 2000); // 2000ms = 2 giây
     } catch (error) {
       setCardError("An error occurred while processing the payment.");
@@ -128,16 +158,88 @@ const CheckoutForm = () => {
       color: "#721c24",
       border: "1px solid #f5c6cb",
     },
+    orderDetails: {
+      backgroundColor: "#f0f0f0", // Màu nền
+      color: "#333", // Màu chữ
+    },
   };
 
   return (
     <>
-    <div style={styles.form}>
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: "15px" }}>
-          <CardElement options={{ hidePostalCode: true }} />
+      <Payment />
+      <div className="OrderInformation-paymentmethods">
+        <p>
+          📦Your order is getting ready🚚 <br /> 🌐🎏❤️
+        </p>
+      </div>
+      <div className="OrderInformation-main-order">
+        <div className="OrderInformation-main-pic">
+          <div className="OrderInformation-pic-koi1">
+            <img src={pickoi1} alt="PIC KOI 1" />
+            <div className="OrderInformation-pic1">
+              <p>Large Box (S01)</p>
+              <div className="OrderInformation-info-box">
+                <p>
+                  Contains <br /> <span>10-20</span> Koi Fish totality
+                </p>
+              </div>
+              <button className="OrderInformation-button">Delete</button>
+            </div>
+            <div className="OrderInformation-amount1">
+              <button className="decrement-button1">-</button>
+              <span className="OrderInformation-count1">{number1}</span>
+              <button className="increment-button1">+</button>
+            </div>
+          </div>
+
+          <div className="OrderInformation-pic-koi2">
+            <img src={pickoi2} alt="PIC KOI 2" />
+            <div className="OrderInformation-pic2">
+              <p>Medium Box (S02)</p>
+              <div className="OrderInformation-info-box">
+                <p>
+                  Contains at least <span>5-10</span> Koi Fish
+                </p>
+              </div>
+              <button className="OrderInformation-button">Delete</button>
+            </div>
+            <div className="OrderInformation-amount2">
+              <button className="decrement-button2">-</button>
+              <span className="OrderInformation-count2">{number2}</span>
+              <button className="increment-button2">+</button>
+            </div>
+          </div>
+
+          <div className="OrderInformation-pic-koi3">
+            <img src={pickoi3} alt="PIC KOI 3" />
+            <div className="OrderInformation-pic3">
+              <p>Small Box (S03)</p>
+              <div className="OrderInformation-info-box">
+                <p>
+                  Contains at least <span>3-5</span> Koi Fish maximum
+                </p>
+              </div>
+              <button className="OrderInformation-button">Delete</button>
+            </div>
+            <div className="OrderInformation-amount3">
+              <button className="decrement-button3">-</button>
+              <span className="OrderInformation-count3">{number3}</span>
+              <button className="increment-button3">+</button>
+            </div>
+          </div>
         </div>
-        {/* <input
+
+        <div className="OrderInformation-order-information">
+          <div
+            className="OrderInformation-order-details"
+            style={styles.orderDetails}
+          >
+            <div style={styles.form}>
+              <form onSubmit={handleSubmit}>
+                <div style={{ marginBottom: "15px" }}>
+                  <CardElement options={{ hidePostalCode: true }} />
+                </div>
+                {/* <input
           type="number"
           placeholder="Amount"
           value={totalPrice}
@@ -146,40 +248,42 @@ const CheckoutForm = () => {
           style={styles.input}
           // hidden
         /> */}
-        <div style={styles.amountDisplay}>
-        Payment Amount
-        </div>
-        <div style={styles.amountDisplay}>
-            {displayAmount} VND {/* Hiển thị số tiền với chữ "VND" */}
-        </div>
-        <input
-          type="text"
-          placeholder="Payment Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-          style={styles.input}
-        />
-        <button
-          type="submit"
-          disabled={!stripe || isProcessing}
-          style={styles.button}
-        >
-          {isProcessing ? "Processing..." : "Pay"}
-        </button>
+                <div style={styles.amountDisplay}>Payment Amount</div>
+                <div style={styles.amountDisplay}>
+                  {displayAmount} VND {/* Hiển thị số tiền với chữ "VND" */}
+                </div>
+                <input
+                  type="text"
+                  placeholder="Payment Description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  required
+                  style={styles.input}
+                />
+                <button
+                  type="submit"
+                  disabled={!stripe || isProcessing}
+                  style={styles.button}
+                >
+                  {isProcessing ? "Processing..." : "Pay"}
+                </button>
 
-        {paymentSucceeded && (
-          <div style={{ ...styles.alert, ...styles.successAlert }}>
-            {successMessage}
+                {paymentSucceeded && (
+                  <div style={{ ...styles.alert, ...styles.successAlert }}>
+                    {successMessage}
+                  </div>
+                )}
+                {cardError && (
+                  <div style={{ ...styles.alert, ...styles.errorAlert }}>
+                    {cardError}
+                  </div>
+                )}
+              </form>
+            </div>
           </div>
-        )}
-        {cardError && (
-          <div style={{ ...styles.alert, ...styles.errorAlert }}>
-            {cardError}
-          </div>
-        )}
-      </form>
-    </div>
+        </div>
+      </div>
+      <PaymentFooter />
     </>
   );
 };
