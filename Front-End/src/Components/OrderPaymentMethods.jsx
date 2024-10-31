@@ -35,7 +35,7 @@ function OrderPaymentMethods() {
             case 'momo':
                 navigate('/checkout', {
                     state: {
-                        totalPrice                        
+                        totalPrice             
                     }
                 });
                 break;
