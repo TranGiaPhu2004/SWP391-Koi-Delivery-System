@@ -119,7 +119,11 @@ const OrderInformation = () => {
               to="/checkout"
               state={{
                 orderData: {
-                  totalPrice                  
+                  totalPrice,
+                  startPlace,
+                  endPlace,
+                  deliveryID,
+                  boxes,
                 },
               }}
             >
