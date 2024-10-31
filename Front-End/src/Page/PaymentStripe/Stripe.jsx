@@ -20,9 +20,10 @@ const CheckoutForm = () => {
   const [successMessage, setSuccessMessage] = useState(""); // State for success message
   const location = useLocation();
   const { orderData } = location.state || {};
-  const { totalPrice, startPlace, endPlace, deliveryID, boxes } =
+  const { totalPrice, startPlace, endPlace, deliveryID, boxes ,orderID} =
     orderData || {};
   const navigate = useNavigate();
+  const createdOrderID = localStorage.getItem("orderID");
 
   const initialCount1 = boxes.find((box) => box.boxid === 1)?.quantity || 0;
   const initialCount2 = boxes.find((box) => box.boxid === 2)?.quantity || 0;
@@ -74,6 +75,7 @@ const CheckoutForm = () => {
       currency: "VND",
       stripeToken: token.id,
       description,
+      orderID: createdOrderID
     };
 
     try {
