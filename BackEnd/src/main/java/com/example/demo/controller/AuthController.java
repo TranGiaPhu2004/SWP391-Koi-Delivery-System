@@ -23,7 +23,8 @@ import org.slf4j.LoggerFactory;
 @RestController
 @RequestMapping("/auth")
 @Tag(name = "Authentication Controller (API về xác thực)")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173","https://deploy-server-c1f5.vercel.app/"})
+
 public class AuthController {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);

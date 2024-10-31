@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/orders")
 @Tag(name = "Order Controller (API thực hiện CRUD)")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173","https://deploy-server-c1f5.vercel.app/"})
 public class OrderController {
     private final OrderService orderService;
     private final DeliveryService deliveryService;
