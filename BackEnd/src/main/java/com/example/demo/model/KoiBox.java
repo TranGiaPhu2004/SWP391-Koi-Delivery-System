@@ -22,6 +22,6 @@ public class KoiBox {
     @Column(name = "boxsize")
     private Float boxSize;
 
-    @OneToMany(mappedBy = "box", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "box")
     private Set<KoiFish> koiFishes;
 }

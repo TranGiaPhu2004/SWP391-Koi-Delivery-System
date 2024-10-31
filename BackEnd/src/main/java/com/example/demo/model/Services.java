@@ -23,7 +23,7 @@ public class Services {
     @Column(name = "price", nullable = false)
     private Float price;
 
-    @OneToMany(mappedBy = "services", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "services", fetch = FetchType.LAZY)
     private Set<Order> orders;
 
 }

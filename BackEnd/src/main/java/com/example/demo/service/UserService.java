@@ -65,14 +65,6 @@ public class UserService implements UserDetailsService {
         if (user != null) {
             logger.info("Delete user id: " + id);
             logger.info("Delete User "+id+" start");
-//            xóa order mới xóa user
-//            orderRepository.deleteByUser(user);
-            List<Order> orders = orderRepository.findByUser(user);
-
-            // Xóa từng order theo orderID
-            for (Order order : orders) {
-                orderRepository.deleteById(order.getOrderID());
-            }
             userRepository.deleteById(id);
             msg.setMsg("Delete User "+id+" successfully");
             msg.setSuccess(Boolean.TRUE);

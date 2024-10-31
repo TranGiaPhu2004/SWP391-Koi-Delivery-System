@@ -41,7 +41,7 @@ public class Order {
     @JoinColumn(name = "Order_StatusID")
     private OrderStatus orderStatus;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
     @JoinColumn(name = "PaymentID")
     private Payment payment;
 
@@ -49,12 +49,12 @@ public class Order {
     @JoinColumn(name = "ServiceID")
     private Services services;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     private Set<KoiFish> koiFishes;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     private Set<Feedback> feedbacks;
 
-    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "order")
     private Delivery delivery;
 }

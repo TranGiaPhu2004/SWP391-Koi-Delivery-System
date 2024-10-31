@@ -102,9 +102,21 @@ public class OrderController {
         return ResponseEntity.status(response.getHttpCode()).body(response);
     }
 
+    @Operation(summary = "chinh pay trong DB")
     @PostMapping("/{orderID}/pay")
     public ResponseEntity<MsgResponseDTO> payOrder(@PathVariable Integer orderID) {
         MsgResponseDTO response = orderService.payOrder(orderID);
+        if (response.isSuccess()) {
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.status(response.getHttpCode()).body(response);
+        }
+    }
+
+    @Operation(summary = "Delete Order")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<MsgResponseDTO> deleteOrder(@PathVariable Integer id) {
+        MsgResponseDTO response = orderService.deleteOrder(id);
         if (response.isSuccess()) {
             return ResponseEntity.ok(response);
         } else {
