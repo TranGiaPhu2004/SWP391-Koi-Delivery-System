@@ -19,6 +19,7 @@ const ConfirmOrder = () => {
 
   const [alertMessage, setAlertMessage] = useState("");
   const [showAlert, setShowAlert] = useState(false);
+  const username = localStorage.getItem("username");
 
   
 
@@ -126,7 +127,7 @@ const ConfirmOrder = () => {
           <div className="ManagerOrder-user-info">
             <img src={avatar} alt="User Avatar" className="ManagerOrder-avatar" />
             <div className="ManagerOrder-user-details">
-              <h3>Vũ Đức Mạnh</h3>
+              <h3>{username}</h3>
               <p>Sale Staff</p>
             </div>
           </div>

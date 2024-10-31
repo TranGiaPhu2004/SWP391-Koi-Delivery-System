@@ -19,6 +19,7 @@ const DeliveryViewOrder = () => {
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1); // Current page
   const [ordersPerPage] = useState(10); // Number of orders per page
+  const username = localStorage.getItem("username");
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -95,7 +96,7 @@ const DeliveryViewOrder = () => {
               className="ManagerOrder-avatar"
             />
             <div className="ManagerOrder-user-details">
-              <h3>Vũ Đức Mạnh</h3>
+              <h3>{username}</h3>
               <p>Delivery Staff</p>
             </div>
           </div>

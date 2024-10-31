@@ -13,6 +13,7 @@ const ManagerCustomer = () => {
   const [message, setMessage] = useState("");
   const [searchQuery, setSearchQuery] = useState(""); // State for search query
   const navigate = useNavigate();
+  const username = localStorage.getItem("username");
   // Pagination states
   
   const [currentPage, setCurrentPage] = useState(1); // Current page
@@ -172,7 +173,7 @@ const ManagerCustomer = () => {
               className="ManagerCustomer-avatar"
             />
             <div className="ManagerCustomer-user-details">
-              <h3>Vũ Đức Mạnh</h3>
+              <h3>{username}</h3>
               <p>Manager</p>
             </div>
           </div>
