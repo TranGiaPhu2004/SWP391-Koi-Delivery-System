@@ -17,6 +17,15 @@ const CheckoutForm = () => {
   const { totalPrice} = orderData || {};
   const navigate = useNavigate();
  
+
+  // Hàm để định dạng số tiền với dấu phẩy
+  const formatAmount = (amount) => {
+    return new Intl.NumberFormat('vi-VN', { style: 'decimal' }).format(amount);
+  };
+
+  // Hiển thị số tiền đã định dạng
+  const displayAmount = totalPrice ? formatAmount(totalPrice) : "";
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsProcessing(true);
@@ -78,6 +87,12 @@ const CheckoutForm = () => {
       borderRadius: "8px",
       backgroundColor: "#f9f9f9",
     },
+    amountDisplay: {
+      fontSize: "15px",
+      // fontWeight: "bold",
+      margin: "10px 0",
+      textAlign: "center",
+    },
     input: {
       width: "100%",
       padding: "10px",
@@ -122,17 +137,24 @@ const CheckoutForm = () => {
         <div style={{ marginBottom: "15px" }}>
           <CardElement options={{ hidePostalCode: true }} />
         </div>
-        <input
+        {/* <input
           type="number"
           placeholder="Amount"
           value={totalPrice}
           onChange={(e) => setAmount(e.target.value)}
           required
           style={styles.input}
-        />
+          // hidden
+        /> */}
+        <div style={styles.amountDisplay}>
+        Payment Amount
+        </div>
+        <div style={styles.amountDisplay}>
+            {displayAmount} VND {/* Hiển thị số tiền với chữ "VND" */}
+        </div>
         <input
           type="text"
-          placeholder="Description"
+          placeholder="Payment Description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           required
