@@ -2,10 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dto.request.BoxDTO;
 import com.example.demo.dto.request.OrderCreateRequestDTO;
-import com.example.demo.dto.response.ListOrderResponseDTO;
-import com.example.demo.dto.response.MsgResponseDTO;
-import com.example.demo.dto.response.OrderDTO;
-import com.example.demo.dto.response.OrderStatusResponseDTO;
+import com.example.demo.dto.response.*;
 import com.example.demo.model.*;
 import com.example.demo.repository.*;
 import org.aspectj.weaver.ast.Or;
@@ -59,8 +56,8 @@ public class OrderService {
     private AuthService authService;
 
 
-    public MsgResponseDTO createOrder(OrderCreateRequestDTO request) {
-        MsgResponseDTO msg = new MsgResponseDTO();
+    public OrderCreateResponseDTO createOrder(OrderCreateRequestDTO request) {
+        OrderCreateResponseDTO response = new OrderCreateResponseDTO();
 
         try {
             String username = authService.getCurrentUsername();
@@ -110,22 +107,23 @@ public class OrderService {
                 // Save the contain
                 containRepository.save(contain);
             }
-            msg.setMsg("Order created successfully");
-            msg.setSuccess(Boolean.TRUE);
+            response.setOrderId(savedOrder.getOrderID());
+            response.setMsg("Order created successfully");
+            response.setSuccess(Boolean.TRUE);
 
             if (users == null) {
-                msg.setSuccess(Boolean.FALSE);
-                msg.setMsg("Authorization User not found");
+                response.setSuccess(Boolean.FALSE);
+                response.setMsg("Authorization User not found");
 //                thêm return sau khi front end thêm đc token vào
-//                return msg;
+//                return response;
             }
 
-            return msg;
+            return response;
         } catch (Exception exception) {
-            msg.setSuccess(Boolean.FALSE);
-            msg.setMsg(exception.getMessage());
+            response.setSuccess(Boolean.FALSE);
+            response.setMsg(exception.getMessage());
             logger.error("Error in method {}: {}", "createOrder", exception.getMessage(), exception);
-            return msg;
+            return response;
         }
     }
 
