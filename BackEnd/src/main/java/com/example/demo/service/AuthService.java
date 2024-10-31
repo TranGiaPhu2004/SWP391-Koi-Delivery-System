@@ -64,7 +64,7 @@ public class AuthService {
 
         // Nếu đăng nhập thành công
         logger.info("dang nhap thanh cong");
-        return new LoginResponseDTO(jwtUtil.generateToken(user),user.getRole().getTitle());
+        return new LoginResponseDTO(jwtUtil.generateToken(user),user.getRole().getTitle(),user.getUsername());
     }
 
     public LoginResponseDTO loginByUsername(LoginByUsernameRequestDTO request) {
@@ -72,7 +72,7 @@ public class AuthService {
         String password = request.getPassword();
         User user = userRepository.findByUsername(username).orElse(null);
         if (user != null && user.getPassword().equals(password)) { // So sánh trực tiếp
-            return new LoginResponseDTO(jwtUtil.generateToken(user),user.getRole().getTitle()) ;
+            return new LoginResponseDTO(jwtUtil.generateToken(user),user.getRole().getTitle(),user.getUsername()) ;
         }
         return null; // Invalid credentials
     }
@@ -82,7 +82,7 @@ public class AuthService {
         String password = request.getPassword();
         User user = userRepository.findByEmail(email).orElse(null);
         if (user != null && user.getPassword().equals(password)) { // So sánh trực tiếp
-            return new LoginResponseDTO(jwtUtil.generateToken(user),user.getRole().getTitle());
+            return new LoginResponseDTO(jwtUtil.generateToken(user),user.getRole().getTitle(),user.getUsername()) ;
         }
         return null; // Invalid credentials
     }

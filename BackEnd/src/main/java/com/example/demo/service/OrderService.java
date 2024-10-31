@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -47,6 +48,12 @@ public class OrderService {
 
     @Autowired
     private IDeliveryMethodRepository deliveryMethodRepository;
+
+    @Autowired
+    private IFeedbackRepository feedbackRepository;
+
+    @Autowired
+    private IKoiFishRepository koiFishRepository;
 
     @Autowired
     private AuthService authService;
@@ -322,6 +329,29 @@ public class OrderService {
             response.setHttpCode(500);
             response.setSuccess(Boolean.FALSE);
             response.setMsg(e.getMessage());
+        }
+        return response;
+    }
+
+//    @Transactional
+    public MsgResponseDTO deleteOrder(Integer orderID){
+        MsgResponseDTO response = new MsgResponseDTO();
+        try {
+            Order order = orderRepository.findById(orderID).orElse(null);
+            if (order != null) {
+                orderRepository.deleteById(orderID);
+                response.setSuccess(Boolean.TRUE);
+                response.setMsg("Order "+order.getOrderID()+" successfully deleted");
+                response.setHttpCode(200);
+            } else {
+                response.setSuccess(Boolean.FALSE);
+                response.setMsg("Order not found");
+                response.setHttpCode(404);
+            }
+        } catch (Exception e) {
+            response.setSuccess(Boolean.FALSE);
+            response.setMsg("---Exception : " + e.getMessage());
+            response.setHttpCode(500);
         }
         return response;
     }
