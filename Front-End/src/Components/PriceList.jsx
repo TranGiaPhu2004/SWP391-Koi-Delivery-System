@@ -12,6 +12,12 @@ function PriceList() {
   const [count1, setCount1] = useState(0);
   const [count2, setCount2] = useState(0);
   const [count3, setCount3] = useState(0);
+  const [showAlert1, setShowAlert1] = useState(false);
+  const [showAlert2, setShowAlert2] = useState(false);
+  const [showAlert3, setShowAlert3] = useState(false);
+  const [showAlert4, setShowAlert4] = useState(false);
+  const [showAlert5, setShowAlert5] = useState(false);
+
 
   const navigate = useNavigate();
 
@@ -57,7 +63,7 @@ function PriceList() {
 
   const boxPrices = [1200000, 700000, 400000]; // Large Box, Medium Box, Small Box
 
- 
+
 
   const calculateTotalPrice = () => {
     let total = 0;
@@ -121,12 +127,48 @@ function PriceList() {
     }
   };
 
+
+
+
   //TẠO ĐỐI TƯỢNG DỮ LIỆU ĐỂ GỬI YÊU CẦU LÊN API
   const handleSubmit = async (e) => {
-    e.preventDefault();
 
-    if (!startPlace || !endPlace) {
-      alert("Please fill out all fields and select delivery type.");
+    e.preventDefault();
+    
+    if ((count1 == 0 || count2 == 0 || count3 == 0) && (deliveryType == null)
+      && (selectedServices == null) && (!startPlace && !endPlace)) {
+      setShowAlert1(true);
+      setTimeout(() => {
+        setShowAlert1(false);
+      }, 2000);
+      return;
+    }
+    else if (count1 == 0 && count2 == 0 && count3 == 0) {
+      setShowAlert2(true);
+      setTimeout(() => {
+        setShowAlert2(false);
+      }, 3000);
+      return;
+    } else if (selectedServices == null) {
+      setShowAlert4(true);
+      setTimeout(() => {
+        setShowAlert4(false);
+      }, 3000);
+      return;
+    }
+
+    else if (deliveryType == null) {
+      setShowAlert3(true);
+      setTimeout(() => {
+        setShowAlert3(false);
+      }, 3000);
+      return;
+
+    } else if (!startPlace || !endPlace) {
+      setShowAlert5(true);
+      setTimeout(() => {
+        setShowAlert5(false);
+      }, 3000);
       return;
     }
 
@@ -166,10 +208,38 @@ function PriceList() {
     } catch (error) {
       console.error("Đã xảy ra lỗi khi gửi yêu cầu POST:", error);
     }
+
+
   };
+
 
   return (
     <>
+      {showAlert1 && (
+        <div className="PriceList-custom-alert">
+          Please fill out all the fields !!!
+        </div>
+      )}
+      {showAlert2 && (
+        <div className="PriceList-custom-alert">
+          Please choose at least one box !!!
+        </div>
+      )}
+      {showAlert3 && (
+        <div className="PriceList-custom-alert">
+          Please choose specific delivery category !!!
+        </div>
+      )}
+      {showAlert4 && (
+        <div className="PriceList-custom-alert">
+          Please choose detailed descriptive one service !!!
+        </div>
+      )}
+      {showAlert5 && (
+        <div className="PriceList-custom-alert">
+          Please fill out Pick-up and Destination obviously!!!
+        </div>
+      )}
       <div className="PriceList-main-priceList">
         <p>🚚 Koi Delivery Service Price List 🎏</p>
       </div>
