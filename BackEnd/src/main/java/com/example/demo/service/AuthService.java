@@ -74,7 +74,7 @@ public class AuthService {
         if (user != null && user.getPassword().equals(password)) { // So sánh trực tiếp
             return new LoginResponseDTO(jwtUtil.generateToken(user),user.getRole().getTitle(),user.getUsername()) ;
         }
-        return null; // Invalid credentials
+        return new LoginResponseDTO(); // Invalid credentials
     }
 
     public LoginResponseDTO loginByEmail(LoginByEmailRequestDTO request) {

@@ -15,4 +15,5 @@ public class UpdateUserRequestDTO implements Serializable {
     private String password;
     private String email;
     private String phonecontact;
+    private Integer roleID;
 }

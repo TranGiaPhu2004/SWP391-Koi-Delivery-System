@@ -57,11 +57,8 @@ public class UserController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         // Lấy username từ đối tượng Authentication
-        String username = authentication.getName();
-
-
-
-        MsgResponseDTO response = userService.updateUserByID(id, updateUser);
+//        String username = authentication.getName();
+        MsgResponseDTO response = userService.updateCustomerUserByID(id, updateUser);
         if(response.isSuccess()){
             return ResponseEntity.ok(response);
         }
@@ -81,5 +78,11 @@ public class UserController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+    }
+
+    @GetMapping("/{id}/role")
+    public ResponseEntity<UserResponseDTO> getUserRole(@PathVariable Integer id){
+        UserResponseDTO response = userService.getUserRoleById(id);
+        return ResponseEntity.status(response.getHttpStatus()).body(response);
     }
 }
