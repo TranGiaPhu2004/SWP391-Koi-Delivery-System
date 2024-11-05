@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/orderStatus")
 @Tag(name = "Order Status Controller")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173","https://deploy-server-c1f5.vercel.app/"})
 public class OrderStatusController {
 
     @Autowired

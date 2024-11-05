@@ -37,6 +37,7 @@ function LoginHeaderMethod() {
         // Lưu token vào localStorage hoặc sessionStorage
         localStorage.setItem("token", data.token);
         localStorage.setItem("role", data.role);
+        localStorage.setItem("username", data.username);
 
         if (data.role === "Admin") {
           navigate("/Manager");

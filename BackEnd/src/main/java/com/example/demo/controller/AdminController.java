@@ -19,7 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/admin")
 @Tag(name = "Admin Controller (API của trang Admin)")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173","https://deploy-server-c1f5.vercel.app/"})
 public class AdminController {
     private final UserService userService;
     private final AuthService authService;

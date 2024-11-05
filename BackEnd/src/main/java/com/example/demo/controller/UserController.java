@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/users")
 @Tag(name = "User Controller (API về Table User)")
-@CrossOrigin(origins = "http://localhost:5173") // Cho phép từ origin http://localhost:5173
+@CrossOrigin(origins = {"http://localhost:5173","https://deploy-server-c1f5.vercel.app/"})
 public class UserController {
 
     @Autowired

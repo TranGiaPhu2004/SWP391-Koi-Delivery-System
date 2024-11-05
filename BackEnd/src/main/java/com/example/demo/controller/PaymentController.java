@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @Log
 @RestController
 @RequestMapping("/payment")
-@Tag(name = "Charge Controller (API cho thanh toán)")
+@CrossOrigin(origins = {"http://localhost:5173","https://deploy-server-c1f5.vercel.app/"})
 public class PaymentController {
 
     private static final Logger logger = LoggerFactory.getLogger(PaymentController.class);

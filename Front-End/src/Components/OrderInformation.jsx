@@ -13,7 +13,7 @@ const OrderInformation = () => {
   // kiểm tra xem trong hệ thống đã tồn tại state chứa dữ liệu chưa ?
   const orderData = state ? state.data : {};
 
-  const { totalPrice, startPlace, endPlace, deliveryID, boxes } = orderData;
+  const { totalPrice, startPlace, endPlace, deliveryID, boxes ,orderID} = orderData;
 
   // CHUYỂN SANG ĐƠN VỊ TIỀN TỂ LÀ VNĐ
   const formatCurrency = (amount) => {
@@ -124,6 +124,7 @@ const OrderInformation = () => {
                   endPlace,
                   deliveryID,
                   boxes,
+                  orderID
                 },
               }}
             >

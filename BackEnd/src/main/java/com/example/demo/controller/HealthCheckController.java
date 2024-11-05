@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/test")
 @Tag(name = "Health Check Controller (Kiểm tra server)")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173","https://deploy-server-c1f5.vercel.app/"})
 public class HealthCheckController {
 
     private static final Logger logger = LoggerFactory.getLogger(HealthCheckController.class);

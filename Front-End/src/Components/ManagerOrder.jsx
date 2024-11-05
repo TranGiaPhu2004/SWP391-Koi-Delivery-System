@@ -19,7 +19,7 @@ const ManagerOrder = () => {
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1); // Current page
   const [ordersPerPage] = useState(12); // Number of orders per page
-
+  const username = localStorage.getItem("username");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -98,7 +98,7 @@ const ManagerOrder = () => {
           <div className="ManagerOrder-user-info">
             <img src={avatar} alt="User Avatar" className="ManagerOrder-avatar" />
             <div className="ManagerOrder-user-details">
-              <h3>Vũ Đức Mạnh</h3>
+              <h3>{username}</h3>
               <p>Manager</p>
             </div>
           </div>
