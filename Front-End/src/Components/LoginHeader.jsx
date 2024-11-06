@@ -17,13 +17,13 @@ function LoginHeaderMethod() {
 
     // Tạo đối tượng dữ liệu để gửi lên API
     const loginData = {
-      usernameOrEmail: username,
+      username: username,
       password: password,
     };
 
     try {
       // Gửi yêu cầu POST đến API
-      const response = await fetch("http://localhost:8080/auth/login", {
+      const response = await fetch("http://localhost:8080/auth/login/username", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
