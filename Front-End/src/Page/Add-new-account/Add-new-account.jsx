@@ -49,6 +49,10 @@ function RegisterMethod() {
   const handleRegister = async (e) => {
     e.preventDefault();
 
+    // Regular expressions for validation
+    const usernameRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{1,}$/; // Ít nhất 1 chữ hoa, 1 số, 1 kí tự đặc biệt
+    const passwordMinLength = 8;
+
     // Basic validation for input fields
     if (!email || !username || !password || !confirmPassword || !role) {
       setErrorMessage("Please fill in all fields.");
@@ -57,6 +61,25 @@ function RegisterMethod() {
 
     if (password !== confirmPassword) {
       setErrorMessage("Passwords do not match.");
+      return;
+    }
+
+    // Validate username: at least 1 uppercase letter, 1 special character, and 1 number
+    if (!usernameRegex.test(username)) {
+      setErrorMessage(
+        "Username must contain at least 1 uppercase letter, 1 number, and 1 special character."
+      );
+      return;
+    }
+
+    // Validate password: must be at least 8 characters and not contain the username
+    if (password.length < passwordMinLength) {
+      setErrorMessage("Password must be at least 8 characters long.");
+      return;
+    }
+
+    if (password.includes(username)) {
+      setErrorMessage("Password must not contain the username.");
       return;
     }
 
@@ -96,6 +119,7 @@ function RegisterMethod() {
       setSuccessMessage("");
     }
   };
+
 
   return (
     <div className="Register-main">
