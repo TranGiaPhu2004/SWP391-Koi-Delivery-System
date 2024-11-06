@@ -134,7 +134,7 @@ function PriceList() {
   const handleSubmit = async (e) => {
 
     e.preventDefault();
-    
+
     if ((count1 == 0 || count2 == 0 || count3 == 0) && (deliveryType == null)
       && (selectedServices == null) && (!startPlace && !endPlace)) {
       setShowAlert1(true);
@@ -142,7 +142,16 @@ function PriceList() {
         setShowAlert1(false);
       }, 2000);
       return;
+    } 
+    else if ((count1 == 0 || count2 == 0 || count3 == 0) && (deliveryType == null)
+      || (selectedServices == null) || (!startPlace && !endPlace)) {
+      setShowAlert1(true);
+      setTimeout(() => {
+        setShowAlert1(false);
+      }, 2000);
+      return;
     }
+
     else if (count1 == 0 && count2 == 0 && count3 == 0) {
       setShowAlert2(true);
       setTimeout(() => {
