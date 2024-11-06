@@ -14,6 +14,10 @@ function RegisterMethod() {
   const [roles, setRoles] = useState([]); // Lưu danh sách các vai trò từ backend
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [emailError, setEmailError] = useState(false);
+  const [usernameError, setUsernameError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+  const [confirmPasswordError, setConfirmPasswordError] = useState(false);
 
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
@@ -22,16 +26,12 @@ function RegisterMethod() {
     // Lấy danh sách vai trò từ backend
     const fetchRoles = async () => {
       try {
-        const response = await fetch("http://localhost:8080/role",
-           {
-            method: "GET",
-            headers: {
-              
-              Authorization: `Bearer ${token}`,
-            },
-            
-          }
-        );
+        const response = await fetch("http://localhost:8080/role", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         if (response.ok) {
           const data = await response.json();
           setRoles(data.allRole); // Cập nhật state với danh sách vai trò
@@ -51,16 +51,36 @@ function RegisterMethod() {
 
     // Regular expressions for validation
     const usernameRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{1,}$/; // Ít nhất 1 chữ hoa, 1 số, 1 kí tự đặc biệt
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{1,}$/;
     const passwordMinLength = 8;
+
+    setEmailError(false);
+    setUsernameError(false);
+    setPasswordError(false);
+    setConfirmPasswordError(false);
 
     // Basic validation for input fields
     if (!email || !username || !password || !confirmPassword || !role) {
       setErrorMessage("Please fill in all fields.");
+      if (!email) {
+        setEmailError(true);
+      }
+      if (!username) {
+        setUsernameError(true);
+      }
+      if (!password) {
+        setPasswordError(true);
+      }
+      if (!confirmPassword) {
+        setConfirmPasswordError(true);
+      }
+
       return;
     }
 
     if (password !== confirmPassword) {
       setErrorMessage("Passwords do not match.");
+      setConfirmPasswordError(true);
       return;
     }
 
@@ -69,17 +89,29 @@ function RegisterMethod() {
       setErrorMessage(
         "Username must contain at least 1 uppercase letter, 1 number, and 1 special character."
       );
+      setUsernameError(true);
       return;
     }
+
+    if (!passwordRegex.test(password)) {
+      setErrorMessage(
+        "password must contain at least 1 uppercase letter, 1 number, and 1 special character."
+      );
+      setPasswordError(true);
+      return;
+    }
+
 
     // Validate password: must be at least 8 characters and not contain the username
     if (password.length < passwordMinLength) {
       setErrorMessage("Password must be at least 8 characters long.");
+      setPasswordError(true);
       return;
     }
 
     if (password.includes(username)) {
       setErrorMessage("Password must not contain the username.");
+      setPasswordError(true);
       return;
     }
 
@@ -99,32 +131,39 @@ function RegisterMethod() {
         },
         body: JSON.stringify(registerData),
       });
-
+      const data = await response.json();
       if (response.ok) {
-        setSuccessMessage("Registration successful. Redirecting to login page...");
+        setSuccessMessage(
+          "Registration successful. Redirecting to login page..."
+        );
         setErrorMessage("");
         // Redirect to login page after a short delay
         setTimeout(() => {
           navigate("/login");
         }, 2000);
-      } else if (response.status === 409) {
-        setErrorMessage("Email already exists.");
+      } else if (response.status === 401) {
+        setErrorMessage(data.msg);
         setSuccessMessage("");
       } else {
         setErrorMessage("Registration failed. Please try again later.");
         setSuccessMessage("");
       }
     } catch (error) {
-      setErrorMessage("Error registering. Please check your network and try again.");
+      setErrorMessage(
+        "Error registering. Please check your network and try again."
+      );
       setSuccessMessage("");
     }
   };
 
-
   return (
     <div className="Register-main">
       <div className="Register-LogoRegister">
-        <img src={LogoLogin} alt="LogoRegister" className="Register-LogoRegisterImg" />
+        <img
+          src={LogoLogin}
+          alt="LogoRegister"
+          className="Register-LogoRegisterImg"
+        />
       </div>
       <div className="Register-form">
         <div className="Register-logo">
@@ -134,54 +173,67 @@ function RegisterMethod() {
         <form onSubmit={handleRegister}>
           {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
           {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
+
           <div className="Register-input-group">
             <label className="Register-label">EMAIL</label>
             <input
-              className="Register-email-input"
+              className={`Register-email-input ${emailError ? "error" : ""}`}
               type="email"
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
+
           <div className="Register-input-group">
             <label className="Register-label">USERNAME</label>
             <input
-              className="Register-username-input"
+              className={`Register-username-input ${
+                usernameError ? "error" : ""
+              }`}
               type="text"
               placeholder="Enter your username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
+
           <div className="Register-input-group">
             <label className="Register-label">PASSWORD</label>
             <input
-              className="Register-password-input"
+              className={`Register-password-input ${
+                passwordError ? "error" : ""
+              }`}
               type="password"
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+
           <div className="Register-input-group">
             <label className="Register-label">CONFIRM PASSWORD</label>
             <input
-              className="Register-confirm-password-input"
+              className={`Register-confirm-password-input ${
+                confirmPasswordError ? "error" : ""
+              }`}
               type="password"
               placeholder="Confirm your password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
+
           <div className="Register-input-group">
             <label className="Register-label">SET ROLE</label>
             <select
-              className="Register-role-select"
+              className={`Register-role-select ${!role ? "error" : ""}`}
               value={role}
               onChange={(e) => setConfirmRole(e.target.value)}
             >
-              <option value="" disabled>Select a role</option>
+              <option value="" disabled>
+                Select a role
+              </option>
               {roles.map((role) => (
                 <option key={role} value={role}>
                   {role}
@@ -189,6 +241,7 @@ function RegisterMethod() {
               ))}
             </select>
           </div>
+
           <button className="Register-button" type="submit">
             CREATE
           </button>
