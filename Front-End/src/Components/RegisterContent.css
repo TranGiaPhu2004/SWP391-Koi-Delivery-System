@@ -116,3 +116,12 @@
 .Register-button:hover {
   background-color: #2c2c57;
 }
+
+.error {
+  border: 2px solid red;
+}
+
+.error:focus {
+  outline: none;
+  border-color: darkred;
+}

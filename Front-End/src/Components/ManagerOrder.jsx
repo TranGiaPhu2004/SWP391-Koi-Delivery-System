@@ -18,7 +18,7 @@ const ManagerOrder = () => {
 
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1); // Current page
-  const [ordersPerPage] = useState(12); // Number of orders per page
+  const [ordersPerPage] = useState(10); // Number of orders per page
   const username = localStorage.getItem("username");
   const navigate = useNavigate();
 
