@@ -262,7 +262,7 @@ function PriceList() {
               <p>Large Box (S01)</p>
               <div className="PriceList-info-box">
                 <p>
-                  Contains at least <br /> <span>10-20</span> Koi Fish totality
+                  Contains at least <br /> <span>10-12</span> Koi Fish totality, fish size can exceed 78cm and weight can exceed 12 kg
                 </p>
               </div>
               <div className="PriceList-amount1">
@@ -294,7 +294,7 @@ function PriceList() {
               <p>Medium Box (S02)</p>
               <div className="PriceList-info-box">
                 <p>
-                  Contains at least <br /> <span>5-10</span> Koi Fish
+                  Contains at least <br /> <span>5-10</span> Koi Fish, fish size not exceed 78cm and weight not exceed 12 kg
                 </p>
               </div>
               <div className="PriceList-amount2">
@@ -326,7 +326,7 @@ function PriceList() {
               <p>Small Box (S03)</p>
               <div className="PriceList-info-box">
                 <p>
-                  Contains at least <br /> <span>3-5</span> Koi Fish maximum
+                  Contains at least <br /> <span>1-5</span> Koi Fish maximum, fish size not exeed 78cm and weight not exceed 12 kg
                 </p>
               </div>
               <div className="PriceList-amount3">

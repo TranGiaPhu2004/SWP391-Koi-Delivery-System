@@ -14,6 +14,15 @@
   margin-left: 10px;
 }
 
+.ManagerOrder-koi{
+  margin-top: 40%;
+}
+
+.ManagerOrder-koi img{
+  
+  width: 100%;
+}
+
 .ManagerCustomer-sidebar {
   background-color: white;
   /* background-color: #1a1a2e; */
@@ -44,6 +53,7 @@
   color: #ff4b5c; /* Màu chữ khi hover */
   transition: color 0.3s ease; /* Hiệu ứng chuyển màu */
 }
+
 
 .ManagerCustomer-nav-item {
   color: #2B3D55;

@@ -56,7 +56,7 @@ const ConfirmOrder = () => {
 
   
  
- 
+
 
   // New function to confirm the order
   const handleConfirmOrder = async (orderID) => {
@@ -153,7 +153,9 @@ const ConfirmOrder = () => {
                 <th>Start Place</th>
                 <th>End Place</th>
                 <th>Total Price</th>
+                <th>Payment Status</th>
                 <th>Action</th> {/* Add new column for actions */}
+                
               </tr>
             </thead>
             <tbody>
@@ -164,7 +166,7 @@ const ConfirmOrder = () => {
                   <td>{order.startPlace}</td>
                   <td>{order.endPlace}</td>
                   <td>{order.totalPrice}</td>
-                  
+                  <td>{order.paymentStatus ? 'Paid' : 'Unpaid'}</td> {/* Display Payment Status */}
                   <td>
                     <button
                       className="ManagerOrder-btn-confirm"

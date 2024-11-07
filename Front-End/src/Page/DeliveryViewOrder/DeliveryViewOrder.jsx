@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import logo from "../../assets/image/Logo.png";
 import avatar from "../../assets/image/avatar.png";
 import search from "../../assets/image/search.png";
+import pickkoi from "../../assets/image/fastDelivery.png"
 import EditIcon from "../../assets/image/edit.svg";
 import DeleteIcon from "../../assets/image/delete.svg";
 import ArrowDown from "../../assets/image/arrow-down.svg";
@@ -84,17 +85,23 @@ const DeliveryViewOrder = () => {
           <img src={logo} alt="Logo" />
         </div>
 
+        <div className="ManagerOrder-fastDeli">
+          <img src={pickkoi} alt="koi" />
+        </div>
+
         <LogoutButton />
       </aside>
 
       <main className="ManagerOrder-main-content">
         <header className="ManagerOrder-header">
           <div className="ManagerOrder-user-info">
+         
             <img
               src={avatar}
               alt="User Avatar"
               className="ManagerOrder-avatar"
             />
+             
             <div className="ManagerOrder-user-details">
               <h3>{username}</h3>
               <p>Delivery Staff</p>
@@ -126,6 +133,7 @@ const DeliveryViewOrder = () => {
                 <th>Start Place</th>
                 <th>End Place</th>
                 <th>Total Price</th>
+                <th>Payment Status</th> {/* New Payment Status Column */}
                 <th>Details</th>
               </tr>
             </thead>
@@ -137,13 +145,14 @@ const DeliveryViewOrder = () => {
                   <td>{order.startPlace}</td>
                   <td>{order.endPlace}</td>
                   <td>{order.totalPrice}</td>
+                  <td>{order.paymentStatus ? 'Paid' : 'Unpaid'}</td> {/* Display Payment Status */}
                   <td>
                     <div className="ManagerOrder-detail-buttons">
                       <button
                         className="ManagerOrder-btn-view-status"
                         onClick={() => handleViewDeliveryStatus(order.orderID)}
                       >
-                        View and Update Status
+                        View/Update Status
                       </button>
                     </div>
                   </td>

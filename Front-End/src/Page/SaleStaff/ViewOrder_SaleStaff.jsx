@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import logo from '../../assets/image/Logo.png';
 import avatar from '../../assets/image/avatar.png';
 import search from '../../assets/image/search.png';
+import Koi from '../../assets/image/Koi.png'
 import EditIcon from '../../assets/image/edit.svg';
 import DeleteIcon from '../../assets/image/delete.svg';
 import ArrowDown from '../../assets/image/arrow-down.svg';
@@ -77,9 +78,15 @@ const CustomerOrder = () => {
       <aside className="ManagerOrder-sidebar">
         <div className="ManagerOrder-logo">
           <img src={logo} alt="Logo" />
+          
+          
+        </div>
+        <div className="ManagerOrder-koi">
+        <img src={Koi} alt="Koi" />
         </div>
         
         <LogoutButton />
+        
       </aside>
 
       <main className="ManagerOrder-main-content">
@@ -113,18 +120,20 @@ const CustomerOrder = () => {
                 <th>Start Place</th>
                 <th>End Place</th>
                 <th>Total Price</th>
+                <th>Payment Status</th> {/* New Payment Status Column */}
                 <th>Details</th>
               </tr>
             </thead>
             <tbody>
               {currentOrders.map((order) => (
                 
-                  <tr onClick={() => toggleOrder(order.orderID)}>
+                  <tr key={order.orderID} onClick={() => toggleOrder(order.orderID)}>
                     <td>{order.orderID}</td>
                     <td>{order.orderDate}</td>
                     <td>{order.startPlace}</td>
                     <td>{order.endPlace}</td>
                     <td>{order.totalPrice}</td>
+                    <td>{order.paymentStatus ? 'Paid' : 'Unpaid'}</td> {/* Payment Status displayed here */}
                     <td>
                     <div className="ManagerOrder-detail-buttons">
                             <button 

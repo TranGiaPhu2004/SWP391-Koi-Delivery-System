@@ -2,10 +2,6 @@ import React, { useState, useEffect } from 'react';
 import logo from '../assets/image/Logo.png';
 import avatar from '../assets/image/avatar.png';
 import search from '../assets/image/search.png';
-import EditIcon from '../assets/image/edit.svg';
-import DeleteIcon from '../assets/image/delete.svg';
-import ArrowDown from '../assets/image/arrow-down.svg';
-import ArrowUp from '../assets/image/arrow-up.svg';
 import './ManagerOrder.css';
 import LogoutButton from "../Logout";
 import { Link, useNavigate } from "react-router-dom";
@@ -87,7 +83,6 @@ const ManagerOrder = () => {
             <li className="ManagerOrder-nav-item">
               <Link to="/ManagerOrder">Order Manager</Link>
             </li>
-           
           </ul>
         </nav>
         <LogoutButton />
@@ -124,28 +119,28 @@ const ManagerOrder = () => {
                 <th>Start Place</th>
                 <th>End Place</th>
                 <th>Total Price</th>
+                <th>Payment Status</th> {/* New Payment Status Column */}
                 <th>Details</th>
               </tr>
             </thead>
             <tbody>
               {currentOrders.map((order) => (
-                
-                  <tr onClick={() => toggleOrder(order.orderID)}>
-                    <td>{order.orderID}</td>
-                    <td>{order.orderDate}</td>
-                    <td>{order.startPlace}</td>
-                    <td>{order.endPlace}</td>
-                    <td>{order.totalPrice}</td>
-                    <td>
-                    <button 
-                              className="ManagerOrder-btn-view-status"
-                              onClick={() => handleViewDeliveryStatus(order.orderID)}
-                            >
-                              Update Delivery Status
-                            </button>
-                    </td>
-                  </tr>
-                  
+                <tr key={order.orderID} onClick={() => toggleOrder(order.orderID)}>
+                  <td>{order.orderID}</td>
+                  <td>{order.orderDate}</td>
+                  <td>{order.startPlace}</td>
+                  <td>{order.endPlace}</td>
+                  <td>{order.totalPrice}</td>
+                  <td>{order.paymentStatus ? 'Paid' : 'Unpaid'}</td> {/* Display Payment Status */}
+                  <td>
+                    <button
+                      className="ManagerOrder-btn-view-status"
+                      onClick={() => handleViewDeliveryStatus(order.orderID)}
+                    >
+                      Update Delivery Status
+                    </button>
+                  </td>
+                </tr>
               ))}
             </tbody>
           </table>
@@ -153,7 +148,11 @@ const ManagerOrder = () => {
           {/* Pagination controls */}
           <div className="ManagerOrder-pagination">
             {Array.from({ length: Math.ceil(filteredOrders.length / ordersPerPage) }).map((_, idx) => (
-              <button key={idx} onClick={() => paginate(idx + 1)} className={currentPage === idx + 1 ? 'active' : ''}>
+              <button
+                key={idx}
+                onClick={() => paginate(idx + 1)}
+                className={currentPage === idx + 1 ? 'active' : ''}
+              >
                 {idx + 1}
               </button>
             ))}
