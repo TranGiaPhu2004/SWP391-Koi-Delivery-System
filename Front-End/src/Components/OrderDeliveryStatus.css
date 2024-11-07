@@ -28,13 +28,17 @@
     flex-direction: row;
     column-gap: 15px;
     margin-left: 8px;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     flex-wrap: nowrap;
     width: 100vw;
     margin-top: 40px;
 }
 
+.OrderDeliveryStatus-tracking-order div {
+    text-align: center;
+    
+}
 
 .OrderDeliveryStatus-tracking-order p {
     display: flex;
@@ -45,40 +49,12 @@
     font-family: cursive;
 }
 
-.OrderDeliveryStatus-tracking0 img {
-    width: 19.5%;
-    height: 20%;
-    opacity: 0.5;
-    transition: opacity 0.5s ease, filter 0.5s ease;
+.OrderDeliveryStatus-tracking-order img {
+    width: 100px; /* Đảm bảo tất cả các ảnh có cùng kích thước */
+    height: 100px; /* Hoặc đặt kích thước cụ thể tùy ý */
+    margin-bottom: 10px; /* Khoảng cách giữa ảnh và văn bản */
 }
 
-.OrderDeliveryStatus-tracking1 img {
-    width: 20%;
-    height: 20%;
-    opacity: 0.5;
-    transition: opacity 0.5s ease, filter 0.5s ease;
-}
-
-.OrderDeliveryStatus-tracking2 img {
-    width: 29%;
-    height: 20%;
-    opacity: 0.5;
-    transition: opacity 0.5s ease, filter 0.5s ease;
-}
-
-.OrderDeliveryStatus-tracking3 img {
-    width: 22%;
-    height: 20%;
-    opacity: 0.5;
-    transition: opacity 0.5s ease, filter 0.5s ease;
-}
-
-.OrderDeliveryStatus-tracking4 img {
-    width: 19.75%;
-    height: 20%;
-    opacity: 0.5;
-    transition: opacity 0.5s ease, filter 0.5s ease;
-}
 
 /* trạng thái chưa xác nhận */
 .OrderDeliveryStatus-tracking0 img.blurred {

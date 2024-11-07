@@ -133,7 +133,7 @@ const CustomerOrder = () => {
                     <td>{order.startPlace}</td>
                     <td>{order.endPlace}</td>
                     <td>{order.totalPrice}</td>
-                    <td>{order.paymentStatus ? 'Paid' : 'Unpaid'}</td> {/* Payment Status displayed here */}
+                    <td className={order.paymentStatus ? 'paid-status' : 'unpaid-status'}>{order.paymentStatus ? 'Paid' : 'Unpaid'}</td> {/* Payment Status displayed here */}
                     <td>
                     <div className="ManagerOrder-detail-buttons">
                             <button 

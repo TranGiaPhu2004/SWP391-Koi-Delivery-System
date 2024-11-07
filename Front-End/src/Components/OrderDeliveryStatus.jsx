@@ -98,7 +98,7 @@ function OrderDeliveryStatus() {
       </div>
 
       <div className="OrderDeliveryStatus-order-id">
-        <label htmlFor="orderId">Order ID:</label>
+        <label htmlFor="orderId">Current Order ID:</label>
         <input type="text" id="orderId" value={orderId} readOnly />
       </div>
 

@@ -4,7 +4,23 @@
     box-sizing: border-box;
     font-family: 'Arial', sans-serif;
   }
+  .paid-status {
+    color: green; /* Màu chữ */
+    border: 2px solid green; /* Viền xanh */
+    padding: 3px 5px; /* Thêm chút đệm để viền không chạm vào chữ */
+    border-radius: 4px; /* Bo góc viền */
     
+  }
+  
+  /* Chỉ áp dụng viền cho phần chữ "Unpaid" */
+  .unpaid-status {
+    color: red; /* Màu chữ */
+    border: 2px solid red; /* Viền đỏ */
+    padding: 3px 5px; /* Thêm chút đệm để viền không chạm vào chữ */
+    border-radius: 4px; /* Bo góc viền */
+    
+  }
+  
   .ManagerOrder-container {
     height: 100vh;
     width: 100vw;
@@ -289,3 +305,12 @@
     border-color: #007bff;
   }
   
+  .ManagerOrder-btn-view-status{
+    width: 100%;
+    
+  }
+
+
+/* ManagerOrder.css */
+
+/* Chỉ áp dụng viền cho phần chữ "Paid" */

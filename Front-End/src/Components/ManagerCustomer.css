@@ -5,6 +5,23 @@
   font-family: 'Arial', sans-serif;
 }
 
+.paid-status {
+  color: green; /* Màu chữ */
+  border: 2px solid green; /* Viền xanh */
+  padding: 3px 5px; /* Thêm chút đệm để viền không chạm vào chữ */
+  border-radius: 4px; /* Bo góc viền */
+  
+}
+
+/* Chỉ áp dụng viền cho phần chữ "Unpaid" */
+.unpaid-status {
+  color: red; /* Màu chữ */
+  border: 2px solid red; /* Viền đỏ */
+  padding: 3px 5px; /* Thêm chút đệm để viền không chạm vào chữ */
+  border-radius: 4px; /* Bo góc viền */
+  
+}
+
 .ManagerCustomer-container {
   width: 100vw;
   display: flex;

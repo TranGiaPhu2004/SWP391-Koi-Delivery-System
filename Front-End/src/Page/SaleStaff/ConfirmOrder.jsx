@@ -166,7 +166,7 @@ const ConfirmOrder = () => {
                   <td>{order.startPlace}</td>
                   <td>{order.endPlace}</td>
                   <td>{order.totalPrice}</td>
-                  <td>{order.paymentStatus ? 'Paid' : 'Unpaid'}</td> {/* Display Payment Status */}
+                  <td className={order.paymentStatus ? 'paid-status' : 'unpaid-status'}>{order.paymentStatus ? 'Paid' : 'Unpaid'}</td> {/* Display Payment Status */}
                   <td>
                     <button
                       className="ManagerOrder-btn-confirm"
