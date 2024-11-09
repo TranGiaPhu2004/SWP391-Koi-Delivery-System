@@ -1,7 +1,7 @@
 package com.example.demo.dto.response;
 
+import com.example.demo.dto.base.KoiBoxDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

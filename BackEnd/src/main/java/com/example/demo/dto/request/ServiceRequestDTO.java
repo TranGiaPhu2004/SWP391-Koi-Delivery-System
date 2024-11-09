@@ -9,7 +9,8 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BoxDTO implements Serializable {
-    private Integer boxid;
-    private int quantity;
+public class ServiceRequestDTO implements Serializable {
+    private Integer serviceId;
+    private String serviceName;
+    private Float price;
 }

@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.response.BoxTypeResponseDTO;
-import com.example.demo.dto.response.KoiBoxDTO;
+import com.example.demo.dto.base.KoiBoxDTO;
 import com.example.demo.model.KoiBox;
 import com.example.demo.repository.IKoiBoxRepository;
 import org.springframework.beans.factory.annotation.Autowired;
