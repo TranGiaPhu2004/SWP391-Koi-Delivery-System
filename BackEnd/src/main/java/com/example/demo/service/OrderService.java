@@ -288,7 +288,9 @@ public class OrderService {
                 for (Order order : orders) {
                     if (order.getDelivery() != null) {
                         if (order.getDelivery().getDeliveryStatus() == null) {
-                            deliveryOrderList.add(order);
+                            if (order.getPayment().getPaymentStatus()){
+                                deliveryOrderList.add(order);
+                            }
                         }
                     }
                 }
