@@ -164,6 +164,7 @@
     width: 100%;
     background-color: #2B3D55;
     height: 100%;
+    overflow-x: auto;
     
   }
   
@@ -177,7 +178,7 @@
   .ManagerOrder-order-table {
     width: 98%; /* Đảm bảo bảng không vượt quá khung nhìn */
     margin-left: 5px;
-    table-layout: fixed; /* Cố định chiều rộng các cột để bảng không bị tràn */
+    
     border-collapse: collapse;
     background-color: #F9F9F9;
     color: black;
@@ -193,6 +194,7 @@
     white-space: nowrap; /* Không cho phép xuống dòng */
     overflow: hidden; /* Ẩn nội dung nếu quá dài */
     text-overflow: ellipsis; /* Thêm dấu "..." nếu nội dung bị cắt ngắn */
+    word-wrap: break-word;
   }
   /* Đặt chiều rộng cho cột ID nhỏ hơn các cột khác */
   .ManagerOrder-order-table th:nth-child(1),
@@ -306,7 +308,7 @@
   }
   
   .ManagerOrder-btn-view-status{
-    width: 100%;
+    width: 50%;
     
   }
 
