@@ -64,7 +64,7 @@ public class AuthService {
 
         // Nếu đăng nhập thành công
         logger.info("dang nhap thanh cong");
-        return new LoginResponseDTO(jwtUtil.generateToken(user),user.getRole().getTitle(),user.getUsername());
+        return new LoginResponseDTO(jwtUtil.generateToken(user), user.getRole().getTitle(), user.getUsername());
     }
 
     public LoginResponseDTO loginByUsername(LoginByUsernameRequestDTO request) {
@@ -72,9 +72,9 @@ public class AuthService {
         String password = request.getPassword();
         User user = userRepository.findByUsername(username).orElse(null);
         if (user != null && user.getPassword().equals(password)) { // So sánh trực tiếp
-            return new LoginResponseDTO(jwtUtil.generateToken(user),user.getRole().getTitle(),user.getUsername()) ;
+            return new LoginResponseDTO(jwtUtil.generateToken(user), user.getRole().getTitle(), user.getUsername());
         }
-        return null; // Invalid credentials
+        return new LoginResponseDTO(); // Invalid credentials
     }
 
     public LoginResponseDTO loginByEmail(LoginByEmailRequestDTO request) {
@@ -82,13 +82,37 @@ public class AuthService {
         String password = request.getPassword();
         User user = userRepository.findByEmail(email).orElse(null);
         if (user != null && user.getPassword().equals(password)) { // So sánh trực tiếp
-            return new LoginResponseDTO(jwtUtil.generateToken(user),user.getRole().getTitle(),user.getUsername()) ;
+            return new LoginResponseDTO(jwtUtil.generateToken(user), user.getRole().getTitle(), user.getUsername());
         }
         return null; // Invalid credentials
     }
 
     public String registerUser(RegisterRequestDTO request) {
         logger.info("Service Start");
+        if (request.getUsername() == null) {
+            logger.info("Username is null");
+            return "Register fail! Username is null.";
+        } else if (request.getUsername().isEmpty()) {
+            logger.info("Username is empty");
+            return "Register fail! Username is empty.";
+        }
+
+        if (request.getEmail() == null) {
+            logger.info("Email is null");
+            return "Register fail! Email is null.";
+        } else if (request.getEmail().isBlank()) {
+            logger.info("Email is empty");
+            return "Register fail! Email is empty.";
+        }
+
+        if (request.getPassword() == null) {
+            logger.info("Password is null");
+            return "Register fail! Password is null.";
+        } else if (request.getPassword().isBlank()) {
+            logger.info("Password Empty");
+            return "Register fail! Password is empty.";
+        }
+
         if (userRepository.existsByUsername(request.getUsername())) {
             logger.info("Username Exist");
             return "Register fail! Username already taken.";
@@ -97,6 +121,7 @@ public class AuthService {
             logger.info("Email Exist");
             return "Register fail! Email already taken.";
         }
+
 
         // Get the default role (customer) if no roleID is provided
         // Find the default "customer" role from the application properties

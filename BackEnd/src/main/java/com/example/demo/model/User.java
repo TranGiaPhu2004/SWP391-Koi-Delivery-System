@@ -35,4 +35,15 @@ public class User implements Serializable{
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<Order> orders;
+
+    //////////////TEST AREA
+    ///////////////////////
+    // Thêm thuộc tính roleID không lưu trong cơ sở dữ liệu
+    @Transient
+    private Integer roleID;
+
+    // Getter cho roleID từ đối tượng Role
+    public Integer getRoleID() {
+        return role != null ? role.getRoleID() : null;
+    }
 }
