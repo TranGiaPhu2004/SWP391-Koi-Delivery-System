@@ -153,7 +153,7 @@ public class OrderService {
                 }
                 order.setOrderStatus(orderStatus);
 
-                if (statusID ==5){
+                if (statusID == 5) {
                     order.getDelivery().setDeliveryStatus(Boolean.TRUE);
                     orderRepository.save(order);
                     msg.setMsg("Delivery has been completed");
@@ -260,38 +260,59 @@ public class OrderService {
 
     public ListOrderResponseDTO getDeliveryOrderByStatus
             (List<Order> orders, String status) {
-        Boolean deliveryStatus = null;
-        if (status.equals("true")) {
-            deliveryStatus = true;
-        } else if (status.equals("false")) {
-            deliveryStatus = false;
-        }
         logger.info("-----" + status);
         List<Order> deliveryOrderList = new ArrayList<>();
 
-        for (Order order : orders) {
-            logger.info("Delivery Status : " + deliveryStatus);
-            // order co bang delivery = confirm
-            logger.info("Order ID : " + order.getOrderID());
-            if (order.getDelivery() != null) {
-                logger.info("---Delivery Status : "
-                        + order.getDelivery().getDeliveryStatus());
-                if (deliveryStatus != null) {
-                    if (order.getDelivery().getDeliveryStatus() != null) {
-                        // order delivery thì dung nhu status thi luu lai
-                        if (order.getDelivery().getDeliveryStatus().equals(deliveryStatus)) {
+        switch (status) {
+            case "true":
+                for (Order order : orders) {
+                    if (order.getDelivery() != null) {
+                        if (order.getDelivery().getDeliveryStatus() == Boolean.TRUE) {
                             deliveryOrderList.add(order);
                         }
                     }
-                } else {
-                    if (order.getDelivery().getDeliveryStatus() == null) {
-                        deliveryOrderList.add(order);
+                }
+                break;
+            case "false":
+                for (Order order : orders) {
+                    if (order.getDelivery() != null) {
+                        if (order.getDelivery().getDeliveryStatus() == Boolean.FALSE) {
+                            if (order.getPayment().getPaymentStatus()){
+                                deliveryOrderList.add(order);
+                            }
+                        }
                     }
                 }
-                logger.info("---Add: " + order.getOrderID() + " complete");
-            }
+                break;
+            case "null":
+                for (Order order : orders) {
+                    if (order.getDelivery() != null) {
+                        if (order.getDelivery().getDeliveryStatus() == null) {
+                            deliveryOrderList.add(order);
+                        }
+                    }
+                }
+                break;
         }
         return getListOrderResponseDTO(deliveryOrderList);
+//        for (Order order : orders) {
+//            if (order.getDelivery() != null) {
+//                if (deliveryStatus != null) {
+//                    if (order.getDelivery().getDeliveryStatus() != null) {
+//                        // order delivery thì dung nhu status thi luu lai
+//                        if (order.getDelivery().getDeliveryStatus().equals(deliveryStatus)) {
+//                            deliveryOrderList.add(order);
+//                        }
+//                    }
+//                } else {
+//                    if (order.getDelivery().getDeliveryStatus() == null) {
+//                        deliveryOrderList.add(order);
+//                    }
+//                }
+//                logger.info("---Add: " + order.getOrderID() + " complete");
+//            }
+//        }
+//        return getListOrderResponseDTO(deliveryOrderList);
     }
 
     public MsgResponseDTO payOrder(Integer orderID) {
@@ -309,7 +330,7 @@ public class OrderService {
                         response.setHttpCode(200);
                     } else {
                         response.setSuccess(Boolean.FALSE);
-                        response.setMsg("Order "+order.getOrderID()+" had been paid");
+                        response.setMsg("Order " + order.getOrderID() + " had been paid");
                         response.setHttpCode(400);
                     }
                 } else {
@@ -330,15 +351,15 @@ public class OrderService {
         return response;
     }
 
-//    @Transactional
-    public MsgResponseDTO deleteOrder(Integer orderID){
+    //    @Transactional
+    public MsgResponseDTO deleteOrder(Integer orderID) {
         MsgResponseDTO response = new MsgResponseDTO();
         try {
             Order order = orderRepository.findById(orderID).orElse(null);
             if (order != null) {
                 orderRepository.deleteById(orderID);
                 response.setSuccess(Boolean.TRUE);
-                response.setMsg("Order "+order.getOrderID()+" successfully deleted");
+                response.setMsg("Order " + order.getOrderID() + " successfully deleted");
                 response.setHttpCode(200);
             } else {
                 response.setSuccess(Boolean.FALSE);
