@@ -4,7 +4,23 @@
     box-sizing: border-box;
     font-family: 'Arial', sans-serif;
   }
+  .paid-status {
+    color: green; /* Màu chữ */
+    border: 2px solid green; /* Viền xanh */
+    padding: 3px 5px; /* Thêm chút đệm để viền không chạm vào chữ */
+    border-radius: 4px; /* Bo góc viền */
     
+  }
+  
+  /* Chỉ áp dụng viền cho phần chữ "Unpaid" */
+  .unpaid-status {
+    color: red; /* Màu chữ */
+    border: 2px solid red; /* Viền đỏ */
+    padding: 3px 5px; /* Thêm chút đệm để viền không chạm vào chữ */
+    border-radius: 4px; /* Bo góc viền */
+    
+  }
+  
   .ManagerOrder-container {
     height: 100vh;
     width: 100vw;
@@ -13,6 +29,12 @@
   
   .ManagerOrder-logo{
     margin-left: 10px;
+  }
+
+  
+  .ManagerOrder-fastDeli img{
+    margin-top: 50%;
+    width: 100%;
   }
   
   .ManagerOrder-sidebar {
@@ -142,6 +164,7 @@
     width: 100%;
     background-color: #2B3D55;
     height: 100%;
+    
   }
   
   .ManagerOrder-order-management h1 {
@@ -159,6 +182,7 @@
     background-color: #F9F9F9;
     color: black;
     overflow-x: auto; /* Cho phép cuộn ngang nếu nội dung quá dài */
+    
   
   }
   
@@ -184,10 +208,12 @@
     top: 0; /* Dính ở phía trên cùng */
     z-index: 1; /* Đảm bảo tiêu đề luôn ở trên cùng */
     box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4); /* Thêm hiệu ứng đổ bóng khi cuộn */
+    
   }
   
   .ManagerOrder-order-table tr:nth-child(even) {
     background-color: #F9F9F9;
+    
   } 
   
   .ManagerOrder-order-table tr:hover {
@@ -202,7 +228,9 @@
     overflow: hidden; /* Ẩn nội dung nếu quá dài */
     text-overflow: ellipsis; /* Thêm dấu "..." nếu nội dung bị cắt ngắn */
     position: relative; /* Thêm thuộc tính để định vị cho phần tử con */
+    
 }
+
 
 .ManagerOrder-toggle-icon {
     width: 16px; /* Kích thước biểu tượng nhỏ hơn */
@@ -277,3 +305,12 @@
     border-color: #007bff;
   }
   
+  .ManagerOrder-btn-view-status{
+    width: 100%;
+    
+  }
+
+
+/* ManagerOrder.css */
+
+/* Chỉ áp dụng viền cho phần chữ "Paid" */

@@ -5,6 +5,23 @@
   font-family: 'Arial', sans-serif;
 }
 
+.paid-status {
+  color: green; /* Màu chữ */
+  border: 2px solid green; /* Viền xanh */
+  padding: 3px 5px; /* Thêm chút đệm để viền không chạm vào chữ */
+  border-radius: 4px; /* Bo góc viền */
+  
+}
+
+/* Chỉ áp dụng viền cho phần chữ "Unpaid" */
+.unpaid-status {
+  color: red; /* Màu chữ */
+  border: 2px solid red; /* Viền đỏ */
+  padding: 3px 5px; /* Thêm chút đệm để viền không chạm vào chữ */
+  border-radius: 4px; /* Bo góc viền */
+  
+}
+
 .ManagerCustomer-container {
   width: 100vw;
   display: flex;
@@ -12,6 +29,15 @@
 
 .ManagerCustomer-logo {
   margin-left: 10px;
+}
+
+.ManagerOrder-koi{
+  margin-top: 40%;
+}
+
+.ManagerOrder-koi img{
+  
+  width: 100%;
 }
 
 .ManagerCustomer-sidebar {
@@ -44,6 +70,7 @@
   color: #ff4b5c; /* Màu chữ khi hover */
   transition: color 0.3s ease; /* Hiệu ứng chuyển màu */
 }
+
 
 .ManagerCustomer-nav-item {
   color: #2B3D55;

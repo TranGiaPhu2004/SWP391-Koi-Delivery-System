@@ -2,19 +2,24 @@ import React, { useState, useEffect } from 'react';
 import logo from '../../assets/image/Logo.png';
 import avatar from '../../assets/image/avatar.png';
 import search from '../../assets/image/search.png';
-import EditIcon from '../../assets/image/edit.svg';
-import DeleteIcon from '../../assets/image/delete.svg';
-import ArrowDown from '../../assets/image/arrow-down.svg';
-import ArrowUp from '../../assets/image/arrow-up.svg';
+import Koi from '../../assets/image/Koi.png';
 import '../../Components/ManagerCustomer.css';
 import LogoutButton from "../../Logout";
 import { Link, useNavigate } from "react-router-dom";
+import { Elements } from '@stripe/react-stripe-js'; // Import Elements
+import { loadStripe } from '@stripe/stripe-js'; // Import loadStripe
+import PaymentModal from '../PaymentStripe/PaymentModal'; // Import PaymentModal
+
+// Load your Stripe publishable key
+const stripePromise = loadStripe('pk_test_51QFJ0X00eXNAQ7PXp9HL5W2c2hEeuHpp3HUieCFUG1rzvM78O9LPo2KNDKimiyuBulhhPBKIWLbkVph4QKeBh1Uj00PuKXqh2d');
 
 const CustomerOrder = () => {
   const [orders, setOrders] = useState([]);
   const [expandedOrder, setExpandedOrder] = useState(null);
   const [error, setError] = useState("");
   const [searchQuery, setSearchQuery] = useState(""); 
+  const [showPaymentModal, setShowPaymentModal] = useState(false); // State to control the modal visibility
+  const [selectedOrder, setSelectedOrder] = useState(null); // Store the order that needs payment
   const navigate = useNavigate();
 
   // Pagination states
@@ -51,9 +56,14 @@ const CustomerOrder = () => {
     setExpandedOrder(expandedOrder === id ? null : id);
   };
 
-  // Function to handle navigation to the OrderDeliveryStatus page
   const handleViewDeliveryStatus = (orderID) => {
     navigate(`/DeliveryTracking/${orderID}`);
+  };
+
+  // Handle "Pay Now" button click to open the modal
+  const handlePayNow = (order) => {
+    setSelectedOrder(order); // Store the selected order
+    setShowPaymentModal(true); // Show the modal
   };
 
   const filteredOrders = orders.filter((order) =>
@@ -71,14 +81,15 @@ const CustomerOrder = () => {
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-
   return (
     <div className="ManagerOrder-container">
       <aside className="ManagerOrder-sidebar">
         <div className="ManagerOrder-logo">
           <img src={logo} alt="Logo" />
         </div>
-        
+        <div className="ManagerOrder-koi">
+          <img src={Koi} alt="Koi" />
+        </div>
         <LogoutButton />
       </aside>
 
@@ -113,40 +124,45 @@ const CustomerOrder = () => {
                 <th>Start Place</th>
                 <th>End Place</th>
                 <th>Total Price</th>
-                <th>Details</th>
+                <th>Payment Status</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
               {currentOrders.map((order) => (
-                
-                  <tr onClick={() => toggleOrder(order.orderID)}>
-                    <td>{order.orderID}</td>
-                    <td>{order.orderDate}</td>
-                    <td>{order.startPlace}</td>
-                    <td>{order.endPlace}</td>
-                    <td>{order.totalPrice}</td>
-                    <td>
+                <tr key={order.orderID} onClick={() => toggleOrder(order.orderID)}>
+                  <td>{order.orderID}</td>
+                  <td>{order.orderDate}</td>
+                  <td>{order.startPlace}</td>
+                  <td>{order.endPlace}</td>
+                  <td>{order.totalPrice}</td>
+                  <td className={order.paymentStatus ? 'paid-status' : 'unpaid-status'}>
+                    {order.paymentStatus ? 'Paid' : 'Unpaid'}
+                  </td>
+                  <td>
                     <div className="ManagerOrder-detail-buttons">
-                            <button 
-                              className="ManagerOrder-btn-view-status"
-                              onClick={() => handleViewDeliveryStatus(order.orderID)}
-                            >
-                              View Delivery Status
-                            </button>
-                            {/* <button className="ManagerOrder-btn-update">
-                              <img src={EditIcon} alt="Edit" />
-                            </button>
-                            <button className="ManagerOrder-btn-delete">
-                              <img src={DeleteIcon} alt="Delete" />
-                            </button> */}
-                          </div>
-                    </td>
-                  </tr>
-                 
-                
+                      {!order.paymentStatus ? (
+                        <button
+                          className="ManagerOrder-btn-pay-now"
+                          onClick={() => handlePayNow(order)} // Open payment modal on click
+                        >
+                          Pay Now
+                        </button>
+                      ) : (
+                        <button 
+                          className="ManagerOrder-btn-view-status"
+                          onClick={() => handleViewDeliveryStatus(order.orderID)}
+                        >
+                          View Delivery Status
+                        </button>
+                      )}
+                    </div>
+                  </td>
+                </tr>
               ))}
             </tbody>
           </table>
+
           {/* Pagination controls */}
           <div className="ManagerOrder-pagination">
             {Array.from({
@@ -162,6 +178,16 @@ const CustomerOrder = () => {
             ))}
           </div>
         </div>
+
+        {/* Payment Modal */}
+        {showPaymentModal && (
+          <Elements stripe={stripePromise}>
+            <PaymentModal 
+              order={selectedOrder} // Pass the selected order for payment
+              onClose={() => setShowPaymentModal(false)} // Close modal handler
+            />
+          </Elements>
+        )}
       </main>
     </div>
   );
