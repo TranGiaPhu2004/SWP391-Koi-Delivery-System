@@ -89,8 +89,8 @@ const CheckoutForm = () => {
       if (responseData.error) {
         setCardError(responseData.error.message || "Payment failed.");
       } else if (
-        responseData.paymentIntent &&
-        responseData.paymentIntent.status === "succeeded"
+       
+        responseData.status === "succeeded"
       ) {
         setAmount("");
         setDescription("");
