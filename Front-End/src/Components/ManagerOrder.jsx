@@ -8,10 +8,11 @@ import { Link, useNavigate } from "react-router-dom";
 
 const ManagerOrder = () => {
   const [orders, setOrders] = useState([]);
-  const [expandedOrder, setExpandedOrder] = useState(null);
   const [error, setError] = useState("");
   const [searchQuery, setSearchQuery] = useState(""); // State for search query
   const [toggleAction, setToggleAction] = useState({}); // New state to track toggle status for each order
+  const [alertMessage, setAlertMessage] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
 
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1); // Current page
@@ -47,10 +48,6 @@ const ManagerOrder = () => {
     fetchOrders();
   }, []);
 
-  const toggleOrder = (id) => {
-    setExpandedOrder(expandedOrder === id ? null : id);
-  };
-
   // Function to handle navigation to the OrderDeliveryStatus page
   const handleViewDeliveryStatus = (orderID) => {
     navigate(`/DeliveryStatus/${orderID}`);
@@ -78,12 +75,15 @@ const ManagerOrder = () => {
       if (response.ok) {
         // If delete is successful, filter out the deleted order from the state
         setOrders(orders.filter((order) => order.orderID !== orderID));
-        alert(`Order ID: ${orderID} has been deleted successfully.`);
+        setAlertMessage(`Order ID: ${orderID} has been deleted successfully.`);
+        setShowAlert(true);
       } else {
         setError("Failed to delete the order.");
       }
     } catch (error) {
-      setError("Error deleting the order. Please check your network and try again.");
+      setError(
+        "Error deleting the order. Please check your network and try again."
+      );
     }
   };
 
@@ -184,7 +184,11 @@ const ManagerOrder = () => {
                   <td>{order.startPlace}</td>
                   <td>{order.endPlace}</td>
                   <td>{order.totalPrice}</td>
-                  <td className={order.paymentStatus ? "paid-status" : "unpaid-status"}>
+                  <td
+                    className={
+                      order.paymentStatus ? "paid-status" : "unpaid-status"
+                    }
+                  >
                     {order.paymentStatus ? "Paid" : "Unpaid"}
                   </td>
 
@@ -195,7 +199,7 @@ const ManagerOrder = () => {
                         className="ManagerOrder-btn-toggle"
                         onClick={() => handleToggleAction(order.orderID)}
                       >
-                        {toggleAction[order.orderID] ? "Show Update" : "Show Delete"}
+                        {toggleAction[order.orderID] ? "Update" : "Delete"}
                       </button>
 
                       {/* Conditionally render the appropriate button based on toggleAction state */}
@@ -209,7 +213,9 @@ const ManagerOrder = () => {
                       ) : (
                         <button
                           className="ManagerOrder-btn-view-status"
-                          onClick={() => handleViewDeliveryStatus(order.orderID)}
+                          onClick={() =>
+                            handleViewDeliveryStatus(order.orderID)
+                          }
                         >
                           Update Delivery Status
                         </button>
@@ -235,6 +241,20 @@ const ManagerOrder = () => {
               </button>
             ))}
           </div>
+          {showAlert && (
+            <div className="custom-alert">
+              <span>{alertMessage}</span>
+              {/* Khi nhấn nút "Close", sẽ tắt alert và chuyển hướng */}
+              <button
+                onClick={() => {
+                  setShowAlert(false); // Tắt alert
+                  navigate("/ManagerOrder"); // Chuyển hướng sau khi tắt alert
+                }}
+              >
+                Close
+              </button>
+            </div>
+          )}
         </div>
       </main>
     </div>

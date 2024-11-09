@@ -40,6 +40,11 @@
   width: 100%;
 }
 
+.ManagerOrder-SaleStaff img{
+  padding-top: 50%;
+  width: 100%;
+}
+
 .ManagerCustomer-sidebar {
   background-color: white;
   /* background-color: #1a1a2e; */
@@ -359,4 +364,26 @@
 
 .custom-alert button:hover {
   text-decoration: underline;
+}
+.ManagerOrder-btn-pay-now{
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin-right: 40px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* General alert styling */
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  max-width: 500px; /* Đặt kích thước tối đa */
+  margin: 20px auto; /* Canh giữa */
 }

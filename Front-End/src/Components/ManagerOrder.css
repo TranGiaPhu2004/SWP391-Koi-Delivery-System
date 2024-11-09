@@ -230,6 +230,7 @@
     overflow: hidden; /* Ẩn nội dung nếu quá dài */
     text-overflow: ellipsis; /* Thêm dấu "..." nếu nội dung bị cắt ngắn */
     position: relative; /* Thêm thuộc tính để định vị cho phần tử con */
+
     
 }
 
@@ -249,9 +250,7 @@
   /* CSS cho các nút Update và Delete */
   .ManagerOrder-btn-update,
   .ManagerOrder-btn-delete {
-    padding: 5px 10px;
-    margin-right: 5px;
-    border: none;
+    
     border-radius: 5px;
     cursor: pointer;
   }
@@ -308,11 +307,39 @@
   }
   
   .ManagerOrder-btn-view-status{
-    width: 50%;
+    width: 80%;
+    text-align: center;
     
   }
 
 
-/* ManagerOrder.css */
+  .custom-alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #4CAF50; /* Màu xanh lá khi thành công */
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
-/* Chỉ áp dụng viền cho phần chữ "Paid" */
+.custom-alert span {
+    margin-right: 20px;
+}
+
+.custom-alert button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.custom-alert button:hover {
+    text-decoration: underline;
+}
