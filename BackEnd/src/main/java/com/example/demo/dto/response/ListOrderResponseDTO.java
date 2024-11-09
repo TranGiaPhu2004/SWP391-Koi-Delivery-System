@@ -1,5 +1,6 @@
 package com.example.demo.dto.response;
 
+import com.example.demo.dto.base.OrderDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

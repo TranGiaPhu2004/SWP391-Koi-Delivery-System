@@ -1,4 +1,4 @@
-package com.example.demo.dto.response;
+package com.example.demo.dto.base;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,11 +6,10 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class KoiBoxDTO implements Serializable {
+@NoArgsConstructor
+public class BoxDTO implements Serializable {
     private Integer boxid;
-    private Float price;
+    private int quantity;
 }
