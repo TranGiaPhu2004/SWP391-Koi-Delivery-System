@@ -4,8 +4,15 @@
     box-sizing: border-box;
     font-family: 'Arial', sans-serif;
   }
+  /* ManagerOrder.css */
+.highlight-row {
+  background-color: #7be95f !important;  /* Light red background to highlight */
+  color: #f30909; /* Optional: change the text color */
+}
+
+
   .paid-status {
-    color: green; /* Màu chữ */
+    color: green; /* Màu chữ */ 
     border: 2px solid green; /* Viền xanh */
     padding: 3px 5px; /* Thêm chút đệm để viền không chạm vào chữ */
     border-radius: 4px; /* Bo góc viền */
@@ -277,6 +284,11 @@
     background-color: #da190b;
     /* Màu đậm hơn khi hover */
   }
+  .ManagerOrder-btn-toggle{
+    border-radius: 5px;
+    cursor: pointer;
+    border: solid grey 1px;
+  }
 
   .ManagerOrder-customs-image {
     width: 150px; /* hoặc giá trị bạn muốn */
@@ -307,7 +319,7 @@
   }
   
   .ManagerOrder-btn-view-status{
-    width: 80%;
+    width: 65%;
     text-align: center;
     
   }
@@ -343,3 +355,4 @@
 .custom-alert button:hover {
     text-decoration: underline;
 }
+

@@ -178,7 +178,9 @@ const ManagerOrder = () => {
             </thead>
             <tbody>
               {currentOrders.map((order) => (
-                <tr key={order.orderID}>
+                <tr key={order.orderID}
+                className={order.orderStatus === 5 ? "highlight-row" : ""}>
+
                   <td>{order.orderID}</td>
                   <td>{order.orderDate}</td>
                   <td>{order.startPlace}</td>
@@ -199,7 +201,7 @@ const ManagerOrder = () => {
                         className="ManagerOrder-btn-toggle"
                         onClick={() => handleToggleAction(order.orderID)}
                       >
-                        {toggleAction[order.orderID] ? "Update" : "Delete"}
+                        {toggleAction[order.orderID] ? "Change to Update" : "Change to Delete"}
                       </button>
 
                       {/* Conditionally render the appropriate button based on toggleAction state */}
