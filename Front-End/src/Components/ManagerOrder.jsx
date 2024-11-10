@@ -214,7 +214,7 @@ const ManagerOrder = () => {
                         </button>
                       ) : (
                         <button
-                          className="ManagerOrder-btn-view-status"
+                          className="ManagerOrder-btn-view-status1"
                           onClick={() =>
                             handleViewDeliveryStatus(order.orderID)
                           }

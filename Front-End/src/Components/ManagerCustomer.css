@@ -323,6 +323,7 @@
   margin-right: 40px;
   border-radius: 5px;
   cursor: pointer;
+  width: 100% !important;
 }
 
 .ManagerOrder-btn-confirm{
