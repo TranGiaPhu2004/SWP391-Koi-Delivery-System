@@ -50,7 +50,7 @@ function RegisterMethod() {
     e.preventDefault();
 
     // Regular expressions for validation
-    const usernameRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{1,}$/; // Ít nhất 1 chữ hoa, 1 số, 1 kí tự đặc biệt
+    
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{1,}$/;
     const passwordMinLength = 8;
 
@@ -84,15 +84,7 @@ function RegisterMethod() {
       return;
     }
 
-    // Validate username: at least 1 uppercase letter, 1 special character, and 1 number
-    if (!usernameRegex.test(username)) {
-      setErrorMessage(
-        "Username must contain at least 1 uppercase letter, 1 number, and 1 special character."
-      );
-      setUsernameError(true);
-      return;
-    }
-
+   
     if (!passwordRegex.test(password)) {
       setErrorMessage(
         "password must contain at least 1 uppercase letter, 1 number, and 1 special character."
