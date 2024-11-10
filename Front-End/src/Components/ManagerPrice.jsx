@@ -10,10 +10,14 @@ const ManagerPrice = () => {
   const navigate = useNavigate();
 
   const customers = [
-    { id: 1, name: 'Small Box', price: '100k', status: 'Active' },
-    { id: 2, name: 'Medium Box', price: '200k', status: 'Inactive' },
-    { id: 3, name: 'Large Box', price: '500k', status: 'Active' },
-    { id: 4, name: 'Service', price: '500k', status: 'Active' },
+    { id: 1, name: 'Small Box', price: '400000', status: 'Active' },
+    { id: 2, name: 'Medium Box', price: '700000', status: 'Active' },
+    { id: 3, name: 'Large Box', price: '1200000', status: 'Active' },
+    { id: 5, name: 'packaging', price: '200000', status: 'Active' },
+    { id: 6, name: 'health', price: '150000', status: 'Active' },
+    { id: 7, name: 'insurance', price: '500000', status: 'Active' },
+    { id: 8, name: 'standard', price: '300000', status: 'Active' },
+    { id: 9, name: 'express', price: '850000', status: 'Active' },
     
   ];
 
@@ -34,10 +38,7 @@ const ManagerPrice = () => {
               <li className="ManagerPrice-nav-item"><Link to="/ManagerOrder">
             Order Manager
       </Link></li>
-              <li className="ManagerPrice-nav-item">Notification</li>
-              <li className="ManagerPrice-nav-item">Settings</li>
-              <li className="ManagerPrice-nav-item">Account</li>
-              <li className="ManagerPrice-nav-item">Help</li>
+              
              </ul>
           </nav>
         <LogoutButton></LogoutButton>
@@ -52,7 +53,7 @@ const ManagerPrice = () => {
               className="ManagerPrice-avatar"
             />
             <div className="ManagerPrice-user-details">
-              <h3>Vũ Đức Mạnh</h3>
+              <h3>admin</h3>
               <p>Manager</p>
             </div>
           </div>
