@@ -387,7 +387,3 @@
   max-width: 500px; /* Đặt kích thước tối đa */
   margin: 20px auto; /* Canh giữa */
 }
-.highlight-row-2{
-  background-color: #f66363 !important;  /* Light red background to highlight */
-  color: #010700; /* Optional: change the text color */
-}

@@ -131,7 +131,7 @@ const CustomerOrder = () => {
             <tbody>
               {currentOrders.map((order) => (
                 <tr key={order.orderID} onClick={() => toggleOrder(order.orderID)} 
-                className={order.paymentStatus === false ? "highlight-row-2" : ""}>
+                className={order.orderStatus === 5 ? "highlight-row" : ""}>
                   <td>{order.orderID}</td>
                   <td>{order.orderDate}</td>
                   <td>{order.startPlace}</td>
