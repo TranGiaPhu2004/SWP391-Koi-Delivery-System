@@ -2,16 +2,15 @@ import React, { useState, useEffect } from "react";
 import logo from "../../assets/image/Logo.png";
 import avatar from "../../assets/image/avatar.png";
 import search from "../../assets/image/search.png";
+import salestaff from "../../assets/image/deliveryinsurance.png";
 import "../../Components/ManagerCustomer.css";
 import LogoutButton from "../../Logout";
 
-
 const ConfirmOrder = () => {
   const [orders, setOrders] = useState([]);
-  
+
   const [error, setError] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
- 
 
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
@@ -20,8 +19,6 @@ const ConfirmOrder = () => {
   const [alertMessage, setAlertMessage] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const username = localStorage.getItem("username");
-
-  
 
   const fetchOrders = async () => {
     try {
@@ -44,19 +41,15 @@ const ConfirmOrder = () => {
         setError("Failed to fetch orders.");
       }
     } catch (error) {
-      setError("Error fetching orders. Please check your network and try again.");
+      setError(
+        "Error fetching orders. Please check your network and try again."
+      );
     }
   };
 
-
   useEffect(() => {
-    
     fetchOrders();
   }, []);
-
-  
- 
-
 
   // New function to confirm the order
   const handleConfirmOrder = async (orderID) => {
@@ -80,14 +73,14 @@ const ConfirmOrder = () => {
         setShowAlert(true);
         fetchOrders();
         setTimeout(() => {
-          setShowAlert(false)
+          setShowAlert(false);
         }, 2000); // 2000ms = 2 giây
       } else {
         setAlertMessage("Failed to confirm the order");
         setShowAlert(true);
         setError("Failed to confirm the order.");
         setTimeout(() => {
-          setShowAlert(false)
+          setShowAlert(false);
         }, 2000); // 2000ms = 2 giây
       }
     } catch (error) {
@@ -95,7 +88,7 @@ const ConfirmOrder = () => {
       setShowAlert(true);
       fetchOrders();
       setTimeout(() => {
-        setShowAlert(false)
+        setShowAlert(false);
       }, 2000); // 2000ms = 2 giây
     }
   };
@@ -119,13 +112,21 @@ const ConfirmOrder = () => {
         <div className="ManagerOrder-logo">
           <img src={logo} alt="Logo" />
         </div>
+        <div className="ManagerOrder-SaleStaff">
+          <img src={salestaff} alt="SaleStaff" />
+        </div>
+
         <LogoutButton />
       </aside>
 
       <main className="ManagerOrder-main-content">
         <header className="ManagerOrder-header">
           <div className="ManagerOrder-user-info">
-            <img src={avatar} alt="User Avatar" className="ManagerOrder-avatar" />
+            <img
+              src={avatar}
+              alt="User Avatar"
+              className="ManagerOrder-avatar"
+            />
             <div className="ManagerOrder-user-details">
               <h3>{username}</h3>
               <p>Sale Staff</p>
@@ -138,7 +139,11 @@ const ConfirmOrder = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
-            <img src={search} alt="Search Icon" className="ManagerOrder-search-icon" />
+            <img
+              src={search}
+              alt="Search Icon"
+              className="ManagerOrder-search-icon"
+            />
           </div>
         </header>
 
@@ -155,18 +160,24 @@ const ConfirmOrder = () => {
                 <th>Total Price</th>
                 <th>Payment Status</th>
                 <th>Action</th> {/* Add new column for actions */}
-                
               </tr>
             </thead>
             <tbody>
               {currentOrders.map((order) => (
-                <tr key={order.orderID} >
+                <tr key={order.orderID}>
                   <td>{order.orderID}</td>
                   <td>{order.orderDate}</td>
                   <td>{order.startPlace}</td>
                   <td>{order.endPlace}</td>
                   <td>{order.totalPrice}</td>
-                  <td className={order.paymentStatus ? 'paid-status' : 'unpaid-status'}>{order.paymentStatus ? 'Paid' : 'Unpaid'}</td> {/* Display Payment Status */}
+                  <td
+                    className={
+                      order.paymentStatus ? "paid-status" : "unpaid-status"
+                    }
+                  >
+                    {order.paymentStatus ? "Paid" : "Unpaid"}
+                  </td>{" "}
+                  {/* Display Payment Status */}
                   <td>
                     <button
                       className="ManagerOrder-btn-confirm"
@@ -193,12 +204,11 @@ const ConfirmOrder = () => {
             ))}
           </div>
           {showAlert && (
-        <div className="custom-alert">
-          <span>{alertMessage}</span>
-          {/* Khi nhấn nút "Close", sẽ tắt alert và chuyển hướng */}
-          
-        </div>
-      )}
+            <div className="custom-alert">
+              <span>{alertMessage}</span>
+              {/* Khi nhấn nút "Close", sẽ tắt alert và chuyển hướng */}
+            </div>
+          )}
         </div>
       </main>
     </div>

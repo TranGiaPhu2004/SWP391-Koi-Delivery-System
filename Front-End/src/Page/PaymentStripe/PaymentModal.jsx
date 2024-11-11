@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
-import './PaymentModal.css'; // Assuming you style the modal in this file
-
+import React, { useState } from "react";
+import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
+import "./PaymentModal.css";
 
 const PaymentModal = ({ order, onClose }) => {
   const stripe = useStripe();
@@ -11,7 +10,7 @@ const PaymentModal = ({ order, onClose }) => {
   const [paymentSucceeded, setPaymentSucceeded] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [description, setDescription] = useState("");
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsProcessing(true);
@@ -50,16 +49,12 @@ const PaymentModal = ({ order, onClose }) => {
 
       if (responseData.error) {
         setCardError(responseData.error.message || "Payment failed.");
-      } else 
-      if (responseData.status === "succeeded") 
-        {
+      } else if (responseData.status === "succeeded") {
         console.log("test");
         setPaymentSucceeded(true);
         setDescription("");
         elements.getElement(CardElement).clear();
         setSuccessMessage("Payment completed successfully!");
-
-       
       }
     } catch (error) {
       setCardError("An error occurred while processing the payment.");
@@ -124,11 +119,11 @@ const PaymentModal = ({ order, onClose }) => {
       border: "1px solid #f5c6cb",
     },
     orderDetails: {
-      backgroundColor: "#f0f0f0", 
+      backgroundColor: "#f0f0f0",
       color: "#333",
     },
   };
-  
+
   return (
     <div className="payment-modal">
       <div className="modal-content">
@@ -137,7 +132,7 @@ const PaymentModal = ({ order, onClose }) => {
         <p>Amount: {order.totalPrice} VND</p>
 
         <form onSubmit={handleSubmit}>
-          <CardElement options={{ hidePostalCode: true }}/>
+          <CardElement options={{ hidePostalCode: true }} />
           <input
             type="text"
             placeholder="Payment Description"
@@ -146,22 +141,27 @@ const PaymentModal = ({ order, onClose }) => {
             required
             style={styles.input}
           />
-          
-          <button
-            type="submit"
-            disabled={!stripe || isProcessing}
-            style={styles.button}
-          >
-            {isProcessing ? "Processing..." : "Pay"}
-          </button>
 
+          <div className="modal-buttons">
+            <button
+              type="submit"
+              disabled={!stripe || isProcessing}
+              className="pay-btn"
+            >
+              {isProcessing ? "Processing..." : "Pay"}
+            </button>
+
+            <button onClick={handleClose} className="close-btn">
+              Close
+            </button>
+          </div>
           {/* Display success message immediately after payment succeeds */}
           {paymentSucceeded && (
             <div style={{ ...styles.alert, ...styles.successAlert }}>
               {successMessage}
             </div>
           )}
-          
+
           {/* Display error message if payment fails */}
           {cardError && (
             <div style={{ ...styles.alert, ...styles.errorAlert }}>
@@ -169,8 +169,8 @@ const PaymentModal = ({ order, onClose }) => {
             </div>
           )}
         </form>
-        
-        <button onClick={handleClose} className="close-btn">Close</button>
+
+       
       </div>
     </div>
   );
