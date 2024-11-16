@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import pickoi1 from "../assets/image/pickoi1.png";
 import pickoi2 from "../assets/image/pickoi2.png";
@@ -18,7 +18,6 @@ function PriceList() {
   const [showAlert4, setShowAlert4] = useState(false);
   const [showAlert5, setShowAlert5] = useState(false);
 
-
   const navigate = useNavigate();
 
   const increment1 = () => setCount1((c) => c + 1);
@@ -31,6 +30,10 @@ function PriceList() {
       alert(
         "Sorry, you could not decrement when amount of boxes begins from Zero ..."
       );
+  };
+  const isLoggedIn = () => {
+    const token = localStorage.getItem("token");
+    return !!token; // Returns true if the token exists
   };
 
   const decrement2 = () => {
@@ -62,8 +65,6 @@ function PriceList() {
   const [orderID, setOrderID] = useState();
 
   const boxPrices = [1200000, 700000, 400000]; // Large Box, Medium Box, Small Box
-
-
 
   const calculateTotalPrice = () => {
     let total = 0;
@@ -127,32 +128,33 @@ function PriceList() {
     }
   };
 
-
-
-
   //TẠO ĐỐI TƯỢNG DỮ LIỆU ĐỂ GỬI YÊU CẦU LÊN API
   const handleSubmit = async (e) => {
-
     e.preventDefault();
 
-    if ((count1 == 0 || count2 == 0 || count3 == 0) && (deliveryType == null)
-      && (selectedServices == null) && (!startPlace && !endPlace)) {
+    if (
+      (count1 == 0 || count2 == 0 || count3 == 0) &&
+      deliveryType == null &&
+      selectedServices == null &&
+      !startPlace &&
+      !endPlace
+    ) {
       setShowAlert1(true);
       setTimeout(() => {
         setShowAlert1(false);
       }, 2000);
       return;
-    } 
-    else if ((count1 == 0 || count2 == 0 || count3 == 0) && (deliveryType == null)
-      || (selectedServices == null) || (!startPlace && !endPlace)) {
+    } else if (
+      ((count1 == 0 || count2 == 0 || count3 == 0) && deliveryType == null) ||
+      selectedServices == null ||
+      (!startPlace && !endPlace)
+    ) {
       setShowAlert1(true);
       setTimeout(() => {
         setShowAlert1(false);
       }, 2000);
       return;
-    }
-
-    else if (count1 == 0 && count2 == 0 && count3 == 0) {
+    } else if (count1 == 0 && count2 == 0 && count3 == 0) {
       setShowAlert2(true);
       setTimeout(() => {
         setShowAlert2(false);
@@ -164,15 +166,12 @@ function PriceList() {
         setShowAlert4(false);
       }, 3000);
       return;
-    }
-
-    else if (deliveryType == null) {
+    } else if (deliveryType == null) {
       setShowAlert3(true);
       setTimeout(() => {
         setShowAlert3(false);
       }, 3000);
       return;
-
     } else if (!startPlace || !endPlace) {
       setShowAlert5(true);
       setTimeout(() => {
@@ -217,10 +216,18 @@ function PriceList() {
     } catch (error) {
       console.error("Đã xảy ra lỗi khi gửi yêu cầu POST:", error);
     }
-
-
   };
-
+  const handleOrderConfirm = (e) => {
+    e.preventDefault();
+    if (!isLoggedIn()) {
+      // If not logged in, navigate to the login page
+      alert("Please Log in to create orders");
+      navigate("/login");
+    } else {
+      // Proceed with order submission if logged in
+      handleSubmit(e);
+    }
+  };
 
   return (
     <>
@@ -271,7 +278,8 @@ function PriceList() {
               <p>Large Box (S01)</p>
               <div className="PriceList-info-box">
                 <p>
-                  Contains at least <br /> <span>10-12</span> Koi Fish totality, fish size can exceed 78cm and weight can exceed 12 kg
+                  Contains at least <br /> <span>10-12</span> Koi Fish totality,
+                  fish size can exceed 78cm and weight can exceed 12 kg
                 </p>
               </div>
               <div className="PriceList-amount1">
@@ -303,7 +311,8 @@ function PriceList() {
               <p>Medium Box (S02)</p>
               <div className="PriceList-info-box">
                 <p>
-                  Contains at least <br /> <span>5-10</span> Koi Fish, fish size not exceed 78cm and weight not exceed 12 kg
+                  Contains at least <br /> <span>5-10</span> Koi Fish, fish size
+                  not exceed 78cm and weight not exceed 12 kg
                 </p>
               </div>
               <div className="PriceList-amount2">
@@ -335,7 +344,8 @@ function PriceList() {
               <p>Small Box (S03)</p>
               <div className="PriceList-info-box">
                 <p>
-                  Contains at least <br /> <span>1-5</span> Koi Fish maximum, fish size not exeed 78cm and weight not exceed 12 kg
+                  Contains at least <br /> <span>1-5</span> Koi Fish maximum,
+                  fish size not exeed 78cm and weight not exceed 12 kg
                 </p>
               </div>
               <div className="PriceList-amount3">
@@ -481,9 +491,7 @@ function PriceList() {
       </div>
 
       <div className="PriceList-buttonn">
-        <button type="submit" onClick={handleSubmit}>
-          Order Completion
-        </button>
+        <button onClick={handleOrderConfirm}>Order Confirm</button>
       </div>
     </>
   );
