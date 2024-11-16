@@ -35,7 +35,7 @@ public class LoggerUtil {
     }
 
     // Phương thức log tự động cho lỗi với thông tin chi tiết về lớp và phương thức
-    public static void logError(Exception ex) {
+    public static String logError(Exception ex) {
         StackTraceElement[] stackTrace = ex.getStackTrace();
         String className = stackTrace.length > 0 ? stackTrace[0].getClassName() : "Unknown";
         String methodName = stackTrace.length > 0 ? stackTrace[0].getMethodName() : "Unknown";
@@ -43,6 +43,7 @@ public class LoggerUtil {
 
         Logger logger = getLogger();
         logger.error(message, ex);
+        return message;
     }
 
     // Phương thức log thông tin (Info)
