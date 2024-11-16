@@ -1,5 +1,6 @@
-package com.example.demo.security;
+package com.example.demo.filter;
 
+import com.example.demo.util.JwtUtil;
 import com.example.demo.model.User;
 import com.example.demo.repository.IUserRepository;
 import com.example.demo.service.UserService;
