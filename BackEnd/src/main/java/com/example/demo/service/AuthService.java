@@ -10,7 +10,7 @@ import com.example.demo.model.Role;
 import com.example.demo.model.User;
 import com.example.demo.repository.IRoleRepository;
 import com.example.demo.repository.IUserRepository;
-import com.example.demo.security.JwtUtil;
+import com.example.demo.util.JwtUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

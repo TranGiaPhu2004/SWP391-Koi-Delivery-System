@@ -1,4 +1,4 @@
-package com.example.demo.security;
+package com.example.demo.util;
 
 import com.example.demo.model.User;
 import io.jsonwebtoken.*;

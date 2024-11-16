@@ -1,5 +1,6 @@
-package com.example.demo.security;
+package com.example.demo.config;
 
+import com.example.demo.filter.JwtRequestFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -42,7 +43,7 @@ public class SecurityConfig {
                         .requestMatchers("/service/**").permitAll()
                         .requestMatchers("/deliveryMethod/**").permitAll()
                         .requestMatchers("/koi-box/**").permitAll()
-                        .anyRequest().authenticated()) // All other routes require authentication
+                        .anyRequest().denyAll()) // All other routes require authentication
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class); // Add JWT filter
 
         return http.build();
