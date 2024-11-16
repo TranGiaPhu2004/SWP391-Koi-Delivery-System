@@ -8,15 +8,16 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class BoxDTO implements Serializable {
+@AllArgsConstructor
+public class DeliveryMethodDTO implements Serializable {
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Integer boxid;
+    private int deliveryMethodId;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Integer quantity;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private String boxname;
+    private String methodName;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Float price;
+
 }

@@ -18,4 +18,7 @@ public class DeliveryMethod {
 
     @Column(name = "methodname", nullable = false)
     private String methodName;
+
+    @Column(name = "price")
+    private Float price;
 }
