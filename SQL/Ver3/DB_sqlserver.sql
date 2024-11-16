@@ -94,6 +94,7 @@ CREATE TABLE Contain (
   OrderID INT,  -- Tham chiếu đến bảng Orders
   BoxID INT,    -- Tham chiếu đến bảng Koi_Box
   Quantity INT, -- Số lượng box trong đơn hàng
+  Price FLOAT, -- Giá của BoxID tại Thời điểm đặt box
   PRIMARY KEY (OrderID, BoxID), -- Cặp khóa chính đại diện cho mối quan hệ nhiều-nhiều
   FOREIGN KEY (OrderID) REFERENCES Orders(OrderID) ON DELETE CASCADE, -- ON DELETE CASCADE để xóa liên quan khi xóa đơn hàng
   FOREIGN KEY (BoxID) REFERENCES Koi_Box(BoxID)     -- Khóa ngoại đến Koi_Box
