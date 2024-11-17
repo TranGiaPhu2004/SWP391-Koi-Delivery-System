@@ -4,7 +4,9 @@
   font-family: 'Kay Pho Du';
   border-top: 1px solid #ccc;
   text-align: center;
-  color: black;
+  color: #fff;
+  background-image: url('../assets/image/ffoot.jpg');
+  object-fit: fill;
 }
 
 .footer-container {
@@ -37,7 +39,7 @@
 }
 
 .footer-left p strong {
-  color: #3D3D74;
+  color: #fff;
   font-weight: 600;
 
   font-family: cursive;
@@ -46,7 +48,7 @@
 
 
 .footer-right p strong {
-  color: #3D3D74;
+  color: #fff;
   font-weight: 600;
 
   font-family: cursive;
@@ -54,11 +56,11 @@
 }
 
 .footer-center {
-  color: #3D3D74;
+  color: #fff;
   text-align: center;
   font-size: 25px;
   font-weight: 600;
-  font-family: cursive;
+  font-family: monospace;
 }
 
 .footer-stars {
