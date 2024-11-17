@@ -116,7 +116,6 @@ public class DeliveryMethodService {
         response.setHttpStatus(HttpStatus.OK);
         response.setSuccess(Boolean.TRUE);
         response.setMsg("Update Delivery Method ID : " + request.getDeliveryMethodId() + " Success");
-
         return response;
     }
 }
