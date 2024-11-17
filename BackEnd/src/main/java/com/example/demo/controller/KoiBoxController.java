@@ -38,7 +38,7 @@ public class KoiBoxController {
 
 
     @Operation(summary = "Update KoiBox")
-    @PostMapping("")
+    @PutMapping()
     public ResponseEntity<MsgResponseDTO> updateBoiBox(@RequestBody BoxUpdateRequestDTO request) {
         MsgResponseDTO response = koiBoxService.updateKoiBox(request);
         if (response.isSuccess()) {
