@@ -52,6 +52,9 @@ public class OrderService {
     private IKoiFishRepository koiFishRepository;
 
     @Autowired
+    private IKoiBoxRepository koiBoxRepository;
+
+    @Autowired
     private AuthService authService;
 
 
@@ -102,7 +105,10 @@ public class OrderService {
                 contain.setOrderID(savedOrder.getOrderID());
                 contain.setBoxID(boxDTO.getBoxid());
                 contain.setQuantity(boxDTO.getQuantity());
-
+                Optional<KoiBox> box = koiBoxRepository.findById(boxDTO.getBoxid());
+                if (box.isPresent()) {
+                    contain.setPrice(box.get().getPrice());
+                }
                 // Save the contain
                 containRepository.save(contain);
             }

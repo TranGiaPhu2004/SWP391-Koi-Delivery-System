@@ -13,6 +13,10 @@ public class Contain {
     @Id
     private Integer boxID;
 
+    @Column(name = "quantity")
     private Integer quantity;
+
+    @Column(name = "Price")
+    private Float price;
 }
 
