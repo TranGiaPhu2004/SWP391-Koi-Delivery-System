@@ -24,4 +24,9 @@ public interface IUserRepository extends JpaRepository<User, Integer> {
     @Transactional
     @Query("DELETE FROM User u WHERE u.userID = :userId")
     void deleteById(Integer userId);
+
+    @Query("""
+            SELECT COUNT(u) FROM User u WHERE u.role.roleID = :roleID
+            """)
+    int countUsersByRole(Integer roleID);
 }

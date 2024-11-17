@@ -24,5 +24,4 @@ public class Role implements Serializable{
 
     @OneToMany(mappedBy = "role",fetch = FetchType.LAZY)
     private Set<User> users;  // Quan hệ 1-nhiều với Users
-    
 }

@@ -67,12 +67,6 @@ public class AdminController {
         }
     }
 
-    @GetMapping("/dashboard/order/date/{date}")
-    public ResponseEntity<?> totalOrdersByDate(
-            @PathVariable("date") String date) {
-        LocalDate localDate = LocalDate.parse(date); // Định dạng: yyyy-MM-dd
-        DashboardResponseDTO response = dashboardService.getTotalOrderByDate(localDate);
-        return ResponseEntity.ok(response);
-    }
+
 }
 
