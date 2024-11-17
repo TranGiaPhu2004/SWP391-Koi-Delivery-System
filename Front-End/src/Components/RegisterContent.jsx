@@ -4,6 +4,7 @@ import KoiBackground from "../assets/image/KoiBackground.jpg";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import loginKoi from '../assets/image/register.jpg'
 
 function RegisterMethod() {
   const [email, setEmail] = useState("");
@@ -124,7 +125,7 @@ function RegisterMethod() {
   return (
     <div className="Register-main">
       <img
-        src={KoiBackground}
+        src={loginKoi}
         alt="LogoRegister"
         className="Register-LogoRegisterImg"
       />
