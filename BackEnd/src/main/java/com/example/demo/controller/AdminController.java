@@ -1,10 +1,12 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.request.CreateEmployeeRequestDTO;
+import com.example.demo.dto.response.DashboardResponseDTO;
 import com.example.demo.dto.response.ListOrderResponseDTO;
 import com.example.demo.dto.response.MsgResponseDTO;
 import com.example.demo.dto.response.UserResponseDTO;
 import com.example.demo.service.AuthService;
+import com.example.demo.service.DashboardService;
 import com.example.demo.service.OrderService;
 import com.example.demo.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -13,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -24,11 +27,13 @@ public class AdminController {
     private final UserService userService;
     private final AuthService authService;
     private final OrderService orderService;
+    private final DashboardService dashboardService;
 
-    public AdminController(UserService userService, AuthService authService, OrderService orderService) {
+    public AdminController(UserService userService, AuthService authService, OrderService orderService, DashboardService dashboardService) {
         this.userService = userService;
         this.authService = authService;
         this.orderService = orderService;
+        this.dashboardService = dashboardService;
     }
 
     // Lấy tất cả người dùng
@@ -63,9 +68,11 @@ public class AdminController {
     }
 
     @GetMapping("/dashboard/order/date/{date}")
-    public ResponseEntity<?> totalOrdersByDate(@PathVariable Date date) {
-
-        return ResponseEntity.ok("aaa");
+    public ResponseEntity<?> totalOrdersByDate(
+            @PathVariable("date") String date) {
+        LocalDate localDate = LocalDate.parse(date); // Định dạng: yyyy-MM-dd
+        DashboardResponseDTO response = dashboardService.getTotalOrderByDate(localDate);
+        return ResponseEntity.ok(response);
     }
 }
 

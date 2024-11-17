@@ -15,7 +15,7 @@ import java.util.Set;
 public class Delivery {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long deliveryID;
+    private Integer deliveryID;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "OrderID")
