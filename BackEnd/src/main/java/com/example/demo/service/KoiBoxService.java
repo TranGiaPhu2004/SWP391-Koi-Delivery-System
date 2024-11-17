@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.base.BoxDTO;
-import com.example.demo.dto.request.BoxRequestDTO;
 import com.example.demo.dto.request.BoxUpdateRequestDTO;
 import com.example.demo.dto.response.BoxResponseDTO;
 import com.example.demo.dto.response.MsgResponseDTO;
