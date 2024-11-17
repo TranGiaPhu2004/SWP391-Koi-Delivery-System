@@ -5,10 +5,12 @@ import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.Order;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -21,4 +23,13 @@ public interface IOrderRepository extends JpaRepository<Order,Integer>{
     void deleteOrderById(Integer orderId);
 //    @Transactional
 //    void deleteByUser(User user);
+
+    @Query("SELECT o FROM Order o WHERE o.orderDate = :orderDate")
+    List<Order> findOrdersByDate(@Param("orderDate") LocalDate orderDate);
+
+    @Query("SELECT COUNT(o) FROM Order o WHERE o.orderDate = :orderDate")
+    Integer countOrdersByDate(@Param("orderDate") LocalDate orderDate);
+
+    @Query("SELECT SUM(o.totalPrice) FROM Order o WHERE o.orderDate = :orderDate")
+    Float sumOrdersByDate(@Param("orderDate") LocalDate orderDate);
 }
