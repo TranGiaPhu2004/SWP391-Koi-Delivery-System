@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import pickoi1 from "../assets/image/pickoi1.png";
 import pickoi2 from "../assets/image/pickoi2.png";
@@ -17,6 +17,11 @@ function PriceList() {
   const [showAlert3, setShowAlert3] = useState(false);
   const [showAlert4, setShowAlert4] = useState(false);
   const [showAlert5, setShowAlert5] = useState(false);
+  const hasLettersAndNumbers = (str) => {
+    const hasLetters = /[a-zA-Z]/.test(str); // Kiểm tra có chữ
+    const hasNumbers = /\d/.test(str); // Kiểm tra có số
+    return hasLetters && hasNumbers;
+  };
 
   const navigate = useNavigate();
 
@@ -58,37 +63,69 @@ function PriceList() {
 
   const [startPlace, setStartPlace] = useState("");
   const [endPlace, setEndPlace] = useState("");
-  const [selectedServices, setSelectedServices] = useState(null);
-
-  const [deliveryType, setDeliveryType] = useState(null);
+  
 
   const [orderID, setOrderID] = useState();
 
   const boxPrices = [1200000, 700000, 400000]; // Large Box, Medium Box, Small Box
 
+  const [services, setServices] = useState([]); // Dữ liệu dịch vụ
+  const [deliveryMethods, setDeliveryMethods] = useState([]); // Dữ liệu phương thức giao hàng
+  const [koiBoxes, setKoiBoxes] = useState([]); // Dữ liệu các loại hộp
+
+  const [selectedServices, setSelectedServices] = useState(null); // Dịch vụ được chọn
+  const [deliveryType, setDeliveryType] = useState(null); // Phương thức giao hàng
+
+  const [loading, setLoading] = useState(true); // Loading state để biết dữ liệu đang được tải
+  const [error, setError] = useState(null); // Lỗi khi gọi API
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const serviceResponse = await fetch("http://localhost:8080/service/all");
+        const serviceData = await serviceResponse.json();
+        setServices(serviceData.serviceList);
+
+        const deliveryResponse = await fetch("http://localhost:8080/deliveryMethod/all");
+        const deliveryData = await deliveryResponse.json();
+        setDeliveryMethods(deliveryData.deliveryMethods);
+
+        const koiResponse = await fetch("http://localhost:8080/koi-box/all");
+        const koiData = await koiResponse.json();
+        setKoiBoxes(koiData.boxTypes);
+
+        setLoading(false);
+      } catch (error) {
+        setError("Failed to fetch data");
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
   const calculateTotalPrice = () => {
     let total = 0;
     //TỔNG CÁC BOXES ĐÃ CHỌN
-    total += count1 * boxPrices[0]; // Large Box
-    total += count2 * boxPrices[1]; // Medium Box
-    total += count3 * boxPrices[2]; // Small Box
+    total += count1 * koiBoxes[2]?.price || 0; // Large Box
+    total += count2 * koiBoxes[1]?.price || 0; // Medium Box
+    total += count3 * koiBoxes[0]?.price || 0; // Small Box
 
     // GIÁ DỊCH VỤ ĐÃ CHỌN
     if (selectedServices === 1) {
-      total += 200000;
+      total += services[1]?.price || 0; // Giá dịch vụ packaging
     } else if (selectedServices === 2) {
-      total += 150000;
+      total += services[0]?.price || 0; // Giá dịch vụ health
     } else if (selectedServices === 3) {
-      total += 500000;
+      total += services[2]?.price || 0; // Giá dịch vụ insurance
     }
 
     // LOẠI HÌNH VẬN CHUYỂN theo ID
-
     if (deliveryType === 1) {
-      total += 300000;
+      total += deliveryMethods[0]?.price || 0; // Giá cho phương thức giao hàng standard
     } else if (deliveryType === 2) {
-      total += 850000;
+      total += deliveryMethods[1]?.price || 0; // Giá cho phương thức giao hàng express
     }
+
 
     return total;
   };
@@ -131,6 +168,21 @@ function PriceList() {
   //TẠO ĐỐI TƯỢNG DỮ LIỆU ĐỂ GỬI YÊU CẦU LÊN API
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!hasLettersAndNumbers(startPlace)) {
+      alert("Pick-up point must contain both letters and numbers.");
+      return;
+    }
+
+    if (!hasLettersAndNumbers(endPlace)) {
+      alert("Destination must contain both letters and numbers.");
+      return;
+    }
+
+    // Kiểm tra điều kiện 2: startPlace và endPlace không được trùng nhau
+    if (startPlace === endPlace) {
+      alert("Pick-up point and destination cannot be the same.");
+      return;
+    }
 
     if (
       (count1 == 0 || count2 == 0 || count3 == 0) &&
@@ -178,6 +230,7 @@ function PriceList() {
         setShowAlert5(false);
       }, 3000);
       return;
+      
     }
 
     const data = {
@@ -272,7 +325,7 @@ function PriceList() {
           <div className="PriceList-pic-koi1">
             <div className="PriceList-price">
               <img src={pickoi1} alt="PIC KOI 1" />
-              <p>1.200.000 vnđ</p>
+              <p>{koiBoxes[2]?.price} vnđ</p>
             </div>
             <div className="PriceList-pic1">
               <p>Large Box (S01)</p>
@@ -305,7 +358,7 @@ function PriceList() {
           <div className="PriceList-pic-koi2">
             <div className="PriceList-price">
               <img src={pickoi2} alt="PIC KOI 2" />
-              <p>700.000 vnđ</p>
+              <p>{koiBoxes[1]?.price} vnđ</p>
             </div>
             <div className="PriceList-pic2">
               <p>Medium Box (S02)</p>
@@ -338,7 +391,7 @@ function PriceList() {
           <div className="PriceList-pic-koi3">
             <div className="PriceList-price">
               <img src={pickoi3} alt="PIC KOI 3" />
-              <p>400.000 vnđ</p>
+              <p>{koiBoxes[0]?.price} vnđ</p>
             </div>
             <div className="PriceList-pic3">
               <p>Small Box (S03)</p>
@@ -388,7 +441,7 @@ function PriceList() {
               />
               <img src={packaging} alt="Professional Packing" />
               <h4>Professional Packaging</h4>
-              <p>200.000 vnđ</p>
+              <p>{services[1]?.price} vnđ</p>
             </label>
           </div>
 
@@ -403,7 +456,7 @@ function PriceList() {
               />
               <img src={health} alt="Health Checking" />
               <h4>Health Checking</h4>
-              <p>150.000 vnđ</p>
+              <p>{services[0]?.price} vnđ</p>
             </label>
           </div>
 
@@ -418,7 +471,7 @@ function PriceList() {
               />
               <img src={deliveryInsurance} alt="Delivery Insurance" />
               <h4>Delivery Insurance</h4>
-              <p>500.000 vnđ</p>
+              <p>{services[2]?.price} vnđ</p>
             </label>
           </div>
         </div>
@@ -469,7 +522,7 @@ function PriceList() {
                     checked={deliveryType === 1}
                   />
                   <h4>Standard Delivery</h4>
-                  <p>300.000 vnđ</p>
+                  <p>{deliveryMethods[0]?.price} vnđ</p>
                 </label>
               </div>
               <div className="PriceList-Delivery-map">
@@ -482,7 +535,7 @@ function PriceList() {
                     checked={deliveryType === 2}
                   />
                   <h4>Express Delivery</h4>
-                  <p>850.000 vnđ</p>
+                  <p>{deliveryMethods[1]?.price} vnđ</p>
                 </label>
               </div>
             </div>
