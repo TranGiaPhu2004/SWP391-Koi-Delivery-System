@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.request.BoxRequestDTO;
 import com.example.demo.dto.request.BoxUpdateRequestDTO;
 import com.example.demo.dto.response.BoxResponseDTO;
 import com.example.demo.dto.response.MsgResponseDTO;

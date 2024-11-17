@@ -12,7 +12,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class DeliveryMethodDTO implements Serializable {
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private int deliveryMethodId;
+    private Integer deliveryMethodId;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String methodName;

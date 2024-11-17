@@ -2,6 +2,8 @@ package com.example.demo.service;
 
 import com.example.demo.dto.base.DeliveryMethodDTO;
 import com.example.demo.dto.response.DeliveryMethodResponseDTO;
+import com.example.demo.dto.response.MsgResponseDTO;
+import com.example.demo.handle.CustomException;
 import com.example.demo.model.DeliveryMethod;
 import com.example.demo.model.Order;
 import com.example.demo.repository.IDeliveryMethodRepository;
@@ -9,9 +11,11 @@ import com.example.demo.repository.IOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DeliveryMethodService {
@@ -85,6 +89,34 @@ public class DeliveryMethodService {
             response.setMsg(e.getMessage());
             response.setSuccess(Boolean.FALSE);
         }
+        return response;
+    }
+
+    @Transactional
+    public MsgResponseDTO updateDeliveryMethod(DeliveryMethodDTO request) {
+        MsgResponseDTO response = new MsgResponseDTO();
+        if (request.getDeliveryMethodId() == null) {
+            throw new CustomException("Delivery Method not found", HttpStatus.BAD_REQUEST);
+        }
+        if (request.getPrice() == null) {
+            throw new CustomException("Price not found", HttpStatus.BAD_REQUEST);
+        } else if (request.getPrice() <= 0){
+            throw new CustomException("Price must be greater than 0", HttpStatus.BAD_REQUEST);
+        }
+
+        Optional<DeliveryMethod> method = deliveryMethodRepository.findById(request.getDeliveryMethodId());
+        if (method.isEmpty()) {
+            throw new CustomException("Delivery Method not found", HttpStatus.BAD_REQUEST);
+        }
+        if (request.getMethodName() != null && !method.get().getMethodName().equals(request.getMethodName())) {
+            method.get().setMethodName(request.getMethodName());
+        }
+        method.get().setPrice(request.getPrice());
+        deliveryMethodRepository.save(method.get());
+        response.setHttpStatus(HttpStatus.OK);
+        response.setSuccess(Boolean.TRUE);
+        response.setMsg("Update Delivery Method ID : " + request.getDeliveryMethodId() + " Success");
+
         return response;
     }
 }
