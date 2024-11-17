@@ -3,13 +3,13 @@ package com.example.demo.service;
 import com.example.demo.dto.base.DashBoardOrderDTO;
 import com.example.demo.dto.base.DashboardBoxDTO;
 import com.example.demo.dto.base.DashboardDeliveryDTO;
+import com.example.demo.dto.base.DashboardUserDTO;
 import com.example.demo.dto.response.DashboardResponseDTO;
 import com.example.demo.dto.response.MsgResponseDTO;
 import com.example.demo.handle.CustomException;
 import com.example.demo.model.Order;
-import com.example.demo.repository.IContainRepository;
-import com.example.demo.repository.IDeliveryRepository;
-import com.example.demo.repository.IOrderRepository;
+import com.example.demo.model.Role;
+import com.example.demo.repository.*;
 import com.example.demo.util.LoggerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,6 +32,12 @@ public class DashboardService {
 
     @Autowired
     private IContainRepository containRepository;
+
+    @Autowired
+    private IUserRepository userRepository;
+
+    @Autowired
+    private IRoleRepository roleRepository;
 
 //    public DashboardResponseDTO getTotalOrderByDate(LocalDate date) {
 //        DashboardResponseDTO response = new DashboardResponseDTO();
@@ -136,6 +142,28 @@ public class DashboardService {
         response.setDelivery(deliveryD);
         response.setBox(boxD);
 
+        return response;
+    }
+
+    public DashboardResponseDTO countUser() {
+        DashboardResponseDTO response = new DashboardResponseDTO();
+
+        List<Integer> roleIDs = roleRepository.findAllRoleIDs();
+        if (roleIDs.isEmpty()) {
+            throw new CustomException("No role available", HttpStatus.NOT_FOUND);
+        }
+        List<DashboardUserDTO> userDTOs = new ArrayList<>();
+        for (Integer roleID : roleIDs) {
+            DashboardUserDTO userDTO = new DashboardUserDTO();
+            int amount = userRepository.countUsersByRole(roleID);
+            String title = roleRepository.findRoleTitleByRoleID(roleID);
+            LoggerUtil.logInfo(amount + " --- " + roleID);
+            userDTO.setRoleID(roleID);
+            userDTO.setRoleName(title);
+            userDTO.setAmount(amount);
+            userDTOs.add(userDTO);
+        }
+        response.setUser(userDTOs);
         return response;
     }
 }
