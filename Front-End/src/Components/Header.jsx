@@ -20,8 +20,7 @@ function Header() {
         <nav className="Home-nav">
           <a href="/">Home</a>
           <a href="/PriceList">Services</a>
-          <a href="/checkout">Contact</a>
-          <a href="/news">News</a>
+          
         </nav>
         <div className="Home-auth-buttons">
           <Link to="/login">

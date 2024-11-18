@@ -104,6 +104,8 @@ function MainContent() {
 
             <img src={packaging1} alt="Professional Packing" />
             <h4>Professional Packaging</h4>
+            <p>We provide high-quality, professional packaging to ensure the safety and well-being of your Koi fish during transit.
+              </p><br/><p> Our packaging materials are designed to maintain optimal water conditions and minimize stress for the fish throughout the journey.</p>
           </label>
         </div>
 
@@ -112,6 +114,8 @@ function MainContent() {
 
             <img src={boxkoi1} alt="Health Checking" />
             <h4>Health Checking</h4>
+            <p>Before delivery, our team conducts a thorough health check on each Koi fish to guarantee they are in excellent condition. 
+              </p><br/><p>We examine for any signs of illness, stress, or injury to ensure the Koi arrive healthy and ready for their new environment.</p>
           </label>
         </div>
 
@@ -120,7 +124,8 @@ function MainContent() {
 
             <img src={insurance} alt="Delivery Insurance" />
             <h4>Delivery Insurance</h4>
-
+            <p>Our delivery insurance offers peace of mind by covering any unexpected issues during transportation</p>.
+            <br/> <p>In case of any damage or loss, you are fully protected, ensuring the safe arrival of your valuable Koi fish.</p>
           </label>
         </div>
       </div>
@@ -136,12 +141,14 @@ function MainContent() {
           <label>
             <img src={standard1} alt="" />
             <h4>Standard Delivery</h4>
+           
           </label>
         </div>
         <div className="Koi-Delivery-map">
           <label>
             <img src={standard2} alt="" />
             <h4>Express Delivery</h4>
+          
           </label>
         </div>
       </div>
