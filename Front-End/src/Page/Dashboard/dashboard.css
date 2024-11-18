@@ -1,0 +1,21 @@
+/* Container for the entire dashboard section */
+.chart-container {
+    width: 45%; /* Set width for each chart (adjust as needed) */
+    margin: 10px; /* Add some margin for spacing */
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* Wrapper for all chart containers to enable the horizontal layout */
+  .dashboard-charts-wrapper {
+    display: flex;
+    justify-content: space-between; /* Distribute charts evenly */
+    gap: 20px; /* Space between the charts */
+    flex-wrap: wrap; /* Allow wrapping if the screen is too small */
+  }
+  
+  /* Optional: Make the charts responsive */
+  .chart-container h2 {
+    text-align: center;
+  }
+  

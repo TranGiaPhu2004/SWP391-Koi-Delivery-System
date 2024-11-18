@@ -158,15 +158,16 @@ const ManagerPrice = () => {
         </div>
         <nav className="ManagerPrice-nav">
           <ul className="ManagerPrice-nav-list">
-            <li className="ManagerPrice-nav-item">
+          <li className="ManagerCustomer-nav-item">
               <Link to="/Manager">Account Management</Link>
             </li>
-            <li className="ManagerPrice-nav-item">
+            <li className="ManagerCustomer-nav-item">
               <Link to="/PriceManager">Price Manager</Link>
             </li>
-            <li className="ManagerPrice-nav-item">
+            <li className="ManagerCustomer-nav-item">
               <Link to="/ManagerOrder">Order Manager</Link>
             </li>
+           
           </ul>
         </nav>
         <LogoutButton />
