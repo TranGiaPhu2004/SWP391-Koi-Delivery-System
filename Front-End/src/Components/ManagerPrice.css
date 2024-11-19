@@ -1,233 +1,211 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
-  }
-    
-  .ManagerPrice-container {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-  }
-  
-  .ManagerPrice-logo{
-    margin-left: 10px;
-  }
-  
-  .ManagerPrice-sidebar {
-    background-color: white;
-    /* background-color: #1a1a2e; */
-    width: 300px;
-    height: 100vh;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    /* justify-content: space-between; */
-    position: fixed; /* Sidebar cố định vị trí */
-    top: 0; /* Đảm bảo nó dính trên cùng của trang */
-    left: 0; /* Đặt sidebar ở phía trái màn hình */
-  }
-  
-  .ManagerPrice-nav-list {
-    list-style-type: none; 
-  }
-  
-  .ManagerPrice-nav-item:hover {
-    color: #ff4b5c;
-    transition: color 0.3s ease;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+}
+.ManagerPrice-price-management {
+  padding: 10px;  
+  width: 100%;
+  background-color: #2b3d55;
+  height: 100%;
+  overflow-y: auto; /* Cho phép cuộn dọc khi cần thiết */
+  max-height: 100vh; /* Giới hạn chiều cao phần chứa bảng (80% chiều cao của viewport) */
+}
 
-  .ManagerPrice-nav-item:hover a {
-    color: #ff4b5c; /* Màu chữ khi hover */
-    transition: color 0.3s ease; /* Hiệu ứng chuyển màu */
-  }
-  
-  
-  .ManagerPrice-nav-item {
-    color: #2B3D55;
-    margin: 20px 0px 20px 10px;
-    cursor: pointer;
-    font-weight: 900;
-    font-size: large;
-  }
+.ManagerPrice-price-table {
+  width: 99%; /* Đảm bảo bảng chiếm hết chiều rộng của container */
+  margin-bottom: 20px; /* Thêm khoảng cách giữa các bảng */
+  table-layout: fixed; /* Cố định chiều rộng các cột */
+  border-collapse: collapse;
+  background-color: #f9f9f9;
+  color: black;
+  overflow-x: auto; /* Cho phép cuộn ngang nếu cần thiết */
+}
 
-  .ManagerPrice-nav-item a {
-    color: #2B3D55;
-    text-decoration: none; /* Loại bỏ gạch chân */
-    display: block; /* Để dễ dàng kích hoạt toàn bộ khu vực */
-    margin: 20px 0px 20px 10px;
-    font-weight: 900;
-    font-size: large;
-  }
-  
-  .ManagerPrice-logout {
-    background-color: #ff4b5c;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: auto;
-  }
-  
-  .ManagerPrice-main-content {
-    padding: 0;
-    width: calc(100% - 250px); 
-    margin-left: 300px; /* Đẩy nội dung chính sang phải bằng với chiều rộng của sidebar */
-    width: calc(100% - 300px); 
-    height: 100vh;
-  }
-  
-  .ManagerPrice-header {
-    border: white;
-    background-color: #F9F9F9;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-  
-  .ManagerPrice-user-info {
-    display: flex;
-    align-items: center;
-  }
-  
-  .ManagerPrice-avatar {
-    border-radius: 50%;
-    margin-left: 20px;
-    width: 50px;
-  }
-  
-  .ManagerPrice-user-details {
-    margin-left: 5px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    color: black;
-  }
-  
-  .ManagerPrice-search-container {
-    display: flex;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    background-color: white; /* Nền trắng cho cả khối */
-    /* padding: 5px; */
-    margin-right: 35px;
-    width: 400px; /* Điều chỉnh kích thước của khối */
-  }
-  
-  .ManagerPrice-search-container input {
-    padding: 5px 10px;
-    width: 100%;
-    border: none;
-    outline: none;
-    border-radius: 20px;
-    background-color: white; /* Nền trắng cho ô input */
-    color: #333; /* Màu chữ cho thanh tìm kiếm */
-  }
-  
-  .ManagerPrice-search-icon {
-    width: 25px; /* Kích thước icon */
-    height: 25px;
-    margin-left: -40px; /* Kéo icon vào gần cạnh phải của ô input */
-    cursor: pointer;
-    background-color: white; /* Đảm bảo icon có nền trắng */
-    padding: 2px; /* Thêm một chút khoảng trống cho icon */
-    border-radius: 50%; /* Tạo hình tròn cho icon nếu cần */
-  }
-  
-  
-  .ManagerPrice-price-management {
-    padding: 10px; 
-    width: 100%;
-    background-color: #2B3D55;
-    height: 100%;
-  }
-  
-  .ManagerPrice-price-management h1 {
-    margin-bottom: 20px;
-    margin-top: 5px;
-    color: white;
-  }
-  
-  .ManagerPrice-table-container {
-    max-height: 400px; /* Đặt chiều cao tối đa cho bảng */
-    overflow-y: auto; /* Cho phép cuộn dọc nếu nội dung tràn */
-    margin: 0;
-    padding: 0;
-    border: none;
-    max-width: 100%;
-    overflow-x: auto;
-  }
-  
-  .ManagerPrice-price-table {
-    width: 98%; /* Đảm bảo bảng không vượt quá khung nhìn */
-    margin-left: 5px;
-    table-layout: fixed; /* Cố định chiều rộng các cột để bảng không bị tràn */
-    border-collapse: collapse;
-    background-color: #F9F9F9;
-    color: black;
-    overflow-x: auto; /* Cho phép cuộn ngang nếu nội dung quá dài */
-  
-  }
-  
-  .ManagerPrice-price-table th, .ManagerPrice-price-table td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: left;
-    white-space: nowrap; /* Không cho phép xuống dòng */
-    overflow: hidden; /* Ẩn nội dung nếu quá dài */
-    text-overflow: ellipsis; /* Thêm dấu "..." nếu nội dung bị cắt ngắn */
-  }
-  /* Đặt chiều rộng cho cột ID nhỏ hơn các cột khác */
-  .ManagerPrice-price-table th:nth-child(1),
-  .ManagerPrice-price-table td:nth-child(1) {
-  width: 50px; /* Bạn có thể điều chỉnh kích thước nhỏ hơn */
-  text-align: center; /* Căn giữa nội dung cột ID */
-  }
-  
-  .ManagerPrice-price-table th {
-    background-color: #F9F9F9;
-    font-weight: bold;
-    position: sticky; /* Làm cho tiêu đề dính */
-    top: 0; /* Dính ở phía trên cùng */
-    z-index: 1; /* Đảm bảo tiêu đề luôn ở trên cùng */
-    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4); /* Thêm hiệu ứng đổ bóng khi cuộn */
-  }
-  
-  .ManagerPrice-price-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  .ManagerPrice-price-table tr:hover {
-    background-color: #f1f1f1;
-  }
-  
-  .ManagerPrice-price-table th:nth-child(5),
-  .ManagerPrice-price-table td:nth-child(5) {
-  width: 180px; /* Điều chỉnh kích thước vừa đủ cho hai nút */
-  text-align: center; /* Căn giữa các nút trong cột */
-  }
-  
-  .ManagerPrice-btn-update img{
-    width: 10%;
-  }
-  /* CSS cho các nút Update và Delete */
-  .ManagerPrice-btn-update{
-    padding: 5px 10px;
-    margin-right: 5px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .ManagerPrice-btn-update {
-    margin-left: 5px;
-    background-color: #4CAF50; /* Màu xanh cho nút Update */
-    color: white;
-  }
-  
-  .ManagerPrice-btn-update:hover {
-    background-color: #45a049; /* Màu đậm hơn khi hover */
-  }
+.ManagerPrice-price-table th,
+.ManagerPrice-price-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+  white-space: nowrap; /* Không cho phép xuống dòng */
+  overflow: hidden; /* Ẩn nội dung nếu quá dài */
+  text-overflow: ellipsis; /* Thêm dấu "..." nếu nội dung bị cắt ngắn */
+}
+
+/* Cập nhật các cột cho phù hợp */
+.ManagerPrice-price-table th:nth-child(1),
+.ManagerPrice-price-table td:nth-child(1) {
+  width: 60px; /* Chiều rộng cột ID */
+  text-align: center; /* Căn giữa nội dung */
+}
+
+.ManagerPrice-price-table th:nth-child(2),
+.ManagerPrice-price-table td:nth-child(2) {
+  width: 200px; /* Chiều rộng cột Name hoặc Method Name */
+}
+
+.ManagerPrice-price-table th:nth-child(3),
+.ManagerPrice-price-table td:nth-child(3) {
+  width: 150px; /* Chiều rộng cột Price */
+}
+
+.ManagerPrice-price-table th:nth-child(4),
+.ManagerPrice-price-table td:nth-child(4) {
+  width: 120px; /* Chiều rộng cột Options */
+}
+
+.ManagerPrice-price-table th:nth-child(5),
+.ManagerPrice-price-table td:nth-child(5) {
+  width: 100px; /* Chiều rộng cột Options cho bảng koi-box */
+}
+
+.ManagerPrice-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+}
+
+.ManagerPrice-logo {
+  margin-left: 10px;
+}
+
+.ManagerPrice-sidebar {
+  background-color: white;
+  /* background-color: #1a1a2e; */
+  width: 300px;
+  height: 100vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  position: fixed; /* Sidebar cố định vị trí */
+  top: 0; /* Đảm bảo nó dính trên cùng của trang */
+  left: 0; /* Đặt sidebar ở phía trái màn hình */
+}
+
+.ManagerPrice-nav-list {
+  list-style-type: none;
+}
+
+.ManagerPrice-nav-item:hover {
+  color: #ff4b5c;
+  transition: color 0.3s ease;
+}
+
+.ManagerPrice-nav-item:hover a {
+  color: #ff4b5c; /* Màu chữ khi hover */
+  transition: color 0.3s ease; /* Hiệu ứng chuyển màu */
+}
+
+.ManagerPrice-nav-item {
+  color: #2b3d55;
+  margin: 20px 0px 20px 10px;
+  cursor: pointer;
+  font-weight: 900;
+  font-size: large;
+}
+
+.ManagerPrice-nav-item a {
+  color: #2b3d55;
+  text-decoration: none; /* Loại bỏ gạch chân */
+  display: block; /* Để dễ dàng kích hoạt toàn bộ khu vực */
+  margin: 20px 0px 20px 10px;
+  font-weight: 900;
+  font-size: large;
+}
+
+.ManagerPrice-logout {
+  background-color: #ff4b5c;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: auto;
+}
+
+.ManagerPrice-main-content {
+  padding: 0;
+  width: calc(100% - 250px);
+  margin-left: 300px; /* Đẩy nội dung chính sang phải bằng với chiều rộng của sidebar */
+  width: calc(100% - 300px);
+  height: 100vh;
+}
+
+.ManagerPrice-header {
+  border: white;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.ManagerPrice-user-info {
+  display: flex;
+  align-items: center;
+}
+
+.ManagerPrice-avatar {
+  border-radius: 50%;
+  margin-left: 20px;
+  width: 50px;
+}
+
+.ManagerPrice-user-details {
+  margin-left: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: black;
+}
+
+
+
+.ManagerPrice-price-management h1 {
+  margin-bottom: 20px;
+  margin-top: 5px;
+  color: #f9f9f9;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.ManagerPrice-table-container {
+  max-height: 400px; /* Đặt chiều cao tối đa cho bảng */
+  overflow-y: auto; /* Cho phép cuộn dọc nếu nội dung tràn */
+  margin: 0;
+  padding: 0;
+  border: none;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+
+
+
+.ManagerPrice-price-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+
+
+.ManagerPrice-btn-update img {
+  width: 10%;
+}
+/* CSS cho các nút Update và Delete */
+.ManagerPrice-btn-update {
+  padding: 5px 10px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.ManagerPrice-btn-update {
+  margin-left: 5px;
+  background-color: #4caf50; /* Màu xanh cho nút Update */
+  color: white;
+}
+
+.ManagerPrice-btn-update:hover {
+  background-color: #45a049; /* Màu đậm hơn khi hover */
+}

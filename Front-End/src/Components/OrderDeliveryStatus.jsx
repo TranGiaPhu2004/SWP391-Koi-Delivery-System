@@ -6,16 +6,16 @@ import track3 from "../assets/image/track3.png";
 import track4 from "../assets/image/track4.png";
 import track5 from "../assets/image/track5.png";
 import "./OrderDeliveryStatus.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function OrderDeliveryStatus() {
   const { orderId } = useParams(); // Get orderId from the URL parameter
-  const [status, setStatus] = useState(0);
+  const [status, setStatus] = useState(0); // Current status from API
+  const [selectedStatus, setSelectedStatus] = useState(0); // Status selected by the user
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
   const [alertMessage, setAlertMessage] = useState("");
   const [showAlert, setShowAlert] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (orderId) {
@@ -25,7 +25,6 @@ function OrderDeliveryStatus() {
 
   const fetchOrderStatus = async () => {
     setLoading(true);
-    setError("");
 
     try {
       const response = await fetch(
@@ -44,23 +43,45 @@ function OrderDeliveryStatus() {
       }
 
       const data = await response.json();
-      console.log("Received data:", data); // Check the data received from the API
-      const statusId = data.orderStatusID - 1; // Adjust the status to match the index
+      const statusId = data.orderStatusID - 1; // Adjust the status to match the index (0-based)
       setStatus(statusId);
+      setSelectedStatus(statusId); // Set selectedStatus to the current status from API
     } catch (err) {
       console.error("Error fetching order status:", err);
-      setError("Failed to fetch order status. Please try again.");
+      setAlertMessage("Failed to fetch order status. Please try again.");
+      setShowAlert(true);
     } finally {
       setLoading(false);
     }
   };
 
+  const handleStatusChange = (index) => {
+    // Ngăn người dùng chọn trạng thái trước đó
+    if (index < status) {
+      setAlertMessage("You cannot select a previous status.");
+      setShowAlert(true);
+    } 
+    // Ngăn người dùng bỏ qua trạng thái
+    else if (index > status + 1) {
+      setAlertMessage("You must follow the order of statuses. You cannot skip statuses.");
+      setShowAlert(true);
+    } 
+    else {
+      setSelectedStatus(index); // Cho phép chọn trạng thái hợp lệ
+    }
+  };
+
   const handleSubmit = async () => {
+    if (selectedStatus !== status + 1) {
+      setAlertMessage("You can only move to the next status in the sequence.");
+      setShowAlert(true);
+      return;
+    }
+
     setLoading(true);
-    setError("");
 
     try {
-      const statusId = status + 1;
+      const statusId = selectedStatus + 1; // Gửi trạng thái tiếp theo (tăng thêm 1)
       const response = await fetch(
         `http://localhost:8080/orders/${orderId}/status/${statusId}`,
         {
@@ -74,17 +95,15 @@ function OrderDeliveryStatus() {
 
       if (!response.ok) {
         throw new Error("Failed to update order status.");
-      } else {
-        const data = await response.json();
-        console.log("Order status updated successfully:", data);
-        setAlertMessage("Order status updated successfully!");
-        setShowAlert(true);
-        
       }
+
+      const data = await response.json();
+      console.log("Order status updated successfully:", data);
+      setAlertMessage("Order status updated successfully!");
+      setShowAlert(true);
     } catch (err) {
       console.error("Error updating order status:", err);
-
-      setAlertMessage("The order delivery status is not change!");
+      setAlertMessage("The order delivery status could not be changed.");
       setShowAlert(true);
     } finally {
       setLoading(false);
@@ -126,8 +145,8 @@ function OrderDeliveryStatus() {
                 type="radio"
                 name="status"
                 value={index}
-                checked={status === index}
-                onChange={() => setStatus(index)}
+                checked={selectedStatus === index}
+                onChange={() => handleStatusChange(index)} // Gọi hàm kiểm tra trạng thái khi chọn
               />
               {`Your order is currently ${
                 [
@@ -147,7 +166,6 @@ function OrderDeliveryStatus() {
         <button onClick={handleSubmit} disabled={loading || !orderId}>
           {loading ? "Updating..." : "Submit"}
         </button>
-        {error && <p className="error-message">{error}</p>}
       </div>
       {showAlert && (
         <div className="custom-alert">

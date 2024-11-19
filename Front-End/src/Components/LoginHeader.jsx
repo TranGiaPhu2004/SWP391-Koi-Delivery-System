@@ -4,6 +4,7 @@ import KoiBackground from "../assets/image/KoiBackground.jpg";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import newkoi from '../assets/image/login-page.jpg'
 
 function LoginHeaderMethod() {
   const [username, setUsername] = useState("");
@@ -61,7 +62,7 @@ function LoginHeaderMethod() {
 
   return (
     <div className="Login-main">
-      <img src={KoiBackground} alt="LogoLogin" className="Login-LogoLoginImg" />
+      <img src={newkoi} alt="LogoLogin" className="Login-LogoLoginImg" />
       <div className="Login-form">
         <div className="Login-logo">
           <img src={Logo} alt="Logo" />

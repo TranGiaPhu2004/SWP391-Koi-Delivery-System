@@ -159,6 +159,9 @@ const ManagerCustomer = () => {
             <li className="ManagerCustomer-nav-item">
               <Link to="/ManagerOrder">Order Manager</Link>
             </li>
+            <li className="ManagerCustomer-nav-item">
+              <Link to="/Dashbroad">User Dash Board</Link>
+            </li>
           </ul>
         </nav>
         <LogoutButton></LogoutButton>

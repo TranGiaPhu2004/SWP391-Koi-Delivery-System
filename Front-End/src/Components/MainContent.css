@@ -1,59 +1,917 @@
 main {
-    padding: 40px;
-    text-align: center;
-    background-color: white;
-  }
+  padding: 40px;
+  text-align: center;
+  background-color: white;
+  /* background-image: url("../assets/image/cash.png");  */
+  /* background: linear-gradient(skyblue, green);
+    background-size: cover;
+    background-repeat: no-repeat; */
 
-  .cherry-blossom{
-    font-size: 60px;
-  }
+}
 
-  .koi-delivery h1 {
-    font-size: 36px;
-    font-weight: 700;
-    margin-bottom: 20px;
-    color: #3D3D74;
-    font-family: cursive;
-  }
+.koi-delivery1 img {
+  width: 100vw;
   
-  .koi-delivery p {
-    font-size: 18px;
-    color: #666;
-    margin-bottom: 40px;
-  }
-  
-  .services {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin: 20px 0;
-  }
+  height: 100vh;
+  object-fit: cover;  
+  margin-left: -40px;
+  margin-top: -40px;
 
-  .services1 {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    margin: 20px 0;
-  }
+}
+
+.Koi-price img {
+  max-width: 100vw;
+  height: 100vh;
+  margin-left: -55%;
+  border-radius: 50px;
   
-  .service-box {
-    width: 30%;
-    text-align: center;
-    margin-bottom: 40px;
-  }
+  /* Adjust this as needed */
+}
+
+.Koi-price2 img {
+  max-width: 100vw;
+  height: 100vh;
+  margin-left: -55%;
+  border-radius: 50%;
   
-  .service-box img {
-    max-width: 100px;
-    margin-bottom: 15px;
-  }
+  /* Adjust this as needed */
+}
+
+.Koi-price1 img {
+  width: 100vw;
+  height: 100vh;
+  margin-right: -30%;
+
+  border-radius: 10%;
   
-  .service-box p {
-    font-size: 16px;
-    color: #555;
-    line-height: 1.6;
-    font-family: 'Kay Pho Du';
-  }
+  /* Adjust this as needed */
+}
+
+
+.cherry-blossom {
+  font-size: 45px;
+}
+
+
+.koi-delivery h1 {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #3D3D74;
+  font-family: cursive;
+  margin-top: 3%;
+  text-align: center;
+}
+
+.koi-delivery2 h1 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #ff1d58;
+  font-family: cursive;
+  margin-top: 10%;
+  text-align: center;
+}
+
+.koi-delivery2 p {
+  text-align: center;
+  white-space: normal;
+  max-width: 80%; 
+  margin: 0 auto;
+  color: #3D3D74;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 800;
+}
+
+.koi-delivery3 h1 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #ff1d58;
+  font-family: cursive;
+  margin-top: -10px;
+  text-align: center;
+}
+
+.koi-delivery3 p {
+  text-align: center;
+  white-space: normal;
+  max-width: 80%; 
+  margin: 0 auto;
+  color: #3D3D74;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 800;
+}
+
+
+.koi-delivery p {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 40px;
+}
+
+.services {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.services1 {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.service-box {
+  width: 30%;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.service-box img {
+  max-width:  30vw;
+  height: 40vh;
+  margin-bottom: 15px;
+}
+
+.service-box p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+  font-family: 'Kay Pho Du';
+}
+
+.div {
+  display: flex;
+}
+
+
+.Koi-custom-alert1 {
+  background-color: #4caf50;
+  /* Greenish-blue background */
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #2e7d32;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  font-size: 16px;
+  transition: opacity 0.5s ease;
+  opacity: 1;
+}
+
+.Koi-main-order1 {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+
+}
+
+.Koi-main-Koi {
+  padding: 20px 20px;
+  border-bottom: 2px dashed #a28089;
+  width: 70%;
+  margin-left: 14%;
+
+}
+
+.Koi-main-Koi p {
+  text-align: center;
+  font-size: 50px;
+  font-family: monospace;
+  color: #ff1d58;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.Koi-BoxChoosing1 {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2%;
+}
+
+.Koi-paymentmethods {
+  text-align: center;
+  margin-left: 37%;
+  font-size: 30px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  width: 30%;
+  padding: 20px 20px;
+  margin-top: -20px;
+  border-bottom: 1px solid black;
+  color: #3D3D74;
+  font-weight: 800;
+
+}
+
+.Koi-message {
+  color: coral;
+  text-align: center;
+  margin-left: 27%;
+  font-size: 15px;
+  font-family: monospace;
+  width: 50%;
+  margin-top: 20px;
+  font-weight: bolder;
+
+}
+
+.Koi-price {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  text-align: center;
+  align-items: center;
+}
+
+.Koi-price2 {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  text-align: center;
+  align-items: center;
+}
+
+
+
+.Koi-price p {
+  white-space: nowrap;
+  font-family: cursive;
+  font-size: 16px;
+  color: #3D3D74;
+  font-weight: 800;
+}
+
+.Koi-price2 p {
+  white-space: nowrap;
+  font-family: cursive;
+  font-size: 16px;
+  color: #3D3D74;
+  font-weight: 800;
+}
+
+.Koi-price1 {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  text-align: center;
+  align-items: center;
+}
+
+
+
+.Koi-price1 p {
+  white-space: nowrap;
+  font-family: cursive;
+  font-size: 16px;
+  color: #3D3D74;
+  font-weight: 800;
+}
+
+
+
+.Koi-main-pic {
+
+  flex-direction: row;
+  column-gap: 80px;
+  margin-left: 5%;
+}
+
+.Koi-pic-koi1,
+.Koi-pic-koi2,
+.Koi-pic-koi3 {
+  width: 100%;
+  /* Chiếm toàn bộ chiều rộng của phần tử cha */
+  height: auto;
+  /* Tự động điều chỉnh chiều cao theo tỷ lệ */
+  object-fit: contain;
+  /* Giữ tỷ lệ gốc và phóng to tối đa */
+  padding: 10px 20px;
+  margin-top: 40px;
+}
+
+.Koi-pic-koi1,
+.Koi-pic-koi2,
+.Koi-pic-koi3 {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+}
+
+.Koi-pic-koi1 img,
+.Koi-pic-koi2 img,
+.Koi-pic-koi3 img {
+  width: 70%;
+  height: 30%;
+}
+
+.Koi-pic1 {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  margin-right: 10%;
+  font-size: 50px;
+  margin-top: -10%;
+
+}
+
+.Koi-pic1 p {
+  font-family: monospace;
+  font-size: 35px;
+
+
+}
+
+.Koi-pic1 .Koi-info-box p {
+  padding: 10px 10px;
+  font-size: 25px;
+}
+
+.Koi-pic1 .Koi-info-box p span {
+  color: #3D3D74;
+  font-weight: 800;
+}
+
+.Koi-pic2 {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+
+
+}
+
+.Koi-pic2 p {
+  font-family: monospace;
+  font-size: 34px;
+
+}
+
+.Koi-pic2 .Koi-info-box p {
+  padding: 10px 10px;
+  font-size: 25px;
+}
+
+.Koi-pic2 .Koi-info-box p span {
+  color: #3D3D74;
+  font-weight: 800;
+}
+
+.Koi-pic3 {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  margin-right: 8%;
+
+}
+
+.Koi-pic3 p {
+  font-family: monospace;
+  font-size: 32px;
+
+}
+
+.Koi-pic3 .Koi-info-box p {
+  padding: 10px 10px;
+  font-size: 25px;
+}
+
+.Koi-pic3 .Koi-info-box p span {
+  color: #3D3D74;
+  font-weight: 800;
+}
+
+.Koi-amount1 {
+  margin-left: 16px;
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+}
+
+.Koi-amount1 .Koi-amount1-button,
+.Koi-amount2 .Koi-amount2-button,
+.Koi-amount3 .Koi-amount3-button {
+  margin-top: -30px;
+}
+
+.Koi-amount1-button .Koi-button,
+.Koi-amount2-button .Koi-button,
+.Koi-amount3-button .Koi-button {
+  margin-top: 20px;
+}
+
+.Koi-amount1 .decrement-button1 {
+  transition: filter 0.3s ease;
+  background-color: rgb(243, 146, 146);
+}
+
+
+.Koi-amount1 .Koi-increment-button1 {
+  background-color: rgb(148, 227, 148);
+}
+
+.Koi-amount2 .Koi-increment-button2 {
+  background-color: rgb(148, 227, 148);
+}
+
+.Koi-amount3 .Koi-increment-button3 {
+  background-color: rgb(148, 227, 148);
+}
+
+.Koi-amount1 .Koi-count1,
+.Koi-amount2 .Koi-count2,
+.Koi-amount3 .Koi-count3 {
+  background: antiquewhite;
+  font-family: cursive;
+  padding: 10px 10px;
+  width: 48px;
+}
+
+.Koi-amount2 .Koi-count2 {
+  background: antiquewhite;
+  font-family: cursive;
+}
+
+.Koi-amount3 .Koi-count3 {
+  background: antiquewhite;
+  font-family: cursive;
+}
+
+
+.Koi-amount2 {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.Koi-amount2 .decrement-button2 {
+  transition: filter 0.3s ease;
+  background-color: rgb(243, 146, 146);
+}
+
+.Koi-amount2 .decrement-button2.blurred {
+  filter: blur(0);
+  cursor: not-allowed;
+}
+
+.Koi-amount2 .decrement-button2.active {
+  filter: none;
+  cursor: pointer;
+}
+
+.Koi-amount3 {
+  margin-left: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.Koi-amount3 .decrement-button3 {
+  transition: filter 0.3s ease;
+  /* Thêm hiệu ứng chuyển đổi mượt */
+  background-color: rgb(243, 146, 146);
+}
+
+.Koi-amount3 .decrement-button3.blurred {
+  filter: blur(0);
+  cursor: not-allowed;
+}
+
+.Koi-amount3 .decrement-button3.active {
+  filter: none;
+  cursor: pointer;
+}
+
+
+.Koi-button {
+  color: red;
+  background-color: antiquewhite;
+  font-family: 'Courier New', Courier, monospace;
+
+}
+
+
+.Koi-button:hover {
+  transform: scale(1.2);
+  border: none;
+}
+
+.Koi-button:active {
+  outline: none;
+}
+
+.Koi-order-information {
+  margin-top: 18%;
+  margin-left: 40%;
+
+}
+
+.Koi-order-details p {
+  cursor: grab;
+
+  color: #3D3D74;
+  font-family: monospace;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.Koi-order-details {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  background: #D9D9D9;
+  padding: 30px 20px;
+  border-radius: 30px;
+  border: none;
+  line-height: 2;
+  width: 420px;
+  height: 430px;
+}
+
+.Koi-order-details span {
+  color: #3D3D74;
+  font-weight: 800;
+}
+
+.Koi-order-details h2 {
+  margin-top: -10px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  text-align: center;
+  color: #3D3D74;
+  font-weight: 800;
+  font-size: 30px;
+  border-bottom: 3px solid white;
+}
+
+.Koi-order-details .line {
+  background: white;
+  width: 100%;
+  height: 5px;
+
+}
+
+.Koi-order-details button {
+  width: 100%;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.Koi-payment-button {
+  background-color: #3D3D74;
+  color: #fff;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  font-weight: bolder;
+
+}
+
+.Koi-payment-button span {
+  background: #D9D9D9;
+  color: black;
+  font-size: 20px;
+  font-weight: bolder;
+  border-radius: 50px;
+  border: none;
+  padding: 8px 8px;
+  margin-left: 10px;
+}
+
+.Koi-payment-button span:hover {
+  color: #007bff;
+  cursor: grab;
+}
+
+/* .Koi-cancel {
+  text-align: center;
+  color: #3D3D74;
+  font-weight: 700;
+} */
+
+.Koi-order-details .cancel:hover {
+  cursor: grab;
+}
+
+.Koi-button:active {
+  border: none;
+}
+
+.Koi-Services {
+  display: flex;
+  flex-direction: column;
+  column-gap: 30px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2%;
+  margin-left: -9%;
+
+}
+
+.Koi-DeliveryTypes {
+  display: flex;
+  flex-direction: column;
+  column-gap: 30px;
+  text-align: center;
+  align-items: center;
+  margin-top: 7%;
+}
+
+.Koi-DeliveryTypes .Koi-paymentmethodss {
+  text-align: center;
+
+  font-size: 30px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  width: 30%;
+  padding: 20px 20px;
+  margin-top: -20px;
+  color: #3D3D74;
+  font-weight: 800;
+}
+
+.Koi-line {
+  width: 100%;
+  border: 1px solid black;
+  margin-left: 32%;
+  opacity: 0.5;
+
+}
+
+.Koi-DeliveryTypes .Koi-message {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  margin-right: -10%;
+}
+
+.Koi-DeliveryTypes .Koi-Delivery {
+  margin-right: 3%;
+}
+
+
+.Koi-package,
+.Koi-health,
+.Koi-temperatureControl,
+.Koi-insurance {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5;
+}
+
+.Koi-package,
+.Koi-health,
+.Koi-temperatureControl,
+.Koi-insurance {
+  margin-left: 20px;
+}
+
+.Koi-temperatureControl {
+  margin-left: -5%;
+}
+
+.Koi-package {
+  margin-left: 8%;
+}
+
+.Koi-package label,
+.Koi-temperatureControl label,
+.Koi-health label,
+.Koi-insurance label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  white-space: nowrap;
+
+}
+
+.Koi-package img,
+.Koi-health img,
+.Koi-insurance img {
+  width: 40%;
+  /* Small but sharp */
+  height: auto;
+  border-radius: 10px;
+  margin-top: 5px;
+}
+
+.Koi-package p,
+.Koi-temperatureControl p,
+.Koi-health p,
+.Koi-insurance p {
+  font-family: cursive;
+  font-size: 18px;
+  color: #3D3D74;
+  font-weight: 800;
+}
+
+.Koi-package h4,
+.Koi-temperatureControl h4,
+.Koi-health h4,
+.Koi-insurance h4 {
+  font-family: monospace;
+  font-size: 17px;
+}
+
+.Koi-Delivery {
+  display: flex;
+  flex-direction: row;
+  margin-left: 15%;
+  margin-top: 2%;
+  column-gap: 140px;
+}
+
+.Koi-Delivery-map {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.Koi-Delivery-map img {
+  width: 60%;
+  height: 70%;
+  margin-right: 70%;
+
   
-  .div {
-    display: flex;
-  }
+}
+.Koi-Delivery-map h4 {
+    margin-left: -36%;
+    font-size: 20px;
+    font-family: monospace;
+}
+
+/* .Koi-standard-delivery,
+.Koi-fast-delivery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.Koi-standard-delivery label,
+.Koi-fast-delivery label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Koi-standard-delivery img,
+.Koi-fast-delivery img {
+  width: 18%;
+  /* Small image size */
+/* height: auto;
+} */
+
+.Koi-fast-delivery {
+  margin-left: -30%;
+}
+
+.Koi-standard-delivery p,
+.Koi-fast-delivery p {
+  font-family: cursive;
+  font-size: 20px;
+  color: #3D3D74;
+  font-weight: 800;
+}
+
+.Koi-buttonn {
+
+  margin-top: 3%;
+  margin-left: 43%;
+
+  padding: 10px 5px 30px 5px;
+}
+
+.Koi-buttonn button {
+  background-color: #3D3D74;
+  color: #fff;
+  font-family: monospace;
+  font-size: 20px;
+  margin-left: 12px;
+}
+
+
+.Koi-DeliveryAddress {
+  margin-top: 5%;
+  margin-left: 10%;
+
+}
+
+.Koi-DeliveryAddress .Koi-form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  row-gap: 20px;
+  background-color: rgb(220, 219, 219);
+  width: 420px;
+  height: 340px;
+  white-space: nowrap;
+  padding: 20px 20px;
+  border-radius: 20px;
+}
+
+
+.Koi-Informationnn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  white-space: nowrap;
+  margin-left: -10%;
+  width: 100%;
+}
+
+.Koi-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Koi-input textarea {
+  width: 70%;
+  height: 80%;
+  border-radius: 10px;
+  border-style: none;
+  padding: 10px 10px;
+  box-sizing: border-box;
+  display: flex;
+
+}
+
+.Koi-input textarea::placeholder {
+  font-family: cursive;
+}
+
+.Koi-form h3 {
+  padding: 10px 10px;
+  font-size: 23px;
+
+  color: #3D3D74;
+  font-weight: 700;
+
+  border-bottom: 1px solid #fff;
+}
+
+.Koi-form h3,
+.Koi-input label {
+  text-align: center;
+}
+
+.Koi-input label {
+  font-size: 20px;
+  font-family: monospace;
+
+}
+
+.Koi-health img{
+  margin-left: 12%;
+  width: 50vw;
+  height: 70vh;
+  border-radius: 80%;
+}
+
+.Koi-health h4 {
+  margin-left: 12%;
+  font-size: 30px;
+  font-family: 'Courier New', Courier, monospace;
+  color: #3D3D74;
+}
+
+.Koi-insurance img{
+  margin-top: 8%;
+  margin-left: 10%;
+  width: 70vw;
+  height: 70vh;
+  image-rendering: optimizeQuality;
+}
+
+.Koi-insurance h4 {
+  margin-left: 12%;
+  font-size: 30px;
+  font-family: 'Courier New', Courier, monospace;
+  color: #3D3D74;
+}
+
+.Koi-package img{
+  margin-top: 8%;
+  margin-left: -2%;
+  width: 50vw;
+  height: 70vh;
+}
+
+.Koi-package h4 {
+ 
+  font-size: 30px;
+  font-family: 'Courier New', Courier, monospace;
+  color: #3D3D74;
+  margin-bottom: 30px;
+}

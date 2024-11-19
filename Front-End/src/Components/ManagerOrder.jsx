@@ -119,14 +119,17 @@ const ManagerOrder = () => {
         </div>
         <nav className="ManagerOrder-nav">
           <ul className="ManagerOrder-nav-list">
-            <li className="ManagerOrder-nav-item">
+          <li className="ManagerCustomer-nav-item">
               <Link to="/Manager">Account Management</Link>
             </li>
-            <li className="ManagerOrder-nav-item">
+            <li className="ManagerCustomer-nav-item">
               <Link to="/PriceManager">Price Manager</Link>
             </li>
-            <li className="ManagerOrder-nav-item">
+            <li className="ManagerCustomer-nav-item">
               <Link to="/ManagerOrder">Order Manager</Link>
+            </li>
+            <li className="ManagerCustomer-nav-item">
+              <Link to="/Dashboard" state={{ orders }}>Revenue Dash Board</Link>
             </li>
           </ul>
         </nav>
