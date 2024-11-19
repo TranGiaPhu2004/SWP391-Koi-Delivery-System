@@ -13,42 +13,72 @@ public interface IContainRepository extends JpaRepository<Contain, ContainId> {
     List<Contain> findContainsByOrderID(Integer orderID);
 
     @Query("""
-                SELECT SUM(c.price)
-                FROM Contain c
-                JOIN Order o ON c.orderID = o.orderID
-                WHERE o.orderDate = :orderDate
-                AND c.boxID = :boxID
+            SELECT SUM(c.price)
+            FROM Contain c
+            JOIN Order o ON c.orderID = o.orderID
+            WHERE o.orderDate = :orderDate
+            AND c.boxID = :boxID
             """)
-    Float calculatePriceBoxesByDate(@Param("boxID") Integer boxID, @Param("orderDate") LocalDate orderDate);
+    Double calculatePriceBoxesByDate(
+            @Param("boxID") Integer boxID,
+            @Param("orderDate") LocalDate orderDate);
 
     @Query("""
-                SELECT COUNT(c)
-                FROM Contain c
-                JOIN Order o ON c.orderID = o.orderID
-                WHERE o.orderDate = :orderDate
-                AND c.boxID = :boxID
+            SELECT SUM(c.price)
+            FROM Contain c
+            JOIN Order o ON c.orderID = o.orderID
+            WHERE MONTH(o.orderDate) = :month
+            AND YEAR(o.orderDate) = :year
+            AND c.boxID = :boxID
             """)
-    Integer countBoxesByDate(@Param("boxID") Integer boxID, @Param("orderDate") LocalDate orderDate);
+    Double calculatePriceBoxesByMonth(
+            @Param("boxID") Integer boxID,
+            @Param("month") Integer month,
+            @Param("year") Integer year);
 
     @Query("""
-    SELECT COUNT(c)
-    FROM Contain c
-    JOIN Order o ON c.orderID = o.orderID
-    WHERE MONTH(o.orderDate) = :month
-    AND YEAR(o.orderDate) = :year
-    AND c.boxID = :boxID
-""")
-    Integer countBoxesByMonth(@Param("boxID") Integer boxID, @Param("month") Integer month, @Param("year") Integer year);
+            SELECT SUM(c.price)
+            FROM Contain c
+            JOIN Order o ON c.orderID = o.orderID
+            WHERE YEAR(o.orderDate) = :year
+            AND c.boxID = :boxID
+            """)
+    Double calculatePriceBoxesByYear(
+            @Param("boxID") Integer boxID,
+            @Param("year") Integer year);
 
     @Query("""
-    SELECT COUNT(c)
-    FROM Contain c
-    JOIN Order o ON c.orderID = o.orderID
-    WHERE YEAR(o.orderDate) = :year
-    AND c.boxID = :boxID
-""")
-    Integer countBoxesByYear(@Param("boxID") Integer boxID, @Param("year") Integer year);
+            SELECT COUNT(c)
+            FROM Contain c
+            JOIN Order o ON c.orderID = o.orderID
+            WHERE o.orderDate = :orderDate
+            AND c.boxID = :boxID
+            """)
+    Integer countBoxesByDate(
+            @Param("boxID") Integer boxID,
+            @Param("orderDate") LocalDate orderDate);
 
+    @Query("""
+            SELECT COUNT(c)
+            FROM Contain c
+            JOIN Order o ON c.orderID = o.orderID
+            WHERE MONTH(o.orderDate) = :month
+            AND YEAR(o.orderDate) = :year
+            AND c.boxID = :boxID
+            """)
+    Integer countBoxesByMonth(
+            @Param("boxID") Integer boxID,
+            @Param("month") Integer month,
+            @Param("year") Integer year);
 
-
+    @Query("""
+            SELECT COUNT(c)
+            FROM Contain c
+            JOIN Order o ON c.orderID = o.orderID
+            WHERE YEAR(o.orderDate) = :year
+            AND c.boxID = :boxID
+            """)
+    Integer countBoxesByYear(
+            @Param("boxID") Integer boxID,
+            @Param("year") Integer year);
 }

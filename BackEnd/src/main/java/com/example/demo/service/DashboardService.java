@@ -5,10 +5,7 @@ import com.example.demo.dto.base.DashboardBoxDTO;
 import com.example.demo.dto.base.DashboardDeliveryDTO;
 import com.example.demo.dto.base.DashboardUserDTO;
 import com.example.demo.dto.response.DashboardResponseDTO;
-import com.example.demo.dto.response.MsgResponseDTO;
 import com.example.demo.handle.CustomException;
-import com.example.demo.model.Order;
-import com.example.demo.model.Role;
 import com.example.demo.repository.*;
 import com.example.demo.util.LoggerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DashboardService {
@@ -90,59 +85,60 @@ public class DashboardService {
 //        return response;
 //    }
 
-    public DashboardResponseDTO getTotalOrderByDate(LocalDate date) {
-        DashboardResponseDTO response = new DashboardResponseDTO();
+    public DashboardBoxDTO test(){
+        DashboardBoxDTO response = new DashboardBoxDTO();
+        Integer id = 1;
+        Integer month = 11;
+        Integer year = 2024;
 
-        /////////
-        // delivery part
-        Integer numberOfOrders = orderRepository.countOrdersByDate(date);
-        Float allTotalPrice = orderRepository.sumOrdersByDate(date);
+        Integer cM = orderRepository.countOrdersByMonth(month, year);
+        Integer cY = orderRepository.countOrdersByYear(year);
+        Double sM = orderRepository.sumOrdersByMonth(month, year);
+        Double sY = orderRepository.sumOrdersByYear(year);
 
+        LoggerUtil.logInfo("Count by month : " + cM);
+        LoggerUtil.logInfo("Count by year : " + cY);
+        LoggerUtil.logInfo("Sum by month : " + sM);
+        LoggerUtil.logInfo("Sum by year : " + sY);
+
+        response.setTotalPrice(sM);
+
+        return response;
+    }
+
+    private DashboardDeliveryDTO getDashboardDelivery(Integer i,Integer numberOfDeliver, Double deliveryTotalPrice) {
+        DashboardDeliveryDTO dashboardDelivery = new DashboardDeliveryDTO();
+        // Nếu trả về null thì gán giá trị mặc định
+        numberOfDeliver = (numberOfDeliver != null) ? numberOfDeliver : 0;
+        deliveryTotalPrice = (deliveryTotalPrice != null) ? deliveryTotalPrice : 0.0f;
+
+        dashboardDelivery.setDeliveryMethodId(i);
+        dashboardDelivery.setTotalPrice(deliveryTotalPrice);
+        dashboardDelivery.setAmount(numberOfDeliver);
+        return dashboardDelivery;
+    }
+
+    private DashboardBoxDTO getDashboardBox(Integer i,Integer numberOfBox, Double boxTotalPrice) {
+        DashboardBoxDTO dashboardBox = new DashboardBoxDTO();
+        // Nếu trả về null thì gán giá trị mặc định
+        numberOfBox = (numberOfBox != null) ? numberOfBox : 0;
+        boxTotalPrice = (boxTotalPrice != null) ? boxTotalPrice : 0.0f;
+
+        dashboardBox.setBoxID(i);
+        dashboardBox.setTotalPrice(boxTotalPrice);
+        dashboardBox.setAmount(numberOfBox);
+        return dashboardBox;
+    }
+
+    private DashBoardOrderDTO getDashBoardOrder(Integer numberOfOrders, Double allTotalPrice) {
+        DashBoardOrderDTO orderD = new DashBoardOrderDTO();
         // Nếu trả về null thì gán giá trị mặc định
         numberOfOrders = (numberOfOrders != null) ? numberOfOrders : 0;
         allTotalPrice = (allTotalPrice != null) ? allTotalPrice : 0.0f;
 
-        DashBoardOrderDTO orderD = new DashBoardOrderDTO();
         orderD.setTotalPrice(allTotalPrice);
         orderD.setAmount(numberOfOrders);
-
-        List<DashboardDeliveryDTO> deliveryD = new ArrayList<>();
-        for (int i = 1; i <= 2; i++) {
-            DashboardDeliveryDTO dashboardDelivery = new DashboardDeliveryDTO();
-            Integer numberOfDeliver = deliveryRepository.countDeliveryMethodAndDate(i, date);
-            Float deliveryTotalPrice = deliveryRepository.calculateTotalPriceByDeliveryMethodAndDate(i, date);
-
-            // Nếu trả về null thì gán giá trị mặc định
-            numberOfDeliver = (numberOfDeliver != null) ? numberOfDeliver : 0;
-            deliveryTotalPrice = (deliveryTotalPrice != null) ? deliveryTotalPrice : 0.0f;
-
-            dashboardDelivery.setDeliveryMethodId(i);
-            dashboardDelivery.setTotalPrice(deliveryTotalPrice);
-            dashboardDelivery.setAmount(numberOfDeliver);
-            deliveryD.add(dashboardDelivery);
-        }
-
-        List<DashboardBoxDTO> boxD = new ArrayList<>();
-        for (int i = 1; i <= 3; i++) {
-            DashboardBoxDTO dashboardBox = new DashboardBoxDTO();
-            Integer numberOfBox = containRepository.countBoxesByDate(i, date);
-            Float boxTotalPrice = containRepository.calculatePriceBoxesByDate(i, date);
-
-            // Nếu trả về null thì gán giá trị mặc định
-            numberOfBox = (numberOfBox != null) ? numberOfBox : 0;
-            boxTotalPrice = (boxTotalPrice != null) ? boxTotalPrice : 0.0f;
-
-            dashboardBox.setBoxID(i);
-            dashboardBox.setTotalPrice(boxTotalPrice);
-            dashboardBox.setAmount(numberOfBox);
-            boxD.add(dashboardBox);
-        }
-        /////////
-        response.setOrder(orderD);
-        response.setDelivery(deliveryD);
-        response.setBox(boxD);
-
-        return response;
+        return orderD;
     }
 
     public DashboardResponseDTO countUser() {
@@ -166,4 +162,107 @@ public class DashboardService {
         response.setUser(userDTOs);
         return response;
     }
+
+    public DashboardResponseDTO getDashboardByDate(Integer year, Integer month, Integer day) {
+        // Định dạng: yyyy-MM-dd
+        LocalDate date = LocalDate.of(year,month,day);
+        DashboardResponseDTO response = new DashboardResponseDTO();
+
+        /////////
+        Integer numberOfOrders = orderRepository.countOrdersByDate(date);
+        Double allTotalPrice = orderRepository.sumOrdersByDate(date);
+        DashBoardOrderDTO orderD = getDashBoardOrder(numberOfOrders,allTotalPrice);
+
+        List<DashboardDeliveryDTO> deliveryD = new ArrayList<>();
+        for (int i = 1; i <= 2; i++) {
+            Integer numberOfDeliver = deliveryRepository.countDeliveryMethodByDate(i, date);
+            Double deliveryTotalPrice = deliveryRepository.calculateTotalPriceByDeliveryMethodByDate(i, date);
+            deliveryD.add(getDashboardDelivery(i, numberOfDeliver, deliveryTotalPrice));
+        }
+
+        List<DashboardBoxDTO> boxD = new ArrayList<>();
+        for (int i = 1; i <= 3; i++) {
+            Integer numberOfBox = containRepository.countBoxesByDate(i, date);
+            Double boxTotalPrice = containRepository.calculatePriceBoxesByDate(i, date);
+            boxD.add(getDashboardBox(i, numberOfBox, boxTotalPrice));
+        }
+        /////////
+        response.setOrder(orderD);
+        response.setDelivery(deliveryD);
+        response.setBox(boxD);
+        String msg = "Get dashboard " + date.toString() + " successfully";
+        response.setMsg(msg);
+        LoggerUtil.logInfo(msg);
+        response.setSuccess(Boolean.TRUE);
+        response.setHttpStatus(HttpStatus.OK);
+
+        return response;
+    }
+
+    public DashboardResponseDTO getDashboardByMonth(Integer year, Integer month) {
+        DashboardResponseDTO response = new DashboardResponseDTO();
+        /////////
+        Integer numberOfOrders = orderRepository.countOrdersByMonth(month, year);
+        Double allTotalPrice = orderRepository.sumOrdersByMonth(month, year);
+        DashBoardOrderDTO orderD = getDashBoardOrder(numberOfOrders,allTotalPrice);
+
+        List<DashboardDeliveryDTO> deliveryD = new ArrayList<>();
+        for (int i = 1; i <= 2; i++) {
+            Integer numberOfDeliver = deliveryRepository.countDeliveryMethodByMonth(i,month,year);
+            Double deliveryTotalPrice = deliveryRepository.calculateTotalPriceByDeliveryMethodByMonth(i,month,year);
+            deliveryD.add(getDashboardDelivery(i,numberOfDeliver,deliveryTotalPrice));
+        }
+
+        List<DashboardBoxDTO> boxD = new ArrayList<>();
+        for (int i = 1; i <= 3; i++) {
+            Integer numberOfBox = containRepository.countBoxesByMonth(i,month,year);
+            Double boxTotalPrice = containRepository.calculatePriceBoxesByMonth(i,month,year);
+            boxD.add(getDashboardBox(i,numberOfBox,boxTotalPrice));
+        }
+        /////////
+        response.setOrder(orderD);
+        response.setDelivery(deliveryD);
+        response.setBox(boxD);
+        /////////
+        response.setMsg("Get dashboard successfully");
+        LoggerUtil.logInfo("Get dashboard successfully");
+        response.setSuccess(Boolean.TRUE);
+        response.setHttpStatus(HttpStatus.OK);
+
+        return response;
+    }
+
+    public DashboardResponseDTO getDashboardByYear(Integer year) {
+        DashboardResponseDTO response = new DashboardResponseDTO();
+        /////////
+        Integer numberOfOrders = orderRepository.countOrdersByYear(year);
+        Double allTotalPrice = orderRepository.sumOrdersByYear(year);
+        DashBoardOrderDTO orderD = getDashBoardOrder(numberOfOrders,allTotalPrice);
+
+        List<DashboardDeliveryDTO> deliveryD = new ArrayList<>();
+        for (int i = 1; i <= 2; i++) {
+            Integer numberOfDeliver = deliveryRepository.countDeliveryMethodByYear(i,year);
+            Double deliveryTotalPrice = deliveryRepository.calculateTotalPriceByDeliveryMethodByYear(i,year);
+            deliveryD.add(getDashboardDelivery(i,numberOfDeliver,deliveryTotalPrice));
+        }
+
+        List<DashboardBoxDTO> boxD = new ArrayList<>();
+        for (int i = 1; i <= 3; i++) {
+            Integer numberOfBox = containRepository.countBoxesByYear(i,year);
+            Double boxTotalPrice = containRepository.calculatePriceBoxesByYear(i,year);
+            boxD.add(getDashboardBox(i,numberOfBox,boxTotalPrice));
+        }
+        /////////
+        response.setOrder(orderD);
+        response.setDelivery(deliveryD);
+        response.setBox(boxD);
+        /////////
+        response.setMsg("Get dashboard successfully");
+        LoggerUtil.logInfo("Get dashboard successfully");
+        response.setSuccess(Boolean.TRUE);
+        response.setHttpStatus(HttpStatus.OK);
+
+        return response;
+    }
+
 }
