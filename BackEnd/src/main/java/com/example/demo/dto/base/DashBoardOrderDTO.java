@@ -13,5 +13,5 @@ import java.io.Serializable;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class DashBoardOrderDTO implements Serializable {
     private int amount;
-    private float totalPrice;
+    private Double totalPrice;
 }

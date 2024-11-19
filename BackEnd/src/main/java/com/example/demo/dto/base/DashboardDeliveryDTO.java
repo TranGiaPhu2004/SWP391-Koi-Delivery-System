@@ -14,5 +14,5 @@ import java.io.Serializable;
 public class DashboardDeliveryDTO implements Serializable {
     private Integer deliveryMethodId;
     private int amount;
-    private float totalPrice;
+    private Double totalPrice;
 }

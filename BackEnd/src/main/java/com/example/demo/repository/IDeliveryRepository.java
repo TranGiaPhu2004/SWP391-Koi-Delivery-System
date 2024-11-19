@@ -14,11 +14,11 @@ import java.util.List;
 public interface IDeliveryRepository extends JpaRepository<Delivery, Integer> {
     List<Delivery> findDeliveriesByOrder(Order order);
 
-    @Query("SELECT SUM(d.price) FROM Delivery d " +
+    @Query("SELECT COUNT(d) FROM Delivery d " +
             "JOIN d.order o " +
             "WHERE d.deliverymethod.deliverymethodID = :deliverymethodID " +
             "AND o.orderDate = :date")
-    Float calculateTotalPriceByDeliveryMethodAndDate(
+    Integer countDeliveryMethodByDate(
             @Param("deliverymethodID") Integer deliverymethodID,
             @Param("date") LocalDate date
     );
@@ -26,10 +26,50 @@ public interface IDeliveryRepository extends JpaRepository<Delivery, Integer> {
     @Query("SELECT COUNT(d) FROM Delivery d " +
             "JOIN d.order o " +
             "WHERE d.deliverymethod.deliverymethodID = :deliverymethodID " +
+            "AND MONTH(o.orderDate) = :month " +
+            "AND YEAR(o.orderDate) = :year")
+    Integer countDeliveryMethodByMonth(
+            @Param("deliverymethodID") Integer deliverymethodID,
+            @Param("month") Integer month,
+            @Param("year") Integer year
+    );
+
+    @Query("SELECT COUNT(d) FROM Delivery d " +
+            "JOIN d.order o " +
+            "WHERE d.deliverymethod.deliverymethodID = :deliverymethodID " +
+            "AND YEAR(o.orderDate) = :year")
+    Integer countDeliveryMethodByYear(
+            @Param("deliverymethodID") Integer deliverymethodID,
+            @Param("year") Integer year
+    );
+
+
+    @Query("SELECT SUM(d.price) FROM Delivery d " +
+            "JOIN d.order o " +
+            "WHERE d.deliverymethod.deliverymethodID = :deliverymethodID " +
             "AND o.orderDate = :date")
-    Integer countDeliveryMethodAndDate(
+    Double calculateTotalPriceByDeliveryMethodByDate(
             @Param("deliverymethodID") Integer deliverymethodID,
             @Param("date") LocalDate date
     );
 
+    @Query("SELECT SUM(d.price) FROM Delivery d " +
+            "JOIN d.order o " +
+            "WHERE d.deliverymethod.deliverymethodID = :deliverymethodID " +
+            "AND MONTH(o.orderDate) = :month " +
+            "AND YEAR(o.orderDate) = :year")
+    Double calculateTotalPriceByDeliveryMethodByMonth(
+            @Param("deliverymethodID") Integer deliverymethodID,
+            @Param("month") Integer month,
+            @Param("year") Integer year
+    );
+
+    @Query("SELECT SUM(d.price) FROM Delivery d " +
+            "JOIN d.order o " +
+            "WHERE d.deliverymethod.deliverymethodID = :deliverymethodID " +
+            "AND YEAR(o.orderDate) = :year")
+    Double calculateTotalPriceByDeliveryMethodByYear(
+            @Param("deliverymethodID") Integer deliverymethodID,
+            @Param("year") Integer year
+    );
 }
