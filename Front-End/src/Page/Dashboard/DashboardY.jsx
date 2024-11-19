@@ -21,22 +21,23 @@ ChartJS.register(
   Legend
 );
 
-const Dashboard = () => {
+const DashboardY = () => {
   const [amountChartData, setAmountChartData] = useState([]);
   const [revenueChartData, setRevenueChartData] = useState([]);
   const location = useLocation();
 
-  // Function to fetch the data for a specific day from your API
-  const fetchDailyData = async (year, month, day) => {
+  // Function to fetch the data for the entire year from your API
+  const fetchYearlyData = async (year) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/dashboard/year/${year}/month/${month}/day/${day}`,
+        `http://localhost:8080/dashboard/year/${year}`,
         {
           method: "GET",
         }
       );
       const data = await response.json();
 
+      // Check if the response is valid and the status is ok
       if (response.ok) {
         const totalOrderAmount = data.order.amount;
         const totalOrderRevenue = data.order.totalPrice;
@@ -117,17 +118,15 @@ const Dashboard = () => {
   useEffect(() => {
     const today = new Date();
     const year = today.getFullYear();
-    const month = today.getMonth() + 1; // Months are zero-indexed
-    const day = today.getDate();
 
-    // Fetch daily data from the API
-    fetchDailyData(year, month, day);
+    // Fetch yearly data from the API
+    fetchYearlyData(year);
   }, []);
 
   return (
     <div>
       {/* Max Revenue Dashboard */}
-      <h1>Daily Revenue Dashboard</h1>
+      <h1>Yearly Revenue Dashboard</h1>
 
       <div className="dashboard-charts-wrapper">
         {/* Wrapper for both charts */}
@@ -179,4 +178,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardY;

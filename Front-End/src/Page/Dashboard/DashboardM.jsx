@@ -21,16 +21,16 @@ ChartJS.register(
   Legend
 );
 
-const Dashboard = () => {
+const DashboardM = () => {
   const [amountChartData, setAmountChartData] = useState([]);
   const [revenueChartData, setRevenueChartData] = useState([]);
   const location = useLocation();
 
-  // Function to fetch the data for a specific day from your API
-  const fetchDailyData = async (year, month, day) => {
+  // Function to fetch the data for a specific month from your API
+  const fetchMonthlyData = async (year, month) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/dashboard/year/${year}/month/${month}/day/${day}`,
+        `http://localhost:8080/dashboard/year/${year}/month/${month}`,
         {
           method: "GET",
         }
@@ -118,16 +118,15 @@ const Dashboard = () => {
     const today = new Date();
     const year = today.getFullYear();
     const month = today.getMonth() + 1; // Months are zero-indexed
-    const day = today.getDate();
 
-    // Fetch daily data from the API
-    fetchDailyData(year, month, day);
+    // Fetch monthly data from the API
+    fetchMonthlyData(year, month);
   }, []);
 
   return (
     <div>
       {/* Max Revenue Dashboard */}
-      <h1>Daily Revenue Dashboard</h1>
+      <h1>Monthly Revenue Dashboard</h1>
 
       <div className="dashboard-charts-wrapper">
         {/* Wrapper for both charts */}
@@ -179,4 +178,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardM;

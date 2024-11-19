@@ -28,6 +28,8 @@ import CheckoutForm from "./Page/PaymentStripe/Stripe.jsx";
 import PaymentModal from "./Page/PaymentStripe/PaymentModal.jsx";
 import Dashbroad from "./Page/Dashbroad/Dashbroad.jsx";
 import Dashboard from "./Page/Dashboard/Dashboard.jsx";
+import DashboardM from "./Page/Dashboard/DashboardM.jsx";
+import DashboardY from "./Page/Dashboard/DashboardY.jsx";
 
 const stripePromise = loadStripe(
   "pk_test_51QFJ0X00eXNAQ7PXp9HL5W2c2hEeuHpp3HUieCFUG1rzvM78O9LPo2KNDKimiyuBulhhPBKIWLbkVph4QKeBh1Uj00PuKXqh2d"
@@ -69,6 +71,8 @@ function App() {
           <Route path="/vnpayy" element={<VNPayMethod />} />
           <Route path="/Dashbroad" element={<Dashbroad />} />
           <Route path="/Dashboard" element={<Dashboard />} />
+          <Route path="/DashboardM" element={<DashboardM />} />
+          <Route path="/DashboardY" element={<DashboardY />} />
           <Route
             path="/checkout"
             element={
