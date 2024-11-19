@@ -32,6 +32,7 @@ function Home_Customer() {
  
   return (
     <>
+    
     <div className="Home-Customer-content">
       
       <img src={logo} alt="Vietnam Flag" className="Home-flag" />
@@ -42,15 +43,12 @@ function Home_Customer() {
         <a href="/HomeCus">Home</a>
         <a href="/PriceList">PriceList</a>
         <a href="/ViewOrder">View Order</a>
-        
+        <LogoutButton></LogoutButton>
       </nav>
       
-      <Link to="/Profile">
-      <img src={avatar} alt="Avatar" className="Home-Customer-Avatar" />
-      </Link>
     </div>
     <MainContent></MainContent>
-    <LogoutButton></LogoutButton>
+    
     {showAlert && (
         <div className="custom-alert">
           <span>{alertMessage}</span>

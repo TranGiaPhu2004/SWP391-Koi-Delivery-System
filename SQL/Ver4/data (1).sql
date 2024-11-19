@@ -25,11 +25,11 @@ INSERT INTO Order_Status (StatusName) VALUES
 
 -- 4. Chèn dữ liệu vào bảng Payment
 INSERT INTO Payment (TotalPrice, PaymentStatus) VALUES
-(100.0, 1),
-(150.0, 0),
-(200.0, 1),
-(300.0, 1),
-(250.0, 0);
+(1000000, 1),
+(1500000, 0),
+(2000000, 1),
+(3000000, 1),
+(2500000, 0);
 
 -- 5. Chèn dữ liệu vào bảng Service
 INSERT INTO Service (ServiceName, Price) VALUES
@@ -45,16 +45,16 @@ INSERT INTO Koi_Box (Price,BoxName, BoxSize) VALUES
 
 -- 7. Chèn dữ liệu vào bảng Orders
 INSERT INTO Orders (StartPlace, EndPlace, OrderDate, TotalPrice, userID, Order_StatusID, CustomsImageLink, PaymentID, ServiceID) VALUES
-('Place A', 'Place B', '2024-10-01', 150.0, 1, 1, 'link_to_image1.jpg', 1, 1),
-('Place C', 'Place D', '2024-10-02', 200.0, 2, 2, 'link_to_image2.jpg', 2, 1),
-('Place E', 'Place F', '2024-10-03', 250.0, 3, 3, 'link_to_image3.jpg', 3, 1),
-('Place G', 'Place H', '2024-10-04', 300.0, 4, 4, 'link_to_image4.jpg', 4, 1),
-('Place I', 'Place J', '2024-10-05', 350.0, 5, 5, 'link_to_image5.jpg', 5, 1);
+('Place A', 'Place B', '2024-10-01', 1500000, 1, 1, 'link_to_image1.jpg', 1, 1),
+('Place C', 'Place D', '2024-10-02', 2000000, 2, 2, 'link_to_image2.jpg', 2, 1),
+('Place E', 'Place F', '2024-10-03', 2500000, 3, 3, 'link_to_image3.jpg', 3, 1),
+('Place G', 'Place H', '2024-10-04', 3000000, 4, 4, 'link_to_image4.jpg', 4, 1),
+('Place I', 'Place J', '2024-10-05', 3500000, 5, 5, 'link_to_image5.jpg', 5, 1);
 
 -- 8. Chèn dữ liệu vào bảng DeliveryMethod
 INSERT INTO DeliveryMethod (methodName,price) VALUES
-('Standard Delivery',15000),
-('Express Delivery',75000);
+('Standard Delivery',300000),
+('Express Delivery',850000);
 
 -- 9. Chèn dữ liệu vào bảng Delivery
 INSERT INTO Delivery (DeliveryMethodID, OrderID, Price, DeliveryStatus) VALUES
