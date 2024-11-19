@@ -16,7 +16,7 @@ public class KoiBox {
     @Column(name = "BoxID")
     private Integer boxID;
 
-    @Column(name = "BoxName")
+    @Column(name = "Boxname")
     private String boxName;
 
     @Column(name = "price")
