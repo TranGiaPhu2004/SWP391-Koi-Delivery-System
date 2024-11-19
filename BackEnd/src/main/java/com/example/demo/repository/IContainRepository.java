@@ -30,4 +30,25 @@ public interface IContainRepository extends JpaRepository<Contain, ContainId> {
             """)
     Integer countBoxesByDate(@Param("boxID") Integer boxID, @Param("orderDate") LocalDate orderDate);
 
+    @Query("""
+    SELECT COUNT(c)
+    FROM Contain c
+    JOIN Order o ON c.orderID = o.orderID
+    WHERE MONTH(o.orderDate) = :month
+    AND YEAR(o.orderDate) = :year
+    AND c.boxID = :boxID
+""")
+    Integer countBoxesByMonth(@Param("boxID") Integer boxID, @Param("month") Integer month, @Param("year") Integer year);
+
+    @Query("""
+    SELECT COUNT(c)
+    FROM Contain c
+    JOIN Order o ON c.orderID = o.orderID
+    WHERE YEAR(o.orderDate) = :year
+    AND c.boxID = :boxID
+""")
+    Integer countBoxesByYear(@Param("boxID") Integer boxID, @Param("year") Integer year);
+
+
+
 }
