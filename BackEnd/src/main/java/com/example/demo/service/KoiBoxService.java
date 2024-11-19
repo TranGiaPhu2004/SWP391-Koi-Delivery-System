@@ -30,7 +30,7 @@ public class KoiBoxService {
                     BoxDTO koiBoxDTO = new BoxDTO();
                     koiBoxDTO.setBoxid(koiBox.getBoxID());
                     koiBoxDTO.setPrice(koiBox.getPrice());
-//                koiBoxDTO.setBoxName(koiBox.getBoxName);
+                    koiBoxDTO.setBoxname(koiBox.getBoxName());
                     boxList.add(koiBoxDTO);
                 }
                 response.setSuccess(Boolean.TRUE);
