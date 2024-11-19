@@ -16,6 +16,9 @@ public class KoiBox {
     @Column(name = "BoxID")
     private Integer boxID;
 
+    @Column(name = "BoxName")
+    private String boxName;
+
     @Column(name = "price")
     private Float price;
 
