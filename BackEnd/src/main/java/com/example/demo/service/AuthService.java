@@ -1,11 +1,13 @@
 package com.example.demo.service;
 
+import java.security.SecureRandom;
 import java.util.Optional;
 
 import com.example.demo.config.DefaultVariableConfig;
 import com.example.demo.dto.request.*;
 import com.example.demo.dto.response.LoginResponseDTO;
 import com.example.demo.dto.response.MsgResponseDTO;
+import com.example.demo.dto.response.OtpResponseDTO;
 import com.example.demo.model.Role;
 import com.example.demo.model.User;
 import com.example.demo.repository.IRoleRepository;
@@ -188,5 +190,17 @@ public class AuthService {
     public String getCurrentUsername() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication != null ? authentication.getName() : null;
+    }
+
+    public OtpResponseDTO generateOtp(String receiver) throws MessagingException {
+        SecureRandom random = new SecureRandom();
+        int otp = 100000 + random.nextInt(900000); // Đảm bảo số ngẫu nhiên nằm trong khoảng 100000-999999
+        String otpCode = String.valueOf(otp);
+        mailService.sendOtpEmail(receiver,otpCode);
+        OtpResponseDTO request = new OtpResponseDTO();
+        request.setOtp(otpCode);
+        request.setSuccess(Boolean.TRUE);
+        request.setMsg("Get otp successfully");
+        return request;
     }
 }
