@@ -1,23 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import logo from '../../assets/image/Logo.png';
-import avatar from '../../assets/image/avatar.png';
-import search from '../../assets/image/search.png';
-import Koi from '../../assets/image/Koi.png';
-import '../../Components/ManagerCustomer.css';
+import React, { useState, useEffect } from "react";
+import logo from "../../assets/image/Logo.png";
+import avatar from "../../assets/image/avatar.png";
+import search from "../../assets/image/search.png";
+import Koi from "../../assets/image/Koi.png";
+import "../../Components/ManagerCustomer.css";
 import LogoutButton from "../../Logout";
 import { Link, useNavigate } from "react-router-dom";
-import { Elements } from '@stripe/react-stripe-js'; // Import Elements
-import { loadStripe } from '@stripe/stripe-js'; // Import loadStripe
-import PaymentModal from '../PaymentStripe/PaymentModal'; // Import PaymentModal
+import { Elements } from "@stripe/react-stripe-js"; // Import Elements
+import { loadStripe } from "@stripe/stripe-js"; // Import loadStripe
+import PaymentModal from "../PaymentStripe/PaymentModal"; // Import PaymentModal
 
 // Load your Stripe publishable key
-const stripePromise = loadStripe('pk_test_51QFJ0X00eXNAQ7PXp9HL5W2c2hEeuHpp3HUieCFUG1rzvM78O9LPo2KNDKimiyuBulhhPBKIWLbkVph4QKeBh1Uj00PuKXqh2d');
+const stripePromise = loadStripe(
+  "pk_test_51QFJ0X00eXNAQ7PXp9HL5W2c2hEeuHpp3HUieCFUG1rzvM78O9LPo2KNDKimiyuBulhhPBKIWLbkVph4QKeBh1Uj00PuKXqh2d"
+);
 
 const CustomerOrder = () => {
   const [orders, setOrders] = useState([]);
   const [expandedOrder, setExpandedOrder] = useState(null);
   const [error, setError] = useState("");
-  const [searchQuery, setSearchQuery] = useState(""); 
+  const [searchQuery, setSearchQuery] = useState("");
   const [showPaymentModal, setShowPaymentModal] = useState(false); // State to control the modal visibility
   const [selectedOrder, setSelectedOrder] = useState(null); // Store the order that needs payment
   const navigate = useNavigate();
@@ -29,11 +31,11 @@ const CustomerOrder = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:8080/users/orders', {
-          method: 'GET',
+        const token = localStorage.getItem("token");
+        const response = await fetch("http://localhost:8080/users/orders", {
+          method: "GET",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         });
@@ -42,10 +44,12 @@ const CustomerOrder = () => {
           const data = await response.json();
           setOrders(data.orders);
         } else {
-          setError('Failed to fetch orders.');
+          setError("Failed to fetch orders.");
         }
       } catch (error) {
-        setError('Error fetching orders. Please check your network and try again.');
+        setError(
+          "Error fetching orders. Please check your network and try again."
+        );
       }
     };
 
@@ -96,9 +100,13 @@ const CustomerOrder = () => {
       <main className="ManagerOrder-main-content">
         <header className="ManagerOrder-header">
           <div className="ManagerOrder-user-info">
-            <img src={avatar} alt="User Avatar" className="ManagerOrder-avatar" />
+            <img
+              src={avatar}
+              alt="User Avatar"
+              className="ManagerOrder-avatar"
+            />
             <div className="ManagerOrder-user-details">
-              <h3>Vũ Đức Mạnh</h3>
+              <h3>User</h3>
               <p>Customer</p>
             </div>
           </div>
@@ -109,13 +117,17 @@ const CustomerOrder = () => {
               value={searchQuery} // Bind searchQuery to the input field
               onChange={(e) => setSearchQuery(e.target.value)} // Update searchQuery state on input change
             />
-            <img src={search} alt="Search Icon" className="ManagerOrder-search-icon" />
+            <img
+              src={search}
+              alt="Search Icon"
+              className="ManagerOrder-search-icon"
+            />
           </div>
         </header>
 
         <div className="ManagerOrder-order-management">
           <h1>Order List</h1>
-          {error && <p style={{ color: 'red' }}>{error}</p>}
+          {error && <p style={{ color: "red" }}>{error}</p>}
           <table className="ManagerOrder-order-table">
             <thead>
               <tr>
@@ -130,15 +142,22 @@ const CustomerOrder = () => {
             </thead>
             <tbody>
               {currentOrders.map((order) => (
-                <tr key={order.orderID} onClick={() => toggleOrder(order.orderID)} 
-                className={order.orderStatus === 5 ? "highlight-row" : ""}>
+                <tr
+                  key={order.orderID}
+                  onClick={() => toggleOrder(order.orderID)}
+                  className={order.orderStatus === 5 ? "highlight-row" : ""}
+                >
                   <td>{order.orderID}</td>
                   <td>{order.orderDate}</td>
                   <td>{order.startPlace}</td>
                   <td>{order.endPlace}</td>
                   <td>{order.totalPrice}</td>
-                  <td className={order.paymentStatus ? 'paid-status' : 'unpaid-status'}>
-                    {order.paymentStatus ? 'Paid' : 'Unpaid'}
+                  <td
+                    className={
+                      order.paymentStatus ? "paid-status" : "unpaid-status"
+                    }
+                  >
+                    {order.paymentStatus ? "Paid" : "Unpaid"}
                   </td>
                   <td>
                     <div className="ManagerOrder-detail-buttons">
@@ -150,9 +169,11 @@ const CustomerOrder = () => {
                           Pay Now
                         </button>
                       ) : (
-                        <button 
+                        <button
                           className="ManagerOrder-btn-view-status"
-                          onClick={() => handleViewDeliveryStatus(order.orderID)}
+                          onClick={() =>
+                            handleViewDeliveryStatus(order.orderID)
+                          }
                         >
                           View Delivery Status
                         </button>
@@ -183,7 +204,7 @@ const CustomerOrder = () => {
         {/* Payment Modal */}
         {showPaymentModal && (
           <Elements stripe={stripePromise}>
-            <PaymentModal 
+            <PaymentModal
               order={selectedOrder} // Pass the selected order for payment
               onClose={() => setShowPaymentModal(false)} // Close modal handler
             />
