@@ -1,9 +1,10 @@
 .Home-Customer-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start; /* Align items to the start, reducing space between them */
   align-items: center;
   padding: 20px;
   background-color: white; /* Change as per your preference */
+  gap: 200px;
 }
 
 .Home-flag {

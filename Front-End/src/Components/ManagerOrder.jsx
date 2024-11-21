@@ -129,7 +129,13 @@ const ManagerOrder = () => {
               <Link to="/ManagerOrder">Order Manager</Link>
             </li>
             <li className="ManagerCustomer-nav-item">
-              <Link to="/Dashboard" state={{ orders }}>Revenue Dash Board</Link>
+              <Link to="/Dashboard" >Daily Revenue Dash Board</Link>
+            </li>
+            <li className="ManagerCustomer-nav-item">
+              <Link to="/DashboardM" >Monthly Revenue Dash Board</Link>
+            </li>
+            <li className="ManagerCustomer-nav-item">
+              <Link to="/DashboardY" >Yearly Revenue Dash Board</Link>
             </li>
           </ul>
         </nav>

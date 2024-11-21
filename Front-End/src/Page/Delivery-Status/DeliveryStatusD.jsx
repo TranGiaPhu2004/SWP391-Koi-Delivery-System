@@ -67,7 +67,7 @@ function DeliveryStatusD() {
         setShowAlert(true);
       } else {
         setAlertMessage(
-          "You cannot skip statuses. Please select the next status in order."
+          "Update order status fail!"
         );
         setShowAlert(true);
       }
@@ -100,7 +100,7 @@ function DeliveryStatusD() {
       }
     } catch (err) {
       console.error("Error updating order status:", err);
-      setAlertMessage("The order delivery status could not be changed.");
+      setAlertMessage("The order delivery status could be not changed.");
       setShowAlert(true);
     } finally {
       setLoading(false);

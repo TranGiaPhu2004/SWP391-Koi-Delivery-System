@@ -21,23 +21,24 @@ ChartJS.register(
   Legend
 );
 
-const Dashboard = () => {
+const DashboardY = () => {
   const [amountChartData, setAmountChartData] = useState([]);
   const [revenueChartData, setRevenueChartData] = useState([]);
   const [actualRevenueChartData, setActualRevenueChartData] = useState([]); // Thêm dữ liệu cho doanh thu thực tế
   const location = useLocation();
 
-  // Function to fetch the data for a specific day from your API
-  const fetchDailyData = async (year, month, day) => {
+  // Function to fetch the data for the entire year from your API
+  const fetchYearlyData = async (year) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/dashboard/year/${year}/month/${month}/day/${day}`,
+        `http://localhost:8080/dashboard/year/${year}`,
         {
           method: "GET",
         }
       );
       const data = await response.json();
 
+      // Check if the response is valid and the status is ok
       if (response.ok) {
         const totalOrderAmount = data.order.amount;
         const totalOrderRevenue = data.order.totalPrice;
@@ -65,7 +66,7 @@ const Dashboard = () => {
         // Tính toán doanh thu thực tế (trừ 5% cho Boxes và Deliveries)
         const actualDeliveryRevenue = totalDeliveryRevenue * 0.95;
         const actualBoxRevenue = totalBoxRevenue * 0.95;
-        const actualOrderRevenue = totalOrderRevenue ; // Orders không bị giảm 5%
+        const actualOrderRevenue = totalOrderRevenue; // Orders không bị giảm 5%
 
         // Set data for the Amount chart
         setAmountChartData({
@@ -116,7 +117,7 @@ const Dashboard = () => {
           labels: ["Orders", "Deliveries", "Boxes"],
           datasets: [
             {
-              label: "Actual Revenue (VND)",
+              label: "Actual Revenue (VND) ",
               data: [actualOrderRevenue, actualDeliveryRevenue, actualBoxRevenue],
               backgroundColor: [
                 "rgba(75, 192, 192, 0.6)",
@@ -145,17 +146,15 @@ const Dashboard = () => {
   useEffect(() => {
     const today = new Date();
     const year = today.getFullYear();
-    const month = today.getMonth() + 1; // Months are zero-indexed
-    const day = today.getDate();
 
-    // Fetch daily data from the API
-    fetchDailyData(year, month, day);
+    // Fetch yearly data from the API
+    fetchYearlyData(year);
   }, []);
 
   return (
     <div>
       {/* Max Revenue Dashboard */}
-      <h1>Daily Revenue Dashboard</h1>
+      <h1>Yearly Revenue Dashboard</h1>
 
       <div className="dashboard-charts-wrapper">
         {/* Wrapper for both charts */}
@@ -204,8 +203,8 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Actual Daily Revenue Dashboard */}
-      <h1>Actual Daily Revenue Dashboard</h1>
+      {/* Actual Yearly Revenue Dashboard */}
+      <h1>Actual Yearly Revenue Dashboard</h1>
 
       <div className="dashboard-charts-wrapper">
         <div className="charts-row">
@@ -214,7 +213,7 @@ const Dashboard = () => {
             actualRevenueChartData.datasets &&
             actualRevenueChartData.labels.length > 0 && (
               <div className="chart-container">
-                <h2>Actual Revenue Overview (Orders, Deliveries, Boxes)</h2>
+                <h2>Actual Revenue Overview </h2>
                 <Bar
                   data={actualRevenueChartData}
                   options={{
@@ -235,5 +234,4 @@ const Dashboard = () => {
   );
 };
 
-
-export default Dashboard;
+export default DashboardY;
