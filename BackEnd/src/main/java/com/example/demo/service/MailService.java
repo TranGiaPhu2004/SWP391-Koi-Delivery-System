@@ -38,15 +38,12 @@ public class MailService {
         DecimalFormat formatter = new DecimalFormat("#,###");
         String formattedAmount = formatter.format(amount) + " VND";
 
-//        model.addAttribute("formattedAmount", formattedAmount);
-
         // Tạo context cho Thymeleaf
         Context context = new Context();
         context.setVariable("name", name);
         context.setVariable("amount", formattedAmount);
         context.setVariable("transactionId", transactionId);
         context.setVariable("receiptUrl", receiptUrl);
-//        context.setVariable("message", mailStructure.getMessage());
 
         // Generate nội dung từ template
         String emailContent = templateEngine.process(PAYMENT_SUCCESS_TEMPLATE, context);
@@ -103,13 +100,14 @@ public class MailService {
         mailSender.send(mimeMessage);
     }
 
-    public void sendDeliveryEmail(String to, String name,Double amount) throws MessagingException {
+    public void sendDeliveryEmail(String to, String name,Double amount,Integer orderID) throws MessagingException {
         DecimalFormat formatter = new DecimalFormat("#,###");
         String formattedAmount = formatter.format(amount) + " VND";
         // Tạo context cho Thymeleaf
         Context context = new Context();
         context.setVariable("name", name);
         context.setVariable("amount", formattedAmount);
+        context.setVariable("orderID", orderID);
 
         // Generate nội dung từ template
         String emailContent = templateEngine.process(DELIVERY_SUCCESS_TEMPLATE, context);
