@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.response.OtpResponseDTO;
+import com.example.demo.util.LoggerUtil;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -26,26 +27,26 @@ public class OtpService {
      * Tạo mã OTP ngẫu nhiên và lưu vào Redis với email làm key
      */
     public OtpResponseDTO generateOtp(String email) throws MessagingException {
-        // Kiểm tra nếu OTP đã tồn tại trong Redis cho email này
+        // Lấy ValueOperations từ redisTemplate
+        LoggerUtil.logInfo("Start Generating OTP");
         ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
-        String existingOtp = valueOperations.get(email);
-
-        if (existingOtp != null) {
-            // Nếu OTP đã tồn tại, trả về thông báo lỗi hoặc yêu cầu người dùng đợi
-            throw new RuntimeException("OTP đã được gửi đến email này. Vui lòng đợi hoặc xác thực OTP trước khi yêu cầu mới.");
-        }
 
         // Tạo OTP 6 chữ số ngẫu nhiên
         String otp = String.format("%06d", RANDOM.nextInt(1_000_000));
 
-        // Lưu OTP vào Redis với TTL (ví dụ: 5 phút)
-        valueOperations.set(email, otp, 5, TimeUnit.MINUTES);  // Dùng email làm key
-        mailService.sendOtpEmail(email,otp);
-        OtpResponseDTO request = new OtpResponseDTO();
-        request.setOtp(otp);
-        request.setSuccess(Boolean.TRUE);
-        request.setMsg("Get otp successfully");
-        return request;
+        // Lưu OTP vào Redis với TTL (ví dụ: 5 phút) và luôn ghi đè
+        valueOperations.set(email, otp, 5, TimeUnit.MINUTES);
+
+        // Gửi email chứa OTP
+        mailService.sendOtpEmail(email, otp);
+
+        // Tạo phản hồi
+        OtpResponseDTO response = new OtpResponseDTO();
+        response.setOtp(otp);
+        response.setSuccess(Boolean.TRUE);
+        response.setMsg("Get otp successfully");
+        LoggerUtil.logInfo("Otp generated successfully");
+        return response;
     }
 
 
@@ -53,6 +54,7 @@ public class OtpService {
      * Xác minh OTP
      */
     public boolean verifyOtp(String email, String otp) {
+        LoggerUtil.logInfo("Start Verifying OTP");
         ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
 
         // Lấy OTP từ Redis bằng email làm key
@@ -62,8 +64,10 @@ public class OtpService {
         if (redisOtp != null && redisOtp.equals(otp)) {
             // Xóa OTP sau khi xác minh thành công
             redisTemplate.delete(email);
+            LoggerUtil.logInfo("Otp verified successfully");
             return true;
         }
+        LoggerUtil.logInfo("Otp verification failed");
         return false;
     }
 }
