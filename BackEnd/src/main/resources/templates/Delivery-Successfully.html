@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delivery Success Notification</title>
+  <style>
+    #card {
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 400px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+
+    #upper-side {
+      background-color: #4caf50;
+      color: white;
+      padding: 20px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    #upper-side h3 {
+      margin: 10px 0;
+    }
+
+    #lower-side {
+      padding: 20px;
+    }
+
+    #lower-side p {
+      font-size: 16px;
+      margin: 15px 0;
+    }
+
+    #contBtn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #4caf50;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    #contBtn:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+<div id="card">
+  <div id="upper-side">
+    <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 200 200"
+            fill="white"
+            width="50px"
+            height="50px"
+    >
+      <circle cx="100" cy="100" r="90" fill="none" stroke="white" stroke-width="5" />
+      <path
+              d="M70 100 L90 120 L130 80"
+              fill="none"
+              stroke="white"
+              stroke-width="8"
+              stroke-linecap="round"
+      />
+    </svg>
+    <h3 id="status">Delivery Successful</h3>
+  </div>
+  <div id="lower-side">
+    <p id="message">
+      Congratulations [[${name}]]! Your order has been successfully delivered.
+    </p>
+    <p>Order ID: <strong>[[${orderID}]]</strong></p>
+    <p>Total Amount: <strong>[[${amount}]]</strong></p>
+    <p>We hope you are satisfied with our service.</p>
+    <p>If you have any questions or feedback, feel free to contact us.</p>
+    <p>Best regards,</p>
+<!--    <a href="#" id="contBtn">View Order Details</a>-->
+  </div>
+</div>
+</body>
+</html>
