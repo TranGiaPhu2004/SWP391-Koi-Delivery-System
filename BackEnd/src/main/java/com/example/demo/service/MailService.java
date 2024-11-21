@@ -19,11 +19,13 @@ public class MailService {
     private final static String DELIVERY_SUCCESS_TEMPLATE = "Delivery-Successfully";
     private final static String REGISTER_SUCCESS_TEMPLATE = "Register-Successfully";
     private final static String CREATE_ORDER_TEMPLATE = "Create-Order";
+    private final static String OTP_VERIFY_TEMPLATE = "OTP-Email";
 
     private final static String REGISTER_SUCCESS_SUBJECT = "REGISTER-SUCCESS--KOI-ORDERING-DELIVERY";
     private final static String PAYMENT_SUCCESS_SUBJECT = "PAYMENT-SUCCESS--KOI-ORDERING-DELIVERY";
     private final static String DELIVERY_SUCCESS_SUBJECT = "DELIVERY-SUCCESS--KOI-ORDERING-DELIVERY";
     private final static String CREATE_ORDER_SUBJECT = "CREATE-ORDER--KOI-ORDERING-DELIVERY";
+    private final static String OTP_VERIFY_SUBJECT = "OTP-VERIFICATION--KOI-ORDERING-DELIVERY";
 
     @Autowired
     private TemplateEngine templateEngine;
@@ -117,6 +119,24 @@ public class MailService {
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
         helper.setTo(to);
         helper.setSubject(DELIVERY_SUCCESS_SUBJECT);
+        helper.setText(emailContent, true);
+
+        // Gửi email
+        mailSender.send(mimeMessage);
+    }
+
+    public void sendOtpEmail(String to, String OtpCode) throws MessagingException {
+        // Tạo context cho Thymeleaf
+        Context context = new Context();
+        context.setVariable("OtpCode", OtpCode);
+        // Generate nội dung từ template
+        String emailContent = templateEngine.process(OTP_VERIFY_TEMPLATE, context);
+
+        // Tạo email
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+        helper.setTo(to);
+        helper.setSubject(OTP_VERIFY_SUBJECT);
         helper.setText(emailContent, true);
 
         // Gửi email

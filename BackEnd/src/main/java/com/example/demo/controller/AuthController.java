@@ -5,6 +5,7 @@ import com.example.demo.dto.request.LoginByUsernameRequestDTO;
 import com.example.demo.dto.request.LoginRequestDTO;
 import com.example.demo.dto.request.RegisterRequestDTO;
 import com.example.demo.dto.response.LoginResponseDTO;
+import com.example.demo.dto.response.OtpResponseDTO;
 import com.example.demo.dto.response.RegisterResponseDTO;
 import com.example.demo.service.*;
 
@@ -101,6 +102,17 @@ public class AuthController {
         }
         else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response); // Code là 403
+        }
+    }
+
+    @GetMapping("/generate-otp/{email}")
+    public ResponseEntity<OtpResponseDTO> generateOTP(@PathVariable String email) throws MessagingException {
+        logger.info("Generate OTP controller called");
+        OtpResponseDTO response = authService.generateOtp(email);
+        if (response.isSuccess()) {
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
     }
 }
