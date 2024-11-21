@@ -44,6 +44,7 @@ public class SecurityConfig {
                         .requestMatchers("/deliveryMethod/**").permitAll()
                         .requestMatchers("/koi-box/**").permitAll()
                         .requestMatchers("/dashboard/**").permitAll()
+                        .requestMatchers("/otp/**").permitAll()
                         .anyRequest().denyAll()) // All other routes require authentication
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class); // Add JWT filter
 
