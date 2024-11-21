@@ -11,11 +11,13 @@ import com.example.demo.model.User;
 import com.example.demo.repository.IRoleRepository;
 import com.example.demo.repository.IUserRepository;
 import com.example.demo.util.JwtUtil;
+import jakarta.mail.MessagingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -32,6 +34,9 @@ public class AuthService {
 
     @Autowired
     private JwtUtil jwtUtil;
+
+    @Autowired
+    private MailService mailService;
 
     private static final Logger logger = LoggerFactory.getLogger(AuthService.class);
 
@@ -87,7 +92,7 @@ public class AuthService {
         return null; // Invalid credentials
     }
 
-    public String registerUser(RegisterRequestDTO request) {
+    public String registerUser(RegisterRequestDTO request) throws MessagingException {
         logger.info("Service Start");
         if (request.getUsername() == null) {
             logger.info("Username is null");
@@ -140,6 +145,7 @@ public class AuthService {
         logger.info("Save to DB");
         userRepository.save(user);
         logger.info("Save to DB success");
+        mailService.sendRegisterEmail(request.getEmail(),request.getUsername());
         return "User registered successfully";
     }
 

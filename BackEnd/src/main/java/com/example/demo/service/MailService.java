@@ -20,6 +20,11 @@ public class MailService {
     private final static String REGISTER_SUCCESS_TEMPLATE = "Register-Successfully";
     private final static String CREATE_ORDER_TEMPLATE = "Create-Order";
 
+    private final static String REGISTER_SUCCESS_SUBJECT = "REGISTER-SUCCESS--KOI-ORDERING-DELIVERY";
+    private final static String PAYMENT_SUCCESS_SUBJECT = "PAYMENT-SUCCESS--KOI-ORDERING-DELIVERY";
+    private final static String DELIVERY_SUCCESS_SUBJECT = "DELIVERY-SUCCESS--KOI-ORDERING-DELIVERY";
+    private final static String CREATE_ORDER_SUBJECT = "CREATE-ORDER--KOI-ORDERING-DELIVERY";
+
     @Autowired
     private TemplateEngine templateEngine;
 
@@ -50,7 +55,7 @@ public class MailService {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
         helper.setTo(to);
-        helper.setSubject(name);
+        helper.setSubject(PAYMENT_SUCCESS_SUBJECT);
         helper.setText(emailContent, true);
 
         // Gửi email
@@ -69,7 +74,7 @@ public class MailService {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
         helper.setTo(to);
-        helper.setSubject(name);
+        helper.setSubject(REGISTER_SUCCESS_SUBJECT);
         helper.setText(emailContent, true);
 
         // Gửi email
@@ -91,14 +96,14 @@ public class MailService {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
         helper.setTo(to);
-        helper.setSubject(name);
+        helper.setSubject(CREATE_ORDER_SUBJECT);
         helper.setText(emailContent, true);
 
         // Gửi email
         mailSender.send(mimeMessage);
     }
 
-    public void sendDeliverEmail(String to, String name,Double amount) throws MessagingException {
+    public void sendDeliveryEmail(String to, String name,Double amount) throws MessagingException {
         DecimalFormat formatter = new DecimalFormat("#,###");
         String formattedAmount = formatter.format(amount) + " VND";
         // Tạo context cho Thymeleaf
@@ -113,13 +118,10 @@ public class MailService {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
         helper.setTo(to);
-        helper.setSubject(name);
+        helper.setSubject(DELIVERY_SUCCESS_SUBJECT);
         helper.setText(emailContent, true);
 
         // Gửi email
         mailSender.send(mimeMessage);
     }
-
-
-
 }
