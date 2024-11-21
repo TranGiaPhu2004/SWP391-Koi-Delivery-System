@@ -51,6 +51,8 @@ public class StripeService {
             if ("succeeded".equals(charge.getStatus())) {
                 logger.info("Charge created successfully with ID: " + charge.getId());
                 logger.info("Balance transaction: " + charge.getBalanceTransaction());
+                String receiptUrl = charge.getReceiptUrl();
+                System.out.println("Receipt URL: " + receiptUrl);
                 response.setId(charge.getId());
                 response.setStatus(charge.getStatus());
                 response.setBalanceTransaction(charge.getBalanceTransaction());
