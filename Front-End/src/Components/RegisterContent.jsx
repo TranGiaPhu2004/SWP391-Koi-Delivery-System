@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./RegisterContent.css";
 import Logo from "../assets/image/Logo.png";
-import loginKoi from '../assets/image/register.jpg';
+import loginKoi from "../assets/image/register.jpg";
 
 function RegisterCM() {
   const [email, setEmail] = useState("");
@@ -25,7 +25,7 @@ function RegisterCM() {
 
   // Hàm kiểm tra tính hợp lệ của email
   const validateEmail = async (email) => {
-    const url = ` https://emailvalidation.abstractapi.com/v1/?api_key=c8dbd3dc441a4535a69785c51b64b9c7&email=${email}`;  // Đặt URL API xác thực email của bạn tại đây
+    const url = ` https://emailvalidation.abstractapi.com/v1/?api_key=c8dbd3dc441a4535a69785c51b64b9c7&email=${email}`; // Đặt URL API xác thực email của bạn tại đây
     httpGetAsync(url, (responseText) => {
       const response = JSON.parse(responseText);
       if (response.deliverability === "DELIVERABLE") {
@@ -47,9 +47,12 @@ function RegisterCM() {
     }
 
     try {
-      const response = await fetch(`http://localhost:8080/auth/generate-otp/${email}`, {
-        method: "GET",
-      });
+      const response = await fetch(
+        `http://localhost:8080/auth/generate-otp/${email}`,
+        {
+          method: "GET",
+        }
+      );
       const data = await response.json();
       if (response.ok) {
         setGeneratedOtp(data.otp); // Lưu mã OTP được gửi từ server
@@ -61,7 +64,9 @@ function RegisterCM() {
         setOtpError(true);
       }
     } catch (error) {
-      setOtpMessage("Error sending OTP. Please check your network and try again.");
+      setOtpMessage(
+        "Error sending OTP. Please check your network and try again."
+      );
       setOtpError(true);
     }
   };
@@ -69,83 +74,108 @@ function RegisterCM() {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    // Chỉ cho phép tiếp tục đăng ký nếu email là hợp lệ
+    // Validate email first if not already validated
     if (emailValidationResult !== "Email is valid") {
       setErrorMessage("Please enter a valid email before registering.");
       return;
     }
 
-    // Kiểm tra OTP đã được gửi hay chưa
+    // Ensure the user has requested an OTP and entered one
     if (!otpSent) {
       setErrorMessage("Please request and enter OTP.");
       return;
     }
 
-    // Kiểm tra OTP có trùng khớp với OTP từ server không
-    if (otp !== generatedOtp) {
-      setErrorMessage("Invalid OTP. Please enter the correct OTP.");
-      setOtpError(true);
+    if (!otp) {
+      setErrorMessage("Please enter the OTP.");
       return;
     }
 
-    // Các kiểm tra khác (email, password, username)
-    if (!email || !username || !password || !confirmPassword) {
-      setErrorMessage("Please fill in all fields.");
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      setErrorMessage("Passwords do not match.");
-      return;
-    }
-
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{1,}$/;
-    const passwordMinLength = 8;
-
-    if (!passwordRegex.test(password)) {
-      setErrorMessage("Password must contain at least 1 uppercase letter, 1 number, and 1 special character.");
-      return;
-    }
-
-    if (password.length < passwordMinLength) {
-      setErrorMessage("Password must be at least 8 characters long.");
-      return;
-    }
-
-    if (password.includes(username)) {
-      setErrorMessage("Password must not contain the username.");
-      return;
-    }
-
-    const registerData = {
-      email: email,
-      username: username,
-      password: password,
-      otp: otp, // Gửi OTP trong dữ liệu đăng ký
-    };
-
+    // Call backend API to verify OTP
     try {
-      const response = await fetch("http://localhost:8080/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(registerData),
-      });
-      const data = await response.json();
-      if (response.ok) {
-        setSuccessMessage("Registration successful. Redirecting to login page...");
-        setErrorMessage("");
-        setTimeout(() => {
-          navigate("/login");
-        }, 2000);
+      const otpVerifyResponse = await fetch(
+        `http://localhost:8080/auth/verify/${email}/${otp}`,
+        {
+          method: "POST",
+        }
+      );
+
+      if (otpVerifyResponse.ok) {
+        // OTP verification successful, proceed with registration
+        setOtpError(false);
+
+        // Validate other inputs (email, password, username)
+        if (!email || !username || !password || !confirmPassword) {
+          setErrorMessage("Please fill in all fields.");
+          return;
+        }
+
+        if (password !== confirmPassword) {
+          setErrorMessage("Passwords do not match.");
+          return;
+        }
+
+        const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{1,}$/;
+        const passwordMinLength = 8;
+
+        if (!passwordRegex.test(password)) {
+          setErrorMessage(
+            "Password must contain at least 1 uppercase letter, 1 number, and 1 special character."
+          );
+          return;
+        }
+
+        if (password.length < passwordMinLength) {
+          setErrorMessage("Password must be at least 8 characters long.");
+          return;
+        }
+
+        if (password.includes(username)) {
+          setErrorMessage("Password must not contain the username.");
+          return;
+        }
+
+        // Send registration data to backend after successful OTP verification
+        const registerData = {
+          email: email,
+          username: username,
+          password: password,
+        };
+
+        const registerResponse = await fetch(
+          "http://localhost:8080/auth/register",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(registerData),
+          }
+        );
+
+        const data = await registerResponse.json();
+        if (registerResponse.ok) {
+          setSuccessMessage(
+            "Registration successful. Redirecting to login page..."
+          );
+          setErrorMessage("");
+          setTimeout(() => {
+            navigate("/login");
+          }, 2000);
+        } else {
+          setErrorMessage(data.msg || "Registration failed. Please try again.");
+          setSuccessMessage("");
+        }
       } else {
-        setErrorMessage(data.msg || "Registration failed. Please try again.");
-        setSuccessMessage("");
+        // Handle invalid OTP case
+        setErrorMessage("Invalid OTP. Please try again.");
+        setOtpError(true);
       }
     } catch (error) {
-      setErrorMessage("Error registering. Please check your network and try again.");
-      setSuccessMessage("");
+      setErrorMessage(
+        "Error verifying OTP. Please check your network and try again."
+      );
+      setOtpError(true);
     }
   };
 
@@ -175,21 +205,23 @@ function RegisterCM() {
               onChange={(e) => setEmail(e.target.value)}
               onBlur={() => validateEmail(email)} // Kiểm tra email khi người dùng rời trường nhập
             />
-            
+
             {emailValidationResult && (
-              <p style={{ color: emailError ? "red" : "green" }}>{emailValidationResult}</p>
+              <p style={{ color: emailError ? "red" : "green" }}>
+                {emailValidationResult}
+              </p>
             )}
             {otpMessage && (
               <p style={{ color: otpError ? "red" : "green" }}>{otpMessage}</p>
             )}
           </div>
 
-          
-
           <div className="Register-input-group">
             <label className="Register-label">USERNAME</label>
             <input
-              className={`Register-username-input ${usernameError ? "error" : ""}`}
+              className={`Register-username-input ${
+                usernameError ? "error" : ""
+              }`}
               type="text"
               placeholder="Enter your username"
               value={username}
@@ -200,7 +232,9 @@ function RegisterCM() {
           <div className="Register-input-group">
             <label className="Register-label">PASSWORD</label>
             <input
-              className={`Register-password-input ${passwordError ? "error" : ""}`}
+              className={`Register-password-input ${
+                passwordError ? "error" : ""
+              }`}
               type="password"
               placeholder="Enter your password"
               value={password}
@@ -211,7 +245,9 @@ function RegisterCM() {
           <div className="Register-input-group">
             <label className="Register-label">CONFIRM PASSWORD</label>
             <input
-              className={`Register-confirm-password-input ${confirmPasswordError ? "error" : ""}`}
+              className={`Register-confirm-password-input ${
+                confirmPasswordError ? "error" : ""
+              }`}
               type="password"
               placeholder="Confirm your password"
               value={confirmPassword}
@@ -219,9 +255,9 @@ function RegisterCM() {
             />
           </div>
           <button type="button" onClick={getOtp}>
-              Get OTP
-            </button>
-            <div className="Register-input-group">
+            Get OTP
+          </button>
+          <div className="Register-input-group">
             <label className="Register-label">OTP</label>
             <input
               className={`Register-otp-input ${otpError ? "error" : ""}`}
