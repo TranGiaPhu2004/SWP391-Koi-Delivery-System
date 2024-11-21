@@ -1,12 +1,11 @@
 import "./RegisterContent.css";
 import Logo from "../assets/image/Logo.png";
-import KoiBackground from "../assets/image/KoiBackground.jpg";
+import loginKoi from '../assets/image/register.jpg';
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import loginKoi from '../assets/image/register.jpg'
 
-function RegisterMethod() {
+function RegisterCM() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -17,18 +16,41 @@ function RegisterMethod() {
   const [usernameError, setUsernameError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [confirmPasswordError, setConfirmPasswordError] = useState(false);
+  const [emailValidationResult, setEmailValidationResult] = useState("");
 
   const navigate = useNavigate();
+
+  const validateEmail = async (email) => {
+    const url = `https://emailvalidation.abstractapi.com/v1/?api_key=c8dbd3dc441a4535a69785c51b64b9c7&email=${email}`;
+    
+    httpGetAsync(url, (responseText) => {
+      const response = JSON.parse(responseText);
+      if (response.deliverability === "DELIVERABLE") {
+        setEmailValidationResult("Email is valid");
+        setEmailError(false);
+      } else {
+        setEmailValidationResult("Email is invalid");
+        setEmailError(true);
+      }
+    });
+  };
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
+    // Kiểm tra email trước khi tiếp tục đăng ký
+    await validateEmail(email);
+
+    // Nếu email không hợp lệ, dừng quá trình đăng ký
+    if (emailError) {
+      setErrorMessage("Invalid email. Please enter a valid email.");
+      return;  // Không cho phép tiếp tục nếu email không hợp lệ
+    }
+
     // Regular expressions for validation
-    
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{1,}$/;
     const passwordMinLength = 8;
 
-    setEmailError(false);
     setUsernameError(false);
     setPasswordError(false);
     setConfirmPasswordError(false);
@@ -58,17 +80,14 @@ function RegisterMethod() {
       return;
     }
 
-    // Validate username: at least 1 uppercase letter, 1 special character, and 1 number
+    // Validate password: at least 1 uppercase letter, 1 special character, and 1 number
     if (!passwordRegex.test(password)) {
       setErrorMessage(
-        "password must contain at least 1 uppercase letter, 1 number, and 1 special character."
+        "Password must contain at least 1 uppercase letter, 1 number, and 1 special character."
       );
       setPasswordError(true);
       return;
     }
-
-    
-    
 
     // Validate password: must be at least 8 characters and not contain the username
     if (password.length < passwordMinLength) {
@@ -146,7 +165,13 @@ function RegisterMethod() {
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              onBlur={() => validateEmail(email)}
             />
+            {emailValidationResult && (
+              <p style={{ color: emailError ? "red" : "green" }}>
+                {emailValidationResult}
+              </p>
+            )}
           </div>
 
           <div className="Register-input-group">
@@ -197,4 +222,16 @@ function RegisterMethod() {
   );
 }
 
-export default RegisterMethod;
+// Hàm kiểm tra email thông qua API
+function httpGetAsync(url, callback) {
+    const xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+      if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+        callback(xmlHttp.responseText);
+      }
+    };
+    xmlHttp.open("GET", url, true); // true cho không đồng bộ
+    xmlHttp.send(null);
+}
+
+export default RegisterCM;

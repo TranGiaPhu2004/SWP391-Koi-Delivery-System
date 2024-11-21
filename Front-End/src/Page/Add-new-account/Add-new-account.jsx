@@ -18,8 +18,24 @@ function RegisterMethod() {
   const [usernameError, setUsernameError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [confirmPasswordError, setConfirmPasswordError] = useState(false);
+  const [emailValidationResult, setEmailValidationResult] = useState("");
 
   const navigate = useNavigate();
+
+  const validateEmail = async (email) => {
+    const url = `https://emailvalidation.abstractapi.com/v1/?api_key=c8dbd3dc441a4535a69785c51b64b9c7&email=${email}`;
+    
+    httpGetAsync(url, (responseText) => {
+      const response = JSON.parse(responseText);
+      if (response.deliverability === "DELIVERABLE") {
+        setEmailValidationResult("Email is valid");
+        setEmailError(false);
+      } else {
+        setEmailValidationResult("Email is invalid");
+        setEmailError(true);
+      }
+    });
+  };
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -50,6 +66,14 @@ function RegisterMethod() {
     e.preventDefault();
 
     // Regular expressions for validation
+    await validateEmail(email);
+
+    // Nếu email không hợp lệ, dừng quá trình đăng ký
+    if (emailError) {
+      setErrorMessage("Invalid email. Please enter a valid email.");
+      return;  // Không cho phép tiếp tục nếu email không hợp lệ
+    }
+
     
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{1,}$/;
     const passwordMinLength = 8;
@@ -174,7 +198,13 @@ function RegisterMethod() {
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              onBlur={() => validateEmail(email)}
             />
+            {emailValidationResult && (
+              <p style={{ color: emailError ? "red" : "green" }}>
+                {emailValidationResult}
+              </p>
+            )}
           </div>
 
           <div className="Register-input-group">
@@ -241,6 +271,17 @@ function RegisterMethod() {
       </div>
     </div>
   );
+}
+
+function httpGetAsync(url, callback) {
+  const xmlHttp = new XMLHttpRequest();
+  xmlHttp.onreadystatechange = function () {
+    if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+      callback(xmlHttp.responseText);
+    }
+  };
+  xmlHttp.open("GET", url, true); // true cho không đồng bộ
+  xmlHttp.send(null);
 }
 
 export default RegisterMethod;
