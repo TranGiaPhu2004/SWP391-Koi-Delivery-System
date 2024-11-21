@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @Log
 @RestController
 @RequestMapping("/payment")
+@Tag(name = "Payment Controller")
 @CrossOrigin(origins = {"http://localhost:5173","https://deploy-server-c1f5.vercel.app/"})
 public class PaymentController {
 
@@ -36,12 +37,6 @@ public class PaymentController {
         } else {
             return ResponseEntity.status(response.getHttpCode()).body(response);
         }
-    }
-
-    @ExceptionHandler(StripeException.class)
-    public String handleError(Model model, StripeException ex) {
-        model.addAttribute("error", ex.getMessage());
-        return "result";
     }
 }
 

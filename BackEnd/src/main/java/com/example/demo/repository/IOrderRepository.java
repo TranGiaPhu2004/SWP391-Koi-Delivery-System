@@ -12,6 +12,7 @@ import com.example.demo.model.Order;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface IOrderRepository extends JpaRepository<Order, Integer> {
@@ -82,5 +83,11 @@ public interface IOrderRepository extends JpaRepository<Order, Integer> {
             @Param("year") Integer year
     );
 
+    @Query("""
+            SELECT o.user FROM Order o WHERE o.orderID = :orderID
+            """)
+    Optional<User> findUserByOrderId(
+            @Param("orderID") Integer orderID
+    );
 
 }
