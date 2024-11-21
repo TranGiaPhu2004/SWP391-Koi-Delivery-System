@@ -172,6 +172,9 @@ public class OrderService {
                 if (statusID == 5) {
                     order.getDelivery().setDeliveryStatus(Boolean.TRUE);
                     orderRepository.save(order);
+
+                    User user = order.getUser();
+                    mailService.sendDeliveryEmail(user.getEmail(), user.getUsername(),(double) order.getTotalPrice(),order.getOrderID());
                     msg.setMsg("Delivery has been completed");
                 } else {
                     orderRepository.save(order);
