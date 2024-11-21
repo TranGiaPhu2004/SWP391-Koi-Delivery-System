@@ -9,6 +9,7 @@ import com.example.demo.dto.response.OtpResponseDTO;
 import com.example.demo.dto.response.RegisterResponseDTO;
 import com.example.demo.service.*;
 
+import com.example.demo.util.LoggerUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
@@ -124,11 +125,14 @@ public class AuthController {
     @Operation(summary = "kiểm tra otp")
     @PostMapping("/verify/{email}/{otp}")
     public ResponseEntity<String> verifyOtp(@PathVariable String email, @PathVariable String otp) {
+        LoggerUtil.logInfo("Start /verify/{email}/{otp} API");
         boolean isValid = otpService.verifyOtp(email, otp);
 
         if (isValid) {
+            LoggerUtil.logInfo("Xác minh OTP thành công!");
             return ResponseEntity.ok("Xác minh OTP thành công!");
         } else {
+            LoggerUtil.logInfo("OTP không hợp lệ hoặc đã hết hạn.");
             return ResponseEntity.status(400).body("OTP không hợp lệ hoặc đã hết hạn.");
         }
     }
