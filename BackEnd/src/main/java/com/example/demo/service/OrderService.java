@@ -57,6 +57,8 @@ public class OrderService {
     @Autowired
     private AuthService authService;
 
+    @Autowired
+    private MailService mailService;
 
     public OrderCreateResponseDTO createOrder(OrderCreateRequestDTO request) {
         OrderCreateResponseDTO response = new OrderCreateResponseDTO();
@@ -120,16 +122,15 @@ public class OrderService {
                 response.setSuccess(Boolean.FALSE);
                 response.setMsg("Authorization User not found");
 //                thêm return sau khi front end thêm đc token vào
-//                return response;
+                return response;
             }
-
-            return response;
+            mailService.sendCreateOrderEmail(users.getEmail(),users.getUsername(),(double) order.getTotalPrice(), order.getOrderID());
         } catch (Exception exception) {
             response.setSuccess(Boolean.FALSE);
             response.setMsg(exception.getMessage());
             logger.error("Error in method {}: {}", "createOrder", exception.getMessage(), exception);
-            return response;
         }
+        return response;
     }
 
     public ListOrderResponseDTO getAllOrders() {

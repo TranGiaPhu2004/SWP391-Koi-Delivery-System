@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.mail.MessagingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -89,7 +90,7 @@ public class AuthController {
 
     @Operation(summary = "Register = username,password,email")
     @PostMapping("/register")
-    public ResponseEntity<RegisterResponseDTO> register(@RequestBody RegisterRequestDTO request) {
+    public ResponseEntity<RegisterResponseDTO> register(@RequestBody RegisterRequestDTO request) throws MessagingException {
         logger.info("Register controller called");
         String msg = authService.registerUser(request);
         RegisterResponseDTO response = new RegisterResponseDTO();
