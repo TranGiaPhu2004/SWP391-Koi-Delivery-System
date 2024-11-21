@@ -25,12 +25,9 @@ function HeaderDeliveryStatus() {
 
             <div className="HeaderDeliveryStatus-choice">
                 <ul className='HeaderDeliveryStatus-list'>
-                    <li><a href="/about">About us</a></li>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/services">Services</a></li>
                     
-                    <li><a href="/contact">Contact</a></li>
-                    <li><a href="/news">News</a></li>
+                    <li><a href="/">Home</a></li>
+                    
                 </ul>
             </div>
 
