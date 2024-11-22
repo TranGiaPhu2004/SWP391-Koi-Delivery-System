@@ -1,21 +1,25 @@
 package com.example.demo.service;
 
+import java.security.SecureRandom;
 import java.util.Optional;
 
 import com.example.demo.config.DefaultVariableConfig;
 import com.example.demo.dto.request.*;
 import com.example.demo.dto.response.LoginResponseDTO;
 import com.example.demo.dto.response.MsgResponseDTO;
+import com.example.demo.dto.response.OtpResponseDTO;
 import com.example.demo.model.Role;
 import com.example.demo.model.User;
 import com.example.demo.repository.IRoleRepository;
 import com.example.demo.repository.IUserRepository;
 import com.example.demo.util.JwtUtil;
+import jakarta.mail.MessagingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -32,6 +36,9 @@ public class AuthService {
 
     @Autowired
     private JwtUtil jwtUtil;
+
+    @Autowired
+    private MailService mailService;
 
     private static final Logger logger = LoggerFactory.getLogger(AuthService.class);
 
@@ -87,7 +94,7 @@ public class AuthService {
         return null; // Invalid credentials
     }
 
-    public String registerUser(RegisterRequestDTO request) {
+    public String registerUser(RegisterRequestDTO request) throws MessagingException {
         logger.info("Service Start");
         if (request.getUsername() == null) {
             logger.info("Username is null");
@@ -140,6 +147,7 @@ public class AuthService {
         logger.info("Save to DB");
         userRepository.save(user);
         logger.info("Save to DB success");
+        mailService.sendRegisterEmail(request.getEmail(),request.getUsername());
         return "User registered successfully";
     }
 
@@ -182,5 +190,17 @@ public class AuthService {
     public String getCurrentUsername() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication != null ? authentication.getName() : null;
+    }
+
+    public OtpResponseDTO generateOtp(String receiver) throws MessagingException {
+        SecureRandom random = new SecureRandom();
+        int otp = 100000 + random.nextInt(900000); // Đảm bảo số ngẫu nhiên nằm trong khoảng 100000-999999
+        String otpCode = String.valueOf(otp);
+        mailService.sendOtpEmail(receiver,otpCode);
+        OtpResponseDTO request = new OtpResponseDTO();
+        request.setOtp(otpCode);
+        request.setSuccess(Boolean.TRUE);
+        request.setMsg("Get otp successfully");
+        return request;
     }
 }

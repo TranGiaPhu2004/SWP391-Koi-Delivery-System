@@ -129,6 +129,15 @@ function PriceList() {
 
     return total;
   };
+  // Function to normalize the addresses by trimming spaces and removing unnecessary commas
+const normalizeAddress = (address) => {
+  return address
+    .trim() // Remove leading and trailing spaces
+    .replace(/\s+/g, " ") // Replace multiple spaces with a single space
+    .replace(/,+/g, ",") // Replace multiple commas with a single comma
+    .replace(/,\s*$/, ""); // Remove trailing commas
+};
+
 
   // XỬ LÝ KHI CHỌN DỊCH VỤ (SERVICES)
   const handleServiceChange = (e) => {
@@ -168,18 +177,20 @@ function PriceList() {
   //TẠO ĐỐI TƯỢNG DỮ LIỆU ĐỂ GỬI YÊU CẦU LÊN API
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!hasLettersAndNumbers(startPlace)) {
+    const cleanedStartPlace = normalizeAddress(startPlace);
+  const cleanedEndPlace = normalizeAddress(endPlace);
+    if (!hasLettersAndNumbers(cleanedStartPlace)) {
       alert("Pick-up point must contain both letters and numbers.");
       return;
     }
 
-    if (!hasLettersAndNumbers(endPlace)) {
+    if (!hasLettersAndNumbers(cleanedEndPlace)) {
       alert("Destination must contain both letters and numbers.");
       return;
     }
 
     // Kiểm tra điều kiện 2: startPlace và endPlace không được trùng nhau
-    if (startPlace === endPlace) {
+    if (cleanedStartPlace === cleanedEndPlace) {
       alert("Pick-up point and destination cannot be the same.");
       return;
     }
@@ -188,8 +199,8 @@ function PriceList() {
       (count1 == 0 || count2 == 0 || count3 == 0) &&
       deliveryType == null &&
       selectedServices == null &&
-      !startPlace &&
-      !endPlace
+      !cleanedStartPlace &&
+      !cleanedEndPlace
     ) {
       setShowAlert1(true);
       setTimeout(() => {
@@ -199,7 +210,7 @@ function PriceList() {
     } else if (
       ((count1 == 0 || count2 == 0 || count3 == 0) && deliveryType == null) ||
       selectedServices == null ||
-      (!startPlace && !endPlace)
+      (!cleanedStartPlace && !cleanedEndPlace)
     ) {
       setShowAlert1(true);
       setTimeout(() => {
@@ -224,7 +235,7 @@ function PriceList() {
         setShowAlert3(false);
       }, 3000);
       return;
-    } else if (!startPlace || !endPlace) {
+    } else if (!cleanedStartPlace || !cleanedEndPlace) {
       setShowAlert5(true);
       setTimeout(() => {
         setShowAlert5(false);
@@ -232,6 +243,7 @@ function PriceList() {
       return;
       
     }
+    
 
     const data = {
       orderID: orderID,
@@ -476,32 +488,32 @@ function PriceList() {
           </div>
         </div>
 
-        <div className="PriceList-Informationnn">
-          <div className="PriceList-DeliveryAddress">
-            <div className="PriceList-form">
-              <h3>Delivery Information Form</h3>
-              <div className="PriceList-input">
-                <label htmlFor="pickupPoint">Pick-up</label>
-                <textarea
-                  id="pickupPoint"
-                  name="pickupPoint"
-                  placeholder="From"
-                  value={startPlace}
-                  onChange={(e) => setStartPlace(e.target.value)}
-                ></textarea>
-              </div>
-              <div className="PriceList-input">
-                <label htmlFor="deliveryPoint">Destination</label>
-                <textarea
-                  id="deliveryPoint"
-                  name="deliveryPoint"
-                  placeholder="To"
-                  value={endPlace}
-                  onChange={(e) => setEndPlace(e.target.value)}
-                ></textarea>
+          <div className="PriceList-Informationnn">
+            <div className="PriceList-DeliveryAddress">
+              <div className="PriceList-form">
+                <h3>Delivery Information Form</h3>
+                <div className="PriceList-input">
+                  <label htmlFor="pickupPoint">Pick-up</label>
+                  <textarea
+                    id="pickupPoint"
+                    name="pickupPoint"
+                    placeholder="From"
+                    value={startPlace}
+                    onChange={(e) => setStartPlace(e.target.value)}
+                  ></textarea>
+                </div>
+                <div className="PriceList-input">
+                  <label htmlFor="deliveryPoint">Destination</label>
+                  <textarea
+                    id="deliveryPoint"
+                    name="deliveryPoint"
+                    placeholder="To"
+                    value={endPlace}
+                    onChange={(e) => setEndPlace(e.target.value)}
+                  ></textarea>
+                </div>
               </div>
             </div>
-          </div>
 
           <div className="PriceList-DeliveryTypes">
             <div className="PriceList-paymentmethodss">Delivery Categories</div>

@@ -5,14 +5,18 @@ import com.example.demo.dto.request.LoginByUsernameRequestDTO;
 import com.example.demo.dto.request.LoginRequestDTO;
 import com.example.demo.dto.request.RegisterRequestDTO;
 import com.example.demo.dto.response.LoginResponseDTO;
+import com.example.demo.dto.response.OtpResponseDTO;
 import com.example.demo.dto.response.RegisterResponseDTO;
 import com.example.demo.service.*;
 
+import com.example.demo.util.LoggerUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.mail.MessagingException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +33,9 @@ public class AuthController {
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     private final AuthService authService;
+
+    @Autowired
+    private OtpService otpService;
 
     public AuthController(AuthService authService) {
         this.authService = authService;
@@ -89,7 +96,7 @@ public class AuthController {
 
     @Operation(summary = "Register = username,password,email")
     @PostMapping("/register")
-    public ResponseEntity<RegisterResponseDTO> register(@RequestBody RegisterRequestDTO request) {
+    public ResponseEntity<RegisterResponseDTO> register(@RequestBody RegisterRequestDTO request) throws MessagingException {
         logger.info("Register controller called");
         String msg = authService.registerUser(request);
         RegisterResponseDTO response = new RegisterResponseDTO();
@@ -100,6 +107,33 @@ public class AuthController {
         }
         else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response); // Code là 403
+        }
+    }
+
+    @Operation(summary = "tạo otp")
+    @GetMapping("/generate-otp/{email}")
+    public ResponseEntity<OtpResponseDTO> generateOTP(@PathVariable String email) throws MessagingException {
+        logger.info("Generate OTP controller called");
+        OtpResponseDTO response =  otpService.generateOtp(email);
+        if (response.isSuccess()) {
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+        }
+    }
+
+    @Operation(summary = "kiểm tra otp")
+    @PostMapping("/verify/{email}/{otp}")
+    public ResponseEntity<String> verifyOtp(@PathVariable String email, @PathVariable String otp) {
+        LoggerUtil.logInfo("Start /verify/{email}/{otp} API");
+        boolean isValid = otpService.verifyOtp(email, otp);
+
+        if (isValid) {
+            LoggerUtil.logInfo("Xác minh OTP thành công!");
+            return ResponseEntity.ok("Xác minh OTP thành công!");
+        } else {
+            LoggerUtil.logInfo("OTP không hợp lệ hoặc đã hết hạn.");
+            return ResponseEntity.status(400).body("OTP không hợp lệ hoặc đã hết hạn.");
         }
     }
 }

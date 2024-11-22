@@ -4,11 +4,13 @@ import com.example.demo.dto.base.BoxDTO;
 import com.example.demo.dto.base.OrderDTO;
 import com.example.demo.dto.request.OrderCreateRequestDTO;
 import com.example.demo.dto.response.*;
+import com.example.demo.handle.CustomException;
 import com.example.demo.model.*;
 import com.example.demo.repository.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -57,6 +59,16 @@ public class OrderService {
     @Autowired
     private AuthService authService;
 
+    @Autowired
+    private MailService mailService;
+
+    public User getUserByOrderId(Integer orderId) {
+        User user = orderRepository.findUserByOrderId(orderId).orElse(null);
+        if (user == null) {
+            throw new CustomException("Order's User doesnt exist!", HttpStatus.NOT_FOUND);
+        }
+        return user;
+    }
 
     public OrderCreateResponseDTO createOrder(OrderCreateRequestDTO request) {
         OrderCreateResponseDTO response = new OrderCreateResponseDTO();
@@ -120,16 +132,15 @@ public class OrderService {
                 response.setSuccess(Boolean.FALSE);
                 response.setMsg("Authorization User not found");
 //                thêm return sau khi front end thêm đc token vào
-//                return response;
+                return response;
             }
-
-            return response;
+            mailService.sendCreateOrderEmail(users.getEmail(),users.getUsername(),(double) order.getTotalPrice(), order.getOrderID());
         } catch (Exception exception) {
             response.setSuccess(Boolean.FALSE);
             response.setMsg(exception.getMessage());
             logger.error("Error in method {}: {}", "createOrder", exception.getMessage(), exception);
-            return response;
         }
+        return response;
     }
 
     public ListOrderResponseDTO getAllOrders() {
@@ -161,6 +172,9 @@ public class OrderService {
                 if (statusID == 5) {
                     order.getDelivery().setDeliveryStatus(Boolean.TRUE);
                     orderRepository.save(order);
+
+                    User user = order.getUser();
+                    mailService.sendDeliveryEmail(user.getEmail(), user.getUsername(),(double) order.getTotalPrice(),order.getOrderID());
                     msg.setMsg("Delivery has been completed");
                 } else {
                     orderRepository.save(order);

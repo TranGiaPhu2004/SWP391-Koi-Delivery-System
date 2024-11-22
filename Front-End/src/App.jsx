@@ -31,6 +31,7 @@ import Dashboard from "./Page/Dashboard/Dashboard.jsx";
 import DashboardM from "./Page/Dashboard/DashboardM.jsx";
 import DashboardY from "./Page/Dashboard/DashboardY.jsx";
 
+
 const stripePromise = loadStripe(
   "pk_test_51QFJ0X00eXNAQ7PXp9HL5W2c2hEeuHpp3HUieCFUG1rzvM78O9LPo2KNDKimiyuBulhhPBKIWLbkVph4QKeBh1Uj00PuKXqh2d"
 );
@@ -43,6 +44,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
+          
           <Route path="/ForgotPass" element={<ForgotPassword />} />
           <Route path="/Payment" element={<PaymentMethods />} />
           <Route path="/PriceManager" element={<ManagerPrice />} />

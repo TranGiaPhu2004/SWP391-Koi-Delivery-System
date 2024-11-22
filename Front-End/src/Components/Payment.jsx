@@ -25,11 +25,9 @@ function Payment() {
 
             <div className="Payment-choice">
                 <ul className='Payment-list'>
-                    <li className='headerPaymentList' ><a href="/about">About us</a></li>
+                    
                     <li className='headerPaymentList'><a href="/">Home</a></li>
-                    <li className='headerPaymentList'><a href="/services">Services</a></li>
-                    <li className='headerPaymentList'><a href="/contact">Contact</a></li>
-                    <li className='headerPaymentList'><a href="/news">News</a></li>
+                    
                 </ul>
             </div>
 

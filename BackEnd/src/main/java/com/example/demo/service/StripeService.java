@@ -3,10 +3,12 @@ package com.example.demo.service;
 import com.example.demo.dto.request.PaymentRequestDTO;
 import com.example.demo.dto.response.MsgResponseDTO;
 import com.example.demo.dto.response.PaymentResponseDTO;
+import com.example.demo.model.User;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
 import jakarta.annotation.PostConstruct;
+import jakarta.mail.MessagingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,10 @@ public class StripeService {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private MailService mailService;
+
+
     private Charge charge(PaymentRequestDTO paymentRequest)
             throws StripeException {
         Map<String, Object> chargeParams = new HashMap<>();
@@ -49,8 +55,7 @@ public class StripeService {
             logger.info(request.getStripeToken());
             Charge charge = charge(request);
             if ("succeeded".equals(charge.getStatus())) {
-                logger.info("Charge created successfully with ID: " + charge.getId());
-                logger.info("Balance transaction: " + charge.getBalanceTransaction());
+                sendPaymentMail(request,charge);
                 response.setId(charge.getId());
                 response.setStatus(charge.getStatus());
                 response.setBalanceTransaction(charge.getBalanceTransaction());
@@ -68,5 +73,14 @@ public class StripeService {
             response.setHttpCode(500);
         }
         return response;
+    }
+
+    private void sendPaymentMail(PaymentRequestDTO paymentRequest,Charge charge) throws StripeException, MessagingException {
+        User user = orderService.getUserByOrderId(paymentRequest.getOrderID());
+        logger.info("Charge created successfully with ID: " + charge.getId());
+        logger.info("Balance transaction: " + charge.getBalanceTransaction());
+        String receiptUrl = charge.getReceiptUrl();
+        logger.info("Receipt URL: " + receiptUrl);
+        mailService.sendPaymentEmail(user.getEmail(), user.getUsername(), (double) paymentRequest.getAmount(), charge.getId() , receiptUrl);
     }
 }

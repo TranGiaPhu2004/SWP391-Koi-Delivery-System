@@ -24,6 +24,7 @@ ChartJS.register(
 const DashboardY = () => {
   const [amountChartData, setAmountChartData] = useState([]);
   const [revenueChartData, setRevenueChartData] = useState([]);
+  const [actualRevenueChartData, setActualRevenueChartData] = useState([]); // Thêm dữ liệu cho doanh thu thực tế
   const location = useLocation();
 
   // Function to fetch the data for the entire year from your API
@@ -61,6 +62,11 @@ const DashboardY = () => {
           (sum, box) => sum + box.totalPrice,
           0
         );
+
+        // Tính toán doanh thu thực tế (trừ 5% cho Boxes và Deliveries)
+        const actualDeliveryRevenue = totalDeliveryRevenue * 0.95;
+        const actualBoxRevenue = totalBoxRevenue * 0.95;
+        const actualOrderRevenue = totalOrderRevenue; // Orders không bị giảm 5%
 
         // Set data for the Amount chart
         setAmountChartData({
@@ -100,6 +106,28 @@ const DashboardY = () => {
                 "rgba(54, 162, 235, 1)",
                 "rgba(255, 206, 86, 1)",
                 "rgba(75, 192, 192, 1)",
+              ],
+              borderWidth: 1,
+            },
+          ],
+        });
+
+        // Set data for the Actual Revenue chart (trừ 5%)
+        setActualRevenueChartData({
+          labels: ["Orders", "Deliveries", "Boxes"],
+          datasets: [
+            {
+              label: "Actual Revenue (VND) ",
+              data: [actualOrderRevenue, actualDeliveryRevenue, actualBoxRevenue],
+              backgroundColor: [
+                "rgba(75, 192, 192, 0.6)",
+                "rgba(153, 102, 255, 0.6)",
+                "rgba(255, 159, 64, 0.6)",
+              ],
+              borderColor: [
+                "rgba(75, 192, 192, 1)",
+                "rgba(153, 102, 255, 1)",
+                "rgba(255, 159, 64, 1)",
               ],
               borderWidth: 1,
             },
@@ -166,6 +194,34 @@ const DashboardY = () => {
                       title: {
                         display: true,
                         text: "Total Revenue (VND) (Orders, Deliveries, Boxes)",
+                      },
+                    },
+                  }}
+                />
+              </div>
+            )}
+        </div>
+      </div>
+
+      {/* Actual Yearly Revenue Dashboard */}
+      <h1>Actual Yearly Revenue Dashboard</h1>
+
+      <div className="dashboard-charts-wrapper">
+        <div className="charts-row">
+          {/* Actual Revenue Chart */}
+          {actualRevenueChartData.labels &&
+            actualRevenueChartData.datasets &&
+            actualRevenueChartData.labels.length > 0 && (
+              <div className="chart-container">
+                <h2>Actual Revenue Overview </h2>
+                <Bar
+                  data={actualRevenueChartData}
+                  options={{
+                    responsive: true,
+                    plugins: {
+                      title: {
+                        display: true,
+                        text: "Actual Revenue (VND) (Orders, Deliveries, Boxes)",
                       },
                     },
                   }}
