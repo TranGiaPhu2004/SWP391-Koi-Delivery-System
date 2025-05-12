@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/otp")
-@Hidden
 public class OtpController {
 
     @Autowired

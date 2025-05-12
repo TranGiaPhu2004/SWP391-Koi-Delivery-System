@@ -67,7 +67,7 @@ function PriceList() {
 
   const [orderID, setOrderID] = useState();
 
-  const boxPrices = [1200000, 700000, 400000]; // Large Box, Medium Box, Small Box
+  
 
   const [services, setServices] = useState([]); // Dữ liệu dịch vụ
   const [deliveryMethods, setDeliveryMethods] = useState([]); // Dữ liệu phương thức giao hàng
@@ -106,9 +106,9 @@ function PriceList() {
   const calculateTotalPrice = () => {
     let total = 0;
     //TỔNG CÁC BOXES ĐÃ CHỌN
-    total += count1 * koiBoxes[2]?.price || 0; // Large Box
+    total += count1 * koiBoxes[0]?.price || 0; // Large Box
     total += count2 * koiBoxes[1]?.price || 0; // Medium Box
-    total += count3 * koiBoxes[0]?.price || 0; // Small Box
+    total += count3 * koiBoxes[2]?.price || 0; // Small Box
 
     // GIÁ DỊCH VỤ ĐÃ CHỌN
     if (selectedServices === 1) {
@@ -337,7 +337,7 @@ const normalizeAddress = (address) => {
           <div className="PriceList-pic-koi1">
             <div className="PriceList-price">
               <img src={pickoi1} alt="PIC KOI 1" />
-              <p>{koiBoxes[2]?.price} vnđ</p>
+              <p>{koiBoxes[0]?.price} vnđ</p>
             </div>
             <div className="PriceList-pic1">
               <p>Large Box (S01)</p>
@@ -403,7 +403,7 @@ const normalizeAddress = (address) => {
           <div className="PriceList-pic-koi3">
             <div className="PriceList-price">
               <img src={pickoi3} alt="PIC KOI 3" />
-              <p>{koiBoxes[0]?.price} vnđ</p>
+              <p>{koiBoxes[2]?.price} vnđ</p>
             </div>
             <div className="PriceList-pic3">
               <p>Small Box (S03)</p>

@@ -145,7 +145,7 @@
     position: fixed;
     top: 20px;
     right: 20px;
-    background-color: #4CAF50; /* Màu xanh lá khi thành công */
+    background-color: #af4c4c !important; /* Màu xanh lá khi thành công */
     color: white;
     padding: 20px;
     border-radius: 5px;

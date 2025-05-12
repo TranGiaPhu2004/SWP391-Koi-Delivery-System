@@ -94,7 +94,7 @@ const DashboardM = () => {
           labels: ["Orders", "Deliveries", "Boxes"],
           datasets: [
             {
-              label: "Revenue (VND)",
+              label: "Cash (VND)",
               data: [totalOrderRevenue, totalDeliveryRevenue, totalBoxRevenue],
               backgroundColor: [
                 "rgba(54, 162, 235, 0.6)",
@@ -185,7 +185,7 @@ const DashboardM = () => {
             revenueChartData.datasets &&
             revenueChartData.labels.length > 0 && (
               <div className="chart-container">
-                <h2>Revenue Overview (Orders, Deliveries, Boxes)</h2>
+                <h2>Cash Overview (Orders, Deliveries, Boxes)</h2>
                 <Bar
                   data={revenueChartData}
                   options={{
@@ -193,7 +193,7 @@ const DashboardM = () => {
                     plugins: {
                       title: {
                         display: true,
-                        text: "Total Revenue (VND) (Orders, Deliveries, Boxes)",
+                        text: "Total Cash (VND) (Orders, Deliveries, Boxes)",
                       },
                     },
                   }}
